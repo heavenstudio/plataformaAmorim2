@@ -1,0 +1,478 @@
+/**
+ *   Este codigo é software livre você e pode resdistribuir e/ou modificar ele seguindo os termos da
+ *   Creative Commons Attribution 4.0 International Pare visualizar uma copia desta 
+ *   licensa em ingles visite http://creativecommons.org/licenses/by/4.0/.
+ *   
+ *   This code is free software; you can redistribute it and/or modify it
+ *   under the terms of Creative Commons Attribution 4.0 International License. 
+ *   To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
+ */
+package br.com.muranodesign.resources;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
+import org.apache.log4j.Logger;
+
+import br.com.muranodesign.business.AlunoService;
+import br.com.muranodesign.business.AlunoVariavelService;
+import br.com.muranodesign.business.AnoLetivoService;
+import br.com.muranodesign.business.GrupoService;
+import br.com.muranodesign.business.PeriodoService;
+import br.com.muranodesign.business.ProfessorFuncionarioService;
+import br.com.muranodesign.business.TutoriaService;
+import br.com.muranodesign.model.Aluno;
+import br.com.muranodesign.model.AlunoVariavel;
+import br.com.muranodesign.model.AnoLetivo;
+import br.com.muranodesign.model.Grupo;
+import br.com.muranodesign.model.Periodo;
+import br.com.muranodesign.model.ProfessorFuncionario;
+import br.com.muranodesign.model.Tutoria;
+
+
+/**
+ * Classe tem como objetivo disponibilizar os serviços relacionandosa grupos
+ *
+ * @author Rogerio Lima dos Santos
+ * @version 1.00
+ * @since Release 1 da aplicação
+ */
+@Path("Grupo")
+public class GrupoResource {
+
+	/** The logger. */
+	private Logger logger = Logger.getLogger(GrupoResource.class.getName());
+
+	/**
+	 * Gets the grupo.
+	 *
+	 * @return the grupo
+	 */
+	@GET
+	@Produces("application/json")
+	public List<Grupo> getGrupo() {
+		logger.info("Listar Grupo ...");
+		List<Grupo> resultado;
+		resultado = new GrupoService().listarTodos();
+		logger.info("QTD Grupo : " + resultado.size());
+		return resultado;
+	}
+
+	/**
+	 * Gets the evento.
+	 *
+	 * @param id the id
+	 * @return the evento
+	 */
+	@Path("{id}")
+	@GET
+	@Produces("application/json")
+	public Grupo getEvento(@PathParam("id") int id) {
+		logger.info("Lista Grupo  por id " + id);
+		List<Grupo> resultado;
+		resultado = new GrupoService().listarkey(id);
+		Grupo evento = new Grupo();
+		if(!resultado.isEmpty()){
+			 evento = resultado.get(0);
+		}
+		return evento;
+	}
+
+	@Path("Verifica/{id}")
+	@GET
+	@Produces("application/json")
+	public String verifica(@PathParam("id") int id) {
+		List<Grupo> resultado;
+		resultado = new GrupoService().verifica(id);
+		String valor = "";
+		if(resultado.get(0).getStatus().equals("0")){
+			valor = "0";
+		}else if(resultado.get(0).getStatus().equals("1")){
+			valor = "1";
+		}
+		return valor;
+	}
+	
+	
+	@Path("Teste/{ano}/{periodo}")
+	@GET
+	@Produces("application/json")
+	public List<Grupo> teste(@PathParam("ano") String ano,@PathParam("periodo") String periodo){
+		Grupo grupo = new Grupo();
+		grupo = new GrupoService().listarUltimo(ano, periodo).get(0);
+		String num = grupo.getNomeGrupo().substring(2);
+		int numResult = 1 + Integer.parseInt(num);
+		
+		return new GrupoService().listarUltimo(ano, periodo);
+	}
+	
+	@Path("GrupoTutoria/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Grupo> getTutoria(@PathParam("id") int id){
+		logger.info("Lista Grupo  por id tutoria" + id);
+		List<Grupo> resultado; 
+		resultado = new GrupoService().listarTutor(id);
+		Grupo evento = resultado.get(0);
+
+		return resultado;
+	}
+	
+	
+	/**
+	 * Removes the grupo.
+	 *
+	 * @param action the action
+	 * @param id the id
+	 * @return the string
+	 */
+	@Path("Delete")
+	@POST
+	@Produces("text/plain")
+	public String removeGrupo(@FormParam("action") String action,
+			@FormParam("id") int id) {
+
+		logger.info("Grupo  " + action);
+		if ( action.equals("delete")) {
+			List<Grupo> resultado;
+			resultado = new GrupoService().listarkey(id);
+			Grupo res = resultado.get(0);
+			List<AlunoVariavel> aluno = new AlunoVariavelService().listaGrupo(id);
+			for(int i = 0; i < aluno.size(); i++){
+				Grupo g = new Grupo();
+				aluno.get(i).setGrupo(g);
+			}
+			
+			new GrupoService().deletarGrupo(res);
+			return "true";
+		} else {
+			return "false";
+		}
+
+	}
+	
+	
+	@POST
+	@Produces("text/plain")
+	public String eventoAction(
+
+			@FormParam("action") String action,
+			@FormParam("id") String strid,
+			@FormParam("lider") String lider,
+			@FormParam("idProfessor") int idProfessor,
+			@FormParam("anoEstudo") String anoEstudo,
+			@FormParam("periodo") String periodo,
+			@FormParam("idPeriodo") int idPerido,
+			@FormParam("idGrupo") int idGrupo
+
+	) {
+		
+		
+		
+		
+		Grupo objGrupo = new Grupo();
+		logger.info("eventoAction ...");
+		Grupo resultado;
+		Tutoria resultadoTutor;
+		
+		if(action.equals("delete")){
+			 resultado = new GrupoService().listarkey(idGrupo).get(0);
+			 resultado.setStatus("1");
+			 new GrupoService().atualizarGrupo(resultado);
+			 return Integer.toString(idGrupo);
+		}
+		
+		Tutoria tutor = new Tutoria();
+		TutoriaService tutorSer = new TutoriaService();
+		//
+		Grupo grupo = new Grupo();
+
+		AnoLetivoService anoLetivoSer = new AnoLetivoService();
+		ProfessorFuncionarioService professorSer = new ProfessorFuncionarioService();
+		
+		//Periodo perio = new Periodo();
+		PeriodoService periodoSer = new PeriodoService();
+
+		Calendar cal = GregorianCalendar.getInstance(); 
+		int anotual = cal.get(Calendar.YEAR);
+		
+		Aluno objAluno = null;
+		if (!lider.isEmpty()) {
+			List<Aluno> rsAluno;
+			rsAluno = new AlunoService().listarkey(Integer.parseInt(lider));
+			if (!rsAluno.isEmpty()) {
+				objAluno = rsAluno.get(0);
+			}
+		}
+
+		
+		if (action.equals("create")) {
+			
+			List<AnoLetivo> listaAno;
+			listaAno = anoLetivoSer.listarAnoLetivo(Integer.toString(anotual));
+			
+			List<ProfessorFuncionario> listaPro;
+			listaPro = professorSer.listarkey(idProfessor);
+			
+			List<Periodo> listaPeriodo;
+			listaPeriodo = periodoSer.listarkey(idPerido);
+			
+			
+			if(!tutorSer.listarProfessor(listaPro.get(0).getNome()).isEmpty()){
+				tutor = tutorSer.listarProfessor(listaPro.get(0).getNome()).get(0);
+				objGrupo.setTutoria(tutor);
+			}
+			else{
+			
+			tutor.setAnoLetivo(listaAno.get(0));
+			tutor.setTutor(listaPro.get(0));
+			tutor.setPeriodo(listaPeriodo.get(0));
+			tutor.setTutoria(listaPro.get(0).getNome());
+			
+			resultadoTutor = tutorSer.criarTutoria(tutor);
+			objGrupo.setTutoria(resultadoTutor);
+			}
+			//
+			int numResult;
+			
+			List<Grupo> retornoGrupo = new GrupoService().listarUltimo(anoEstudo, periodo);
+			if(retornoGrupo.isEmpty()){
+				numResult = 1;
+			}else{
+				//grupo = new GrupoService().listarUltimo(anoEstudo, periodo).get(0);
+				grupo = retornoGrupo.get(0);
+				String num = grupo.getNomeGrupo().substring(2);
+				numResult = 1 + Integer.parseInt(num);
+			}
+			//
+			
+			
+			//objGrupo.setNomeGrupo(anoEstudo+periodo);
+			objGrupo.setNomeGrupo(anoEstudo+periodo+Integer.toString(numResult));
+			objGrupo.setLider(objAluno);
+			objGrupo.setStatus("0");
+
+			resultado = new GrupoService().criarGrupo(objGrupo);
+			
+			/*
+			int id = resultado.getIdgrupo();
+
+			List<Grupo> rsGrupo;
+			rsGrupo = new GrupoService().listarkey(id);
+			objGrupo = rsGrupo.get(0);
+			objGrupo.setNomeGrupo(anoEstudo+periodo+Integer.toString(id));
+			objGrupo.setLider(objAluno);
+			
+			
+			resultado = new GrupoService().atualizarGrupo(objGrupo);
+			*/
+
+		} else if (action.equals("update")) {
+
+			int id = Integer.parseInt(strid);
+			List<Grupo> rsGrupo;
+			rsGrupo = new GrupoService().listarkey(id);
+			objGrupo = rsGrupo.get(0);
+			//objGrupo.setNomeGrupo(anoEstudo+periodo+Integer.toString(id));
+			objGrupo.setLider(objAluno);
+			objGrupo.setTutoria(new TutoriaService().listarProfessorId(idProfessor).get(0));
+			
+			resultado = new GrupoService().atualizarGrupo(objGrupo);
+			
+			//new GrupoService().update(id, anoEstudo+periodo+Integer.toString(id), objAluno.getIdAluno());
+			
+
+			resultado = objGrupo;
+
+		}else {
+			return "0";
+		}
+		return Integer.toString(resultado.getIdgrupo());
+
+	}
+	 
+	
+	
+	/*
+	@POST
+	@Produces("text/plain")
+	public String eventoAction(
+			
+			@FormParam("action") String action,
+			@FormParam("id") String strid,
+			
+			@FormParam("nomeGrupo") String nomeGrupo,
+			@FormParam("lider") String lider,
+			@FormParam("tutoria") String tutoria
+			
+			
+			
+			) {
+		Grupo objGrupo = new Grupo();
+		logger.info("eventoAction ...");
+		Grupo resultado;
+
+		Aluno objAluno = null;
+		if (!lider.isEmpty()){
+			List<Aluno> rsAluno;
+			rsAluno = new AlunoService().listarkey(Integer.parseInt(lider));
+			if (!rsAluno.isEmpty()){
+				objAluno= rsAluno.get(0);
+			}
+		
+		}
+		
+		
+		
+		List<Tutoria> rsTutoria;
+		rsTutoria= new TutoriaService().listarkey(Integer.parseInt(tutoria));
+		Tutoria objTutoria = rsTutoria.get(0);
+		
+		
+		
+		if (action.equals("create")) {
+			
+			objGrupo.setNomeGrupo(nomeGrupo);
+			objGrupo.setLider(objAluno);
+			objGrupo.setTutoria(objTutoria);
+			
+			resultado = new GrupoService().criarGrupo(objGrupo);
+			
+		}  else if (action.equals("update")) {
+			
+			int id=Integer.parseInt(strid);
+			List<Grupo> rsGrupo;
+			rsGrupo= new GrupoService().listarkey(id);
+			objGrupo= rsGrupo.get(0);
+			objGrupo.setNomeGrupo(nomeGrupo);
+			objGrupo.setLider(objAluno);
+			objGrupo.setTutoria(objTutoria);
+			
+			
+			
+			
+			 resultado =  new GrupoService().atualizarGrupo(objGrupo);
+			
+		} else {
+			return "0";
+		}
+	    return Integer.toString(resultado.getIdgrupo());
+	
+		}
+	*/
+	/**
+	 * Listar lider grupo
+	 * @param lider
+	 * @param grupo
+	 * @return
+	 */
+	@Path("liderGrupo")
+	@POST
+	@Produces("text/plain")
+	public String eventoAction2( @FormParam("lider") String lider,
+			@FormParam("grupo") String grupo){
+		
+		  Grupo objGrupo = new Grupo();
+		  Aluno objAluno = new Aluno();
+	   
+	        	List<Grupo> rsGrupo;
+	    		rsGrupo = new GrupoService().listarkey(Integer.parseInt(grupo));
+	    		if (!rsGrupo.isEmpty()) {
+	    			objGrupo= rsGrupo.get(0);
+	    			List<Aluno> rsAluno;
+		    		rsAluno = new AlunoService().listarkey(Integer.parseInt(lider));
+		    		objAluno= rsAluno.get(0);
+	    			objGrupo.setLider(objAluno);
+	    			 new GrupoService().atualizarGrupo(objGrupo);
+	    			
+	    		} else {
+	    			logger.info("Não foi possivel completar a operacao");
+	    			return "false";
+	    			
+	    		}
+	    		
+		return "true";
+	}
+	
+	/**
+	 * Listar alunos grupo
+	 * @param id
+	 * @return
+	 */
+	/*
+	@Path("AlunoGrupo/{id}")
+	@GET
+	@Produces("application/json")
+	public List<List<AlunoVariavel>> alunogrupo(@PathParam("id") int id){
+		List<AlunoVariavel> rsAluno;
+		List<AlunoVariavel> listaTotal = null;
+		List<List<AlunoVariavel>> full = new ArrayList<List<AlunoVariavel>>();
+		
+		int quantidade, quantidadeFull, quantidadeParcial;
+		rsAluno = new AlunoVariavelService().listaGrupo(id);
+		
+		quantidade = rsAluno.size();
+		
+		for(int i = 0; i < quantidade; i ++){
+			listaTotal = new AlunoVariavelService().listaAnoEstudo(rsAluno.get(i).getAnoEstudo());
+			full.add(listaTotal);
+		}
+		quantidadeFull = full.size();
+		
+		for(int i = 0; i < quantidadeFull; i ++){
+			quantidadeParcial = full.get(i).size();
+			for(int k = 0; k < quantidadeParcial; k++){
+				if(full.get(i).get(k).get)
+			}
+		}
+		return full;
+	}
+	*/
+
+	@Path("AlunoGrupo/{id}")
+	@GET
+	@Produces("application/json")
+	public /*List<*/List<AlunoVariavel>/*>*/ alunogrupo(@PathParam("id") int id){
+		List<AlunoVariavel> rsAluno;
+		List<AlunoVariavel> listaTotal = null;
+		List<List<AlunoVariavel>> full = new ArrayList<List<AlunoVariavel>>();
+		
+		int quantidade;
+		rsAluno = new AlunoVariavelService().listaGrupo(id);
+		/*
+		quantidade = rsAluno.size();
+		
+		for(int i = 0; i < quantidade; i ++){
+			listaTotal = new AlunoVariavelService().listaAnoEstudo(rsAluno.get(i).getAnoEstudo());
+			full.add(listaTotal);
+		}
+		*/
+		return rsAluno;
+	}
+	
+	@Path("TutoriaGrupo/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Grupo> tutoriaGrupo(@PathParam("id") int id){
+		List<ProfessorFuncionario> professor = new ArrayList<ProfessorFuncionario>();
+		//professor = new ProfessorFuncionarioService().listarkey(id);
+		List<Tutoria> tutor = new TutoriaService().listarProfessorId(id);
+		List<Grupo> grupos = new ArrayList<Grupo>();
+		
+		 grupos = new GrupoService().listarTutor(tutor.get(0).getIdtutoria());
+	
+		return grupos;
+	}
+	
+	//!(tutor.get(0).getIdtutoria() == null) || .get(0).getIdtutoria()
+	
+}
