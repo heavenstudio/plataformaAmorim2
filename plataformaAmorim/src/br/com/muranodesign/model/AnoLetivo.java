@@ -54,8 +54,10 @@ public class AnoLetivo implements Serializable {
     @OneToMany(mappedBy = "anoLetivo")
     private Collection<Tutoria> tutoriaCollection;
     @OneToMany(mappedBy = "anoLetivo")
+    
     private Collection<ProfessorFuncionarioVariavel> professorFuncionarioVariavelCollection;
     @OneToMany(mappedBy = "anoLetivo")
+    
   //  private Collection<CalendarioEventos> calendarioEventosCollection;
     //@OneToMany(mappedBy = "anoLetivo")
     private Collection<FichaFinalizacaoQuestao> fichaFinalizacaoQuestaoCollection;

@@ -57,20 +57,26 @@ public class CalendarioEventos implements Serializable {
     @Lob
     @Column(name = "descricao")
     private String descricao;
+    
     @Column(name = "imagem")
     private String imagem;
     @Basic(optional = false)
+    
     @Column(name = "feriado")
     private String feriado;
     @Basic(optional = false)
+    
     @Column(name = "aula")
     private String aula;
+    
     @JoinColumn(name = "calendario", referencedColumnName = "idcalendario")
     @ManyToOne
     private Calendario calendario;
+    
     @JoinColumn(name = "ano", referencedColumnName = "idano_letivo")
     @ManyToOne
     private AnoLetivo ano;
+    
     @JoinColumn(name = "tipo_evento", referencedColumnName = "idtipo_evento")
     @ManyToOne
     private TipoEvento tipoEvento;

@@ -91,7 +91,18 @@ public class CalendarioEventosDAOImpl extends AbstractHibernateDAO implements Ca
 		return result;
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CalendarioEventosDAO#listarNotMural()
+	 */
+	public List<CalendarioEventos> listarNotMural(){
+		Criteria criteria = getSession().createCriteria(CalendarioEventos.class);
+		criteria.createAlias("tipoEvento", "tipoEvento");
+		criteria.add(Restrictions.ne("tipoEvento.tipoEvento", "mural"));
+		List<CalendarioEventos> result = criteria.list();
+		return result;
+		
+	}
 
 
 

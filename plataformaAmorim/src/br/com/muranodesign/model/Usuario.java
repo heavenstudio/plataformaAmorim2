@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.UPDATE", query = "UPDATE Usuario u SET u.senha = :senha WHERE u.idusuario = :idusuario"),
     @NamedQuery(name = "Usuario.findByIdusuario", query = "SELECT u FROM Usuario u WHERE u.idusuario = :idusuario"),
     @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login"),
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
@@ -61,18 +62,26 @@ public class Usuario implements Serializable {
     @Column(name = "moderador")
     private String moderador;
     @OneToMany(mappedBy = "usuario")
+    
     private Collection<ForumResposta> forumRespostaCollection;
     @OneToMany(mappedBy = "usuario")
+    
     private Collection<ForumQuestao> forumQuestaoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "remetente")
     
+    
     private Collection<Mensagens> mensagensCollection1;
+    @OneToMany(mappedBy = "usuario")
+    
+    
     @JoinColumn(name = "aluno", referencedColumnName = "ID_ALUNO")
     @ManyToOne
     private Aluno aluno;
+    
     @JoinColumn(name = "perfil", referencedColumnName = "idperfil")
     @ManyToOne
     private Perfil perfil;
+    
     @JoinColumn(name = "professor", referencedColumnName = "idprofessor_funcionario")
     @ManyToOne
     private ProfessorFuncionario professor;

@@ -86,6 +86,18 @@ public class CalendarioEventosResource {
 
 	}
 	
+	@Path("NaoMural")
+	@GET
+	@Produces("application/json")
+	public  List<CalendarioEventos> getNaoMural() {
+		logger.info("Listar CalendarioEventos ...");
+		List<CalendarioEventos> resultado;
+		resultado = new CalendarioEventosService().listarNotMural();
+		logger.info("QTD CalendarioEventos : " + resultado.size());
+		return resultado;
+
+	}
+	
 	/**
 	 * Remove  calendario eventos.
 	 *

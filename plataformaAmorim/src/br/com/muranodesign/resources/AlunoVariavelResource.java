@@ -2292,8 +2292,6 @@ public class AlunoVariavelResource {
 				}
 			}
 			return null;
-
-		
 		
 	}
 	

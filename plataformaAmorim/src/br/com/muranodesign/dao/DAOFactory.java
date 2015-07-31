@@ -27,6 +27,8 @@ import br.com.muranodesign.dao.impl.ForumQuestaoDAOImpl;
 import br.com.muranodesign.dao.impl.ForumRespostaDAOImpl;
 import br.com.muranodesign.dao.impl.GrupoDAOImpl;
 import br.com.muranodesign.dao.impl.HistoricoDAOImpl;
+import br.com.muranodesign.dao.impl.HistoricoEventosDAOImpl;
+import br.com.muranodesign.dao.impl.ImagensDAOImpl;
 import br.com.muranodesign.dao.impl.MateriaDAOImpl;
 import br.com.muranodesign.dao.impl.MensagensDAOImpl;
 import br.com.muranodesign.dao.impl.NativeQueryDAOImpl;
@@ -45,6 +47,7 @@ import br.com.muranodesign.dao.impl.RelatorioTutoriaDAOImpl;
 import br.com.muranodesign.dao.impl.RoteiroDAOImpl;
 import br.com.muranodesign.dao.impl.SODAOImpl;
 import br.com.muranodesign.dao.impl.SessaoForumGeralDAOImpl;
+import br.com.muranodesign.dao.impl.TemplateDAOImpl;
 import br.com.muranodesign.dao.impl.TipoEventoDAOImpl;
 import br.com.muranodesign.dao.impl.TipoProducaoAlunoDAOImpl;
 import br.com.muranodesign.dao.impl.TipoRecursoAprendizagemDAOImpl;
@@ -544,6 +547,33 @@ public static MensagensDAO getMensagensDAO(
 	 */
 	public static SODAO getSodao(PersistenceContext persistenceContext){
 		return new SODAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static HistoricoEventosDAO getHistoricoEventosDAO(PersistenceContext persistenceContext){
+		return new HistoricoEventosDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static ImagensDAO getImagensDAO(PersistenceContext persistenceContext){
+		return new ImagensDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static TemplateDAO getTemplateDAO(PersistenceContext persistenceContext){
+		return new TemplateDAOImpl((HibernatePersistenceContext) persistenceContext);
 	}
 	
 	/**

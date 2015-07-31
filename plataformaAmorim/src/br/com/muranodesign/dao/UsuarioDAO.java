@@ -84,6 +84,8 @@ public interface UsuarioDAO {
 		 * @return
 		 */
 		public List<Usuario> listarProfessor(int idProfessor);
+		
+		public void updateUser(String senha,int id);
 	
 
 }

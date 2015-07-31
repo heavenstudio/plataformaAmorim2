@@ -126,8 +126,8 @@ public class Usuario extends JerseyTest  {
 	*/
 	@Test
 	public void insert2() {
-		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AlunoVariavel");
-	webResource.post("action=update&inicio=2009-03-16&programaSocial=N&aluno=711&grupo=181&anoEstudo=36&periodo=8&anoLetivo=60&ativo=1&id=1205");
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Logar/AlterarSenhaFull");
+	webResource.post("senha=TESTE&id=674");
 	
 	}
 			

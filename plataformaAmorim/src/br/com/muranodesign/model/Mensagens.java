@@ -70,6 +70,7 @@ public class Mensagens implements Serializable {
   
     @Column(name = "destinatarios")
     private String destinatarios;
+    
    
     
     @Column(name = "anexo")

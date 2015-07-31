@@ -9,7 +9,11 @@
 		<property name="hibernate.connection.username">amorim_prod</property>
 		<property name="hibernate.connection.password">amorim_prod</property>
 		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
 		<!-- <property name="hibernate.hbm2ddl.auto">update</property> 
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<property name="show_sql">true</property> 
@@ -87,6 +91,10 @@
 		<mapping class="br.com.muranodesign.model.SessaoForumGeral"/>
 		<mapping class="br.com.muranodesign.model.ForumGeralQuestao"/>
 		<mapping class="br.com.muranodesign.model.ForumGeralResposta"/>
+		
+		<mapping class="br.com.muranodesign.model.Imagens" />
+		<mapping class="br.com.muranodesign.model.historicoEventos" />
+		<mapping class="br.com.muranodesign.model.Template" />
 	
 	</session-factory>
 </hibernate-configuration>

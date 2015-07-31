@@ -12,6 +12,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.UsuarioDAO;
@@ -114,6 +115,14 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 		criteria.add(Restrictions.eq("professor.idprofessorFuncionario", idProfessor));
 		List<Usuario> result = criteria.list();
 		return result;
+	}
+	
+	public void updateUser(String senha,int id){
+		Query query = getSession().getNamedQuery("Usuario.UPDATE");
+		query.setParameter("senha", senha);
+		query.setParameter("idusuario", id);
+		
+		query.executeUpdate();
 	}
 	
 	@Override

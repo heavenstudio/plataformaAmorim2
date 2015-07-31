@@ -136,6 +136,14 @@ public class UsuarioService {
 		pc.commitAndClose();
 		return p;
 	}
+	
+	public int updateUser(String senha,int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		UsuarioDAO dao = DAOFactory.getUsuarioDAO(pc);
+		dao.updateUser(senha, id);
+		pc.commitAndClose();
+		return id;
+	}
 
 	
 }

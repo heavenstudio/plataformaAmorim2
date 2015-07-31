@@ -96,6 +96,19 @@ public class CalendarioEventosService {
 		pc.commitAndClose();
 		return p;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<CalendarioEventos> listarNotMural(){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		CalendarioEventosDAO dao = DAOFactory.getCalendarioEventosDAO(pc);
+		List<CalendarioEventos> result = dao.listarNotMural();
+				
+		pc.commitAndClose();
+		return result;
+	}
 
 	
 }

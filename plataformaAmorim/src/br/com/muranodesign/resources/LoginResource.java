@@ -186,9 +186,7 @@ public class LoginResource {
 	 * @param senhaAnt
 	 * @param senha
 	 * @return O retorno é uma string informando se a alteração foi realizada ou
-	 *         não
-	 *         
-	 *         
+	 *         não    
 	 *         
 	 */
 
@@ -229,7 +227,7 @@ public class LoginResource {
 				String senhaMD5 = new BigInteger(1, m.digest()).toString(16);
 				
 				user.setSenha(senhaMD5);
-				new UsuarioService().atualizarUsuario(user);
+				new UsuarioService().updateUser(senhaMD5, id);
 				
 				retorno = "ok";
 			}else{
