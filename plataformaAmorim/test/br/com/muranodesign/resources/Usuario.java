@@ -124,11 +124,18 @@ public class Usuario extends JerseyTest  {
 	webResource.post("action=create&idProfessor=60&anoEstudo=1&periodo=T&idPerido=9&lider=0");
 	}
 	*/
+	/*
 	@Test
 	public void insert2() {
 		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Logar/AlterarSenhaFull");
 	webResource.post("senha=TESTE&id=674");
 	
+	}*/
+	
+	@Test
+	public void insert2() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/HistoricoEventos");
+	webResource.post("action=update&ano=");
 	}
 			
 }

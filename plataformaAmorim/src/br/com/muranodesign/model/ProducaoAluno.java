@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProducaoAluno.findByImagem", query = "SELECT p FROM ProducaoAluno p WHERE p.imagem = :imagem"),
     @NamedQuery(name = "ProducaoAluno.findByData", query = "SELECT p FROM ProducaoAluno p WHERE p.data = :data"),
     @NamedQuery(name = "ProducaoAluno.findByArquivo", query = "SELECT p FROM ProducaoAluno p WHERE p.arquivo = :arquivo")})
-public class ProducaoAluno implements Serializable {
+	public class ProducaoAluno implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,9 +66,14 @@ public class ProducaoAluno implements Serializable {
     @Column(name = "status")
     private int status;
     
-     @OneToOne
-	 @JoinColumn(name = "idmensagens")
-	 private Mensagens mensagens;
+    @OneToOne
+	@JoinColumn(name = "idmensagens")
+	private Mensagens mensagens;
+     
+    @OneToOne
+	@JoinColumn(name = "Idtemplate")
+	private Template template;
+     
     
     @JoinColumn(name = "ano_letivo", referencedColumnName = "idano_letivo")
     @ManyToOne(optional = false)
@@ -219,6 +224,14 @@ public class ProducaoAluno implements Serializable {
 
 	public void setMensagens(Mensagens mensagens) {
 		this.mensagens = mensagens;
+	}
+
+	public Template getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(Template template) {
+		this.template = template;
 	}
     
 }

@@ -9,8 +9,6 @@
 		<property name="hibernate.connection.username">amorim_prod</property>
 		<property name="hibernate.connection.password">amorim_prod</property>
 		
-		<property name="hibernate.hbm2ddl.auto">update</property>
-		
 		<!-- <property name="hibernate.hbm2ddl.auto">update</property> 
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		

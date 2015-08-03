@@ -45,7 +45,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mensagens.findByTipoMensagem", query = "SELECT m FROM Mensagens m WHERE m.tipoMensagem = :tipoMensagem"),
     @NamedQuery(name = "Mensagens.findByData", query = "SELECT m FROM Mensagens m WHERE m.data = :data"),
     @NamedQuery(name = "Mensagens.findByProprietario", query = "SELECT m FROM Mensagens m WHERE m.proprietario = :proprietario")})
-public class Mensagens implements Serializable {
+
+	public class Mensagens implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,16 +72,13 @@ public class Mensagens implements Serializable {
     @Column(name = "destinatarios")
     private String destinatarios;
     
-   
-    
     @Column(name = "anexo")
     private String anexo;
     
     @JoinColumn(name = "proprietario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private Usuario proprietario;
-    
-    
+        
     @JoinColumn(name = "remetente", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private Usuario remetente;
@@ -108,7 +106,6 @@ public class Mensagens implements Serializable {
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
-
 
     public String getLida() {
         return lida;
@@ -150,8 +147,6 @@ public class Mensagens implements Serializable {
         this.data = data;
     }
 
-
-
     public Usuario getRemetente() {
         return remetente;
     }
@@ -159,11 +154,6 @@ public class Mensagens implements Serializable {
     public void setRemetente(Usuario remetente) {
         this.remetente = remetente;
     }
-
-  
-    
-    
-    
     
     public Usuario getProprietario() {
 		return proprietario;
@@ -180,8 +170,6 @@ public class Mensagens implements Serializable {
 	public void setAnexo(String anexo) {
 		this.anexo = anexo;
 	}
-	
-	
 
 	public String getDestinatarios() {
 		return destinatarios;

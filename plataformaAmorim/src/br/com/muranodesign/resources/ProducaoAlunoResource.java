@@ -142,7 +142,6 @@ public class ProducaoAlunoResource {
 		   ProducaoAluno resultado =  new ProducaoAlunoService().atualizarProducaoAluno(objProducaoAluno);
 		   return resultado.getIdproducaoAluno();
 		
-		
 	}
 	
 	@Path("Filtos/{id}/{tipo}/{roteiro}")
@@ -201,7 +200,6 @@ public class ProducaoAlunoResource {
 		List<Aluno> rsAluno;
 		rsAluno = new AlunoService().listarkey(Integer.parseInt(aluno));
 		Aluno objAluno= rsAluno.get(0);
-		
 		
 		
 		List<TipoProducaoAluno> rsTipoProducaoAluno;
@@ -315,7 +313,6 @@ public class ProducaoAlunoResource {
 
 		return resultado;
 
-
 	}
 	
 	
@@ -357,9 +354,4 @@ public class ProducaoAlunoResource {
 
 
 	}
-
-
-	
-	
-
 }
