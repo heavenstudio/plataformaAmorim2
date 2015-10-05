@@ -91,7 +91,10 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		return result;
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listarFiltro(int, int, int)
+	 */
 	public List<ProducaoAluno> listarFiltro(int id, int tipo, int roteiro){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.createAlias("aluno", "aluno");
@@ -106,10 +109,56 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		return result;
 	}
 		
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listarAluno(int)
+	 */
 	public List<ProducaoAluno> listarAluno(int id){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
+		List<ProducaoAluno> result = criteria.list();
+		return result;
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listarPortifolio(int)
+	 */
+	public List<ProducaoAluno> listarPortifolio(int id){
+		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", id));
+		criteria.createAlias("tipo", "tipo");
+		criteria.add(Restrictions.eq("tipo.idtipoProducaoAluno", 5));
+		List<ProducaoAluno> result = criteria.list();
+		return result;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listaAlunoRoteiroTipo(int, int, int)
+	 */
+	public List<ProducaoAluno> listaAlunoRoteiroTipo(int idAluno, int idRoteiro, int idTipo){
+		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		
+		criteria.createAlias("roteiro", "roteiro");
+		criteria.add(Restrictions.eq("roteiro.idroteiro", idRoteiro));
+		
+		criteria.createAlias("tipo", "tipo");
+		criteria.add(Restrictions.eq("tipo.idtipoProducaoAluno", idTipo));
+		List<ProducaoAluno> result = criteria.list();
+		return result;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#NCapa(int)
+	 */
+	public List<ProducaoAluno> NCapa(int id){
+		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
+		criteria.add(Restrictions.isNotNull("capa"));
 		List<ProducaoAluno> result = criteria.list();
 		return result;
 	}

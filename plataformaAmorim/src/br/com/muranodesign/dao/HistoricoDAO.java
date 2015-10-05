@@ -53,7 +53,11 @@ public List<Historico_conexao> listAll();
 	 */
 	public List<Historico_conexao> listarQtdAcessoExterno(String data);
 	
-	
+	/**
+	 * Listar historico por so
+	 * @param so
+	 * @return list
+	 */
 	public List<Historico_conexao> listarSo(SO so);
 
 }

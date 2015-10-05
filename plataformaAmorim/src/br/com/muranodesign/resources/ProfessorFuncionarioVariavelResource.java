@@ -85,6 +85,11 @@ public class ProfessorFuncionarioVariavelResource {
 		return resultado;
 	}
 
+	/**
+	 * Lista professor funcionario por id 
+	 * @param id
+	 * @return list
+	 */
 	@Path("Professor/{id}")
 	@GET
 	@Produces("application/json")

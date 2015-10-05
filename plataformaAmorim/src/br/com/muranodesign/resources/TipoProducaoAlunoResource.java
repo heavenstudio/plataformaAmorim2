@@ -96,7 +96,13 @@ public class TipoProducaoAlunoResource {
 
 	}
 	
-	
+	/**
+	 * Criar e alterar o tipo de producao aluno
+	 * @param action
+	 * @param strid
+	 * @param tipo
+	 * @return id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(

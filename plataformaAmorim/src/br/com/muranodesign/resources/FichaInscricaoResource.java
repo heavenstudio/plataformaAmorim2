@@ -21,6 +21,15 @@ public class FichaInscricaoResource {
 	
 	private Logger logger = Logger.getLogger(FichaInscricao.class.getName());
 	
+	/**
+	 * Criar e alterar ficha de inscricao
+	 * @param action
+	 * @param id
+	 * @param local
+	 * @param ano_letivo
+	 * @param roteiro
+	 * @return  id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -58,7 +67,10 @@ public class FichaInscricaoResource {
 		return Integer.toString(resultado.getIdfichainscricao());
 	}
 	
-	
+	/**
+	 * Listar todas as fichas de inscricao
+	 * @return list
+	 */
 	@GET
 	@Produces("application/json")
 	public List<FichaInscricao> getFichaInscricao() {
@@ -69,7 +81,11 @@ public class FichaInscricaoResource {
 		return resultado;
 	}
 	
-	
+	/**
+	 * Listar ficha de inscricao por id
+	 * @param id
+	 * @return list
+	 */
 	@Path("{id}")
 	@GET
 	@Produces("application/json")

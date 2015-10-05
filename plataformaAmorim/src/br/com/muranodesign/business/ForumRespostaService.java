@@ -122,6 +122,21 @@ public class ForumRespostaService {
 		pc.commitAndClose();
 		return retorno;
 	}
+	
+	/**
+	 * Lista respostas não vistas
+	 * @param id
+	 * @return
+	 */
+	public List<ForumResposta> ListaNVisto(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ForumRespostaDAO dao = DAOFactory.getForumRespostaDAO(pc);
+		List<ForumResposta> retorno = dao.ListaNVisto(id);
+		pc.commitAndClose();
+		return retorno;
+	}
+	
+	
 
 	
 }

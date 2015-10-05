@@ -77,6 +77,12 @@ public class PlanoEstudoResource {
 
 	}
 	
+	/**
+	 * Listar plano de estudo por id de aluno
+	 * @param id
+	 * @return list
+	 * @throws ParseException
+	 */
 	@Path("aluno/{id}")
 	@GET
 	@Produces("application/json")
@@ -91,6 +97,12 @@ public class PlanoEstudoResource {
 
 	}
 	
+	/**
+	 * Listar plano de estudo por id de aluno
+	 * @param id
+	 * @return list
+	 * @throws ParseException
+	 */
 	@Path("alunoTotal/{id}")
 	@GET
 	@Produces("application/json")

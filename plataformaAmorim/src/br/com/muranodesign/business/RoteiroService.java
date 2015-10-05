@@ -113,4 +113,12 @@ public class RoteiroService {
 	}
 
 	
+	public List<Roteiro> ListaLikeRoteiro(String letra){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroDAO dao = DAOFactory.getRoteiroDAO(pc);
+		List<Roteiro> result = dao.ListaLikeRoteiro(letra);
+		pc.commitAndClose();
+		return result;
+	}
+	
 }

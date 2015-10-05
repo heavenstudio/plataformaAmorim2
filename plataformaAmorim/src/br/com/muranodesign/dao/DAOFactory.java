@@ -9,6 +9,9 @@
  */
 package br.com.muranodesign.dao;
 
+import br.com.muranodesign.dao.impl.AgendamentoSalaDAOImpl;
+import br.com.muranodesign.dao.impl.AgrupamentoDAOImpl;
+import br.com.muranodesign.dao.impl.AlunoAgrupamentoDAOImpl;
 import br.com.muranodesign.dao.impl.AlunoDAOImpl;
 import br.com.muranodesign.dao.impl.AlunoVariavelDAOImpl;
 import br.com.muranodesign.dao.impl.AnoEstudoDAOImpl;
@@ -16,10 +19,15 @@ import br.com.muranodesign.dao.impl.AnoLetivoDAOImpl;
 import br.com.muranodesign.dao.impl.AtividadeDAOImpl;
 import br.com.muranodesign.dao.impl.AtribuicaoRoteiroExtraDAOImpl;
 import br.com.muranodesign.dao.impl.AvaliacaoProducaoAlunoDAOImpl;
+import br.com.muranodesign.dao.impl.BlogDAOImpl;
 import br.com.muranodesign.dao.impl.CalendarioDAOImpl;
 import br.com.muranodesign.dao.impl.CalendarioEventosDAOImpl;
 import br.com.muranodesign.dao.impl.CategoriaProducaoAlunoDAOImpl;
 import br.com.muranodesign.dao.impl.ChamadaDAOImpl;
+import br.com.muranodesign.dao.impl.CicloAnoEstudoDAOImpl;
+import br.com.muranodesign.dao.impl.CicloDAOImpl;
+import br.com.muranodesign.dao.impl.ComunicadoOficinasDAOImpl;
+import br.com.muranodesign.dao.impl.CoresDAOImpl;
 import br.com.muranodesign.dao.impl.FichaInscricaoDAOImpl;
 import br.com.muranodesign.dao.impl.ForumGeralQuestaoDAOImpl;
 import br.com.muranodesign.dao.impl.ForumGeralRespostaDAOImpl;
@@ -31,11 +39,19 @@ import br.com.muranodesign.dao.impl.HistoricoEventosDAOImpl;
 import br.com.muranodesign.dao.impl.ImagensDAOImpl;
 import br.com.muranodesign.dao.impl.MateriaDAOImpl;
 import br.com.muranodesign.dao.impl.MensagensDAOImpl;
+import br.com.muranodesign.dao.impl.MenuDAOImpl;
+import br.com.muranodesign.dao.impl.MenuPerfilDAOImpl;
+import br.com.muranodesign.dao.impl.MuralDAOImpl;
 import br.com.muranodesign.dao.impl.NativeQueryDAOImpl;
+import br.com.muranodesign.dao.impl.ObjetivoAulaDAOImpl;
 import br.com.muranodesign.dao.impl.ObjetivoDAOImpl;
+import br.com.muranodesign.dao.impl.OficinaDAOImpl;
+import br.com.muranodesign.dao.impl.OficinaProfessorDAOImpl;
 import br.com.muranodesign.dao.impl.PerfilDAOImpl;
 import br.com.muranodesign.dao.impl.PeriodoDAOImpl;
+import br.com.muranodesign.dao.impl.PlanejamentoAulaDAOImpl;
 import br.com.muranodesign.dao.impl.PlanejamentoRoteiroDAOImpl;
+import br.com.muranodesign.dao.impl.PlanoAulaDAOImpl;
 import br.com.muranodesign.dao.impl.PlanoEstudoDAOImpl;
 import br.com.muranodesign.dao.impl.PresencaProfessorDAOImpl;
 import br.com.muranodesign.dao.impl.ProducaoAlunoDAOImpl;
@@ -44,8 +60,12 @@ import br.com.muranodesign.dao.impl.ProfessorFuncionarioVariavelDAOImpl;
 import br.com.muranodesign.dao.impl.RecursoAprendizagemDAOImpl;
 import br.com.muranodesign.dao.impl.RegistroDiarioDAOImpl;
 import br.com.muranodesign.dao.impl.RelatorioTutoriaDAOImpl;
+import br.com.muranodesign.dao.impl.RoteiroAulaDAOImpl;
 import br.com.muranodesign.dao.impl.RoteiroDAOImpl;
+import br.com.muranodesign.dao.impl.RotinaDAOImpl;
 import br.com.muranodesign.dao.impl.SODAOImpl;
+import br.com.muranodesign.dao.impl.SalasDAOImpl;
+import br.com.muranodesign.dao.impl.SemanaDAOImpl;
 import br.com.muranodesign.dao.impl.SessaoForumGeralDAOImpl;
 import br.com.muranodesign.dao.impl.TemplateDAOImpl;
 import br.com.muranodesign.dao.impl.TipoEventoDAOImpl;
@@ -188,6 +208,11 @@ public class DAOFactory {
 		return new ChamadaDAOImpl(
 				(HibernatePersistenceContext) persistenceContext);
 	}
+	
+	
+	public static CoresDAO getCorDAO(PersistenceContext persistenceContext){
+		return new CoresDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
 
 
 /*
@@ -292,6 +317,78 @@ public static MensagensDAO getMensagensDAO(
 		return new RoteiroDAOImpl(
 				(HibernatePersistenceContext) persistenceContext);
 	}
+	
+	
+	/**
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static CicloDAO getCicloDAO(PersistenceContext persistenceContext) {
+		return new CicloDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static MenuDAO getMenuDAO(PersistenceContext persistenceContext) {
+		return new MenuDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static MenuPerfilDAO getMenuPerfilDAO(PersistenceContext persistenceContext) {
+		return new MenuPerfilDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static RoteiroAulaDAO getRoteiroAulaDAO(PersistenceContext persistenceContext) {
+		return new RoteiroAulaDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static ObjetivoAulaDAO getObjetivoAulaDAO(PersistenceContext persistenceContext) {
+		return new ObjetivoAulaDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static BlogDAO getBlogDAO(PersistenceContext persistenceContext) {
+		return new BlogDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static CicloAnoEstudoDAO getCicloAnoEstudoDAO(PersistenceContext persistenceContext) {
+		return new CicloAnoEstudoDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
 
 	/**
 	 * Gets the objetivo dao.
@@ -314,6 +411,24 @@ public static MensagensDAO getMensagensDAO(
 	public static RegistroDiarioDAO getRegistroDiarioDAO(PersistenceContext persistenceContext) {
 		return new RegistroDiarioDAOImpl(
 				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static MuralDAO getMuralDAO(PersistenceContext persistenceContext){
+		return new MuralDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static PlanejamentoAulaDAO getPlanejamentoAulaDAO(PersistenceContext persistenceContext){
+		return new PlanejamentoAulaDAOImpl((HibernatePersistenceContext) persistenceContext);
 	}
 
 	/**
@@ -383,6 +498,16 @@ public static MensagensDAO getMensagensDAO(
 	 */
 	public static MateriaDAO getMateriaDAO(PersistenceContext persistenceContext) {
 		return new MateriaDAOImpl(
+				(HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static PlanoAulaDAO getPlanoAulaDAO(PersistenceContext persistenceContext) {
+		return new PlanoAulaDAOImpl(
 				(HibernatePersistenceContext) persistenceContext);
 	}
 	
@@ -554,9 +679,92 @@ public static MensagensDAO getMensagensDAO(
 	 * @param persistenceContext
 	 * @return
 	 */
+	public static AgendamentoSalaDAO getAgendamentoSalaDAO(PersistenceContext persistenceContext){
+		return new AgendamentoSalaDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static AgrupamentoDAO getAgrupamentoDAO(PersistenceContext persistenceContext){
+		return new AgrupamentoDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static AlunoAgrupamentoDAO getAlunoAgrupamentoDAO(PersistenceContext persistenceContext){
+		return new AlunoAgrupamentoDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static OficinaDAO getOficinaDAO(PersistenceContext persistenceContext){
+		return new OficinaDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static OficinaProfessorDAO getOficinaProfessorDAO(PersistenceContext persistenceContext){
+		return new OficinaProfessorDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static RotinaDAO getRotinaDAO(PersistenceContext persistenceContext){
+		return new RotinaDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static SalasDAO getSalasDAO(PersistenceContext persistenceContext){
+		return new SalasDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static SemanaDAO getSemanaDAO(PersistenceContext persistenceContext){
+		return new SemanaDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
 	public static HistoricoEventosDAO getHistoricoEventosDAO(PersistenceContext persistenceContext){
 		return new HistoricoEventosDAOImpl((HibernatePersistenceContext) persistenceContext);
 	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	public static ComunicadoOficinasDAO getComunicadoOficinasDAO(PersistenceContext persistenceContext){
+		return new ComunicadoOficinasDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	
 	
 	/**
 	 * 

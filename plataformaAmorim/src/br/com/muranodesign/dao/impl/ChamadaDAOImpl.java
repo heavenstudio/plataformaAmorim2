@@ -129,6 +129,10 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ChamadaDAO#dataPresenca(int, java.util.Date)
+	 */
 	public List<Chamada> dataPresenca(int id, Date data){
 		Criteria criteria = getSession().createCriteria(Chamada.class);
 		criteria.createAlias("aluno", "aluno");

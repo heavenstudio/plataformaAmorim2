@@ -73,6 +73,10 @@ public class ProfessorFuncionario implements Serializable {
    
     @Column(name = "complemento")
     private String complemento;
+    
+    @Column(name = "perfil")
+    private int perfil;
+    
     @Basic(optional = false)
     @Column(name = "cep")
     private String cep;
@@ -107,10 +111,13 @@ public class ProfessorFuncionario implements Serializable {
     private String observacao;
     @Column(name = "foto_professor_funcionario")
     private String fotoProfessorFuncionario;
+    /*
+    @JoinColumn(name = "perfil", referencedColumnName = "idperfil")
+    @ManyToOne(optional = false)
+    private Perfil perfil;*/
     
-    //@JoinColumn(name = "perfil", referencedColumnName = "idperfil")
-    //@ManyToOne(optional = false)
-    //private Perfil perfil;
+   
+    
     @OneToMany(mappedBy = "professor")
     private Collection<RelatorioAluno> relatorioAlunoCollection;
     @OneToMany(mappedBy = "tutor")
@@ -354,5 +361,18 @@ public class ProfessorFuncionario implements Serializable {
     public String toString() {
         return "br.com.muranodesign.model.ProfessorFuncionario[ idprofessorFuncionario=" + idprofessorFuncionario + " ]";
     }
+
+	public int getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(int perfil) {
+		this.perfil = perfil;
+	}
+
+
+
+
+
     
 }

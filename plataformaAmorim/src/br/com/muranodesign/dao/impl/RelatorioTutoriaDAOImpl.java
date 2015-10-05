@@ -91,6 +91,10 @@ public class RelatorioTutoriaDAOImpl extends AbstractHibernateDAO implements Rel
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RelatorioTutoriaDAO#listarTutoriaAluno(int, int)
+	 */
 	public List<RelatorioTutoria> listarTutoriaAluno(int tutoria, int aluno){
 		Criteria criteria = getSession().createCriteria(RelatorioTutoria.class);
 		criteria.createAlias("aluno", "aluno");

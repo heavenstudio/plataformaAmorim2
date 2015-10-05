@@ -69,4 +69,11 @@ public interface ForumRespostaDAO {
 		 * @return
 		 */
 		public List<ForumResposta> ListarTotal(int id);
+		
+		/**
+		 * Lista respostas não vistas
+		 * @param id
+		 * @return
+		 */
+		public List<ForumResposta> ListaNVisto(int id);
 }

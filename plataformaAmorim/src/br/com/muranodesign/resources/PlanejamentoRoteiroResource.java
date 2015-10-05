@@ -90,6 +90,11 @@ public class PlanejamentoRoteiroResource {
 
 	}
 	
+	/**
+	 * Listar plano de estudo por id
+	 * @param id
+	 * @return list
+	 */
 	@Path("PlanoEstudo/{id}")
 	@GET
 	@Produces("application/json")
@@ -109,7 +114,11 @@ public class PlanejamentoRoteiroResource {
 	}
 	
 	
-	
+	/**
+	 * Listar os objetivos por id aluno
+	 * @param id
+	 * @return Hashtable<String, Long> 
+	 */
 	@Path("/ObjetivoAluno/{id}")
 	@GET
 	@Produces("application/json")
@@ -142,7 +151,11 @@ public class PlanejamentoRoteiroResource {
 	return retorno;
 	}
 	
-	
+	/**
+	 * Listar os objetivos por id de professor
+	 * @param id
+	 * @return Hashtable<String, Integer>
+	 */
 	@Path("/ObjetivoAlunoProfessor/{id}")
 	@GET
 	@Produces("application/json")
@@ -277,7 +290,7 @@ public class PlanejamentoRoteiroResource {
 	 * Listar planejamento de roteiro por aluno e objetivo
 	 * @param aluno
 	 * @param objetivo
-	 * @return
+	 * @return list
 	 */
 	@Path("alunoPendente/{aluno}/{objetivo}")
 	@GET
@@ -291,6 +304,11 @@ public class PlanejamentoRoteiroResource {
 		
 		}
 	
+	/**
+	 * Listar status por id de aluno
+	 * @param id
+	 * @return list
+	 */
 	@Path("status/{id}")
 	@GET
 	@Produces("application/json")
@@ -313,6 +331,11 @@ public class PlanejamentoRoteiroResource {
 		return retorno;
 	}
 	
+	/**
+	 * Listar planejamento de roteiros quando o roteiro for ativo 
+	 * @param id
+	 * @return list
+	 */
 	@Path("RoteirosAtivos/{id}")
 	@GET
 	@Produces("application/json")
@@ -364,7 +387,7 @@ public class PlanejamentoRoteiroResource {
 	 * Alterar o status
 	 * @param strid
 	 * @param status
-	 * @return
+	 * @return String
 	 * @throws ParseException 
 	 */
 	@Path("StatusPlanejamento")
@@ -389,8 +412,7 @@ public class PlanejamentoRoteiroResource {
 			Date date = (Date)formatter.parse(k);
 			planejamento.setDataStatusVisto(date);
 		}
-		
-		
+
 		
 		planejamento.setIdplanejamentoRoteiro(id);
 		planejamento.setStatus(status);
@@ -460,8 +482,6 @@ public class PlanejamentoRoteiroResource {
 		
 		//TODO: Validar valores.
 		
-		
-		
 	
 		if (action.equals("create")) {
 			logger.info("Craindo no  Planejamento Roteiro");
@@ -499,9 +519,5 @@ public class PlanejamentoRoteiroResource {
 		return Integer.toString(resultado.getIdplanejamentoRoteiro());
 
 	}
-	
-	
-	
-	
 
 }

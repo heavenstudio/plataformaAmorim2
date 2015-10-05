@@ -27,6 +27,16 @@ public class AtribuicaoRoteiroExtraResource {
 	
 	private Logger logger = Logger.getLogger(AtribuicaoRoteiroExtraResource.class.getName());
 	
+	/**
+	 * Criar e alterar atribuicao de roteiros extras 
+	 * @param action
+	 * @param id
+	 * @param idaluno
+	 * @param idroteiro
+	 * @param motivo
+	 * @param idano_letivo
+	 * @return  id
+	 */
 	@POST
 	@Produces("application/json")
 	public String eventoAction(
@@ -67,7 +77,11 @@ public class AtribuicaoRoteiroExtraResource {
 	}
 	
 	
-	
+	/**
+	 * Deletar atribuicao de roteiros extras 
+	 * @param id
+	 * @return String
+	 */
 	@Path("{id}")
 	@DELETE
 	@Produces("text/plain")
@@ -83,7 +97,10 @@ public class AtribuicaoRoteiroExtraResource {
 		return "Deletado";
 	}
 	
-	
+	/**
+	 * Lista todas as atribuições de roteiros extras
+	 * @return list
+	 */
 	@GET
 	@Produces("application/json")
 	public List<AtribuicaoRoteiroExtra> getAtribuicaoRoteiroExtra(){
@@ -96,7 +113,12 @@ public class AtribuicaoRoteiroExtraResource {
 		return resultado;
 	}
 	
-	
+	/**
+	 * Lista atribuições de roteiros extras por id de aluno e id de roteiro
+	 * @param idaluno
+	 * @param idroteiro
+	 * @return int
+	 */
 	@Path("/RoteiroAluno/{idaluno}/{idroteiro}")
 	@GET
 	@Produces("application/json")
@@ -116,7 +138,11 @@ public class AtribuicaoRoteiroExtraResource {
 		return result;
 	}
 	
-	
+	/**
+	 * Lista roteiro por id de aluno
+	 * @param id
+	 * @return list
+	 */
 	@Path("aluno/{id}")
 	@GET
 	@Produces("application/json")

@@ -42,6 +42,33 @@ public class AlunoService {
 	}
 	
 	/**
+	 * Lista por intervalo de ids
+	 * @param primeiro
+	 * @param ultimo
+	 * @return list
+	 */
+	public List<Aluno> listIntervalo(int primeiro, int ultimo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoDAO dao = DAOFactory.getAlunoDAO(pc);
+		List<Aluno> result = dao.listIntervalo(primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
+	 * Lista todos por like
+	 * @param letra
+	 * @return list
+	 */
+	public List<Aluno> listAllLike(String letra){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoDAO dao = DAOFactory.getAlunoDAO(pc);
+		List<Aluno> result = dao.listAllLike(letra);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
 	 * Lisat atraves do id..
 	 *
 	 * @param id do aluno

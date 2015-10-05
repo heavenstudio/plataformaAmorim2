@@ -31,6 +31,7 @@ import br.com.muranodesign.business.PlanoEstudoService;
 import br.com.muranodesign.business.RegistroDiarioService;
 import br.com.muranodesign.model.PlanoEstudo;
 import br.com.muranodesign.model.RegistroDiario;
+import br.com.muranodesign.util.StringUtil;
 
 
 
@@ -112,7 +113,7 @@ public class RegistroDiarioResource {
 	/**
 	 * Listar registro por plano de estudo
 	 * @param id
-	 * @return
+	 * @return list
 	 */
 	@Path("PlanoEstudo/{id}")
 	@GET
@@ -127,7 +128,7 @@ public class RegistroDiarioResource {
 	
 	/**
 	 * Listar o ultimo 
-	 * @return
+	 * @return list
 	 */
 	@Path("utimo")
 	@GET
@@ -141,6 +142,13 @@ public class RegistroDiarioResource {
 		
 	}
 	
+	/**
+	 * Listar registros diarios por mes e ano
+	 * @param mes
+	 * @param ano
+	 * @return list
+	 * @throws ParseException
+	 */
 	@Path("RegistroMes/{mes}/{ano}")
 	@GET
 	@Produces("application/json")
@@ -222,7 +230,7 @@ public class RegistroDiarioResource {
 			
 			@FormParam("action") String action,
 			@FormParam("id") String strid,
-			//@FormParam("data") String data,
+			@FormParam("data") String data,
 			@FormParam("registro") String registro,
 			@FormParam("planoEstudo") String planoEstudo 
 		
@@ -246,13 +254,13 @@ public class RegistroDiarioResource {
 			
 		}
 		*/
-		
+		/*
 		Date k = null;
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 		String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
 		Date date = (Date)formatter.parse(data);
-		
+		*/
 			
 		
 		// get tipo evento
@@ -261,12 +269,13 @@ public class RegistroDiarioResource {
 		PlanoEstudo objPlanoEstudo = rsPlanoEstudo.get(0);
 		//TODO: Validar valores.
 		
-		
+		StringUtil stringUtil = new StringUtil();
 		
 	
 		if (action.equals("create")) {
 			logger.info("Criando no  evento");
-			objRegistroDiario.setData(date);
+			//objRegistroDiario.setData(date);
+			objRegistroDiario.setData(stringUtil.converteStringData(data));
 			objRegistroDiario.setRegistro(registro);
 			objRegistroDiario.setPlanoEstudo(objPlanoEstudo);
 		
@@ -282,7 +291,8 @@ public class RegistroDiarioResource {
 			List<RegistroDiario> rsRegistroDiario;
 			rsRegistroDiario= new RegistroDiarioService().listarkey(id);
 			objRegistroDiario = rsRegistroDiario.get(0);
-			objRegistroDiario.setData(date);
+			//objRegistroDiario.setData(date);
+			objRegistroDiario.setData(stringUtil.converteStringData(data));
 			objRegistroDiario.setRegistro(registro);
 			objRegistroDiario.setPlanoEstudo(objPlanoEstudo);
 		

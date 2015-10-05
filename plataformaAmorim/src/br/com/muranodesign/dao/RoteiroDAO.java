@@ -71,5 +71,11 @@ public interface RoteiroDAO {
 		 */
 		public Roteiro listarid(int id);
 		
+		/**
+		 * Listar like nome de roteiros
+		 * @param letra
+		 * @return
+		 */
+		public List<Roteiro> ListaLikeRoteiro(String letra);
 
 }

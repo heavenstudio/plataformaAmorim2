@@ -12,6 +12,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.AlunoDAO;
@@ -45,11 +46,38 @@ public class AlunoDAOImpl extends AbstractHibernateDAO implements AlunoDAO {
 	public List<Aluno> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Aluno.class);
+		//criteria.setFirstResult(arg0);
+		//criteria.setMaxResults(arg0);
 		List<Aluno> result = criteria.list();
 		
 		
 		return result;
 	} 
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoDAO#listIntervalo(int, int)
+	 */
+	public List<Aluno> listIntervalo(int primeiro, int ultimo){
+		Criteria criteria = getSession().createCriteria(Aluno.class);
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		
+		List<Aluno> result = criteria.list();
+		
+		return result;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoDAO#listAllLike(java.lang.String)
+	 */
+	public List<Aluno> listAllLike(String letra){
+		Criteria criteria = getSession().createCriteria(Aluno.class);
+		criteria.add(Restrictions.like("nome", letra, MatchMode.START));
+		List<Aluno> result = criteria.list();
+		return result;
+	}
 	
 
 	/* (non-Javadoc)

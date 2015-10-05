@@ -40,6 +40,34 @@ public class MensagensService {
 	}
 	
 	/**
+	 * Listar por intervalo de ids
+	 * @param primeiro
+	 * @param ultimo
+	 * @return
+	 */
+	public List<Mensagens> listIntervalo(int primeiro, int ultimo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
+		List<Mensagens> result = dao.listIntervalo(primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param idProprietario
+	 * @param idMensagem
+	 * @return
+	 */
+	public List<Mensagens> listarMensagemByProprietario(int idProprietario, int idMensagem){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
+		List<Mensagens> result = dao.listarMensagemByProprietario(idProprietario, idMensagem);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
 	 * Listarkey.
 	 *
 	 * @param key the key
@@ -53,7 +81,11 @@ public class MensagensService {
 		return result;
 	}
 	
-	
+	/**
+	 * 
+	 * @param proprietario
+	 * @return
+	 */
 	public List<Mensagens> listarProprietario(Usuario proprietario) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
@@ -62,11 +94,18 @@ public class MensagensService {
 		return result;
 	}
 	
-	
-	public List<Mensagens> listarProprietario(Usuario proprietario,String caixa) {
+	/**
+	 * 
+	 * @param proprietario
+	 * @param caixa
+	 * @param primeiro
+	 * @param ultimo
+	 * @return
+	 */
+	public List<Mensagens> listarProprietario(Usuario proprietario,String caixa,int primeiro, int ultimo) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
-		List<Mensagens> result = dao.listarProprietario(proprietario,caixa);
+		List<Mensagens> result = dao.listarProprietario(proprietario, caixa, primeiro, ultimo);
 		pc.commitAndClose();
 		return result;
 	}
@@ -132,6 +171,13 @@ public class MensagensService {
 		return result;
 	}
 	
+	public List<Mensagens> listarProprietarioCount(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
+		List<Mensagens> result = dao.listarProprietarioCount(id);
+		pc.commitAndClose();
+		return result;
+	}
 
 	
 }

@@ -87,7 +87,41 @@ public class AlunoResource {
 
 	}
 	
-	@Path("html")
+	/**
+	 * Lista aluno por intervalo de ids
+	 * @param primeiro
+	 * @param ultimo
+	 * @return String com html
+	 */
+	@Path("html/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public String getHtmlAluno(@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		List<Aluno> alunos;
+		List<AlunoVariavel> variavel;
+		alunos = new AlunoService().listIntervalo(primeiro, ultimo);
+		int qtd = alunos.size();
+		String html = "";
+		
+		for(int i = 0; i < qtd; i++){
+			 variavel = new AlunoVariavelService().listaAluno(alunos.get(i).getIdAluno());
+			
+			
+			html +=  "<tr id="+"aluno"+" onClick="+"editarAluno"+"("+alunos.get(i).getIdAluno()+")"+">"+
+					 "<td class="+"alunoNome"+">"+alunos.get(i).getNome()+"</td>"+
+					 "<td class="+"alunoAno"+">"+"</td>"+
+					 "<td class="+"alunoPeriodo"+">"+"</td>"+
+					 "</tr>";
+		}
+		
+		return html;
+	}
+	
+	/**
+	 * Lista aluno e retorna um html
+	 * @return String com html
+	 */
+	@Path("html/")
 	@GET
 	@Produces("application/json")
 	public String getHtmlAluno(){
@@ -112,6 +146,41 @@ public class AlunoResource {
 	}
 	
 	
+	/**
+	 * Lista aluno por 'like'
+	 * @param letra
+	 * @return String com html
+	 */
+	@Path("htmlLike/{letra}")
+	@GET
+	@Produces("application/json")
+	public String gethtmlLikeAluno(@PathParam("letra") String letra){
+		List<Aluno> alunos;
+		List<AlunoVariavel> variavel;
+		alunos = new AlunoService().listAllLike(letra);
+		int qtd = alunos.size();
+		String html = "";
+		
+		for(int i = 0; i < qtd; i++){
+			 variavel = new AlunoVariavelService().listaAluno(alunos.get(i).getIdAluno());
+			
+			
+			html +=  "<tr id="+"aluno"+" onClick="+"editarAluno"+"("+alunos.get(i).getIdAluno()+")"+">"+
+					 "<td class="+"alunoNome"+">"+alunos.get(i).getNome()+"</td>"+
+					 "<td class="+"alunoAno"+">"+"</td>"+
+					 "<td class="+"alunoPeriodo"+">"+"</td>"+
+					 "</tr>";
+		}
+		
+		return html;
+	}
+	
+	
+	/**
+	 * Lista aluno por ano
+	 * @param ano
+	 * @return String com html
+	 */
 	@Path("htmlAno/{ano}")
 	@GET
 	@Produces("application/json")
@@ -142,6 +211,12 @@ public class AlunoResource {
 	
 	}
 	
+	/**
+	 * Lista aluno por ano e periodo
+	 * @param ano
+	 * @param periodo
+	 * @return String com html
+	 */
 	@Path("htmlAnoPerido/{ano}/{periodo}")
 	@GET
 	@Produces("application/json")

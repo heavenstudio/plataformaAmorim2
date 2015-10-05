@@ -77,7 +77,11 @@ public class PresencaProfessorResource {
 
 	}
 	
-	
+	/**
+	 * Listar presenca por professor
+	 * @param id
+	 * @return int
+	 */
 	@Path("Professor/{id}")
 	@GET
 	@Produces("application/json")
@@ -114,6 +118,16 @@ public class PresencaProfessorResource {
 
 	}
 	
+	/**
+	 * Criar e alterar presenca de professor
+	 * @param action
+	 * @param strid
+	 * @param presenca
+	 * @param data
+	 * @param professor
+	 * @param calendario
+	 * @return id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(

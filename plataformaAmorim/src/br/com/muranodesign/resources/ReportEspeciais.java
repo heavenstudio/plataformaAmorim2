@@ -30,7 +30,11 @@ import br.com.muranodesign.model.report.ReportStatusPlanoEstudos;
 @Path("relatorio")
 public class ReportEspeciais {
 	
-	
+	/**
+	 * Relatorio de plano de estudos por tutor
+	 * @param id
+	 * @return list
+	 */
 	@Path("statusPlanoestudos/{id}")
 	@GET
 	@Produces("application/json")
@@ -65,6 +69,11 @@ public class ReportEspeciais {
 		
 	}
 	
+	/**
+	 * Verifica se o aluno pertence ao grupo
+	 * @param id
+	 * @return String
+	 */
 	@Path("existAlunoVariavelGrupo/{id}")
 	@GET
 	@Produces("text/plain")

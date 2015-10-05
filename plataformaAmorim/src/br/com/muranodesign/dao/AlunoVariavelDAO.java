@@ -120,8 +120,16 @@ public interface AlunoVariavelDAO {
 		 */
 		public List<AlunoVariavel> listaPeriodo(Periodo periodo);
 		
-		
+		/**
+		 * Lista por named query
+		 * @return
+		 */
 		public List<AlunoVariavel> listarNamed();
 		
+		/**
+		 * 
+		 * @param id
+		 * @param grupo
+		 */
 		public void update(int id, int grupo);
 }

@@ -1,4 +1,4 @@
-package br.com.muranodesign.resources;
+	package br.com.muranodesign.resources;
 
 import org.junit.Test;
 
@@ -13,7 +13,6 @@ public class Usuario extends JerseyTest  {
 	protected AppDescriptor configure() {
 		return new WebAppDescriptor.Builder().build();
 	}
-	
 	/*
 	// Teste com professor nulo
 	@Test
@@ -131,11 +130,61 @@ public class Usuario extends JerseyTest  {
 	webResource.post("senha=TESTE&id=674");
 	
 	}*/
-	
+	/*
 	@Test
 	public void insert2() {
 		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/HistoricoEventos");
 	webResource.post("action=update&ano=");
 	}
+	*/
+	/*
+	@Test
+	public void insert2() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AlunoVariavel/listarAlunoAgrupamento");
+	webResource.post("Tutoria=3&Ano=0&Periodo=0");
+	}*/
+	
+	/*
+	@Test
+	public void insert2() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AlunoVariavel/Relatorio");
+	webResource.post("Ano=6&email=email");
+	}
+	*/
+	
+	@Test
+	public void insert2() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/ObjetivoAula/ClonarObjetivo");
+	webResource.post("idOficinaProfessor=2&idRoteiroAula=112");
+	
+	}
+	/*
+	@Test
+	public void insert2() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/PlanoAula");
+	webResource.post("action=create&idProfessor=52&data_ini=25-05-1994&data_fim=25-05-1995&objetivos=sgsdg&tarefa_casa=lbbj&registro_atividade=ashfhhf");
+	
+	}*/
+	/*
+	@Test
+	public void insert2() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AgendamentoSala");
+	webResource.post("action=create&idrotina=");
+	}*/
+	
+	/*
+	@Test
+	public void insert2() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Oficina");
+	webResource.post("action=update&nome=Fisica&id=1");
+	}
+	*/
+	/*
+	@Test
+	public void insert3() {
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Oficina");
+	webResource.post("action=delete&id=1");
+	}*/
+	
 			
 }

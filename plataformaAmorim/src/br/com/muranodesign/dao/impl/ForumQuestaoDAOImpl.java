@@ -12,6 +12,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -19,6 +20,7 @@ import br.com.muranodesign.dao.ForumQuestaoDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
 import br.com.muranodesign.hibernate.HibernatePersistenceContext;
 import br.com.muranodesign.model.ForumQuestao;
+import br.com.muranodesign.util.StringUtil;
 
 /**
  * Abstração do dao e implementação do GRUD
@@ -50,6 +52,18 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 		
 		return result;
 	} 
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listAllOrder()
+	 */
+	public List<ForumQuestao> listAllOrder(){
+		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
+		criteria.addOrder(Order.desc("data"));
+		List<ForumQuestao> result = criteria.list();
+		
+		return result;
+	}
 	
 
 	/* (non-Javadoc)
@@ -98,6 +112,97 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
 		criteria.addOrder( Order.desc( "idforumQuestao" ) ); 
 		criteria.setMaxResults(qtd);
+		List<ForumQuestao> result = criteria.list();
+		
+		return result;
+	}
+	
+	//Pendente
+	public List<ForumQuestao> Range(String data2, String data){
+		
+		StringUtil stringUtil = new StringUtil();
+		/*
+		Date dataHoje = new Date();
+		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
+		String data = formataData.format(dataHoje);
+		StringUtil stringUtil = new StringUtil();
+		
+		Calendar c = Calendar.getInstance();
+		int dia = c.get(Calendar.DAY_OF_MONTH);
+		String data2;
+		if(dia > 7){
+			dia = dia - 7;
+			String quebra[] = data.split("-");
+			
+			if(dia > 10){
+				//data2 = Integer.toString(dia)+"-"+quebra[1]+"-"+quebra[2];
+				data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(dia);
+			}else{
+				data2 = quebra[0]+"-"+quebra[1]+"-"+"0"+Integer.toString(dia);
+			}
+			
+		}else{
+			int aux = 30;
+			dia = dia - 7;
+			aux = aux + dia;
+			
+			String quebra[] = data.split("/");
+			int mes = Integer.parseInt(quebra[1]);
+			mes = mes + 1;
+			
+			//data2 = Integer.toString(aux)+"/"+Integer.toString(mes)+"/"+quebra[2];
+			data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(aux);
+			
+		}
+		
+		System.out.print("inicio "+stringUtil.converteStringData(data2));
+		System.out.print("fim "+stringUtil.converteStringData(data));*/
+		
+		
+		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
+		criteria.add(Restrictions.ge("data", stringUtil.converteStringData(data2)));
+		criteria.add(Restrictions.lt("data", stringUtil.converteStringData(data)));
+		List<ForumQuestao> result = criteria.list();
+		
+		return result;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listaRoteiro(int)
+	 */
+	public List<ForumQuestao> listaRoteiro(int roteiro){
+		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
+		criteria.createAlias("roteiro", "roteiro");
+		criteria.add(Restrictions.eq("roteiro.idroteiro", roteiro));
+		List<ForumQuestao> result = criteria.list();
+		
+		return result;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listaUser(int)
+	 */
+	public List<ForumQuestao> listaUser(int idUser){
+		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
+		criteria.createAlias("usuario", "usuario");
+		criteria.add(Restrictions.eq("usuario.idusuario", idUser));
+		List<ForumQuestao> result = criteria.list();
+		
+		return result;
+		
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#ListaLikeRoteiro(java.lang.String)
+	 */
+	public List<ForumQuestao> ListaLikeRoteiro(String letra){
+		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
+		criteria.createAlias("roteiro", "roteiro");
+		criteria.add(Restrictions.like("roteiro.nome", letra, MatchMode.START));
+		criteria.addOrder(Order.desc("data"));
 		List<ForumQuestao> result = criteria.list();
 		
 		return result;

@@ -98,8 +98,8 @@ public class CalendarioEventosService {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Listar os não murais
+	 * @return list
 	 */
 	public List<CalendarioEventos> listarNotMural(){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();

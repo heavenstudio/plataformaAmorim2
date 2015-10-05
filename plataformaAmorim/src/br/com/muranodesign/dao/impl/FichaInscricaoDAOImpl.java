@@ -18,6 +18,10 @@ public class FichaInscricaoDAOImpl extends AbstractHibernateDAO implements Ficha
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.FichaInscricaoDAO#listAll()
+	 */
 	public List<FichaInscricao> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(FichaInscricao.class);
@@ -27,6 +31,10 @@ public class FichaInscricaoDAOImpl extends AbstractHibernateDAO implements Ficha
 		return result;
 	} 
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.FichaInscricaoDAO#criar(br.com.muranodesign.model.FichaInscricao)
+	 */
 	public void criar(FichaInscricao c) {
 		synchronized (FichaInscricaoDAOImpl.class) {
 			getSession().persist(c);
@@ -35,17 +43,28 @@ public class FichaInscricaoDAOImpl extends AbstractHibernateDAO implements Ficha
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.FichaInscricaoDAO#deletar(br.com.muranodesign.model.FichaInscricao)
+	 */
 	public void deletar(FichaInscricao c) {
 		getSession().delete(c);
 		getSession().flush();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.FichaInscricaoDAO#atualizar(br.com.muranodesign.model.FichaInscricao)
+	 */
 	public void atualizar(FichaInscricao p) {
 		getSession().merge(p);
 		getSession().flush();
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.FichaInscricaoDAO#listarKey(int)
+	 */
 	public List<FichaInscricao> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(FichaInscricao.class);
 		criteria.add(Restrictions.eq("roteiro", new RoteiroService().listarkey(key).get(0)));

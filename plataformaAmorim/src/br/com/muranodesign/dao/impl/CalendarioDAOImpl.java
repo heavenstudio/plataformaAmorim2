@@ -150,7 +150,10 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 		return result;
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CalendarioDAO#listarEvento(int)
+	 */
 	public List<Calendario> listarEvento(int id) throws ParseException{
 		//String date_s = new Date().toString();
 		//SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd"); 

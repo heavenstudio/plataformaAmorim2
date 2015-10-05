@@ -66,6 +66,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @Column(name = "status")
     private int status;
     
+    @Column(name = "capa")
+    private String capa;
+    
     @OneToOne
 	@JoinColumn(name = "idmensagens")
 	private Mensagens mensagens;
@@ -232,6 +235,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 	public void setTemplate(Template template) {
 		this.template = template;
+	}
+
+	public String getCapa() {
+		return capa;
+	}
+
+	public void setCapa(String capa) {
+		this.capa = capa;
 	}
     
 }

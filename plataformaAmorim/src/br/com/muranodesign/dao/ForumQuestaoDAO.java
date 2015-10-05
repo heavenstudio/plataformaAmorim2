@@ -62,6 +62,37 @@ public interface ForumQuestaoDAO {
 		 * @return
 		 */
 		public List<ForumQuestao> topN(int qtd);
+		
+		/**
+		 * Lista por roteiro
+		 * @return
+		 */
+		public List<ForumQuestao> listaRoteiro(int roteiro);	
+		
+		/**
+		 * Lista por like de nome de roteiro
+		 * @param letra
+		 * @return
+		 */
+		public List<ForumQuestao> ListaLikeRoteiro(String letra);
+		
+		/**
+		 * Lista ordenado por data
+		 * @return
+		 */
+		public List<ForumQuestao> listAllOrder();
 	
+		/**
+		 * Lista os foruns dos ultimos 7 dias
+		 * @return
+		 */
+		public List<ForumQuestao> Range(String data2, String data);
+		
+		/**
+		 * Lista por id de usuario
+		 * @param idUser
+		 * @return
+		 */
+		public List<ForumQuestao> listaUser(int idUser);
 
 }

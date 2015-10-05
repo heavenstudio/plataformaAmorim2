@@ -97,6 +97,7 @@ public class ProducaoAlunoService {
 		return p;
 	}
 
+	
 	public List<ProducaoAluno> listarFiltro(int id, int tipo, int roteiro){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
@@ -113,4 +114,28 @@ public class ProducaoAlunoService {
 		return result;
 	}
 	
+	public List<ProducaoAluno> listarPortifolio(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
+		List<ProducaoAluno> result = dao.listarPortifolio(id);
+		pc.commitAndClose();
+		return result;
+		
+	}
+	
+	public List<ProducaoAluno> listaAlunoRoteiroTipo(int idAluno, int idRoteiro, int idTipo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
+		List<ProducaoAluno> result = dao.listaAlunoRoteiroTipo(idAluno, idRoteiro, idTipo);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	public List<ProducaoAluno> NCapa(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
+		List<ProducaoAluno> result = dao.NCapa(id);
+		pc.commitAndClose();
+		return result;
+	}
 }

@@ -123,6 +123,10 @@ public class PlanoEstudoDAOImpl extends AbstractHibernateDAO implements PlanoEst
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanoEstudoDAO#TodosPlanoEstudos(int)
+	 */
 	public List<PlanoEstudo> TodosPlanoEstudos(int idAluno){
 		Criteria criteria = getSession().createCriteria(PlanoEstudo.class);
 		criteria.createAlias("aluno", "aluno");

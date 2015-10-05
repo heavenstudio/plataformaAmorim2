@@ -59,7 +59,7 @@ public class TutoriaResource {
 	/**
 	 * Listar os tutores por ano 
 	 * @param ano
-	 * @return
+	 * @return String com html
 	 */
 	@Path("html/{ano}")
 	@GET
@@ -77,6 +77,11 @@ public class TutoriaResource {
 		return HtmlContent;
 	}
 	
+	/**
+	 * Lista os tutores por ano 
+	 * @param ano
+	 * @return  String com html
+	 */
 	@Path("htmlTutoria/{ano}")
 	@GET
 	@Produces("text/plain")
@@ -97,7 +102,7 @@ public class TutoriaResource {
 	/**
 	 * Listar tutoria por ano
 	 * @param ano
-	 * @return
+	 * @return list
 	 */
 	@Path("TutoriaAno/{ano}")
 	@GET
@@ -108,6 +113,11 @@ public class TutoriaResource {
 		return tutores;
 	}
 	
+	/**
+	 * Listar tutoria por periodo
+	 * @param id
+	 * @return list
+	 */
 	@Path("TutoriaPerido/{id}")
 	@GET
 	@Produces("application/json")
@@ -135,6 +145,11 @@ public class TutoriaResource {
 
 	}
 	
+	/**
+	 * Lista alunos por tutor
+	 * @param id
+	 * @return String com html
+	 */
 	@Path("AlunoHtml/{id}")
 	@GET
 	@Produces("application/json")
@@ -172,7 +187,11 @@ public class TutoriaResource {
 		return html;
 	}
 	
-	
+	/**
+	 * Lista alunos por tutor
+	 * @param id
+	 * @return
+	 */
 	@Path("AlunoId/{id}")
 	@GET
 	@Produces("application/json")

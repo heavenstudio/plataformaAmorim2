@@ -207,7 +207,6 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		
 		
 	}
-
 	
 	public List<AlunoVariavel> listarNamed(){
 		

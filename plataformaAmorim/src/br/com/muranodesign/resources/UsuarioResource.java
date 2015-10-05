@@ -27,10 +27,13 @@ import org.apache.commons.mail.EmailException;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AlunoService;
+import br.com.muranodesign.business.ForumQuestaoService;
+import br.com.muranodesign.business.ForumRespostaService;
 import br.com.muranodesign.business.PerfilService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.business.UsuarioService;
 import br.com.muranodesign.model.Aluno;
+import br.com.muranodesign.model.ForumQuestao;
 import br.com.muranodesign.model.Perfil;
 import br.com.muranodesign.model.ProfessorFuncionario;
 import br.com.muranodesign.model.Usuario;
@@ -86,7 +89,7 @@ public class UsuarioResource {
 	/**
 	 * Listar usuario por id
 	 * @param id
-	 * @return
+	 * @return obj usuario
 	 */
 	@Path("aluno/{id}")
 	@GET
@@ -101,9 +104,22 @@ public class UsuarioResource {
 	}
 	
 	/**
+	 * mata a sessao aberta
+	 * @param id
+	 */
+	@Path("logout/{id}")
+	@POST
+	@Produces("text/plain")
+	public void getLogout(@FormParam("id") int id) {
+		Usuario user = new UsuarioService().listarkey(id).get(0);
+		user.setAtivo(0);
+		new UsuarioService().atualizarUsuario(user);
+	}
+	
+	/**
 	 * Listar professor por id
 	 * @param id
-	 * @return
+	 * @return obj usuario
 	 */
 	@Path("professor/{id}")
 	@GET
@@ -116,6 +132,45 @@ public class UsuarioResource {
 
 		return evento;
 	}
+	
+	/**
+	 * Seta o valor 1 para o campo banner
+	 * @param id
+	 */
+	@Path("CamposObrigatorios/{id}")
+	@GET
+	@Produces("application/json")
+	public void CamposObrigatorios(@PathParam("id") int id){
+		Usuario user = new UsuarioService().listarkey(id).get(0);
+		user.setBanner(1);
+		new UsuarioService().atualizarUsuario(user);
+	}
+	
+	/**
+	 * Lista respostas de forum questao
+	 * @param idUser
+	 * @return
+	 */
+	@Path("Respostas/{idUser}")
+	@GET
+	@Produces("application/json")
+	public long Respostas(@PathParam("idUser") int idUser){
+		
+		List<ForumQuestao> questoes = new ForumQuestaoService().listaUser(idUser);
+		
+		long count = 0;
+		if(!questoes.isEmpty()){
+			for (ForumQuestao forumQuestao : questoes) {
+				long aux = new ForumRespostaService().Total(forumQuestao.getIdforumQuestao());
+				count = count + aux;
+			}
+		}
+		
+		return count;
+		
+	}
+	
+	
 	
 	/**
 	 * recuperar senha

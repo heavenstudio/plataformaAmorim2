@@ -66,7 +66,10 @@ public List<Historico_conexao> listAll() {
 		return result;
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.HistoricoDAO#listarQtdAcessoEscola(java.lang.String)
+	 */
 	public List<Historico_conexao> listarQtdAcessoEscola(String data){
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		criteria.add(Restrictions.isNotNull("cnx_escola"));
@@ -76,6 +79,10 @@ public List<Historico_conexao> listAll() {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.HistoricoDAO#listarQtdAcessoExterno(java.lang.String)
+	 */
 	public List<Historico_conexao> listarQtdAcessoExterno(String data){
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		criteria.add(Restrictions.isNotNull("cnx_externo"));
@@ -84,6 +91,10 @@ public List<Historico_conexao> listAll() {
 		return result;
 	}	
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.HistoricoDAO#listarSo(br.com.muranodesign.model.SO)
+	 */
 	public List<Historico_conexao> listarSo(SO so){
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		criteria.add(Restrictions.eq("s_o", so));

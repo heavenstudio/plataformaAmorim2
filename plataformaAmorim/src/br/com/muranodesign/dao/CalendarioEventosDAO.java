@@ -58,7 +58,7 @@ public interface CalendarioEventosDAO {
 		
 		/**
 		 * Listar os não murais
-		 * @return
+		 * @return list
 		 */
 		public List<CalendarioEventos> listarNotMural();
 		

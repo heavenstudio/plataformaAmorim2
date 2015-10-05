@@ -76,6 +76,11 @@ public class AtividadeResource {
 		
 	}
 	
+	/**
+	 * Lista atividade por objetivo
+	 * @param id
+	 * @return
+	 */
 	@Path("atividadeObjetivo/{id}")
 	@GET
 	@Produces("application/json")

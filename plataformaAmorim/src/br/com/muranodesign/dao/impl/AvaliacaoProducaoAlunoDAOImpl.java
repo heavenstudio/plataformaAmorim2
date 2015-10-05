@@ -91,11 +91,8 @@ public class AvaliacaoProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 		return result;
 	}
 
-	/**
-	 * Listar avaliacao producao aluno.
-	 *
-	 * @param AvaliacaoProducaoAluno the avaliacao producao aluno
-	 * @return the list
+	/*
+	 * 
 	 */
 	public List<AvaliacaoProducaoAluno> listarAvaliacaoProducaoAluno(String AvaliacaoProducaoAluno) {
 		

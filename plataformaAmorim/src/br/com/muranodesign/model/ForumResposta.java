@@ -26,7 +26,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-
+    
 /**
  *
  * @author rogerio
@@ -60,6 +60,10 @@ public class ForumResposta implements Serializable {
     @JoinColumn(name = "usuario", referencedColumnName = "idusuario")
     @ManyToOne
     private Usuario usuario;
+    
+    @Column(name = "visto")
+    private int visto;
+    
 
     public ForumResposta() {
     }
@@ -140,5 +144,17 @@ public class ForumResposta implements Serializable {
     public String toString() {
         return "br.com.muranodesign.model.ForumResposta[ idforumResposta=" + idforumResposta + " ]";
     }
+
+	public int getVisto() {
+		return visto;
+	}
+
+	public void setVisto(int visto) {
+		this.visto = visto;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
 }

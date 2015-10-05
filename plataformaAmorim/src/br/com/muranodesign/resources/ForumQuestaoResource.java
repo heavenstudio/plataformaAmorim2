@@ -10,6 +10,9 @@
 package br.com.muranodesign.resources;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,9 +27,11 @@ import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.ForumQuestaoService;
+import br.com.muranodesign.business.ForumRespostaService;
 import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.business.UsuarioService;
 import br.com.muranodesign.model.ForumQuestao;
+import br.com.muranodesign.model.ForumResposta;
 import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.Usuario;
 import br.com.muranodesign.util.StringUtil;
@@ -83,6 +88,203 @@ public class ForumQuestaoResource {
 
 	}
 
+	
+	/**
+	 * Lista por rotina
+	 * @param id
+	 * @return
+	 */
+	@Path("ListaPorAnoEstudo/{id}")
+	@GET
+	@Produces("application/json")
+	public List<ForumQuestao> ForumListaAno(@PathParam("id") int id){
+		List<Roteiro> roteiro = new RoteiroService().listarAno(id);
+		List<ForumQuestao> forum = new ArrayList<ForumQuestao>();
+		
+		if(!roteiro.isEmpty()){
+			for (Roteiro roteiro2 : roteiro) {
+				forum.addAll(new ForumQuestaoService().listaRoteiro(roteiro2.getIdroteiro()));
+			}
+		}
+		
+		return forum;
+		
+	}
+	
+	/**
+	 * Listar por roteiro
+	 * @param id
+	 * @return
+	 */
+	@Path("ListaPorRoteiro/{id}")
+	@GET
+	@Produces("application/json")
+	public List<ForumQuestao> ListaPorRoteiro(@PathParam("id") int id){
+		
+		
+		return new ForumQuestaoService().listaRoteiro(id);
+		
+	}
+	
+	/**
+	 * 
+	 * @param idUsuario
+	 * @return
+	 */
+	@Path("RespostasNVistas/{idUsuario}")
+	@GET
+	@Produces("application/json")
+	public long RespostasNVistas(@PathParam("idUsuario") int idUsuario){
+		List<ForumQuestao> questao = new ForumQuestaoService().listaUser(idUsuario);
+		List<ForumResposta> resp = new ArrayList<ForumResposta>();
+		
+		for (ForumQuestao forumQuestao : questao) {
+			resp.addAll(new ForumRespostaService().ListaNVisto(forumQuestao.getIdforumQuestao()));	
+		}
+		
+		return resp.size();
+	}
+
+	/**
+	 * Alterar a flag para vista 
+	 * @param idQuestao
+	 * @return
+	 */
+	@Path("RespostaVista/{idQuestao}")
+	@GET
+	@Produces("application/json")
+	public String RespostaVista(@PathParam("idQuestao") int idQuestao){
+		List<ForumResposta> resp = new ForumRespostaService().ListaNVisto(idQuestao);
+		
+		for (ForumResposta forumResposta : resp) {
+			forumResposta.setVisto(1);
+			new ForumRespostaService().atualizarForumResposta(forumResposta);
+		}
+		
+		return "alterada";
+	}
+	
+	
+	//Pendente
+	@Path("RangeData/")
+	@GET
+	@Produces("application/json")
+	public List<ForumQuestao> RangeData(){
+		
+		
+		Date dataHoje = new Date();
+		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
+		String data = formataData.format(dataHoje);
+		//StringUtil stringUtil = new StringUtil();
+		
+		Calendar c = Calendar.getInstance();
+		int dia = c.get(Calendar.DAY_OF_MONTH);
+		String data2;
+		if(dia > 7){
+			dia = dia - 7;
+			String quebra[] = data.split("-");
+			
+			if(dia > 10){
+				//data2 = Integer.toString(dia)+"-"+quebra[1]+"-"+quebra[2];
+				data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(dia);
+			}else{
+				data2 = quebra[0]+"-"+quebra[1]+"-"+"0"+Integer.toString(dia);
+			}
+			
+		}else{
+			int aux = 30;
+			dia = dia - 7;
+			aux = aux + dia;
+			
+			String quebra[] = data.split("-");
+			int mes = Integer.parseInt(quebra[1]);
+			mes = mes - 1;
+			
+			//data2 = Integer.toString(aux)+"/"+Integer.toString(mes)+"/"+quebra[2];
+			data2 = quebra[0]+"-"+Integer.toString(mes)+"-"+Integer.toString(aux);
+			
+		}
+		
+		//System.out.print("inicio "+stringUtil.converteStringData(data2));
+		//System.out.print("fim "+stringUtil.converteStringData(data));
+		
+		return new ForumQuestaoService().Range(data2,data);
+	}
+	
+	
+	
+	
+	//Pendente
+		@Path("RangeDataCount/")
+		@GET
+		@Produces("application/json")
+		public int RangeDataCount(){
+			
+			
+			Date dataHoje = new Date();
+			SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
+			String data = formataData.format(dataHoje);
+			//StringUtil stringUtil = new StringUtil();
+			
+			Calendar c = Calendar.getInstance();
+			int dia = c.get(Calendar.DAY_OF_MONTH);
+			String data2;
+			if(dia > 7){
+				dia = dia - 7;
+				String quebra[] = data.split("-");
+				
+				if(dia > 10){
+					//data2 = Integer.toString(dia)+"-"+quebra[1]+"-"+quebra[2];
+					data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(dia);
+				}else{
+					data2 = quebra[0]+"-"+quebra[1]+"-"+"0"+Integer.toString(dia);
+				}
+				
+			}else{
+				int aux = 30;
+				dia = dia - 7;
+				aux = aux + dia;
+				
+				String quebra[] = data.split("-");
+				int mes = Integer.parseInt(quebra[1]);
+				mes = mes - 1;
+				
+				//data2 = Integer.toString(aux)+"/"+Integer.toString(mes)+"/"+quebra[2];
+				data2 = quebra[0]+"-"+Integer.toString(mes)+"-"+Integer.toString(aux);
+				
+			}
+			
+			//System.out.print("inicio "+stringUtil.converteStringData(data2));
+			//System.out.print("fim "+stringUtil.converteStringData(data));
+			
+			return new ForumQuestaoService().Range(data2,data).size();
+		}
+	
+	
+	
+	/**
+	 * Listar por like de nome de roteiro
+	 * @param letra
+	 * @return
+	 */
+	@Path("ListaLikeRoteiro/{letra}") 
+	@GET
+	@Produces("application/json")
+	public List<ForumQuestao> ListaLikeRoteiro(@PathParam("letra") String letra){
+		return new ForumQuestaoService().ListaLikeRoteiro(letra);
+	}
+	
+	/**
+	 * Lista ordenado por data
+	 * @return
+	 */
+	@Path("ListaOrdenado/") 
+	@GET
+	@Produces("application/json")
+	public List<ForumQuestao> listAllOrder(){
+		return new ForumQuestaoService().listAllOrder();
+	}
+	
 	/**
 	 * Removes the forum questao.
 	 *
@@ -107,7 +309,12 @@ public class ForumQuestaoResource {
 		}
 
 	}
-
+	
+	/**
+	 * Listar forum questao por top de qualquer valor
+	 * @param qtd
+	 * @return list
+	 */
 	@Path("topN/{qtd}")
 	@GET
 	@Produces("application/json")
@@ -117,6 +324,17 @@ public class ForumQuestaoResource {
 		
 	}
 
+	/**
+	 * Criar e alterar forum questao
+	 * @param action
+	 * @param strid
+	 * @param questao
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @param usuario
+	 * @param roteiro
+	 * @return  id
+	 */
 	@POST
 	//@Path("upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -227,11 +445,6 @@ public class ForumQuestaoResource {
 
 
 	}
-	
-	
-	
-	
-
 
 
 }

@@ -74,6 +74,36 @@ public class MensagensResource {
 
 	}
 	
+	/**
+	 * Listar por intervalo de id's
+	 * @param primeiro
+	 * @param ultimo
+	 * @return
+	 */
+	@Path("Intervalo/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public List<Mensagens> getIntervalo(@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		logger.info("Lista Mensagens  por id intervalo de ids");
+		List<Mensagens> retorno = new MensagensService().listIntervalo(primeiro, ultimo);
+		return retorno;
+	}
+	
+	/**
+	 * Listar por proprietario e imagens
+	 * @param idProprietario
+	 * @param idMensagem
+	 * @return
+	 */
+	@Path("MensagemByUser/{idProprietario}/{idMensagem}")
+	@GET
+	@Produces("application/json")
+	public List<Mensagens> MensagemByUser(@PathParam("idProprietario") int idProprietario,@PathParam("idMensagem") int idMensagem){
+		logger.info("Lista Mensagens  por id de user e id de mensagem");
+		List<Mensagens> retorno = new MensagensService().listarMensagemByProprietario(idProprietario, idMensagem);
+		return retorno;
+	}
+	
 	
 	/**
 	 * Gets the evento.
@@ -106,10 +136,10 @@ public class MensagensResource {
 	 * @param id the id
 	 * @return the evento
 	 */
-	@Path("email/{caixa}/{proprietario}")
+	@Path("email/{caixa}/{proprietario}/{primeiro}/{ultimo}")
 	@GET
 	@Produces("application/json")
-	public List<Mensagens> getMensagemProprietarioCaixa(@PathParam("proprietario") int proprietario , @PathParam("caixa") String caixa ) {
+	public List<Mensagens> getMensagemProprietarioCaixa(@PathParam("proprietario") int proprietario , @PathParam("caixa") String caixa,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo) {
 		logger.info("Lista Mensagens  por id " + proprietario);
 		
 		List<Usuario> rsUsuario;
@@ -118,7 +148,7 @@ public class MensagensResource {
 		
 		
 		List<Mensagens> resultado;
-		resultado = new MensagensService().listarProprietario(obj,caixa);
+		resultado = new MensagensService().listarProprietario(obj,caixa,primeiro,ultimo);
 	
 
 		return resultado;
@@ -153,7 +183,11 @@ public class MensagensResource {
 
 	}
 	
-	
+	/**
+	 * Listar mensagens por id de remetente
+	 * @param id
+	 * @return list
+	 */
 	@Path("Remetente/{id}")
 	@GET
 	@Produces("application/json")
@@ -165,6 +199,11 @@ public class MensagensResource {
 		return rsUsuario;
 	}
 	
+	/**
+	 * Listar mensagens por id de proprietario 
+	 * @param id
+	 * @return list
+	 */ 
 	@Path("Proprietario/{id}")
 	@GET
 	@Produces("application/json")
@@ -176,8 +215,33 @@ public class MensagensResource {
 		return rsUsuario;
 	}
 	
+	/**
+	 * Count de mensagens por proprietario
+	 * @param id
+	 * @return int
+	 */
+	@Path("ProprietarioCount/{id}")
+	@GET
+	@Produces("application/json")
+	public int getProprietarioCount(@PathParam("id") int id){
+		logger.info("Mensagens do usuario " + id);
+		List<Mensagens> rsUsuario;
+		rsUsuario = new MensagensService().listarProprietarioCount(id);
+		
+		return rsUsuario.size();
+	}
 	
-	
+	/**
+	 * Criar e alterar mensagens
+	 * @param action
+	 * @param strid
+	 * @param assunto
+	 * @param mensagem
+	 * @param lida
+	 * @param remetente
+	 * @param destinatarios
+	 * @return id
+	 */
 	@POST
 	//@Path("upload")
 	//@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -319,22 +383,18 @@ public class MensagensResource {
 		}
 		
 		
-		
-		
-		
-
-		
-		
 		return Integer.toString(resultado.getIdmensagens());
-		
-		
-		
-		
 		
 	}
 	
-	
+	/**
+	 * update de mensagens lidas
+	 * @param strId
+	 * @param lida
+	 * @return String
+	 */
 	@Path("update/lida/{id}/{lida}")
+	@POST
 	public String eventoAction2(
 
 			@PathParam("id") String strId,
@@ -365,36 +425,7 @@ public class MensagensResource {
 
 	}
 
-	
-	/*
-	
-	@POST
-	//@Path("upload")
-	@Produces("application/json")
-	public void eventoAction(
 
-			@FormParam("action") String action,
-			@FormParam("id") String strid,
-			@FormParam("usuario") String usuario,
-			@FormParam("destinatario") List<String> destinatario,
-			@FormParam("mensagem") String mensagem){
-		
-		
-		for (String string : destinatario) {
-			
-			System.out.println("destinatario " + string);
-			
-		}
-		
-	
-	
-	
-	}
-	*/
-	
-	
-	
-	
 	
 
 }

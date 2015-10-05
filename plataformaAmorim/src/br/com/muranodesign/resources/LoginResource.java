@@ -21,18 +21,22 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.HistoricoService;
+import br.com.muranodesign.business.MenuPerfilService;
 import br.com.muranodesign.business.SOService;
 import br.com.muranodesign.business.UsuarioService;
 import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.Historico_conexao;
+import br.com.muranodesign.model.MenuPerfil;
 import br.com.muranodesign.model.Usuario;
 
 
@@ -85,6 +89,14 @@ public class LoginResource {
 			for (Usuario user : resultado) {
 				
 				if (user.getSenha().equals(senhaMD5)) {
+					/*if(user.getAtivo() == 1){
+						
+						return null;
+						
+					}else{*/
+					
+					//user.setAtivo(1);
+					//new UsuarioService().atualizarUsuario(user);
 					ret = user;
 					logger.info("Usuario " + usuario
 							+ " liberado para acessa a aplicação");
@@ -168,7 +180,8 @@ public class LoginResource {
 					histoService.criarHistorico(historico);
 					
 					
-				}
+				//}
+			  }
 			}
 
 		} catch (NoSuchAlgorithmException e) {
@@ -237,7 +250,15 @@ public class LoginResource {
 	}
 	
 	
-	
+	/**
+	 * Alterar a senha do usuario
+	 * @param login
+	 * @param senhaAnt
+	 * @param senha
+	 * @param senhaNova
+	 * @param id
+	 * @return id
+	 */
 	@Path("alterarSenha")
 	@POST
 	//@Produces("application/json")
@@ -289,4 +310,28 @@ public class LoginResource {
 	}
 	
 
+	
+	
+	@Path("html/{id}")
+	@GET
+	@Produces("application/json")
+	public List<MenuPerfil> getMenu(@PathParam("id") int id){
+		
+		Usuario user = new UsuarioService().listarkey(id).get(0);
+		List<MenuPerfil> menu = new MenuPerfilService().listarUser(user.getPerfil().getIdperfil());
+		
+		/*String HtmlContent = "";
+		
+		for(int i = 0; i < menu.size(); i++){
+			
+			HtmlContent += "<div class="+"Content_lateral_Menu_Opcao "+ menu.get(i).getMenu().getClasse()+">"+
+							"<a href="+menu.get(i).getMenu().getLink()+">"+menu.get(i).getMenu().getNome()+"</a>"+
+							"</div>";
+		}*/
+		
+		
+		return menu;
+	}
+	
+	
 }

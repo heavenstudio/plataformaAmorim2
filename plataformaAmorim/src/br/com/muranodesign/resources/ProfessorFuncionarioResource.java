@@ -69,12 +69,15 @@ public class ProfessorFuncionarioResource {
 		String HtmlContent = "";
 		
 		for(int i = 0; i < tamanho; i++){
-			//carrega professor na combo
 			HtmlContent += "<option value="+resultado.get(i).getIdprofessorFuncionario()+">"+resultado.get(i).getNome()+"</option>";
 		}
 		return HtmlContent;
 	}
 	
+	/**
+	 * Listar todos os professores funcionarios
+	 * @return list
+	 */
 	@GET
 	@Produces("application/json")
 	public List<ProfessorFuncionario> getProfessorFuncionario() {
@@ -108,7 +111,7 @@ public class ProfessorFuncionarioResource {
 	/**
 	 * Listar Professor por id grupo
 	 * @param id
-	 * @return
+	 * @return list
 	 */
 	@Path("ProfessorGrupo/{id}")
 	@GET
@@ -154,6 +157,26 @@ public class ProfessorFuncionarioResource {
 
 	}
 
+	/**
+	 * Criar e alterar professor funcionario
+	 * @param action
+	 * @param strid
+	 * @param nome
+	 * @param rua
+	 * @param numero
+	 * @param complemento
+	 * @param cep
+	 * @param bairro
+	 * @param cidade
+	 * @param estado
+	 * @param naturalidadeEstado
+	 * @param naturalidadePais
+	 * @param dataEntradaPrefeitura
+	 * @param ativo
+	 * @param dataEntradaEscola
+	 * @param observacao
+	 * @return id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -300,12 +323,19 @@ public class ProfessorFuncionarioResource {
 
 	}
 
+	/**
+	 * upload de imagem profesor funcionario
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return obj professorFuncionario
+	 */
 	@POST
 	@Path("upload/ProfessorFuncionario/imagem/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public ProfessorFuncionario eventoAction2(
 
-	@PathParam("id") String strId,
+			@PathParam("id") String strId,
 			@FormDataParam("imagem") InputStream uploadedInputStream,
 			@FormDataParam("imagem") FormDataContentDisposition fileDetail
 

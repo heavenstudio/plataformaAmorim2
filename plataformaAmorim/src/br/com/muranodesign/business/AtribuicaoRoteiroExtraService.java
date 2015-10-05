@@ -16,7 +16,7 @@ public class AtribuicaoRoteiroExtraService {
 	/**
 	 * Criar roteiro extra
 	 * @param p
-	 * @return
+	 * @return p
 	 */
 	public AtribuicaoRoteiroExtra criarRoteiroExtra(AtribuicaoRoteiroExtra p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -54,7 +54,7 @@ public class AtribuicaoRoteiroExtraService {
 	
 	/**
 	 * Listar todos
-	 * @return
+	 * @return list
 	 */
 	public List<AtribuicaoRoteiroExtra> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -69,7 +69,7 @@ public class AtribuicaoRoteiroExtraService {
 	 * Listar por aluno e roteiro
 	 * @param aluno
 	 * @param roteiro
-	 * @return
+	 * @return list
 	 */
 	public List<AtribuicaoRoteiroExtra> listarkey(Aluno aluno, Roteiro roteiro) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -83,7 +83,7 @@ public class AtribuicaoRoteiroExtraService {
 	/**
 	 * Listar por id
 	 * @param id
-	 * @return
+	 * @return list
 	 */
 	public List<AtribuicaoRoteiroExtra> listarid(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -97,7 +97,7 @@ public class AtribuicaoRoteiroExtraService {
 	 * Listar por aluno e ano letivo
 	 * @param aluno
 	 * @param ano
-	 * @return
+	 * @return list
 	 */
 	public List<AtribuicaoRoteiroExtra> listarAluno(Aluno aluno, AnoLetivo ano){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -110,7 +110,7 @@ public class AtribuicaoRoteiroExtraService {
 	/**
 	 * Listar por aluno
 	 * @param aluno
-	 * @return
+	 * @return list
 	 */
 	public List<AtribuicaoRoteiroExtra> listarAluno(Aluno aluno){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();

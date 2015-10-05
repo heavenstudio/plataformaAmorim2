@@ -87,6 +87,11 @@ public class GrupoResource {
 		return evento;
 	}
 
+	/**
+	 * Listar se o grupo existe 
+	 * @param id
+	 * @return String
+	 */
 	@Path("Verifica/{id}")
 	@GET
 	@Produces("application/json")
@@ -102,7 +107,12 @@ public class GrupoResource {
 		return valor;
 	}
 	
-	
+	/**
+	 * Listar grupo por ano e periodo
+	 * @param ano
+	 * @param periodo
+	 * @return list
+	 */
 	@Path("Teste/{ano}/{periodo}")
 	@GET
 	@Produces("application/json")
@@ -115,6 +125,11 @@ public class GrupoResource {
 		return new GrupoService().listarUltimo(ano, periodo);
 	}
 	
+	/**
+	 * Listar grupo por id de tutoria
+	 * @param id
+	 * @return list
+	 */
 	@Path("GrupoTutoria/{id}")
 	@GET
 	@Produces("application/json")
@@ -160,7 +175,18 @@ public class GrupoResource {
 
 	}
 	
-	
+	/**
+	 * Deletar, criar e alterar grupo
+	 * @param action
+	 * @param strid
+	 * @param lider
+	 * @param idProfessor
+	 * @param anoEstudo
+	 * @param periodo
+	 * @param idPerido
+	 * @param idGrupo
+	 * @return  id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -176,12 +202,9 @@ public class GrupoResource {
 
 	) {
 		
-		
-		
-		
 		Grupo objGrupo = new Grupo();
 		logger.info("eventoAction ...");
-		Grupo resultado;
+		Grupo resultado = null;
 		Tutoria resultadoTutor;
 		
 		if(action.equals("delete")){
@@ -193,13 +216,12 @@ public class GrupoResource {
 		
 		Tutoria tutor = new Tutoria();
 		TutoriaService tutorSer = new TutoriaService();
-		//
+		
 		Grupo grupo = new Grupo();
 
 		AnoLetivoService anoLetivoSer = new AnoLetivoService();
 		ProfessorFuncionarioService professorSer = new ProfessorFuncionarioService();
-		
-		//Periodo perio = new Periodo();
+	
 		PeriodoService periodoSer = new PeriodoService();
 
 		Calendar cal = GregorianCalendar.getInstance(); 
@@ -241,58 +263,67 @@ public class GrupoResource {
 			resultadoTutor = tutorSer.criarTutoria(tutor);
 			objGrupo.setTutoria(resultadoTutor);
 			}
-			//
+			
 			int numResult;
 			
 			List<Grupo> retornoGrupo = new GrupoService().listarUltimo(anoEstudo, periodo);
 			if(retornoGrupo.isEmpty()){
 				numResult = 1;
 			}else{
-				//grupo = new GrupoService().listarUltimo(anoEstudo, periodo).get(0);
+				
 				grupo = retornoGrupo.get(0);
 				String num = grupo.getNomeGrupo().substring(2);
 				numResult = 1 + Integer.parseInt(num);
 			}
-			//
 			
 			
-			//objGrupo.setNomeGrupo(anoEstudo+periodo);
 			objGrupo.setNomeGrupo(anoEstudo+periodo+Integer.toString(numResult));
 			objGrupo.setLider(objAluno);
 			objGrupo.setStatus("0");
 
 			resultado = new GrupoService().criarGrupo(objGrupo);
 			
-			/*
-			int id = resultado.getIdgrupo();
-
-			List<Grupo> rsGrupo;
-			rsGrupo = new GrupoService().listarkey(id);
-			objGrupo = rsGrupo.get(0);
-			objGrupo.setNomeGrupo(anoEstudo+periodo+Integer.toString(id));
-			objGrupo.setLider(objAluno);
-			
-			
-			resultado = new GrupoService().atualizarGrupo(objGrupo);
-			*/
+		
 
 		} else if (action.equals("update")) {
-
 			int id = Integer.parseInt(strid);
+			
 			List<Grupo> rsGrupo;
 			rsGrupo = new GrupoService().listarkey(id);
 			objGrupo = rsGrupo.get(0);
-			//objGrupo.setNomeGrupo(anoEstudo+periodo+Integer.toString(id));
+			
+			List<AnoLetivo> listaAno;
+			listaAno = anoLetivoSer.listarAnoLetivo(Integer.toString(anotual));
+			
+			List<ProfessorFuncionario> listaPro;
+			listaPro = professorSer.listarkey(idProfessor);
+			
+			List<Periodo> listaPeriodo;
+			listaPeriodo = periodoSer.listarkey(idPerido);
+			
+			if(!tutorSer.listarProfessor(listaPro.get(0).getNome()).isEmpty()){
+				tutor = tutorSer.listarProfessor(listaPro.get(0).getNome()).get(0);
+				objGrupo.setTutoria(tutor);
+			}
+			else{
+			
+			tutor.setAnoLetivo(listaAno.get(0));
+			tutor.setTutor(listaPro.get(0));
+			tutor.setPeriodo(listaPeriodo.get(0));
+			tutor.setTutoria(listaPro.get(0).getNome());
+			
+			resultadoTutor = tutorSer.criarTutoria(tutor);
+			objGrupo.setTutoria(resultadoTutor);
+			}
+		
+			
+			
 			objGrupo.setLider(objAluno);
-			objGrupo.setTutoria(new TutoriaService().listarProfessorId(idProfessor).get(0));
+			
 			
 			resultado = new GrupoService().atualizarGrupo(objGrupo);
 			
-			//new GrupoService().update(id, anoEstudo+periodo+Integer.toString(id), objAluno.getIdAluno());
 			
-
-			resultado = objGrupo;
-
 		}else {
 			return "0";
 		}
@@ -373,7 +404,7 @@ public class GrupoResource {
 	 * Listar lider grupo
 	 * @param lider
 	 * @param grupo
-	 * @return
+	 * @return String
 	 */
 	@Path("liderGrupo")
 	@POST
@@ -438,6 +469,11 @@ public class GrupoResource {
 	}
 	*/
 
+	/**
+	 * Listar alunos por id de grupo
+	 * @param id
+	 * @return List
+	 */
 	@Path("AlunoGrupo/{id}")
 	@GET
 	@Produces("application/json")
@@ -459,6 +495,11 @@ public class GrupoResource {
 		return rsAluno;
 	}
 	
+	/**
+	 * Listar 
+	 * @param id
+	 * @return list
+	 */
 	@Path("TutoriaGrupo/{id}")
 	@GET
 	@Produces("application/json")

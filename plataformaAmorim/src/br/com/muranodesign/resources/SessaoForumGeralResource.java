@@ -27,6 +27,10 @@ public class SessaoForumGeralResource {
 	 */
 	private Logger logger = Logger.getLogger(SessaoForumGeralResource.class.getName());
 	
+	/**
+	 * Listar todas as sessoes forum geral
+	 * @return list
+	 */
 	@GET
 	@Produces("application/json")
 	public List<SessaoForumGeral> getSessao() {
@@ -37,6 +41,11 @@ public class SessaoForumGeralResource {
 		return resultado;
 	}
 	
+	/**
+	 * Lista sessao por id
+	 * @param id
+	 * @return obj SessaoForumGeral
+	 */
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
@@ -53,6 +62,12 @@ public class SessaoForumGeralResource {
 
 	}
 	
+	/**
+	 * Deleta sessao
+	 * @param action
+	 * @param id
+	 * @return String
+	 */
 	@Path("{action}/{id}")
 	@Produces("text/plain")
 	public String removeSessao(@PathParam("action") String action, 	@PathParam("id") int id) {
@@ -69,7 +84,13 @@ public class SessaoForumGeralResource {
 	}
 	
 	
-
+	/**
+	 * Criar e alterar sessao
+	 * @param action
+	 * @param id
+	 * @param sessao
+	 * @return id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(

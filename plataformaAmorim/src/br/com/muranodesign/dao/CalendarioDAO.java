@@ -31,7 +31,7 @@ public interface CalendarioDAO {
 		
 		/**
 		 * Listar todos que forem visiveis
-		 * @return
+		 * @return list
 		 */
 		public List<Calendario> listVisivel();
 		

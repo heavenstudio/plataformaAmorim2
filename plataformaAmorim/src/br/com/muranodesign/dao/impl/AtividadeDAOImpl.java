@@ -106,6 +106,10 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AtividadeDAO#listarObjetivo(int)
+	 */
 	public List<Atividade> listarObjetivo(int objetivo){
 		Criteria criteria = getSession().createCriteria(Atividade.class);
 		criteria.createAlias("objetivo", "objetivo");

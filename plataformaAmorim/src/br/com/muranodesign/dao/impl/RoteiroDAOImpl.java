@@ -12,6 +12,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.RoteiroDAO;
@@ -117,13 +118,23 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 	}
 	
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RoteiroDAO#listarid(int)
+	 */
 	public Roteiro listarid(int id){
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		criteria.add(Restrictions.eq("idroteiro", id));
 		Roteiro result;
 		List<Roteiro> resultado = criteria.list();
 		result = resultado.get(0);
+		return result;
+	}
+	
+	public List<Roteiro> ListaLikeRoteiro(String letra){
+		Criteria criteria = getSession().createCriteria(Roteiro.class);
+		criteria.add(Restrictions.like("nome", letra, MatchMode.START));
+		List<Roteiro> result = criteria.list();
 		return result;
 	}
 

@@ -65,6 +65,10 @@ public class ForumRespostaResource {
 		logger.info("QTD ForumResposta : " + resultado.size());
 		return resultado;
 	}
+	
+	
+	
+	
 
 	/**
 	 * Gets the evento.
@@ -85,6 +89,11 @@ public class ForumRespostaResource {
 
 	}
 	
+	/**
+	 * Retorna o total de forum resposta e a quantidade por professor
+	 * @param id
+	 * @return Hashtable<String, Long>
+	 */
 	@Path("TotalParcial/{id}")
 	@GET
 	@Produces("application/json")
@@ -108,6 +117,15 @@ public class ForumRespostaResource {
 		retorno.put("Professor",count );
 		return retorno;
 	}
+	
+	
+	@Path("ListarPorQuestao/{id}")
+	@GET
+	@Produces("application/json")
+	public List<ForumResposta> qtd(@PathParam("id") int id){
+		return new ForumRespostaService().ListarTotal(id);
+	}
+	
 	/**
 	 * Removes the forum resposta.
 	 *
@@ -133,7 +151,17 @@ public class ForumRespostaResource {
 
 	}
 	
-	
+	/**
+	 * Criar e alterar forum questao
+	 * @param action
+	 * @param strid
+	 * @param resposta
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @param usuario
+	 * @param forumQuestao
+	 * @return  id
+	 */
 	@POST
 	//@Path("upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -156,20 +184,14 @@ public class ForumRespostaResource {
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),50);
 		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
 		
-		
-		
 		 
 		Upload upload = new Upload (); 
 		// save it
 		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
 		
 		
- 
 		String anexo = "http://177.55.99.90/files/"+ arquivo;
- 
 
-		
-		
 		
 		ForumResposta objForumResposta = new ForumResposta();
 		logger.info("eventoAction ...");
@@ -188,9 +210,6 @@ public class ForumRespostaResource {
 		ForumQuestao objForumQuestao= rsForumQuestao.get(0);
 		//TODO: Validar valores.
 
-
-
-
 		if (action.equals("create")) {
 			logger.info("Criando no  Forum Questao");
 
@@ -199,6 +218,7 @@ public class ForumRespostaResource {
 			objForumResposta.setUsuario(objUsuario);
 			objForumResposta.setForumQuestao(objForumQuestao);
 			objForumResposta.setAnexo(anexo);
+			objForumResposta.setVisto(0);
 		
 
 			resultado = new ForumRespostaService().criarForumResposta(objForumResposta);
@@ -215,12 +235,10 @@ public class ForumRespostaResource {
 			objForumResposta.setUsuario(objUsuario);
 			objForumResposta.setForumQuestao(objForumQuestao);
 			objForumResposta.setAnexo(anexo);
+			objForumResposta.setVisto(0);
 
 			resultado = new ForumRespostaService().atualizarForumResposta(objForumResposta);
 			
-
-
-
 
 		}else {
 			logger.info("Erro na URI  " + action);
@@ -228,14 +246,8 @@ public class ForumRespostaResource {
 		}
 
 
-
 		return Integer.toString(resultado.getIdforumResposta());
 
-
 	}
-	
-	
-	
-	
 
 }

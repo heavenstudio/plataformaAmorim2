@@ -97,7 +97,13 @@ public class PeriodoResource {
 
 	}
 	
-	
+	/**
+	 * Deletar, alterar e criar periodo 
+	 * @param action
+	 * @param strid
+	 * @param periodo
+	 * @return id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(

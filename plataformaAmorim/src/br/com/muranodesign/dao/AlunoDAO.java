@@ -28,6 +28,21 @@ public interface AlunoDAO {
 		public List<Aluno> listAll();
 		
 		/**
+		 * 
+		 * @param letra
+		 * @return
+		 */
+		public List<Aluno> listAllLike(String letra);
+		
+		/**
+		 * Listar alunos por intervalo de id
+		 * @param primeiro
+		 * @param ultimo
+		 * @return
+		 */
+		public List<Aluno> listIntervalo(int primeiro, int ultimo);
+		
+		/**
 		 * Criar.
 		 *
 		 * @param p the p

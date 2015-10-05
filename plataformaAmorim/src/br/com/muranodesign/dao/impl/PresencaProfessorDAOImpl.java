@@ -91,7 +91,10 @@ public class PresencaProfessorDAOImpl extends AbstractHibernateDAO implements Pr
 		return result;
 	}
 
-
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PresencaProfessorDAO#listarFaltas(int)
+	 */
 	public List<PresencaProfessor> listarFaltas(int id){
 		Criteria criteria = getSession().createCriteria(PresencaProfessor.class);
 		criteria.createAlias("professor", "professor");

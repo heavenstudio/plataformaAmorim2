@@ -11,6 +11,8 @@ package br.com.muranodesign.resources;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,7 +87,7 @@ public class AlunoVariavelResource {
 	
 	/**
 	 * Lista todos os alunos variaveis 
-	 * @return
+	 * @return list
 	 */
 	@GET
 	@Produces("application/json")
@@ -125,6 +127,127 @@ public class AlunoVariavelResource {
 		return resultado;
 	}
 	
+	/**
+	 * Lista aluno variavel por tutoria, ano e periodo 
+	 * @param Tutoria
+	 * @param Ano
+	 * @param Periodo
+	 * @return list
+	 */
+	@Path("listarAlunoAgrupamento/{Tutoria}/{Ano}/{Periodo}")
+	@GET
+	@Produces("application/json")
+	public List<AlunoVariavel> AlunoAgrupamento(
+			@PathParam("Tutoria") int Tutoria,
+			@PathParam("Ano") int Ano,
+			@PathParam("Periodo") int Periodo){
+		
+		
+		
+		List<AlunoVariavel> resultado = new ArrayList<AlunoVariavel>();
+		
+		List<AlunoVariavel> aluno = new ArrayList<AlunoVariavel>();
+		List<Grupo> grupo = new ArrayList<Grupo>();
+		
+		
+		if(Tutoria != 0 && Periodo == 0 & Ano == 0){
+			grupo = new GrupoService().listarTutor(Tutoria);
+			int qtd = grupo.size();
+			
+			for(int i = 0; i < qtd; i++){
+				aluno = new AlunoVariavelService().listaGrupo(grupo.get(i).getIdgrupo());
+				resultado.addAll(aluno);
+			}
+			
+
+		}else if(Ano != 0 && Tutoria == 0 && Periodo == 0){
+			
+			resultado = new AlunoVariavelService().listaAnoEstudo(new AnoEstudoService().listarkey(Ano).get(0));
+
+		}else if(Periodo != 0 && Ano == 0 && Tutoria == 0){
+			
+			resultado = new AlunoVariavelService().listaPeriodo(new PeriodoService().listarkey(Periodo).get(0));
+
+		}else if(Tutoria != 0 && Ano != 0 && Periodo == 0){
+			
+			grupo = new GrupoService().listarTutor(Tutoria);
+			int qtd = grupo.size();
+			
+			for(int i = 0; i < qtd; i++){
+				aluno = new AlunoVariavelService().listaGrupo(grupo.get(i).getIdgrupo());
+				if(!aluno.isEmpty()){
+					for(int k =0; k < aluno.size(); k++){
+						if(aluno.get(k).getAnoEstudo().getIdanoEstudo() == Ano){
+							resultado.add(aluno.get(k));
+						}
+					}
+				}
+			}
+
+		}else if(Tutoria != 0 && Periodo != 0 && Ano == 0){
+			grupo = new GrupoService().listarTutor(Tutoria);
+			int qtd = grupo.size();
+			
+			for(int i = 0; i < qtd; i++){
+				aluno = new AlunoVariavelService().listaGrupo(grupo.get(i).getIdgrupo());
+				if(!aluno.isEmpty()){
+					for(int k =0; k < aluno.size(); k++){
+						if(aluno.get(k).getPeriodo().getIdperiodo() == Periodo){
+							resultado.add(aluno.get(k));
+						}
+					}
+				}
+			}
+
+		}else if(Periodo != 0 && Ano != 0 && Tutoria == 0){
+			resultado = new AlunoVariavelService().listaAnoEstudoPeriodoComgrupo(new AnoEstudoService().listarkey(Ano).get(0), new PeriodoService().listarkey(Periodo).get(0));
+
+		}else if(Tutoria != 0 && Ano != 0 && Periodo != 0){
+			
+			grupo = new GrupoService().listarTutor(Tutoria);
+			int qtd = grupo.size();
+			
+			for(int i = 0; i < qtd; i++){
+				aluno = new AlunoVariavelService().listaGrupo(grupo.get(i).getIdgrupo());
+				if(!aluno.isEmpty()){
+					for(int k =0; k < aluno.size(); k++){
+						if(aluno.get(k).getAnoEstudo().getIdanoEstudo() == Ano && aluno.get(k).getPeriodo().getIdperiodo() == Periodo){
+							resultado.add(aluno.get(k));
+						}
+					}
+				}
+			}
+		}
+		
+		return resultado;
+	}
+	
+	/**
+	 * Gerar relatório de aluno variavel
+	 * @param Tutoria
+	 * @param Ano
+	 * @param Periodo
+	 * @param Nome
+	 * @param Sexo
+	 * @param Datanascimento
+	 * @param Endereco
+	 * @param TelefoneResidencial
+	 * @param TelefoneCelular
+	 * @param email
+	 * @param NomeResponsavel
+	 * @param ParentescoResponsavel
+	 * @param TelefoneResidencialResponsavel
+	 * @param TelefoneCelularResponsavel
+	 * @param TelefoneComercialResponsavel
+	 * @param emailResponsavel
+	 * @param NomeMae
+	 * @param EnderecoMae
+	 * @param TelefoneCelularMae
+	 * @param TelefoneResidencialMae
+	 * @param TelefoneComercialMae
+	 * @param emailMae
+	 * @return list
+	 */
 	@Path("Relatorio")
 	@POST
 	@Produces("application/json")
@@ -157,7 +280,6 @@ public class AlunoVariavelResource {
 			
 			){
 		
-		
 			
 				 
 			HSSFWorkbook workbook = new HSSFWorkbook();
@@ -170,8 +292,10 @@ public class AlunoVariavelResource {
 			try {
 				
 			nomeArquivo = new StringUtil().geraNomeAleatorio("xls", 15);
-			fos = new FileOutputStream(new File("/home/tomcat/webapps/relatorio/"+ nomeArquivo));
-			 
+			fos = new FileOutputStream(new File("/home/tomcat/webapps/files/" + nomeArquivo));
+			//fos = new FileOutputStream(new File("C:/Users/Kevyn/Documents/teste/" + nomeArquivo));
+			System.out.println("este é o nome do arquivo " +nomeArquivo); 
+			
 			// Este trecho obtem uma lista de objetos do tipo CD
 			 
 			// do banco de dados através de um DAO e itera sobre a lista
@@ -182,7 +306,6 @@ public class AlunoVariavelResource {
 			 
 			
 			 
-			
 			/* 
 			for (int i = 0; i < 4; i++) {
 			HSSFRow row = firstSheet.createRow(i);
@@ -252,7 +375,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getNome();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 								row.createCell((short) 0).setCellValue(valor);
 								
@@ -265,7 +388,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getSexo();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 								row.createCell((short) 1).setCellValue(valor);
 							}else{
@@ -278,7 +401,15 @@ public class AlunoVariavelResource {
 							Date valor = alunos.get(k).getAluno().getDataNascimento();
 							
 							if(valor != null){
-								retorno.add(valor.toString());
+								
+								DateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+								
+								String dataS = formatter.format(valor);
+								
+								//Date data = (Date) formatter.parse(dataS);
+								
+								retorno.add(dataS);
+								
 								row.createCell((short) 2).setCellValue(valor);
 							}else{
 								retorno.add( null);
@@ -290,7 +421,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getEndereco();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 								row.createCell((short) 3).setCellValue(valor);
 							}else{
@@ -304,7 +435,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 								row.createCell((short) 4).setCellValue(valor);
 							}else{
@@ -317,7 +448,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 		
 								row.createCell((short) 5).setCellValue(valor);
@@ -330,8 +461,8 @@ public class AlunoVariavelResource {
 						if(email != "" && email != null){
 							
 							String valor = alunos.get(k).getAluno().getEmail();
-							
-							if(valor != null){
+							System.out.println(valor);
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 				
 								row.createCell((short) 6).setCellValue(valor);
@@ -345,7 +476,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getNomeResponsavel();	
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 			
 								row.createCell((short) 7).setCellValue(valor);
@@ -360,7 +491,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getParentescoResponsavel();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 8).setCellValue(valor);
@@ -375,7 +506,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 9).setCellValue(valor);
@@ -390,7 +521,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 				
 								row.createCell((short) 10).setCellValue(valor);
@@ -405,7 +536,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneComercialResponsavel();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 								
 								row.createCell((short) 11).setCellValue(valor);
@@ -419,8 +550,8 @@ public class AlunoVariavelResource {
 						if(emailResponsavel != "" && emailResponsavel != null){
 							
 							String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-							
-							if(valor != null){
+							System.out.println(valor);
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 12).setCellValue(valor);
@@ -435,7 +566,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getNomeMae();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 13).setCellValue(valor);
@@ -450,7 +581,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getEnderecoMae();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 14).setCellValue(valor);
@@ -464,7 +595,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneCelularMae();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 15).setCellValue(valor);
@@ -479,7 +610,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneResidencialMae();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 16).setCellValue(valor);
@@ -494,7 +625,7 @@ public class AlunoVariavelResource {
 							
 							String valor = alunos.get(k).getAluno().getTelefoneComercialMae();
 							
-							if(valor != null){
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 								
 								row.createCell((short) 17).setCellValue(valor);
@@ -507,8 +638,8 @@ public class AlunoVariavelResource {
 						if(emailMae != "" && emailMae != null){
 							
 							String valor = alunos.get(k).getAluno().getEmail1Mae();
-							
-							if(valor != null){
+							System.out.println(valor);
+							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
 								row.createCell((short) 18).setCellValue(valor);
@@ -537,7 +668,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNome();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -551,7 +682,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getSexo();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -566,7 +697,14 @@ public class AlunoVariavelResource {
 						Date valor = alunos.get(k).getAluno().getDataNascimento();
 						
 						if(valor != null){
-							retorno.add(valor.toString());
+							
+							DateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+							
+							String dataS = formatter.format(valor);
+							
+							//Date data = (Date) formatter.parse(dataS);
+							
+							retorno.add(dataS);
 							h++;
 							row = firstSheet.createRow(h);
 							row.createCell((short) 0).setCellValue(valor);
@@ -580,7 +718,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getEndereco();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -596,7 +734,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -611,7 +749,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -625,8 +763,8 @@ public class AlunoVariavelResource {
 					if(email != "" && email != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -641,7 +779,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNomeResponsavel();	
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -657,7 +795,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getParentescoResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -673,7 +811,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -689,7 +827,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -705,7 +843,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneComercialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -720,8 +858,8 @@ public class AlunoVariavelResource {
 					if(emailResponsavel != "" && emailResponsavel != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -737,7 +875,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNomeMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -753,7 +891,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getEnderecoMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -768,7 +906,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -784,7 +922,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -800,7 +938,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneComercialMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -814,8 +952,8 @@ public class AlunoVariavelResource {
 					if(emailMae != "" && emailMae != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Mae();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
 							row = firstSheet.createRow(h);
@@ -844,7 +982,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNome();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 0).setCellValue(valor);
 							
@@ -857,7 +995,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getSexo();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 1).setCellValue(valor);
 						}else{
@@ -870,7 +1008,14 @@ public class AlunoVariavelResource {
 						Date valor = alunos.get(k).getAluno().getDataNascimento();
 						
 						if(valor != null){
-							retorno.add(valor.toString());
+							
+							DateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+							
+							String dataS = formatter.format(valor);
+							
+							//Date data = (Date) formatter.parse(dataS);
+							
+							retorno.add(dataS);
 							row.createCell((short) 2).setCellValue(valor);
 						}else{
 							retorno.add( null);
@@ -882,7 +1027,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getEndereco();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 3).setCellValue(valor);
 						}else{
@@ -896,7 +1041,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 4).setCellValue(valor);
 						}else{
@@ -909,7 +1054,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 	
 							row.createCell((short) 5).setCellValue(valor);
@@ -922,8 +1067,8 @@ public class AlunoVariavelResource {
 					if(email != "" && email != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 			
 							row.createCell((short) 6).setCellValue(valor);
@@ -937,7 +1082,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNomeResponsavel();	
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 		
 							row.createCell((short) 7).setCellValue(valor);
@@ -952,7 +1097,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getParentescoResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 8).setCellValue(valor);
@@ -967,7 +1112,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 9).setCellValue(valor);
@@ -982,7 +1127,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 			
 							row.createCell((short) 10).setCellValue(valor);
@@ -997,7 +1142,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneComercialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							
 							row.createCell((short) 11).setCellValue(valor);
@@ -1011,8 +1156,8 @@ public class AlunoVariavelResource {
 					if(emailResponsavel != "" && emailResponsavel != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 12).setCellValue(valor);
@@ -1027,7 +1172,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNomeMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 13).setCellValue(valor);
@@ -1042,7 +1187,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getEnderecoMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 14).setCellValue(valor);
@@ -1056,7 +1201,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 15).setCellValue(valor);
@@ -1071,7 +1216,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 16).setCellValue(valor);
@@ -1086,7 +1231,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneComercialMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							
 							row.createCell((short) 17).setCellValue(valor);
@@ -1099,8 +1244,8 @@ public class AlunoVariavelResource {
 					if(emailMae != "" && emailMae != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Mae();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 18).setCellValue(valor);
@@ -1133,7 +1278,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNome();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 0).setCellValue(valor);
 									
@@ -1146,7 +1291,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getSexo();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 1).setCellValue(valor);
 								}else{
@@ -1159,7 +1304,14 @@ public class AlunoVariavelResource {
 								Date valor = alunos.get(k).getAluno().getDataNascimento();
 								
 								if(valor != null){
-									retorno.add(valor.toString());
+									
+									DateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+									
+									String dataS = formatter.format(valor);
+									
+									//Date data = (Date) formatter.parse(dataS);
+									
+									retorno.add(dataS);
 									row.createCell((short) 2).setCellValue(valor);
 								}else{
 									retorno.add( null);
@@ -1171,7 +1323,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getEndereco();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 3).setCellValue(valor);
 								}else{
@@ -1185,7 +1337,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 4).setCellValue(valor);
 								}else{
@@ -1198,7 +1350,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 			
 									row.createCell((short) 5).setCellValue(valor);
@@ -1211,8 +1363,8 @@ public class AlunoVariavelResource {
 							if(email != "" && email != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
 									row.createCell((short) 6).setCellValue(valor);
@@ -1226,7 +1378,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNomeResponsavel();	
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 				
 									row.createCell((short) 7).setCellValue(valor);
@@ -1241,7 +1393,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getParentescoResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 8).setCellValue(valor);
@@ -1256,7 +1408,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 9).setCellValue(valor);
@@ -1271,7 +1423,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
 									row.createCell((short) 10).setCellValue(valor);
@@ -1286,7 +1438,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneComercialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									
 									row.createCell((short) 11).setCellValue(valor);
@@ -1300,8 +1452,8 @@ public class AlunoVariavelResource {
 							if(emailResponsavel != "" && emailResponsavel != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 12).setCellValue(valor);
@@ -1316,7 +1468,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNomeMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 13).setCellValue(valor);
@@ -1331,7 +1483,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getEnderecoMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 14).setCellValue(valor);
@@ -1345,7 +1497,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 15).setCellValue(valor);
@@ -1360,7 +1512,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 16).setCellValue(valor);
@@ -1375,7 +1527,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneComercialMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									
 									row.createCell((short) 17).setCellValue(valor);
@@ -1388,8 +1540,8 @@ public class AlunoVariavelResource {
 							if(emailMae != "" && emailMae != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Mae();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 18).setCellValue(valor);
@@ -1424,7 +1576,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNome();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 0).setCellValue(valor);
 									
@@ -1437,7 +1589,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getSexo();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 1).setCellValue(valor);
 								}else{
@@ -1450,7 +1602,14 @@ public class AlunoVariavelResource {
 								Date valor = alunos.get(k).getAluno().getDataNascimento();
 								
 								if(valor != null){
-									retorno.add(valor.toString());
+									
+									DateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+									
+									String dataS = formatter.format(valor);
+									
+									//Date data = (Date) formatter.parse(dataS);
+									
+									retorno.add(dataS);
 									row.createCell((short) 2).setCellValue(valor);
 								}else{
 									retorno.add( null);
@@ -1462,7 +1621,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getEndereco();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 3).setCellValue(valor);
 								}else{
@@ -1476,7 +1635,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 4).setCellValue(valor);
 								}else{
@@ -1489,7 +1648,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 			
 									row.createCell((short) 5).setCellValue(valor);
@@ -1502,8 +1661,8 @@ public class AlunoVariavelResource {
 							if(email != "" && email != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
 									row.createCell((short) 6).setCellValue(valor);
@@ -1517,7 +1676,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNomeResponsavel();	
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 				
 									row.createCell((short) 7).setCellValue(valor);
@@ -1532,7 +1691,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getParentescoResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 8).setCellValue(valor);
@@ -1547,7 +1706,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 9).setCellValue(valor);
@@ -1562,7 +1721,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
 									row.createCell((short) 10).setCellValue(valor);
@@ -1577,7 +1736,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneComercialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									
 									row.createCell((short) 11).setCellValue(valor);
@@ -1591,8 +1750,8 @@ public class AlunoVariavelResource {
 							if(emailResponsavel != "" && emailResponsavel != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 12).setCellValue(valor);
@@ -1607,7 +1766,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNomeMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 13).setCellValue(valor);
@@ -1622,7 +1781,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getEnderecoMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 14).setCellValue(valor);
@@ -1636,7 +1795,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 15).setCellValue(valor);
@@ -1651,7 +1810,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 16).setCellValue(valor);
@@ -1666,7 +1825,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneComercialMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									
 									row.createCell((short) 17).setCellValue(valor);
@@ -1679,8 +1838,8 @@ public class AlunoVariavelResource {
 							if(emailMae != "" && emailMae != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Mae();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 18).setCellValue(valor);
@@ -1709,7 +1868,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNome();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 0).setCellValue(valor);
 							
@@ -1722,7 +1881,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getSexo();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 1).setCellValue(valor);
 						}else{
@@ -1735,7 +1894,14 @@ public class AlunoVariavelResource {
 						Date valor = alunos.get(k).getAluno().getDataNascimento();
 						
 						if(valor != null){
-							retorno.add(valor.toString());
+							
+							DateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+							
+							String dataS = formatter.format(valor);
+							
+							//Date data = (Date) formatter.parse(dataS);
+							
+							retorno.add(dataS);
 							row.createCell((short) 2).setCellValue(valor);
 						}else{
 							retorno.add( null);
@@ -1747,7 +1913,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getEndereco();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 3).setCellValue(valor);
 						}else{
@@ -1761,7 +1927,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							row.createCell((short) 4).setCellValue(valor);
 						}else{
@@ -1774,7 +1940,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 	
 							row.createCell((short) 5).setCellValue(valor);
@@ -1787,8 +1953,8 @@ public class AlunoVariavelResource {
 					if(email != "" && email != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 			
 							row.createCell((short) 6).setCellValue(valor);
@@ -1802,7 +1968,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNomeResponsavel();	
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 		
 							row.createCell((short) 7).setCellValue(valor);
@@ -1817,7 +1983,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getParentescoResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 8).setCellValue(valor);
@@ -1832,7 +1998,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 9).setCellValue(valor);
@@ -1847,7 +2013,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 			
 							row.createCell((short) 10).setCellValue(valor);
@@ -1862,7 +2028,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneComercialResponsavel();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							
 							row.createCell((short) 11).setCellValue(valor);
@@ -1876,8 +2042,8 @@ public class AlunoVariavelResource {
 					if(emailResponsavel != "" && emailResponsavel != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 12).setCellValue(valor);
@@ -1892,7 +2058,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getNomeMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 13).setCellValue(valor);
@@ -1907,7 +2073,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getEnderecoMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 14).setCellValue(valor);
@@ -1921,7 +2087,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneCelularMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 15).setCellValue(valor);
@@ -1936,7 +2102,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneResidencialMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 16).setCellValue(valor);
@@ -1951,7 +2117,7 @@ public class AlunoVariavelResource {
 						
 						String valor = alunos.get(k).getAluno().getTelefoneComercialMae();
 						
-						if(valor != null){
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							
 							row.createCell((short) 17).setCellValue(valor);
@@ -1964,8 +2130,8 @@ public class AlunoVariavelResource {
 					if(emailMae != "" && emailMae != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Mae();
-						
-						if(valor != null){
+						System.out.println(valor);
+						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
 							row.createCell((short) 18).setCellValue(valor);
@@ -1996,7 +2162,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNome();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 0).setCellValue(valor);
 									
@@ -2009,7 +2175,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getSexo();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 1).setCellValue(valor);
 								}else{
@@ -2022,7 +2188,13 @@ public class AlunoVariavelResource {
 								Date valor = alunos.get(k).getAluno().getDataNascimento();
 								
 								if(valor != null){
-									retorno.add(valor.toString());
+									DateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+									
+									String dataS = formatter.format(valor);
+									
+									//Date data = (Date) formatter.parse(dataS);
+									
+									retorno.add(dataS);
 									row.createCell((short) 2).setCellValue(valor);
 								}else{
 									retorno.add( null);
@@ -2034,7 +2206,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getEndereco();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 3).setCellValue(valor);
 								}else{
@@ -2048,7 +2220,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									row.createCell((short) 4).setCellValue(valor);
 								}else{
@@ -2061,7 +2233,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 			
 									row.createCell((short) 5).setCellValue(valor);
@@ -2074,8 +2246,8 @@ public class AlunoVariavelResource {
 							if(email != "" && email != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
 									row.createCell((short) 6).setCellValue(valor);
@@ -2089,7 +2261,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNomeResponsavel();	
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 				
 									row.createCell((short) 7).setCellValue(valor);
@@ -2104,7 +2276,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getParentescoResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 8).setCellValue(valor);
@@ -2119,7 +2291,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 9).setCellValue(valor);
@@ -2134,7 +2306,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
 									row.createCell((short) 10).setCellValue(valor);
@@ -2149,7 +2321,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneComercialResponsavel();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									
 									row.createCell((short) 11).setCellValue(valor);
@@ -2163,8 +2335,8 @@ public class AlunoVariavelResource {
 							if(emailResponsavel != "" && emailResponsavel != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 12).setCellValue(valor);
@@ -2179,7 +2351,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getNomeMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 13).setCellValue(valor);
@@ -2194,7 +2366,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getEnderecoMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 14).setCellValue(valor);
@@ -2208,7 +2380,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneCelularMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 15).setCellValue(valor);
@@ -2223,7 +2395,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneResidencialMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 16).setCellValue(valor);
@@ -2238,7 +2410,7 @@ public class AlunoVariavelResource {
 								
 								String valor = alunos.get(k).getAluno().getTelefoneComercialMae();
 								
-								if(valor != null){
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 									
 									row.createCell((short) 17).setCellValue(valor);
@@ -2251,8 +2423,8 @@ public class AlunoVariavelResource {
 							if(emailMae != "" && emailMae != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Mae();
-								
-								if(valor != null){
+								System.out.println(valor);
+								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
 									row.createCell((short) 18).setCellValue(valor);
@@ -2276,7 +2448,8 @@ public class AlunoVariavelResource {
 			workbook.write(fos);
 			
 			
-			retorno.add("http://177.55.99.90/relatorio/"+nomeArquivo);
+			retorno.add("http://177.55.99.90/files/"+nomeArquivo);
+			//retorno.add("http://172.16.31.178/"+nomeArquivo);
 			listRetorno.add(retorno);
 			return listRetorno.get(0);
 			 
@@ -2315,9 +2488,9 @@ public class AlunoVariavelResource {
 	}
 	
 	/**
-	 * Listar Aluno variavel
+	 * Lista Aluno variavel
 	 * @param id
-	 * @return
+	 * @return Obj AlunoVariavel
 	 */
 	@Path("aluno/{id}")
 	@GET
@@ -2332,9 +2505,9 @@ public class AlunoVariavelResource {
 	}
 	
 	/**
-	 * Listar grupo
+	 * Lista grupo
 	 * @param id
-	 * @return
+	 * @return list
 	 */
 	@Path("grupo/{id}")
 	@GET

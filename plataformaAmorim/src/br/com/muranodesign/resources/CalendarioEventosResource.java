@@ -86,6 +86,10 @@ public class CalendarioEventosResource {
 
 	}
 	
+	/**
+	 * Listar Calendario quando tipo de evento não for mural
+	 * @return list
+	 */
 	@Path("NaoMural")
 	@GET
 	@Produces("application/json")

@@ -53,6 +53,21 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 		return result;
 	} 
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listIntervalo(int, int)
+	 */
+	public List<Mensagens> listIntervalo(int primeiro, int ultimo){
+		Criteria criteria = getSession().createCriteria(Mensagens.class);
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		
+		List<Mensagens> result = criteria.list();
+		
+		
+		return result;
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#criar(br.com.muranodesign.model.Mensagens)
@@ -112,7 +127,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	
 	
 	@Override
-	public List<Mensagens> listarProprietario(Usuario proprietario,String caixa) {
+	public List<Mensagens> listarProprietario(Usuario proprietario,String caixa,int primeiro, int ultimo) {
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		
        //criteria.createAlias("proprietario", "proprietario");
@@ -129,13 +144,33 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 		}
 		
 		criteria.add(Restrictions.eq("proprietario", proprietario));
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
 		
 		
 		List<Mensagens> result = criteria.list();
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listarMensagemByProprietario(int, int)
+	 */
+	public List<Mensagens> listarMensagemByProprietario(int idProprietario, int idMensagem){
+		Criteria criteria = getSession().createCriteria(Mensagens.class);
+		criteria.createAlias("proprietario", "proprietario");
+		criteria.add(Restrictions.eq("proprietario.idusuario", idProprietario));
+		criteria.add(Restrictions.eq("idmensagens", idMensagem));
+		
+		
+		List<Mensagens> result = criteria.list();
+		return result;
+	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listarRemetente(int)
+	 */
 	public List<Mensagens> listarRemetente(int id){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.createAlias("remetente", "remetente");
@@ -146,7 +181,10 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 		
 	}
 	
-
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listarProprietario(int)
+	 */
 	public List<Mensagens> listarProprietario(int id){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.createAlias("proprietario", "proprietario");
@@ -156,9 +194,22 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 		return result;
 		
 	}
-
-
-
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listarProprietarioCount(int)
+	 */
+	public List<Mensagens> listarProprietarioCount(int id){
+		Criteria criteria = getSession().createCriteria(Mensagens.class);
+		criteria.createAlias("proprietario", "proprietario");
+		criteria.add(Restrictions.eq("proprietario.idusuario", id));
+		
+		criteria.add(Restrictions.eq("lida", "N"));
+		criteria.add(Restrictions.eq("cxEntrada", "S"));
+		criteria.add(Restrictions.eq("cxEnviada", "N"));
+
+		List<Mensagens> result = criteria.list();
+		return result;
+	}
 
 }

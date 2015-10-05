@@ -111,7 +111,11 @@ public class ChamadaResource {
 		return resultado;
 
 	}
-	
+	/**
+	 * Listar faltas por id de aluno
+	 * @param id
+	 * @return numero de faltas
+	 */
 	@Path("faltas/{id}")
 	@GET
 	@Produces("application/json")
@@ -120,6 +124,13 @@ public class ChamadaResource {
 		return new ChamadaService().countFaltas(id);
 	}
 	
+	/**
+	 * Listar  data da chamada 
+	 * @param id
+	 * @param data
+	 * @return
+	 * @throws ParseException
+	 */
 	@Path("dataChamada/{id}/{data}")
 	@GET
 	@Produces("application/json")
@@ -193,6 +204,15 @@ public class ChamadaResource {
 	}
 	
 	
+	/**
+	 * Criar e alterar chamada
+	 * @param action
+	 * @param strid
+	 * @param presenca
+	 * @param data
+	 * @param aluno
+	 * @return  id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(

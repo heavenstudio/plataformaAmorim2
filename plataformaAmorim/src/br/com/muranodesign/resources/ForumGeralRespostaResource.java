@@ -30,6 +30,10 @@ public class ForumGeralRespostaResource {
 	 */
 	private Logger logger = Logger.getLogger(ForumGeralRespostaResource.class.getName());
 	
+	/**
+	 * Listar todos os fóruns gerais de resposta
+	 * @return list
+	 */
 	@GET
 	@Produces("application/json")
 	public List<ForumGeralResposta> getForumGeralResposta() {
@@ -40,6 +44,11 @@ public class ForumGeralRespostaResource {
 		return resultado;
 	}
 	
+	/**
+	 * Listar forum geral de resposta por id
+	 * @param id
+	 * @return obj forum geral resposta
+	 */
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
@@ -56,6 +65,12 @@ public class ForumGeralRespostaResource {
 
 	}
 	
+	/**
+	 * Deletar forum geral de resposta
+	 * @param action
+	 * @param id
+	 * @return String
+	 */
 	@Path("{action}/{id}")
 	@Produces("text/plain")
 	public String removeForumGeralResposta(@PathParam("action") String action, 	@PathParam("id") int id) {
@@ -71,6 +86,17 @@ public class ForumGeralRespostaResource {
 		}
 	}
 	
+	/**
+	 *  Criar e alterar forum geral de resposta
+	 * @param action
+	 * @param id
+	 * @param questao
+	 * @param resposta
+	 * @param anexo
+	 * @param data
+	 * @param idAluno
+	 * @return  id
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(

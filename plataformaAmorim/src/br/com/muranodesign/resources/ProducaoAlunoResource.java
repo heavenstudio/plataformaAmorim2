@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -96,6 +97,57 @@ public class ProducaoAlunoResource {
 
 	}
 	
+	@Path("alunoPortifolio/{id}")
+	@GET
+	@Produces("application/json")
+	public List<ProducaoAluno> getalunoPortifolio(@PathParam("id") int id) throws ParseException {
+		logger.info("Lista ProducaoAluno  por id " + id);
+		List<ProducaoAluno> resultado;
+		resultado = new ProducaoAlunoService().listarPortifolio(id);
+		//PlanoEstudo evento = resultado.get(0);}
+        
+      
+		return resultado;
+
+	}
+	
+	
+	@Path("alunoTipoProducao/{idAluno}/{idRoteiro}/{idTipo}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<Integer, Integer> getAlunoTipoProducao(@PathParam("idAluno") int idAluno,@PathParam("idRoteiro") int idRoteiro,
+			@PathParam("idTipo") int idTipo){
+		
+		Hashtable<Integer, Integer> retorno = new Hashtable<Integer, Integer>();
+		List<ProducaoAluno> aux = new ProducaoAlunoService().listaAlunoRoteiroTipo(idAluno, idRoteiro, idTipo);
+		
+		if(!aux.isEmpty()){
+			ProducaoAluno prod = aux.get(0);
+			
+			if(!(prod.getMensagens() == null)){
+				retorno.put(prod.getMensagens().getIdmensagens(), prod.getStatus());
+			}else{
+				retorno.put(0, prod.getStatus());
+			}
+			
+		}else{
+			retorno.put(0,0);
+		}
+		
+		
+		
+		return retorno;
+		
+	}
+	
+	@Path("NCapa/{id}")
+	@GET
+	@Produces("application/json")
+	public List<ProducaoAluno> getNCapa(@PathParam("id") int id){
+		return new ProducaoAlunoService().NCapa(id);
+		
+	}
+	
 	/**
 	 * Removes the producao aluno.
 	 *
@@ -122,7 +174,13 @@ public class ProducaoAlunoResource {
 	}
 	
 	
-	
+	/**
+	 * Verifica o status da produção do aluno
+	 * @param id
+	 * @param status
+	 * @param mensagens
+	 * @return int
+	 */
 	@Path("Status/{id}/{status}/{mensagens}")
 	@GET
 	@Produces("application/json")
@@ -144,6 +202,60 @@ public class ProducaoAlunoResource {
 		
 	}
 	
+	@POST
+	@Path("upload/capa/{id}")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public ProducaoAluno upload(
+
+	@PathParam("id") String strId,
+			@FormDataParam("fotoAluno") InputStream uploadedInputStream,
+			@FormDataParam("fotoAluno") FormDataContentDisposition fileDetail
+
+	) {
+
+		
+		
+		ProducaoAluno prod = new ProducaoAluno();
+		ProducaoAluno resultado = new ProducaoAluno();
+		
+		int id = Integer.parseInt(strId);
+		List<ProducaoAluno> rsProd;
+		rsProd = new ProducaoAlunoService().listarkey(id);
+		prod = rsProd.get(0);
+
+		// TODO: Criar uma configiracao para o caminho
+		StringUtil stringUtil = new StringUtil();
+		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
+				50);
+		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+		//String uploadedFileLocation = "C:/Users/Kevyn/Documents/kevyn/"+arquivo;
+
+		Upload upload = new Upload();
+		// save it
+		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
+
+		String anexo = "http://177.55.99.90/files/" + arquivo;
+
+		logger.info("anexo" + anexo);
+
+		prod.setCapa(anexo);
+		
+		resultado = new ProducaoAlunoService().atualizarProducaoAluno(prod);
+
+		return resultado;
+
+	}
+	
+	
+	
+	
+	/**
+	 * Listar producao de aluno por filtros 
+	 * @param id
+	 * @param tipo
+	 * @param roteiro
+	 * @return list
+	 */
 	@Path("Filtos/{id}/{tipo}/{roteiro}")
 	@GET
 	@Produces("application/json")
@@ -156,6 +268,11 @@ public class ProducaoAlunoResource {
 		
 	}
 	
+	/**
+	 * Listar producao do aluno por id de aluno
+	 * @param id
+	 * @return list
+	 */
 	@Path("Aluno/{id}")
 	@GET
 	@Produces("application/json")
@@ -166,6 +283,21 @@ public class ProducaoAlunoResource {
 		
 	}
 	
+	/**
+	 * Criar e alterar producao do aluno
+	 * @param action
+	 * @param strid
+	 * @param anoLetivo
+	 * @param texto
+	 * @param arquivo
+	 * @param status
+	 * @param aluno
+	 * @param tipo
+	 * @param roteiro
+	 * @param categoria
+	 * @return
+	 * @throws ParseException
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -177,12 +309,13 @@ public class ProducaoAlunoResource {
 			@FormParam("texto") String texto,
 			@FormParam("arquivo") String arquivo,
 			@FormParam("status") int status,
+			
+			@FormParam("capa") String capa,
 		
 			@FormParam("aluno") String aluno,
 			@FormParam("tipo") String tipo,
 			@FormParam("roteiro") String roteiro,
 			@FormParam("categoria") String categoria
-			
 			
 			) throws ParseException {
 		ProducaoAluno objProducaoAluno = new ProducaoAluno();
@@ -236,6 +369,7 @@ public class ProducaoAlunoResource {
 		    objProducaoAluno.setAluno(objAluno);
 		    objProducaoAluno.setTipo(objTipoProducaoAluno);	
 		    objProducaoAluno.setStatus(1);
+		    objProducaoAluno.setCapa(capa);
 		    if(t == 6 ){
 		    	objProducaoAluno.setArquivo(arquivo);
 		    }
@@ -260,6 +394,7 @@ public class ProducaoAlunoResource {
 			    objProducaoAluno.setAluno(objAluno);
 			    objProducaoAluno.setTipo(objTipoProducaoAluno);
 			    objProducaoAluno.setStatus(status);
+			    objProducaoAluno.setCapa(capa);
 			    if(t != 6 ){
 			    	objProducaoAluno.setRoteiro(objRoteiro);
 			    }
@@ -277,6 +412,13 @@ public class ProducaoAlunoResource {
 		}
 
 
+	/**
+	 * upload de imagem producao aluno
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return obj producaoAluno
+	 */
 	@POST
 	@Path("upload/producaoAluno/imagem/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -285,7 +427,6 @@ public class ProducaoAlunoResource {
 			@PathParam("id") String strId,
 			@FormDataParam("imagem") InputStream uploadedInputStream,
 			@FormDataParam("imagem") FormDataContentDisposition fileDetail
-
 
 			) {
 
@@ -315,10 +456,17 @@ public class ProducaoAlunoResource {
 
 	}
 	
-	
+	/**
+	 * upload de aquivo producao aluno
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return
+	 */
 	@POST
 	@Path("upload/producaoAluno/arquivo/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Produces("application/json")
 	public ProducaoAluno eventoAction2(
 
 			@PathParam("id") String strId,
@@ -339,6 +487,7 @@ public class ProducaoAlunoResource {
 		StringUtil stringUtil = new StringUtil();
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),50);
 		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+		//String uploadedFileLocation = "C:/Users/Kevyn/Documents/kevyn/"+arquivo;
 		String anexo = "http://177.55.99.90/files/"+ arquivo;
 		
 		Upload upload = new Upload (); 

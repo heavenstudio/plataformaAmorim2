@@ -97,6 +97,11 @@ public class AnoEstudoService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param ano
+	 * @return
+	 */
 	public Integer idAno(String ano){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AnoEstudoDAO dao = DAOFactory.getAnoEstudoDAO(pc);

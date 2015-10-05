@@ -12,6 +12,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.TutoriaDAO;
@@ -45,6 +46,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	public List<Tutoria> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
+		criteria.addOrder(Order.asc("tutoria"));
 		List<Tutoria> result = criteria.list();
 		
 		
@@ -136,6 +138,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.createAlias("anoLetivo", "anoLetivo");
 		criteria.add(Restrictions.eq("anoLetivo.ano", ano)); 
+		criteria.addOrder(Order.asc("tutoria"));
 		List<Tutoria> result = criteria.list();
 		
 		return result;
@@ -149,6 +152,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	public List<Tutoria> listarAnoid(int id){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.add(Restrictions.eq("anoLetivo", id)); 
+		criteria.addOrder(Order.asc("tutoria"));
 		List<Tutoria> result = criteria.list();
 		
 		return result;
@@ -162,6 +166,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", id));
+		criteria.addOrder(Order.asc("tutoria"));
 		List<Tutoria> result = criteria.list();
 		return result;
 	}

@@ -52,7 +52,11 @@ public class AnoLetivoService {
 		return result;
 	}
 	
-	
+	/**
+	 * Lista por ano letivo
+	 * @param ano
+	 * @return list
+	 */
 	public List<AnoLetivo> listarAnoLetivo(String ano){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AnoLetivoDAO dao = DAOFactory.getAnoLetivoDAO(pc);

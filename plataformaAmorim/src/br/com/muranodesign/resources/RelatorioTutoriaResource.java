@@ -76,6 +76,12 @@ public class RelatorioTutoriaResource {
 
 	}
 	
+	/**
+	 * Listar relatorio tutoria por id de tutor e id de aluno
+	 * @param tutoria
+	 * @param aluno
+	 * @return list
+	 */
 	@Path("RelatorioTutorAluno/{tutoria}/{aluno}")
 	@GET
 	@Produces("application/json")
@@ -112,7 +118,16 @@ public class RelatorioTutoriaResource {
 
 	}
 	
-	
+	/**
+	 * Criar e alterar relatorio tutoria
+	 * @param action
+	 * @param strid
+	 * @param relatorio
+	 * @param data
+	 * @param tutoria
+	 * @param aluno
+	 * @return String
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(

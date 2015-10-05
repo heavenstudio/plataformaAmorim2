@@ -215,6 +215,10 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarObjetivoCompleto(int)
+	 */
 	public List<PlanejamentoRoteiro> listarObjetivoCompleto(int obj){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("status", "3"));
@@ -224,7 +228,10 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 		return result;
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarObjetivoTotal(int)
+	 */
 	public List<PlanejamentoRoteiro> listarObjetivoTotal(int obj){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.createAlias("objetivo", "objetivo");

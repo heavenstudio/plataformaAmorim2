@@ -81,6 +81,10 @@ public class AtribuicaoRoteiroExtraDAOImpl extends AbstractHibernateDAO  impleme
 			return result;
 		}
 		
+		/*
+		 * (non-Javadoc)
+		 * @see br.com.muranodesign.dao.AtribuicaoRoteiroExtraDAO#listarRoteiro(br.com.muranodesign.model.Aluno, br.com.muranodesign.model.AnoLetivo)
+		 */
 		public List<AtribuicaoRoteiroExtra> listarRoteiro(Aluno aluno, AnoLetivo ano){
 			Criteria criteria = getSession().createCriteria(AtribuicaoRoteiroExtra.class);
 			criteria.add(Restrictions.eq("aluno", aluno));
@@ -90,6 +94,10 @@ public class AtribuicaoRoteiroExtraDAOImpl extends AbstractHibernateDAO  impleme
 			
 		}
 		
+		/*
+		 * (non-Javadoc)
+		 * @see br.com.muranodesign.dao.AtribuicaoRoteiroExtraDAO#listarAluno(br.com.muranodesign.model.Aluno)
+		 */
 		public List<AtribuicaoRoteiroExtra> listarAluno(Aluno aluno){
 			Criteria criteria = getSession().createCriteria(AtribuicaoRoteiroExtra.class);
 			criteria.add(Restrictions.eq("aluno", aluno));

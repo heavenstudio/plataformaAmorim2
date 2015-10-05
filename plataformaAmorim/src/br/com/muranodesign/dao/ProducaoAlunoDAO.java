@@ -71,6 +71,27 @@ public interface ProducaoAlunoDAO {
 		 * @return
 		 */
 		public List<ProducaoAluno> listarAluno(int id);
+		
+		/**
+		 * Listar produção aluno por portifolio
+		 * @param idTipo
+		 * @return
+		 */
+		public List<ProducaoAluno> listarPortifolio(int id);
 	
+		/**
+		 * Listar por aluno, roteiro e tipo
+		 * @param idAluno
+		 * @param idRoteiro
+		 * @param idTipo
+		 * @return
+		 */
+		public List<ProducaoAluno> listaAlunoRoteiroTipo(int idAluno, int idRoteiro, int idTipo);
 
+		/**
+		 * Lista capas não nulas
+		 * @param id
+		 * @return
+		 */
+		public List<ProducaoAluno> NCapa(int id);
 }

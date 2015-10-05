@@ -111,6 +111,19 @@ public class RecursoAprendizagemResource {
 
 	}
 	
+	/**
+	 * Criar e alterar recursos de aprendizagem
+	 * @param action
+	 * @param strid
+	 * @param nomeRecurso
+	 * @param descricaoRecurso
+	 * @param curtir
+	 * @param link
+	 * @param tipoRecursoAprendizagem
+	 * @param materia
+	 * @param roteiro
+	 * @return String
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -200,7 +213,13 @@ public class RecursoAprendizagemResource {
 	
 	
 	
-	
+	/**
+	 * upload de imagem
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return obj RecursoAprendizagem
+	 */
 	@POST
 	@Path("upload/recursoAprendizagem/imagem/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -240,7 +259,13 @@ public class RecursoAprendizagemResource {
 
 	}
 	
-	
+	/**
+	 * upload de arquivo recurso de aprendizagem
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return obj RecursoAprendizagem
+	 */
 	@POST
 	@Path("upload/recursoAprendizagem/arquivo/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -282,7 +307,12 @@ public class RecursoAprendizagemResource {
 	
 	
 	
-	
+	/**
+	 * update do campo curtir em recurso de aprendizagem 
+	 * @param strId
+	 * @param curtir
+	 * @return obj RecursoAprendizagem
+	 */
 	@Path("update/curtir/{id}/{curtir}")
 	public RecursoAprendizagem eventoAction3(
 

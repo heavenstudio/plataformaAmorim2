@@ -52,6 +52,27 @@ public class ForumQuestaoService {
 		return result;
 	}
 	
+	public List<ForumQuestao> listaUser(int idUser){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ForumQuestaoDAO dao = DAOFactory.getForumQuestaoDAO(pc);
+		List<ForumQuestao> result = dao.listaUser(idUser);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
+	 * Lista por roteiro
+	 * @param roteiro
+	 * @return
+	 */
+	public List<ForumQuestao> listaRoteiro(int roteiro){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ForumQuestaoDAO dao = DAOFactory.getForumQuestaoDAO(pc);
+		List<ForumQuestao> result = dao.listaRoteiro(roteiro);
+		pc.commitAndClose();
+		return result;
+	}
+	
 	
 	/**
 	 * Criar forum questao.
@@ -97,6 +118,11 @@ public class ForumQuestaoService {
 		return p;
 	}
 	
+	/**
+	 * Lista topN
+	 * @param qtd
+	 * @return
+	 */
 	public List<ForumQuestao> topN(int qtd){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ForumQuestaoDAO dao = DAOFactory.getForumQuestaoDAO(pc);
@@ -105,5 +131,42 @@ public class ForumQuestaoService {
 		return result;
 	}
 
+	/**
+	 * Lista por like de nome de roteiro
+	 * @param letra
+	 * @return
+	 */
+	public List<ForumQuestao> ListaLikeRoteiro(String letra){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ForumQuestaoDAO dao = DAOFactory.getForumQuestaoDAO(pc);
+		List<ForumQuestao> result = dao.ListaLikeRoteiro(letra);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
+	 *  Lista ordenado por data
+	 * @return
+	 */
+	public List<ForumQuestao> listAllOrder(){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ForumQuestaoDAO dao = DAOFactory.getForumQuestaoDAO(pc);
+		List<ForumQuestao> result = dao.listAllOrder();
+				
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
+	 * Lista os foruns dos ultimos 7 dias
+	 * @return
+	 */
+	public List<ForumQuestao> Range(String data2, String data){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ForumQuestaoDAO dao = DAOFactory.getForumQuestaoDAO(pc);
+		List<ForumQuestao> result = dao.Range(data2,data);
+		pc.commitAndClose();
+		return result;
+	}
 	
 }

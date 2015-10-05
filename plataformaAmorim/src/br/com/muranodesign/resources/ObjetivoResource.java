@@ -86,24 +86,26 @@ public class ObjetivoResource {
 		return Objetivo;
 
 	}
-	
+
 	/**
 	 * Listar obejtivos por id
+	 * 
 	 * @param id
-	 * @return
+	 * @return list
 	 */
 	@Path("ObjetivoAno/{id}")
 	@GET
 	@Produces("application/json")
-	public List<Objetivo> getObjetivoAno(@PathParam("id") int id){
+	public List<Objetivo> getObjetivoAno(@PathParam("id") int id) {
 		logger.debug("Lista Evento  por id " + id);
 		List<Objetivo> obj = new ArrayList<Objetivo>();
 		List<Objetivo> total = new ArrayList<Objetivo>();
 		List<Roteiro> roteiros = new RoteiroService().listarAno(id);
-		
+
 		int quantidade = roteiros.size();
-		for(int i = 0; i < quantidade; i++){
-			obj = new ObjetivoService().listarRoteiro(roteiros.get(i).getIdroteiro());
+		for (int i = 0; i < quantidade; i++) {
+			obj = new ObjetivoService().listarRoteiro(roteiros.get(i)
+					.getIdroteiro());
 			total.addAll(obj);
 		}
 		System.out.println(obj);
@@ -111,58 +113,77 @@ public class ObjetivoResource {
 		System.out.println(total);
 		return total;
 	}
-	
+
 	/**
 	 * Listar Objetivo por Roteiro
+	 * 
 	 * @param id
-	 * @return
+	 * @return list
 	 */
 	@Path("ObjetivoRoteiro/{id}")
 	@GET
 	@Produces("application/json")
-	public List<Objetivo> getObjetivoRoteiro(@PathParam("id") int id){
+	public List<Objetivo> getObjetivoRoteiro(@PathParam("id") int id) {
 		logger.debug("Lista Evento  por id roteiro" + id);
 		List<Objetivo> obj = new ObjetivoService().listarRoteiro(id);
 		return obj;
 	}
-	
+
+	/**
+	 * Lista quantidade de objetivos de roteiros
+	 * 
+	 * @param id
+	 * @return long
+	 */
 	@Path("ObjetivoRoteiroTotal/{id}")
 	@GET
 	@Produces("application/json")
-	public long getObjetivoRoteiroTotal(@PathParam("id") int id){
+	public long getObjetivoRoteiroTotal(@PathParam("id") int id) {
 		logger.debug("Lista Evento  por id roteiro" + id);
 		long r = new ObjetivoService().listarRoteiroTotal(id);
 		return r;
 	}
-	
-	
+
+	/**
+	 * Lista objetivos de roteiros por id
+	 * 
+	 * @param id
+	 * @return long
+	 */
 	@Path("ObjetivoAluno/{id}")
 	@GET
 	@Produces("application/json")
-	public long getObjetivoAluno(@PathParam("id") int id){
+	public long getObjetivoAluno(@PathParam("id") int id) {
 		logger.debug("Lista Evento  por id roteiro" + id);
-		
+
 		List<AlunoVariavel> aluno = new AlunoVariavelService().listarkey(id);
-		List<Roteiro> roteiroAno = new RoteiroService().listarAno(aluno.get(0).getAnoEstudo().getIdanoEstudo());
-		List<AtribuicaoRoteiroExtra> atribuicao = new AtribuicaoRoteiroExtraService().listarAluno(aluno.get(0).getAluno());
-		List<PlanejamentoRoteiro> planejamento = new PlanejamentoRoteiroService().listarIdAluno(aluno.get(0).getAluno().getIdAluno());
-		
+		List<Roteiro> roteiroAno = new RoteiroService().listarAno(aluno.get(0)
+				.getAnoEstudo().getIdanoEstudo());
+		List<AtribuicaoRoteiroExtra> atribuicao = new AtribuicaoRoteiroExtraService()
+				.listarAluno(aluno.get(0).getAluno());
+		List<PlanejamentoRoteiro> planejamento = new PlanejamentoRoteiroService()
+				.listarIdAluno(aluno.get(0).getAluno().getIdAluno());
+
 		long totalObjetivos = 0;
-		
-		for(int i = 0; i < roteiroAno.size(); i++){
-			totalObjetivos += new ObjetivoService().listarRoteiroTotal(roteiroAno.get(i).getIdroteiro());
+
+		for (int i = 0; i < roteiroAno.size(); i++) {
+			totalObjetivos += new ObjetivoService()
+					.listarRoteiroTotal(roteiroAno.get(i).getIdroteiro());
 		}
-		for(int i = 0; i < atribuicao.size(); i++){
-			totalObjetivos += new ObjetivoService().listarRoteiroTotal(atribuicao.get(i).getRoteiro().getIdroteiro());
+		for (int i = 0; i < atribuicao.size(); i++) {
+			totalObjetivos += new ObjetivoService()
+					.listarRoteiroTotal(atribuicao.get(i).getRoteiro()
+							.getIdroteiro());
 		}
-	
-		return totalObjetivos;	
+
+		return totalObjetivos;
 	}
-	
+
 	/**
 	 * Criar grafico
+	 * 
 	 * @param id
-	 * @return 
+	 * @return list
 	 * @return
 	 */
 	@Path("Grafico/{id}")
@@ -174,39 +195,40 @@ public class ObjetivoResource {
 
 		List<Grupo> grupos = new ArrayList<Grupo>();
 		List<Integer> anos = new ArrayList<Integer>();
-		
+
 		List<Tutoria> tutorias = new TutoriaService().listarkey(id);
 		List<AlunoVariavel> alunosTOTAL = new ArrayList<AlunoVariavel>();
-		
+
 		List<Objetivo> objetivo = new ArrayList<Objetivo>();
-		
+
 		List<PlanejamentoRoteiro> planejamentoRoteirosentregues = new ArrayList<PlanejamentoRoteiro>();
 		List<PlanejamentoRoteiro> planejamentoRoteiroscompletos = new ArrayList<PlanejamentoRoteiro>();
-		 
+
 		List<PlanejamentoRoteiro> planejamentoRoteirosentreguesTotal = new ArrayList<PlanejamentoRoteiro>();
 		List<PlanejamentoRoteiro> planejamentoRoteiroscompletoTotal = new ArrayList<PlanejamentoRoteiro>();
-		
-		List<Long> retorno = new ArrayList<Long>();
 
+		List<Long> retorno = new ArrayList<Long>();
 
 		long count = 0;
 		int t = 0;
 		long obj = 0;
 		int qtdAluno = 0;
-		
+
 		grupos = new GrupoService().listarTutor(tutorias.get(0).getIdtutoria());
-		
+
 		int qtdGrupo = grupos.size();
 
 		for (int j = 0; j < qtdGrupo; j++) {
-			alunos = new AlunoVariavelService().listaGrupo(grupos.get(j).getIdgrupo());
+			alunos = new AlunoVariavelService().listaGrupo(grupos.get(j)
+					.getIdgrupo());
 			alunosTOTAL.addAll(alunos);
 		}
 
 		if (!alunosTOTAL.isEmpty()) {
-			 qtdAluno = alunosTOTAL.size();
+			qtdAluno = alunosTOTAL.size();
 			for (int k = 0; k < qtdAluno; k++) {
-				if (!anos.contains(alunosTOTAL.get(k).getAnoEstudo().getIdanoEstudo())) {
+				if (!anos.contains(alunosTOTAL.get(k).getAnoEstudo()
+						.getIdanoEstudo())) {
 					anos.add(alunosTOTAL.get(k).getAnoEstudo().getIdanoEstudo());
 				}
 			}
@@ -214,33 +236,36 @@ public class ObjetivoResource {
 			int qtdAno = anos.size();
 			for (int l = 0; l < qtdAno; l++) {
 
-				
 				obj = new ObjetivoService().listarGrafico(anos.get(l));
 				count = count + obj;
-				
+
 				objetivo = new ObjetivoService().listarEntregues(anos.get(l));
-				
+
 			}
 		}
-		
-		for(int k = 0; k < count; k++){
-			planejamentoRoteirosentregues = new PlanejamentoRoteiroService().listarObjetivoPendente(objetivo.get(k).getIdobjetivo());
-			if(!planejamentoRoteirosentregues.isEmpty()){
-				planejamentoRoteirosentreguesTotal.add(planejamentoRoteirosentregues.get(0));
+
+		for (int k = 0; k < count; k++) {
+			planejamentoRoteirosentregues = new PlanejamentoRoteiroService()
+					.listarObjetivoPendente(objetivo.get(k).getIdobjetivo());
+			if (!planejamentoRoteirosentregues.isEmpty()) {
+				planejamentoRoteirosentreguesTotal
+						.add(planejamentoRoteirosentregues.get(0));
 			}
 		}
-		
-		for(int k = 0; k < count; k++){
-			planejamentoRoteiroscompletos = new PlanejamentoRoteiroService().listarObjetivoCompleto(objetivo.get(k).getIdobjetivo());
-			if(!planejamentoRoteiroscompletos.isEmpty()){
-				planejamentoRoteiroscompletoTotal.add(planejamentoRoteiroscompletos.get(0));
+
+		for (int k = 0; k < count; k++) {
+			planejamentoRoteiroscompletos = new PlanejamentoRoteiroService()
+					.listarObjetivoCompleto(objetivo.get(k).getIdobjetivo());
+			if (!planejamentoRoteiroscompletos.isEmpty()) {
+				planejamentoRoteiroscompletoTotal
+						.add(planejamentoRoteiroscompletos.get(0));
 			}
 		}
-		
+
 		retorno.add(0, count);
-		retorno.add(1,(long)planejamentoRoteirosentreguesTotal.size());
-		retorno.add(2, (long)planejamentoRoteiroscompletoTotal.size());
-		
+		retorno.add(1, (long) planejamentoRoteirosentreguesTotal.size());
+		retorno.add(2, (long) planejamentoRoteiroscompletoTotal.size());
+
 		alunosTOTAL.clear();
 		anos.clear();
 		t++;
@@ -248,74 +273,65 @@ public class ObjetivoResource {
 		System.out.println(t);
 		return retorno;
 	}
+
 	/*
-	@Path("GraficoEntregues/{id}")
-	@GET
-	@Produces("application/json")
-	public long GraficoEntregues(@PathParam("id") int id) {
-		List<AlunoVariavel> alunos = new ArrayList<AlunoVariavel>();
-
-		List<Grupo> grupos = new ArrayList<Grupo>();
-		List<Integer> anos = new ArrayList<Integer>();
-		
-		List<Tutoria> tutorias = new TutoriaService().listarkey(id);
-		List<AlunoVariavel> alunosTOTAL = new ArrayList<AlunoVariavel>();
-		List<PlanejamentoRoteiro> planejamentoRoteiros = new ArrayList<PlanejamentoRoteiro>();
-		
-		List<PlanejamentoRoteiro> planejamentoRoteirosTotal = new ArrayList<PlanejamentoRoteiro>();
-		
-		
-		List<Objetivo> objetivo = new ArrayList<Objetivo>();
-
-		
-		long count = 0;
-		int t = 0;
-		long obj = 0;
-		int qtdAluno = 0;
-		
-		grupos = new GrupoService().listarTutor(tutorias.get(0).getIdtutoria());
-		
-		int qtdGrupo = grupos.size();
-
-		for (int j = 0; j < qtdGrupo; j++) {
-			alunos = new AlunoVariavelService().listaGrupo(grupos.get(j).getIdgrupo());
-			alunosTOTAL.addAll(alunos);
-		}
-
-		if (!alunosTOTAL.isEmpty()) {
-			 qtdAluno = alunosTOTAL.size();
-			for (int k = 0; k < qtdAluno; k++) {
-				if (!anos.contains(alunosTOTAL.get(k).getAnoEstudo().getIdanoEstudo())) {
-					anos.add(alunosTOTAL.get(k).getAnoEstudo().getIdanoEstudo());
-				}
-			}
-
-			int qtdAno = anos.size();
-			for (int l = 0; l < qtdAno; l++) {
-	
-				obj = new ObjetivoService().listarGrafico(anos.get(l));
-				objetivo = new ObjetivoService().listarEntregues(anos.get(l));
-				count = count + obj;
-			}
-	
-		}
-		
-		for(int k = 0; k < count; k++){
-			planejamentoRoteiros = new PlanejamentoRoteiroService().listarObjetivoPendente(objetivo.get(k).getIdobjetivo());
-			if(!planejamentoRoteiros.isEmpty()){
-				planejamentoRoteirosTotal.add(planejamentoRoteiros.get(0));
-			}
-		}
-		
-		alunosTOTAL.clear();
-		anos.clear();
-		t++;
-
-		System.out.println(t);
-		return planejamentoRoteirosTotal.size();
-		
-	}
-	*/
+	 * @Path("GraficoEntregues/{id}")
+	 * 
+	 * @GET
+	 * 
+	 * @Produces("application/json") public long
+	 * GraficoEntregues(@PathParam("id") int id) { List<AlunoVariavel> alunos =
+	 * new ArrayList<AlunoVariavel>();
+	 * 
+	 * List<Grupo> grupos = new ArrayList<Grupo>(); List<Integer> anos = new
+	 * ArrayList<Integer>();
+	 * 
+	 * List<Tutoria> tutorias = new TutoriaService().listarkey(id);
+	 * List<AlunoVariavel> alunosTOTAL = new ArrayList<AlunoVariavel>();
+	 * List<PlanejamentoRoteiro> planejamentoRoteiros = new
+	 * ArrayList<PlanejamentoRoteiro>();
+	 * 
+	 * List<PlanejamentoRoteiro> planejamentoRoteirosTotal = new
+	 * ArrayList<PlanejamentoRoteiro>();
+	 * 
+	 * 
+	 * List<Objetivo> objetivo = new ArrayList<Objetivo>();
+	 * 
+	 * 
+	 * long count = 0; int t = 0; long obj = 0; int qtdAluno = 0;
+	 * 
+	 * grupos = new GrupoService().listarTutor(tutorias.get(0).getIdtutoria());
+	 * 
+	 * int qtdGrupo = grupos.size();
+	 * 
+	 * for (int j = 0; j < qtdGrupo; j++) { alunos = new
+	 * AlunoVariavelService().listaGrupo(grupos.get(j).getIdgrupo());
+	 * alunosTOTAL.addAll(alunos); }
+	 * 
+	 * if (!alunosTOTAL.isEmpty()) { qtdAluno = alunosTOTAL.size(); for (int k =
+	 * 0; k < qtdAluno; k++) { if
+	 * (!anos.contains(alunosTOTAL.get(k).getAnoEstudo().getIdanoEstudo())) {
+	 * anos.add(alunosTOTAL.get(k).getAnoEstudo().getIdanoEstudo()); } }
+	 * 
+	 * int qtdAno = anos.size(); for (int l = 0; l < qtdAno; l++) {
+	 * 
+	 * obj = new ObjetivoService().listarGrafico(anos.get(l)); objetivo = new
+	 * ObjetivoService().listarEntregues(anos.get(l)); count = count + obj; }
+	 * 
+	 * }
+	 * 
+	 * for(int k = 0; k < count; k++){ planejamentoRoteiros = new
+	 * PlanejamentoRoteiroService
+	 * ().listarObjetivoPendente(objetivo.get(k).getIdobjetivo());
+	 * if(!planejamentoRoteiros.isEmpty()){
+	 * planejamentoRoteirosTotal.add(planejamentoRoteiros.get(0)); } }
+	 * 
+	 * alunosTOTAL.clear(); anos.clear(); t++;
+	 * 
+	 * System.out.println(t); return planejamentoRoteirosTotal.size();
+	 * 
+	 * }
+	 */
 
 	/**
 	 * Removes the objetivo.
@@ -339,6 +355,47 @@ public class ObjetivoResource {
 
 		return "Deletado";
 
+	}
+
+	@Path("ListaObjetivoHash/{idUsuario}/{idRoteiro}/{idPlanoEstudo}")
+	@GET
+	@Produces("application/json")
+	public List<String> ListaObjetivoHash(
+			@PathParam("idUsuario") int idUsuario,
+			@PathParam("idRoteiro") int idRoteiro,
+			@PathParam("idPlanoEstudo") int idPlanoEstudo) {
+
+		List<String> lista = new ArrayList<String>();
+		List<Objetivo> objs = new ObjetivoService().listarRoteiro(idRoteiro);
+		List<PlanejamentoRoteiro> plano = new ArrayList<PlanejamentoRoteiro>();
+		List<String> retorno1 = new ArrayList<String>();
+
+		for (int i = 0; i < objs.size(); i++) {
+			plano.addAll(new PlanejamentoRoteiroService().listarPendente(idUsuario, objs.get(i).getIdobjetivo()));
+			
+		}
+		for (int j = 0; j <plano.size(); j++) {
+			retorno1.add(plano.get(j).getObjetivo().getIdobjetivo().toString());
+			
+			retorno1.add(plano.get(j).getObjetivo().getNumero().toString());
+
+			if (plano.isEmpty()) {
+				
+				retorno1.add("0");
+			} else {
+				if (!(plano.get(j).getPlanoEstudo().getIdplanoEstudo() == idPlanoEstudo) && (plano.get(j).getStatus() == "1")) {
+					retorno1.add("0");
+
+				} else {
+					
+					retorno1.add(plano.get(j).getStatus());
+				}
+			}
+			lista.addAll(retorno1);
+		}
+		
+
+		return retorno1;
 	}
 
 	/**

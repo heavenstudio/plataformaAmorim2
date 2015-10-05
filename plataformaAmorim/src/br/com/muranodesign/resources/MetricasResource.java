@@ -21,6 +21,10 @@ import br.com.muranodesign.model.SO;
 @Path("Metricas")
 public class MetricasResource {
 
+	/**
+	 * Listar historico de conexao por mes
+	 * @return Hashtable<String, Integer>
+	 */
 	@Path("/AcessoEscola")
 	@GET
 	@Produces("application/json")
@@ -47,6 +51,10 @@ public class MetricasResource {
 		return escola;
 	}
 	
+	/**
+	 * Listar numero de acessos externos por mes
+	 * @return Hashtable<String, Integer>
+	 */
 	@Path("/AcessoExterno")
 	@GET
 	@Produces("application/json")
@@ -72,6 +80,10 @@ public class MetricasResource {
 		return externo;
 	}
 	
+	/**
+	 * Listar os SO usados para entrar na plataforma
+	 * @return Hashtable<String, Integer>
+	 */
 	@Path("/SO")
 	@GET
 	@Produces("application/json")

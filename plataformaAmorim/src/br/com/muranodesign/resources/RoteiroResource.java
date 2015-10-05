@@ -85,9 +85,23 @@ public class RoteiroResource {
 		return resultado;
 	}
 	
+	
+	@Path("ListaLikeRoteiro/{letra}") 
+	@GET
+	@Produces("application/json")
+	public List<Roteiro> ListaLikeRoteiro(@PathParam("letra") String letra){
+		List<Roteiro> like = new RoteiroService().ListaLikeRoteiro(letra);
+		if(!like.isEmpty()){
+			return like;
+		}else{
+			return new RoteiroService().listarTodos();
+		}
+		 //ForumQuestaoService().ListaLikeRoteiro(letra);
+	}
+	
 	/**
 	 * Listar os roteiros ferentes ao aluno
-	 * @return
+	 * @return list
 	 */
 	@Path("/RoteiroAluno/{idAluno}/{ano}")
 	@GET

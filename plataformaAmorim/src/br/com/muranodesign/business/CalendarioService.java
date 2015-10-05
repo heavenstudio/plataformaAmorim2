@@ -85,6 +85,12 @@ public class CalendarioService {
 		return result;
 	}
 	
+	/**
+	 * Listar por eventos
+	 * @param id
+	 * @return
+	 * @throws ParseException
+	 */
 	public List<Calendario> listarEvento(int id) throws ParseException{
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CalendarioDAO dao = DAOFactory.getCalendarioDAO(pc);
@@ -138,7 +144,10 @@ public class CalendarioService {
 		return p;
 	}
 
-	
+	/**
+	 * Listar todos que forem visiveis
+	 * @return list
+	 */
 	public List<Calendario> listVisivel(){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CalendarioDAO dao = DAOFactory.getCalendarioDAO(pc);

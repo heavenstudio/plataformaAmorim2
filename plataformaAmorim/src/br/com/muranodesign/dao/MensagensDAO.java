@@ -29,6 +29,14 @@ public interface MensagensDAO {
 		public List<Mensagens> listAll();
 		
 		/**
+		 * Lista por intervalo de ids
+		 * @param primeiro
+		 * @param ultimo
+		 * @return
+		 */
+		public List<Mensagens> listIntervalo(int primeiro, int ultimo);
+		
+		/**
 		 * Criar.
 		 *
 		 * @param p the p
@@ -73,9 +81,34 @@ public interface MensagensDAO {
 		 * @param proprietario the proprietario
 		 * @return the list
 		 */
-		public List<Mensagens> listarProprietario(Usuario proprietario, String caixa);
+		public List<Mensagens> listarProprietario(Usuario proprietario,String caixa,int primeiro, int ultimo);
 	
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
 		public List<Mensagens> listarRemetente(int id);
 		
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
 		public List<Mensagens> listarProprietario(int id);
+		
+		/**
+		 * Count de mensagens por proprietario
+		 * @param id
+		 * @return
+		 */
+		public List<Mensagens> listarProprietarioCount(int id);
+		
+		/**
+		 * 
+		 * @param idProprietario
+		 * @param idMensagem
+		 * @return
+		 */
+		public List<Mensagens> listarMensagemByProprietario(int idProprietario, int idMensagem);
 }

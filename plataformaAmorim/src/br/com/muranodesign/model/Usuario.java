@@ -56,6 +56,16 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
+    
+    @Basic(optional = false)
+    @Column(name = "ativo")
+    private int ativo;
+    
+    @Basic(optional = false)
+    @Column(name = "banner")
+    private int banner;
+    
+    
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
@@ -217,5 +227,21 @@ public class Usuario implements Serializable {
     public String toString() {
         return "br.com.muranodesign.model.Usuario[ idusuario=" + idusuario + " ]";
     }
+
+	public int getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(int ativo) {
+		this.ativo = ativo;
+	}
+
+	public int getBanner() {
+		return banner;
+	}
+
+	public void setBanner(int banner) {
+		this.banner = banner;
+	}
     
 }

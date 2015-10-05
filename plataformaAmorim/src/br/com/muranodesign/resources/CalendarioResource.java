@@ -63,6 +63,11 @@ public class CalendarioResource {
 		logger.info("QTD Calendario : " + resultado.size());
 		return resultado;
 	}
+	
+	/**
+	 * Listar calendarios visiveis
+	 * @return list
+	 */
 	@Path("visivel")
 	@GET
 	@Produces("application/json")
@@ -110,7 +115,12 @@ public class CalendarioResource {
 		return resultado;
 	}
 
-
+	/**
+	 * Listar calendarios por id de evento
+	 * @param id
+	 * @return list
+	 * @throws ParseException
+	 */
 	@Path("Evento/{id}")
 	@GET
 	@Produces("application/json")
@@ -169,6 +179,11 @@ public class CalendarioResource {
 
 	}
 */
+	/**
+	 * Delete de calendario
+	 * @param id
+	 * @return String
+	 */
 	@Path("delete/{id}")
 	@Produces("text/plain")
 	public String removeCalendario(/*@PathParam("action") String action,*/
@@ -188,7 +203,13 @@ public class CalendarioResource {
 
 	}
 	
-	
+	/**
+	 * upload de imagem
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return obj calendario
+	 */
 	@POST
 	@Path("upload/calendario/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)

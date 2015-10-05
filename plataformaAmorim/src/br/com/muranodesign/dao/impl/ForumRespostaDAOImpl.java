@@ -106,7 +106,10 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 		
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ForumRespostaDAO#ListarTotal(int)
+	 */
 	public List<ForumResposta> ListarTotal(int id){
 		Criteria criteria = getSession().createCriteria(ForumResposta.class);
 		criteria.createAlias("forumQuestao", "forumQuestao");
@@ -115,6 +118,20 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ForumRespostaDAO#ListaNVisto(int)
+	 */
+	public List<ForumResposta> ListaNVisto(int id){
+		Criteria criteria = getSession().createCriteria(ForumResposta.class);
+		criteria.createAlias("forumQuestao", "forumQuestao");
+		criteria.add(Restrictions.eq("forumQuestao.idforumQuestao", id));
+		criteria.add(Restrictions.eq("visto", 0));
+		
+		List<ForumResposta> result = criteria.list();
+		return result;
+		
+	}
 
 	
 

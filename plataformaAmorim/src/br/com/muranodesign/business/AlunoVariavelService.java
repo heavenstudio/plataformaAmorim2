@@ -73,7 +73,7 @@ public class AlunoVariavelService {
 	/**
 	 * Listar Aluno Variavel
 	 * @param idAluno
-	 * @return
+	 * @return list
 	 */
 	public List<AlunoVariavel> listaAluno(int idAluno) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -85,7 +85,7 @@ public class AlunoVariavelService {
 	/**
 	 * Listar grupo
 	 * @param idGrupo
-	 * @return
+	 * @return list
 	 */
 	public List<AlunoVariavel> listaGrupo(int idGrupo) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -97,7 +97,7 @@ public class AlunoVariavelService {
 	/**
 	 * Listar Ano Estudo
 	 * @param ano
-	 * @return
+	 * @return list
 	 */
 	public List<AlunoVariavel> listaAnoEstudo(AnoEstudo ano){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -111,7 +111,7 @@ public class AlunoVariavelService {
 	 * Listar por ano de estudo e periodo
 	 * @param ano
 	 * @param periodo
-	 * @return
+	 * @return list
 	 */
 	public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
@@ -121,6 +121,12 @@ public class AlunoVariavelService {
 		return result;
 	}
 	
+	/**
+	 * Listar por ano e periodo e que tenha grupo
+	 * @param ano
+	 * @param periodo
+	 * @return list
+	 */
 	public List<AlunoVariavel> listaAnoEstudoPeriodoComgrupo(AnoEstudo ano, Periodo periodo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
@@ -129,6 +135,11 @@ public class AlunoVariavelService {
 		return result;
 	}
 	
+	/**
+	  * Listar por periodo
+	 * @param periodo
+	 * @return
+	 */
 	public List<AlunoVariavel> listaPeriodo(Periodo periodo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
@@ -180,7 +191,11 @@ public class AlunoVariavelService {
 		return p;
 	}
 
-	
+	/**
+	 * Lista aluno variavel 
+	 * @param aluno
+	 * @return list
+	 */
 	public AlunoVariavel getAluno(int aluno) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
@@ -189,6 +204,10 @@ public class AlunoVariavelService {
 		return result;
 	}
 	
+	/**
+	 * Lista aluno varivel por named query
+	 * @return list
+	 */
 	public List<AlunoVariavel> listarNamed(){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
@@ -198,6 +217,12 @@ public class AlunoVariavelService {
 		return result;
 	}
 	
+	/**
+	 * Atualizar grupo
+	 * @param id
+	 * @param grupo
+	 * @return id
+	 */
 	public  int update(int id, int grupo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
