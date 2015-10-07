@@ -64,4 +64,12 @@ public class PlanejamentoAulaService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	public List<PlanejamentoAula> listarProfessorObjetivoAula(int idProfessor, int idObjetivoAula){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		PlanejamentoAulaDAO dao = DAOFactory.getPlanejamentoAulaDAO(pc);
+		List<PlanejamentoAula> result = dao.listarProfessorObjetivoAula(idProfessor, idObjetivoAula);
+		pc.commitAndClose();
+		return result;
+	}
 }

@@ -55,4 +55,12 @@ public interface PlanejamentoAulaDAO {
 	 * @return
 	 */
 	public List<PlanejamentoAula> listarPlanoAula(int id);
+	
+	/**
+	 * Listar por professor e objetivo aula
+	 * @param idProdessor
+	 * @param idObjetivoAula
+	 * @return
+	 */
+	public List<PlanejamentoAula> listarProfessorObjetivoAula(int idProfessor, int idObjetivoAula);
 }

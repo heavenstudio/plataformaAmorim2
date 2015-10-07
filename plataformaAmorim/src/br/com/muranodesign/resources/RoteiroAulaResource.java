@@ -46,6 +46,7 @@ public class RoteiroAulaResource {
 			roteiroAula.setDescricao(Descricao);
 			roteiroAula.setRoteiro(roteiro);
 			roteiroAula.setOficinaprofessor(new OficinaProfessorService().listarkey(idOficinaProfessor).get(0));
+			roteiroAula.setStatus(0);
 			
 			resultado = new RoteiroAulaService().criarRoteiroAula(roteiroAula);
 			
@@ -55,6 +56,7 @@ public class RoteiroAulaResource {
 			roteiroAula.setDescricao(Descricao);
 			roteiroAula.setRoteiro(roteiro);
 			roteiroAula.setOficinaprofessor(new OficinaProfessorService().listarkey(idOficinaProfessor).get(0));
+			roteiroAula.setStatus(0);
 			
 			resultado = new RoteiroAulaService().atualizarRoteiroAula(roteiroAula);
 		}
@@ -81,6 +83,29 @@ public class RoteiroAulaResource {
 		return new RoteiroAulaService().listarOficinaProfessor(id);
 	}
 	
+	
+	@Path("ListarNaoOficinaProfessor/{id}")
+	@GET
+	@Produces("application/json")
+	public List<RoteiroAula> getListarNaoOficinaProfessor(@PathParam("id") int id) {
+		return new RoteiroAulaService().listarNaoOficinaProfessor(id);
+	}
+	
+	@Path("status/{id}")
+	@GET
+	@Produces("application/json")
+	public void alterarStatus(@PathParam("id") int id){
+		RoteiroAula roteiro = new RoteiroAulaService().listarkey(id).get(0);
+		
+		if(roteiro.getStatus() == 0){
+			roteiro.setStatus(1);
+		}else if(roteiro.getStatus() == 1){
+			roteiro.setStatus(0);
+		}
+		
+		
+		new RoteiroAulaService().atualizarRoteiroAula(roteiro);
+	}
 	
 	/**
 	 * 
@@ -129,8 +154,14 @@ public class RoteiroAulaResource {
 	public List<RoteiroAula> ListarOficinaCiclo(@PathParam("idOficina") int idOficina,@PathParam("idCiclo") int idCiclo,@PathParam("idProfessor") int idProfessor){
 		
 		List<OficinaProfessor> oficinasProfessores = new ArrayList<OficinaProfessor>();
+		List<Oficina> oficinas = new ArrayList<Oficina>();
 		
-		List<Oficina> oficinas = new OficinaService().listarIdCiclo(idOficina, idCiclo);
+		if(!(idCiclo == 0)){
+			oficinas = new OficinaService().listarIdCiclo(idOficina, idCiclo);
+		}else{
+			oficinas = new OficinaService().listarIdOficina(idOficina);
+		}
+		
 		List<ObjetivoAula> objetivos = new ArrayList<ObjetivoAula>();
 		
 		List<RoteiroAula> roteiros = new ArrayList<RoteiroAula>();

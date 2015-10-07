@@ -75,6 +75,15 @@ public class ObjetivoAulaResource {
 		return new ObjetivoAulaService().listarPorRoteiro(id);
 	}
 	
+	@Path("ListarPorRoteiroLazy/{id}")
+	@GET
+	@Produces("application/json")
+	public List<ObjetivoAula> getListarPorRoteiroLazy(@PathParam("id") int id){
+		
+		return new ObjetivoAulaService().listarPorRoteiroLazy(id);
+	}
+	
+	
 	@Path("ClonarObjetivo/")
 	@POST
 	@Produces("application/json")
@@ -105,7 +114,7 @@ public class ObjetivoAulaResource {
 		}
 		
 		
-		return null;
+		return "ok";
 	}
 	
 }

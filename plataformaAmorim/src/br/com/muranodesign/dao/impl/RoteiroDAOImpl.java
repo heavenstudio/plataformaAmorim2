@@ -48,7 +48,7 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 		
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		criteria.add(Restrictions.eq("ativo",1));
-		
+	    //criteria.setCacheable(true);
 		List<Roteiro> result = criteria.list();
 		
 		

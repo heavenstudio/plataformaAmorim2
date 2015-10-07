@@ -9,6 +9,7 @@
  */
 package br.com.muranodesign.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -20,7 +21,9 @@ import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
 
+import br.com.muranodesign.business.AlunoVariavelService;
 import br.com.muranodesign.business.AnoEstudoService;
+import br.com.muranodesign.model.AlunoVariavel;
 import br.com.muranodesign.model.AnoEstudo;
 
 
@@ -69,6 +72,21 @@ public class AnoEstudoResource {
 
 		return evento;
 
+	}
+	
+	
+	@Path("AnoEstudoAlunoVariavel/{idAluno}")
+	@GET
+	@Produces("application/json")
+	public List<AnoEstudo> getAnoEstudoAlunoVariavel(@PathParam("idAluno") int idAluno){
+		List<AlunoVariavel> aluno = new AlunoVariavelService().listaAluno(idAluno);
+		List<AnoEstudo> ano = new ArrayList<AnoEstudo>();
+		
+		if(!aluno.isEmpty()){
+			ano = new AnoEstudoService().listarkey(aluno.get(0).getAnoEstudo().getIdanoEstudo());
+		}
+		
+		return ano;
 	}
 	
 	/**

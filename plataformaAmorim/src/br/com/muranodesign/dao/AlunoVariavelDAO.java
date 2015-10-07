@@ -132,4 +132,5 @@ public interface AlunoVariavelDAO {
 		 * @param grupo
 		 */
 		public void update(int id, int grupo);
+		
 }

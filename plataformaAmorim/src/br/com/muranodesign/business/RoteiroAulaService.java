@@ -64,4 +64,12 @@ public class RoteiroAulaService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	public List<RoteiroAula> listarNaoOficinaProfessor(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
+		List<RoteiroAula> result = dao.listarNaoOficinaProfessor(id);
+		pc.commitAndClose();
+		return result;
+	}
 }

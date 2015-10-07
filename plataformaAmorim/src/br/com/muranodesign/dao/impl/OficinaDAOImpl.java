@@ -85,5 +85,15 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.OficinaDAO#listarIdOficina(int)
+	 */
+	public List<Oficina> listarIdOficina(int id){
+		Criteria criteria = getSession().createCriteria(Oficina.class);
+		criteria.add(Restrictions.eq("Idoficina", id));
+		List<Oficina> result = criteria.list();
+		return result;
+	}
 
 }

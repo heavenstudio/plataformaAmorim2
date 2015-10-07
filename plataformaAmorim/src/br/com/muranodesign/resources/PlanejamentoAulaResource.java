@@ -83,6 +83,22 @@ public class PlanejamentoAulaResource {
 		return resultado;
 	}
 	
+	@Path("listarProfessorObjetivoAula/{idProfessor}/{idObjetivoAula}")
+	@GET
+	@Produces("application/json")
+	public String getlistarProfessorObjetivoAula(@PathParam("idProfessor") int idProfessor,@PathParam("idObjetivoAula") int idObjetivoAula){
+		List<PlanejamentoAula> planejamnto = new PlanejamentoAulaService().listarProfessorObjetivoAula(idProfessor, idObjetivoAula);
+		String status;
+		if(!planejamnto.isEmpty()){
+			status = planejamnto.get(0).getStatus();
+		}else{
+			status = "0";
+		}
+		
+		return status;
+	}
+	
+	
 	@Path("listarPlanoAula/{idPlanoAula}")
 	@GET
 	@Produces("application/json")

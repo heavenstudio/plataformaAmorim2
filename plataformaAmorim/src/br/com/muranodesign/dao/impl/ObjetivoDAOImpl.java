@@ -12,8 +12,10 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import br.com.muranodesign.dao.ObjetivoDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
@@ -48,13 +50,28 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 		
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
 		criteria.add(Restrictions.eq("ativo",1));
+		//criteria.setCacheable(true);
+		
 		List<Objetivo> result = criteria.list();
 		
 		
 		return result;
 	} 
 	
-
+	public List<Objetivo> listAllTeste(){
+		Criteria criteria = getSession().createCriteria(Objetivo.class);
+	    ProjectionList projList = Projections.projectionList();  
+	    projList.add(Projections.property("descricao"),"descricao"); 
+	    criteria.createAlias("roteiro", "roteiro");
+	    projList.add(Projections.property("roteiro.idroteiro"));  
+	    criteria.setProjection(projList);
+	    criteria.setResultTransformer(Transformers.aliasToBean(Objetivo.class));  
+	    
+	    List<Objetivo> results = criteria.list();
+	    
+		return results; 
+	
+	}
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoDAO#criar(br.com.muranodesign.model.Objetivo)
 	 */

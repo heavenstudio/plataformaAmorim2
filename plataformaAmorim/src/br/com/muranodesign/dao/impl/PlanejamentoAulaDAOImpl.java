@@ -67,4 +67,13 @@ public class PlanejamentoAulaDAOImpl extends AbstractHibernateDAO implements Pla
 		return result;
 	}
 	
+	public List<PlanejamentoAula> listarProfessorObjetivoAula(int idProfessor, int idObjetivoAula){
+		Criteria criteria = getSession().createCriteria(PlanejamentoAula.class);
+		criteria.createAlias("professor", "professor");
+		criteria.add(Restrictions.eq("professor.idprofessorFuncionario", idProfessor));
+		criteria.createAlias("objetivoAula", "objetivoAula");
+		criteria.add(Restrictions.eq("objetivoAula.Idobjetivo_aula", idObjetivoAula));
+		List<PlanejamentoAula> result = criteria.list();
+		return result;
+	}
 }

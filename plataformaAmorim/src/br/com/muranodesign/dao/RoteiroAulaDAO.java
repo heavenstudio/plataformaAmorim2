@@ -55,4 +55,12 @@ public interface RoteiroAulaDAO {
 	 * @return
 	 */
 	public List<RoteiroAula> listarOficinaProfessor(int id);
+	
+	/**
+	 * Listar quando o id for diferente
+	 * @param id
+	 * @return
+	 */
+	public List<RoteiroAula> listarNaoOficinaProfessor(int id);
+	
 }

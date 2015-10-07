@@ -28,6 +28,12 @@ public interface ObjetivoDAO {
 		public List<Objetivo> listAll();
 		
 		/**
+		 * Teste
+		 * @return
+		 */
+		public List<Objetivo> listAllTeste();
+		
+		/**
 		 * Criar.
 		 *
 		 * @param p the p

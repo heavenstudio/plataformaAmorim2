@@ -55,4 +55,12 @@ public class ObjetivoAulaService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	public List<ObjetivoAula> listarPorRoteiroLazy(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);
+		List<ObjetivoAula> result = dao.listarPorRoteiroLazy(id);
+		pc.commitAndClose();
+		return result;
+	}
 }

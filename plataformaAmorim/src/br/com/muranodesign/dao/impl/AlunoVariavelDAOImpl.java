@@ -224,6 +224,8 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		
 		query.executeUpdate();
 	}
+	
+	
 
 
 	

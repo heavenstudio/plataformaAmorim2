@@ -15,6 +15,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +47,7 @@ public class Objetivo implements Serializable {
     @Basic(optional = false)
     @Column(name = "idobjetivo")
     private Integer idobjetivo;
-    @Basic(optional = false)
+    @Basic(optional = true,fetch = FetchType.LAZY)
     @Lob
     @Column(name = "nome")
     private String nome;
@@ -63,6 +64,8 @@ public class Objetivo implements Serializable {
     @JoinColumn(name = "roteiro", referencedColumnName = "idroteiro")
     @ManyToOne
     private Roteiro roteiro;
+    
+    
     @OneToMany(mappedBy = "objetivo")
     private Collection<PlanejamentoRoteiro> planejamentoRoteiroCollection;
     @OneToMany(mappedBy = "objetivo")
@@ -173,5 +176,9 @@ public class Objetivo implements Serializable {
     public String toString() {
         return "br.com.muranodesign.model.Objetivo[ idobjetivo=" + idobjetivo + " ]";
     }
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
 }

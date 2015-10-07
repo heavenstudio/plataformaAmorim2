@@ -85,6 +85,16 @@ public class RoteiroAulaDAOImpl extends AbstractHibernateDAO implements  Roteiro
 		Criteria criteria = getSession().createCriteria(RoteiroAula.class);
 		criteria.createAlias("Oficinaprofessor", "Oficinaprofessor");
 		criteria.add(Restrictions.eq("Oficinaprofessor.Idoficina_professor", id));
+		criteria.add(Restrictions.eq("status", 0));
+		List<RoteiroAula> result = criteria.list();
+		return result;
+	}
+	
+	public List<RoteiroAula> listarNaoOficinaProfessor(int id){
+		Criteria criteria = getSession().createCriteria(RoteiroAula.class);
+		criteria.createAlias("Oficinaprofessor", "Oficinaprofessor");
+		criteria.add(Restrictions.ne("Oficinaprofessor.Idoficina_professor", id));
+		criteria.add(Restrictions.eq("status", 0));
 		List<RoteiroAula> result = criteria.list();
 		return result;
 	}

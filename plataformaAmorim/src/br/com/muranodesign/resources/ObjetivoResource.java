@@ -61,6 +61,7 @@ public class ObjetivoResource {
 		logger.debug("Listar Objetivo ...");
 		List<Objetivo> resultado;
 		resultado = new ObjetivoService().listarTodos();
+		//resultado = new ObjetivoService().listAllTeste();
 		logger.debug("QTD Objetivo : " + resultado.size());
 		return resultado;
 	}
@@ -368,26 +369,38 @@ public class ObjetivoResource {
 		List<String> lista = new ArrayList<String>();
 		List<Objetivo> objs = new ObjetivoService().listarRoteiro(idRoteiro);
 		List<PlanejamentoRoteiro> plano = new ArrayList<PlanejamentoRoteiro>();
+		List<PlanejamentoRoteiro> aux = new ArrayList<PlanejamentoRoteiro>();
 		List<String> retorno1 = new ArrayList<String>();
 
 		for (int i = 0; i < objs.size(); i++) {
-			plano.addAll(new PlanejamentoRoteiroService().listarPendente(idUsuario, objs.get(i).getIdobjetivo()));
+			aux = new PlanejamentoRoteiroService().listarPendente(idUsuario, objs.get(i).getIdobjetivo());
+			if(!aux.isEmpty()){
+				plano.addAll(aux);
+			}else{
+				retorno1.add(objs.get(i).getIdobjetivo().toString());
+				retorno1.add(objs.get(i).getNumero().toString());
+				retorno1.add("0");
+			}
 			
+			lista.addAll(retorno1);
 		}
 		for (int j = 0; j <plano.size(); j++) {
+			System.out.println(plano.get(j).getObjetivo().getIdobjetivo().toString());
 			retorno1.add(plano.get(j).getObjetivo().getIdobjetivo().toString());
 			
+			System.out.println(plano.get(j).getObjetivo().getNumero().toString());
 			retorno1.add(plano.get(j).getObjetivo().getNumero().toString());
 
 			if (plano.isEmpty()) {
-				
+				System.out.println("0");
 				retorno1.add("0");
 			} else {
-				if (!(plano.get(j).getPlanoEstudo().getIdplanoEstudo() == idPlanoEstudo) && (plano.get(j).getStatus() == "1")) {
+				if (plano.get(j).getStatus().equals("1") && plano.get(j).getPlanoEstudo().getIdplanoEstudo() != idPlanoEstudo){
+					System.out.println("0");
 					retorno1.add("0");
 
-				} else {
-					
+				}else{
+					System.out.println(plano.get(j).getStatus()+"d");
 					retorno1.add(plano.get(j).getStatus());
 				}
 			}

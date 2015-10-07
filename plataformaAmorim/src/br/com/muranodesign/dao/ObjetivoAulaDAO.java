@@ -49,5 +49,11 @@ public interface ObjetivoAulaDAO {
 	 * @return
 	 */
 	public List<ObjetivoAula> listarPorRoteiro(int idroteiro);
+	
+	/**
+	 * Listar por roteiro lazy
+	 * @return
+	 */
+	public List<ObjetivoAula> listarPorRoteiroLazy(int id);
 
 }

@@ -50,5 +50,12 @@ public interface OficinaDAO {
 	 */
 	public List<Oficina> listarIdCiclo(int id, int ciclo);
 	
+	/**
+	 * Listar por id de oficina
+	 * @param id
+	 * @param ciclo
+	 * @return
+	 */
+	public List<Oficina> listarIdOficina(int id);
 
 }

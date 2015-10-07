@@ -26,6 +26,9 @@ public class RoteiroAula implements Serializable{
 	 @Column(name = "Idroteiro_aula")
 	 private int Idroteiro_aula;
 	 
+	 @Column(name = "status")
+	 private int status;
+	 
 	 @Column(name = "roteiro")
 	 private String roteiro;
 	 
@@ -81,6 +84,14 @@ public class RoteiroAula implements Serializable{
 
 	public void setOficinaprofessor(OficinaProfessor oficinaprofessor) {
 		Oficinaprofessor = oficinaprofessor;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	 

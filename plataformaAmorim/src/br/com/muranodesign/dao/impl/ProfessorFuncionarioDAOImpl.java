@@ -12,7 +12,10 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import br.com.muranodesign.dao.ProfessorFuncionarioDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
@@ -45,11 +48,21 @@ public class ProfessorFuncionarioDAOImpl extends AbstractHibernateDAO implements
 	 */
 	public List<ProfessorFuncionario> listAll() {
 		
+		//Criteria criteria = getSession().createCriteria(ProfessorFuncionario.class);
+		//List<ProfessorFuncionario> result = criteria.list();
+		
+		
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionario.class);
-		List<ProfessorFuncionario> result = criteria.list();
-		
-		
-		return result;
+	    ProjectionList projList = Projections.projectionList();  
+	    projList.add(Projections.property("idprofessorFuncionario"),"idprofessorFuncionario"); 
+	    projList.add(Projections.property("nome"),"nome"); 
+	    criteria.setProjection(projList);
+	    
+	    criteria.setResultTransformer(Transformers.aliasToBean(ProfessorFuncionario.class));  
+	    List<ProfessorFuncionario> results = criteria.list();
+	  
+	    
+		return results;
 	} 
 	
 
