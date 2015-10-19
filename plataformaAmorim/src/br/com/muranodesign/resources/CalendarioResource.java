@@ -64,6 +64,14 @@ public class CalendarioResource {
 		return resultado;
 	}
 	
+	@Path("Range")
+	@GET
+	@Produces("application/json")
+	public List<Calendario> getRange(){
+		return new CalendarioService().listarRange();
+	}
+	
+	
 	/**
 	 * Listar calendarios visiveis
 	 * @return list
@@ -215,7 +223,7 @@ public class CalendarioResource {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Calendario eventoAction(
 
-	@PathParam("id") String strId,
+			@PathParam("id") String strId,
 			@FormDataParam("imagem") InputStream uploadedInputStream,
 			@FormDataParam("imagem") FormDataContentDisposition fileDetail
 

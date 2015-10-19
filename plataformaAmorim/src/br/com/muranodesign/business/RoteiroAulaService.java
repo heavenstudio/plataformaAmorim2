@@ -72,4 +72,28 @@ public class RoteiroAulaService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	public List<RoteiroAula> listarLike(int idOficinaProfessor, String letras){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
+		List<RoteiroAula> result = dao.listarLike(idOficinaProfessor, letras);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	public List<RoteiroAula> listarOficinaProfessorLike(int id, String letra){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
+		List<RoteiroAula> result = dao.listarOficinaProfessorLike(id, letra);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	public List<RoteiroAula> listarNaoOficinaProfessorLike(int id, String letra){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
+		List<RoteiroAula> result = dao.listarNaoOficinaProfessorLike(id, letra);
+		pc.commitAndClose();
+		return result;
+	}
 }

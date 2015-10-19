@@ -118,6 +118,13 @@ public class RoteiroResource {
 		return resultado;
 	}
 	
+	@Path("RoteiroRange/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public List<Roteiro> getRoteiroRange(@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		return  new RoteiroService().listRoteiroRange(primeiro, ultimo);
+	}
+	
 
 	/**
 	 * Gets the evento.

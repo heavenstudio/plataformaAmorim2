@@ -61,5 +61,5 @@ public interface PlanoAulaDAO {
 	 * @param idProfessor
 	 * @return
 	 */
-	public List<PlanoAula> listarProfessor(int idProfessor);
+	public List<PlanoAula> listarProfessor(int idProfessor, Date data);
 }

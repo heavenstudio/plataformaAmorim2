@@ -57,10 +57,33 @@ public interface RoteiroAulaDAO {
 	public List<RoteiroAula> listarOficinaProfessor(int id);
 	
 	/**
+	 * Listar por id oficina professor e like roteiro aula
+	 * @param id
+	 * @param letra
+	 * @return
+	 */
+	public List<RoteiroAula> listarOficinaProfessorLike(int id, String letra);
+	
+	/**
 	 * Listar quando o id for diferente
 	 * @param id
 	 * @return
 	 */
 	public List<RoteiroAula> listarNaoOficinaProfessor(int id);
+	
+	/**
+	 * istar quando o id for diferente e like roteiro aula
+	 * @param id
+	 * @return
+	 */
+	public List<RoteiroAula> listarNaoOficinaProfessorLike(int id, String letra);
+	
+	/**
+	 * Listar roteiros like
+	 * @param idOficinaProfessor
+	 * @param letras
+	 * @return
+	 */
+	public List<RoteiroAula> listarLike(int idOficinaProfessor, String letras);
 	
 }

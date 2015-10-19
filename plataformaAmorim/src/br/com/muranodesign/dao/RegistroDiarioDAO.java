@@ -78,6 +78,12 @@ public interface RegistroDiarioDAO {
 		 */
 		public List<RegistroDiario> listarMes(Date ini, Date fim);
 		
+		
+		/**
+		 * Listar por plano de estudo e data
+		 * @return
+		 */
+		public List<RegistroDiario> listaPlanoEstudoDara(int id, Date data);
 	
 
 }

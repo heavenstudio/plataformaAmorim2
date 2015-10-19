@@ -71,10 +71,11 @@ public class PlanoAulaDAOImpl extends AbstractHibernateDAO implements PlanoAulaD
 		return result;
 	}
 	
-	public List<PlanoAula> listarProfessor(int idProfessor){
+	public List<PlanoAula> listarProfessor(int idProfessor, Date data){
 		Criteria criteria = getSession().createCriteria(PlanoAula.class);
 		criteria.createAlias("professor", "professor");
 		criteria.add(Restrictions.eq("professor.idprofessorFuncionario", idProfessor));
+		criteria.add(Restrictions.gt("data_ini",data));
 		List<PlanoAula> result = criteria.list();
 		return result;
 	}

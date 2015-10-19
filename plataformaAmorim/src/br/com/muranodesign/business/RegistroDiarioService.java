@@ -132,4 +132,12 @@ public class RegistroDiarioService {
 	}
 
 	
+	public List<RegistroDiario> listaPlanoEstudoDara(int id, Date data){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RegistroDiarioDAO dao = DAOFactory.getRegistroDiarioDAO(pc);
+		List<RegistroDiario> result = dao.listaPlanoEstudoDara(id, data);
+		pc.commitAndClose();
+		return result;
+	}
+	
 }

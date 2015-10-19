@@ -101,8 +101,7 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 		//criteria.add(Restrictions.eq("userName", user));
 		//.add(Order.asc("alarmeLevel"));
 		List<Atividade> result = criteria.list();
-		
-		
+
 		return result;
 	}
 
@@ -117,12 +116,6 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 		List<Atividade> result = criteria.list();
 		return result;	
 	}
-	
-
-
-
-
-
 	
 
 }

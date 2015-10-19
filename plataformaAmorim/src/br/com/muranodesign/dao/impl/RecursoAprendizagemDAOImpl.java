@@ -90,6 +90,14 @@ public class RecursoAprendizagemDAOImpl extends AbstractHibernateDAO implements 
 		return result;
 	}
 
+	
+	public List<RecursoAprendizagem> listarProRoteiro(int id){
+		Criteria criteria = getSession().createCriteria(RecursoAprendizagem.class);
+		criteria.createAlias("roteiro", "roteiro");
+		criteria.add(Restrictions.eq("roteiro.idroteiro", id));
+		List<RecursoAprendizagem> result = criteria.list();
+		return result;
+	}
 
 
 	

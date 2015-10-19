@@ -142,4 +142,19 @@ public class ChamadaService {
 		return result;
 	}
 	
+	/**
+	 * Verifica data atual
+	 * @param id
+	 * @param data
+	 * @return
+	 */
+	public List<Chamada> dataPresencaAtual(int id, Date data){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ChamadaDAO dao = DAOFactory.getChamadaDAO(pc);
+		List<Chamada> result = dao.dataPresencaAtual(id, data);
+				
+		pc.commitAndClose();
+		return result;
+	}
+	
 }

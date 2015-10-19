@@ -64,7 +64,7 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 	    projList.add(Projections.property("descricao"),"descricao"); 
 	    criteria.createAlias("roteiro", "roteiro");
 	    projList.add(Projections.property("roteiro.idroteiro"));  
-	    criteria.setProjection(projList);
+	    criteria.setProjection(projList).setCacheable(true);
 	    criteria.setResultTransformer(Transformers.aliasToBean(Objetivo.class));  
 	    
 	    List<Objetivo> results = criteria.list();

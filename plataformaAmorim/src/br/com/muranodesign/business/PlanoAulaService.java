@@ -67,10 +67,10 @@ public class PlanoAulaService {
 		return result;
 	}
 	
-	public List<PlanoAula> listarProfessor(int idProfessor){
+	public List<PlanoAula> listarProfessor(int idProfessor,Date data){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
-		List<PlanoAula> result = dao.listarProfessor(idProfessor);
+		List<PlanoAula> result = dao.listarProfessor(idProfessor, data);
 		pc.commitAndClose();
 		return result;
 	}

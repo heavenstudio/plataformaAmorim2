@@ -3,7 +3,9 @@ package br.com.muranodesign.resources;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -83,14 +85,29 @@ public class PlanejamentoAulaResource {
 		return resultado;
 	}
 	
-	@Path("listarProfessorObjetivoAula/{idProfessor}/{idObjetivoAula}")
+	@Path("listarProfessorObjetivoAula/{idProfessor}/{idObjetivoAula}/{idplanoAula}")
 	@GET
 	@Produces("application/json")
-	public String getlistarProfessorObjetivoAula(@PathParam("idProfessor") int idProfessor,@PathParam("idObjetivoAula") int idObjetivoAula){
-		List<PlanejamentoAula> planejamnto = new PlanejamentoAulaService().listarProfessorObjetivoAula(idProfessor, idObjetivoAula);
+	public String getlistarProfessorObjetivoAula(@PathParam("idProfessor") int idProfessor,@PathParam("idObjetivoAula") int idObjetivoAula,@PathParam("idplanoAula") int idplanoAula){
+		List<PlanejamentoAula> planejamnto = new PlanejamentoAulaService().listarProfessorObjetivoAula(idProfessor, idObjetivoAula, idplanoAula);
 		String status;
 		if(!planejamnto.isEmpty()){
 			status = planejamnto.get(0).getStatus();
+		}else{
+			status = "0";
+		}
+		
+		return status;
+	}
+	
+	@Path("listarIdProfessorObjetivoAula/{idProfessor}/{idObjetivoAula}/{idplanoAula}")
+	@GET
+	@Produces("application/json")
+	public String getlistarIdProfessorObjetivoAula(@PathParam("idProfessor") int idProfessor,@PathParam("idObjetivoAula") int idObjetivoAula,@PathParam("idplanoAula") int idplanoAula){
+		List<PlanejamentoAula> planejamnto = new PlanejamentoAulaService().listarProfessorObjetivoAula(idProfessor, idObjetivoAula, idplanoAula);
+		String status;
+		if(!planejamnto.isEmpty()){
+			status = Integer.toString(planejamnto.get(0).getIdplanejamento_aula());
 		}else{
 			status = "0";
 		}
@@ -121,6 +138,33 @@ public class PlanejamentoAulaResource {
 		return resultado;
 	}
 	
+	
+	@Path("listarStatus/{idPlanoAula}")
+	@GET
+	@Produces("application/json")
+	public List<Hashtable<String, String>> getlistarStatus(@PathParam("idPlanoAula") int idPlanoAula){
+		
+		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String,String>>();
+		
+		logger.debug("Listar PlanejamentoAula ...");
+		List<PlanejamentoAula> resultado;
+		resultado = new PlanejamentoAulaService().listarPlanoAula(idPlanoAula);
+		
+		for (PlanejamentoAula planejamentoAula : resultado) {
+			
+			System.out.println(planejamentoAula.getObjetivoAula().getObjetivo());
+			System.out.println(planejamentoAula.getStatus());
+			
+			Hashtable<String, String> hash = new Hashtable<String, String>();
+			
+			hash.put("objetivo", planejamentoAula.getObjetivoAula().getObjetivo());
+			hash.put("status", planejamentoAula.getStatus());
+			
+			list.add(hash);	
+		}
+
+		return list;
+	}
 	
 
 }

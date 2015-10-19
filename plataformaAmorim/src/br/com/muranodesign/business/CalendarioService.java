@@ -157,4 +157,13 @@ public class CalendarioService {
 		return result;
 	}
 	
+	public List<Calendario> listarRange(){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		CalendarioDAO dao = DAOFactory.getCalendarioDAO(pc);
+		List<Calendario> result = dao.listarRange();
+				
+		pc.commitAndClose();
+		return result;
+	}
+	
 }

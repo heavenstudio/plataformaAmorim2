@@ -86,6 +86,13 @@ public class RecursoAprendizagemResource {
 
 	}
 	
+	@Path("listarProRoteiro/{id}")
+	@GET
+	@Produces("application/json")
+	public List<RecursoAprendizagem> listarProRoteiro(@PathParam("id") int id){
+		return new RecursoAprendizagemService().listarProRoteiro(id);
+	}
+	
 	/**
 	 * Removes the recurso aprendizagem.
 	 *

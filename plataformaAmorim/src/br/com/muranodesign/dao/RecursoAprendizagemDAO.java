@@ -56,6 +56,12 @@ public interface RecursoAprendizagemDAO {
 		 */
 		public List<RecursoAprendizagem> listarKey(int key);
 		
+		/**
+		 * Listar por id de roteiro
+		 * @param id
+		 * @return
+		 */
+		public List<RecursoAprendizagem> listarProRoteiro(int id);
 	
 
 }

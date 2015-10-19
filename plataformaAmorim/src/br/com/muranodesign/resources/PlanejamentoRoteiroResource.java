@@ -28,16 +28,19 @@ import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AlunoService;
 import br.com.muranodesign.business.AlunoVariavelService;
+import br.com.muranodesign.business.AtribuicaoRoteiroExtraService;
 import br.com.muranodesign.business.GrupoService;
 import br.com.muranodesign.business.ObjetivoService;
 import br.com.muranodesign.business.PlanejamentoRoteiroService;
 import br.com.muranodesign.business.PlanoEstudoService;
 import br.com.muranodesign.business.TutoriaService;
 import br.com.muranodesign.model.AlunoVariavel;
+import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
 import br.com.muranodesign.model.Grupo;
 import br.com.muranodesign.model.Objetivo;
 import br.com.muranodesign.model.PlanejamentoRoteiro;
 import br.com.muranodesign.model.PlanoEstudo;
+import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.Tutoria;
 
 
@@ -285,6 +288,127 @@ public class PlanejamentoRoteiroResource {
 		return resultado;
 
 	}
+	
+	
+	@Path("ListarTotal/{id}")
+	@GET
+	@Produces("application/json")
+	public int getListarTotal(@PathParam("id") int id){
+		List<PlanejamentoRoteiro> resultado = new PlanejamentoRoteiroService().listarIdAluno(id);
+		List<AlunoVariavel> aluno = new AlunoVariavelService().listaAluno(id);
+		
+		int total = 0;
+		for (PlanejamentoRoteiro planejamentoRoteiro : resultado) {
+			if(planejamentoRoteiro.getObjetivo().getRoteiro().getAtivo() == 1 && planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+				total++;	
+			}
+		}
+		
+		return total;
+	}
+	
+	@Path("HashStatus2/{id}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, Integer> getHashStatus2(@PathParam("id") int id){
+		Hashtable<String, Integer> retorno = new Hashtable<String, Integer>();
+		
+		List<PlanejamentoRoteiro> resultado = new PlanejamentoRoteiroService().listarIdAluno(id);
+		List<AlunoVariavel> aluno = new AlunoVariavelService().listaAluno(id);
+		
+		int completos = 0, completosAnterior = 0, completosProximo = 0;
+		
+		for (PlanejamentoRoteiro planejamentoRoteiro : resultado) {
+			
+			if(planejamentoRoteiro.getStatus().equals("2")){
+				
+				if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+					completos++;	
+				}else if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() < aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+					completosAnterior++;
+				}else if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() > aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+					completosProximo++;
+				}
+			}
+		}
+		
+		retorno.put("completos", completos);
+		retorno.put("completosAnterior", completosAnterior);
+		retorno.put("completosProximo", completosProximo);
+		
+		return retorno;
+		
+	}
+	
+	@Path("HashStatus3/{id}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, Integer> getHashStatus3(@PathParam("id") int id){
+		Hashtable<String, Integer> retorno = new Hashtable<String, Integer>();
+		
+		List<PlanejamentoRoteiro> resultado = new PlanejamentoRoteiroService().listarIdAluno(id);
+		List<AlunoVariavel> aluno = new AlunoVariavelService().listaAluno(id);
+		
+		int completos = 0, completosAnterior = 0, completosProximo = 0;
+		
+		for (PlanejamentoRoteiro planejamentoRoteiro : resultado) {
+			
+			if(planejamentoRoteiro.getStatus().equals("3")){
+				
+				if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+					completos++;	
+				}else if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() < aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+					completosAnterior++;
+				}else if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() > aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+					completosProximo++;
+				}
+			}
+		}
+		
+		retorno.put("completos", completos);
+		retorno.put("completosAnterior", completosAnterior);
+		retorno.put("completosProximo", completosProximo);
+		
+		return retorno;
+		
+	}
+	
+	@Path("HashAtribuicao/{id}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, Integer> getHashAtribuicao(@PathParam("id") int id){
+		Hashtable<String, Integer> retorno = new Hashtable<String, Integer>();
+		
+		List<PlanejamentoRoteiro> resultado = new PlanejamentoRoteiroService().listarIdAluno(id);
+		List<AlunoVariavel> aluno = new AlunoVariavelService().listaAluno(id);
+		
+		List<AtribuicaoRoteiroExtra> atribuicao;
+		List<Roteiro> roteiro = new ArrayList<Roteiro>();
+		
+		atribuicao = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(id).get(0));
+		
+		int LimiteAnterior = 0, LimiteProximo = 0;
+		
+		for(int i = 0; i < atribuicao.size(); i++){
+			roteiro.add(atribuicao.get(i).getRoteiro());
+		}
+		
+		for(int i = 0; i < roteiro.size(); i++){
+			if(resultado.get(i).getObjetivo().getAtivo() == 1 && resultado.get(i).getObjetivo().getRoteiro().getIdroteiro() == roteiro.get(i).getIdroteiro() && resultado.get(i).getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() < aluno.get(i).getAnoEstudo().getIdanoEstudo() ){
+				LimiteAnterior++;
+			}else if(resultado.get(i).getObjetivo().getAtivo() == 1 && resultado.get(i).getObjetivo().getRoteiro().getIdroteiro() == roteiro.get(i).getIdroteiro() && resultado.get(i).getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() > aluno.get(i).getAnoEstudo().getIdanoEstudo()){
+				LimiteProximo++;
+			}
+		}
+		
+		retorno.put("LimiteAnterior", LimiteAnterior);
+		retorno.put("LimiteProximo", LimiteProximo);
+		
+		return retorno;
+	}
+	
+	
+	
 	
 	/**
 	 * Listar planejamento de roteiro por aluno e objetivo

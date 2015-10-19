@@ -126,4 +126,14 @@ public class RegistroDiarioDAOImpl extends AbstractHibernateDAO implements Regis
 		List<RegistroDiario> result = criteria.list();
 		return result;
 	}
+	
+	public List<RegistroDiario> listaPlanoEstudoDara(int id, Date data){
+		Criteria criteria = getSession().createCriteria(RegistroDiario.class);
+		criteria.createAlias("planoEstudo", "planoEstudo");
+		criteria.add(Restrictions.eq("planoEstudo.idplanoEstudo", id));
+		criteria.add(Restrictions.eq("data", data));
+		List<RegistroDiario> result = criteria.list();
+		return result;
+	}
+	
 }

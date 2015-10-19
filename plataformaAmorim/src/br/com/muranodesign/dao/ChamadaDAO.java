@@ -81,5 +81,14 @@ public interface ChamadaDAO {
 		 * @return
 		 */
 		public List<Chamada> dataPresenca(int id, Date data);
+		
+		/**
+		 * Verificar data atual
+		 * @param id
+		 * @param data
+		 * @return
+		 */
+		public List<Chamada> dataPresencaAtual(int id, Date data);
+	
 
 }

@@ -142,6 +142,15 @@ public class RegistroDiarioResource {
 		
 	}
 	
+	@Path("PlanoEstudoData/{id}/{data}")
+	@GET
+	@Produces("application/json")
+	public List<RegistroDiario> getPlanoEstudoData(@PathParam("id") int id,@PathParam("data") String data){
+		StringUtil t = new StringUtil();
+		return new RegistroDiarioService().listaPlanoEstudoDara(id, t.converteStringData(data));
+	}
+	
+	
 	/**
 	 * Listar registros diarios por mes e ano
 	 * @param mes
@@ -311,6 +320,9 @@ public class RegistroDiarioResource {
 		return Integer.toString(resultado.getIdregistroDiario());
 
 	}
+	
+	
+	
 	
 	
 }

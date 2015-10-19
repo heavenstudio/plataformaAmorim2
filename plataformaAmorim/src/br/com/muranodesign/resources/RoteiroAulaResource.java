@@ -75,26 +75,41 @@ public class RoteiroAulaResource {
 		return resultado;
 	}
 	
-	@Path("ListarPorOficinaProfessor/{id}")
+	@Path("ListarPorOficinaProfessor/{id}/{letra}")
 	@GET
 	@Produces("application/json")
-	public List<RoteiroAula> getListarPorOficinaProfessor(@PathParam("id") int id) {
-
-		return new RoteiroAulaService().listarOficinaProfessor(id);
+	public List<RoteiroAula> getListarPorOficinaProfessor(@PathParam("id") int id,@PathParam("letra") String letra) {
+		List<RoteiroAula> retorno = new ArrayList<RoteiroAula>();
+		
+		if(letra.equals("-")){
+			retorno = new RoteiroAulaService().listarOficinaProfessor(id);
+		}else{
+			retorno = new RoteiroAulaService().listarOficinaProfessorLike(id, letra);
+		}
+		return retorno;//new RoteiroAulaService().listarOficinaProfessor(id);
 	}
 	
 	
-	@Path("ListarNaoOficinaProfessor/{id}")
+	@Path("ListarNaoOficinaProfessor/{id}/{letra}")
 	@GET
 	@Produces("application/json")
-	public List<RoteiroAula> getListarNaoOficinaProfessor(@PathParam("id") int id) {
-		return new RoteiroAulaService().listarNaoOficinaProfessor(id);
+	public List<RoteiroAula> getListarNaoOficinaProfessor(@PathParam("id") int id,@PathParam("letra") String letra) {
+		List<RoteiroAula> retorno = new ArrayList<RoteiroAula>();
+		
+		if(letra.equals("-")){
+			retorno = new RoteiroAulaService().listarNaoOficinaProfessor(id);
+		}else{
+			retorno = new  RoteiroAulaService().listarNaoOficinaProfessorLike(id, letra);
+		}
+		
+		return retorno;//new RoteiroAulaService().listarNaoOficinaProfessor(id);
 	}
 	
-	@Path("status/{id}")
-	@GET
-	@Produces("application/json")
-	public void alterarStatus(@PathParam("id") int id){
+	
+	@Path("status")
+	@POST
+	@Produces("text/plain")
+	public void alterarStatus(@FormParam("id") int id){
 		RoteiroAula roteiro = new RoteiroAulaService().listarkey(id).get(0);
 		
 		if(roteiro.getStatus() == 0){
@@ -105,6 +120,20 @@ public class RoteiroAulaResource {
 		
 		
 		new RoteiroAulaService().atualizarRoteiroAula(roteiro);
+	}
+	
+	
+	@Path("ListaLikeRoteiroAula/{idOficinaProfessor}/{letras}") 
+	@GET
+	@Produces("application/json")
+	public List<RoteiroAula> ListaLikeRoteiro(@PathParam("idOficinaProfessor") int idOficinaProfessor,@PathParam("letras") String letras){
+		List<RoteiroAula> like = new RoteiroAulaService().listarLike(idOficinaProfessor, letras);
+		if(!like.isEmpty()){
+			return like;
+		}else{
+			return new RoteiroAulaService().listarTodos();
+		}
+		
 	}
 	
 	/**

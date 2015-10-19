@@ -97,5 +97,12 @@ public class RecursoAprendizagemService {
 		return p;
 	}
 
+	public List<RecursoAprendizagem> listarProRoteiro(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RecursoAprendizagemDAO dao = DAOFactory.getRecursoAprendizagemDAO(pc);
+		List<RecursoAprendizagem> result = dao.listarProRoteiro(id);
+		pc.commitAndClose();
+		return result;
+	}
 	
 }

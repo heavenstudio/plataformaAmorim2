@@ -75,6 +75,21 @@ public class AnoLetivoResource {
 		
 	}
 
+	@Path("ano/{ano}")
+	@GET
+	@Produces("application/json")
+	public int getano(@PathParam("ano") String ano){
+		List<AnoLetivo> anoLetivo = new AnoLetivoService().listarAnoLetivo(ano);
+		
+		if(!anoLetivo.isEmpty()){
+			return anoLetivo.get(0).getIdanoLetivo();
+		}else{
+			return 0;
+		}
+			
+		 
+	}
+	
   
 	/**
 	 * Remove ano letivo.

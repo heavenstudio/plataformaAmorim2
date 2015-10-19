@@ -86,5 +86,11 @@ public interface CalendarioDAO {
 		 * @throws ParseException
 		 */
 		public List<Calendario> listarEvento(int id) throws ParseException;
+		
+		/**
+		 * Listar por range
+		 * @return
+		 */
+		public List<Calendario> listarRange();
 
 }

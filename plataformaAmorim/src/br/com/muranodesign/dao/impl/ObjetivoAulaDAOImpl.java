@@ -89,6 +89,8 @@ public class ObjetivoAulaDAOImpl extends AbstractHibernateDAO implements Objetiv
 	public List<ObjetivoAula> listarPorRoteiroLazy(int id){
 		
 		Criteria criteria = getSession().createCriteria(ObjetivoAula.class);
+		criteria.createAlias("roteiro", "roteiro");
+		criteria.add(Restrictions.eq("roteiro.Idroteiro_aula", id));
 	    ProjectionList projList = Projections.projectionList();  
 	    projList.add(Projections.property("objetivo"),"objetivo"); 
 	    criteria.setProjection(projList);

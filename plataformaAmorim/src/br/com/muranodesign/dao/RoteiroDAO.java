@@ -77,5 +77,13 @@ public interface RoteiroDAO {
 		 * @return
 		 */
 		public List<Roteiro> ListaLikeRoteiro(String letra);
+		
+		/**
+		 * Listar por range de id
+		 * @param primeiro
+		 * @param ultimo
+		 * @return
+		 */
+		public List<Roteiro> listRoteiroRange(int primeiro, int ultimo);
 
 }

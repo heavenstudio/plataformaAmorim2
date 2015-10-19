@@ -24,6 +24,7 @@ import br.com.muranodesign.dao.CalendarioDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
 import br.com.muranodesign.hibernate.HibernatePersistenceContext;
 import br.com.muranodesign.model.Calendario;
+import br.com.muranodesign.util.StringUtil;
 
 
 
@@ -176,5 +177,23 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 		return result;
 	}
 
+	public List<Calendario> listarRange(){
+		Criteria criteria = getSession().createCriteria(Calendario.class);
+		
+		StringUtil stringUtil = new StringUtil();
+		
+		Calendar cal = Calendar.getInstance();
+		
+		int anomenos = cal.get(Calendar.YEAR) - 1;
+		int anomais = cal.get(Calendar.YEAR) + 1;
+		
+		String ini = Integer.toString(anomenos - 2000) + "-01-01";
+		String fim = Integer.toString(anomais - 2000) + "-01-01";
+		
+		criteria.add(Restrictions.ge("dataFim", stringUtil.converteStringData(ini)));
+		criteria.add(Restrictions.le("dataFim", stringUtil.converteStringData(fim)));
+		List<Calendario> result = criteria.list();
+		return result;
+	}
 
 }

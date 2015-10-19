@@ -143,6 +143,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	public List<PlanejamentoRoteiro> listarIdAluno(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("idAluno", id));
+		criteria.add(Restrictions.isNotNull("objetivo"));
 		List<PlanejamentoRoteiro> result = criteria.list();
 		return result;
 	}

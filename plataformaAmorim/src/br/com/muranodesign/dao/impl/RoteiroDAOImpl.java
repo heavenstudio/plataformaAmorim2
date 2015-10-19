@@ -13,7 +13,11 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import br.com.muranodesign.dao.RoteiroDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
@@ -135,6 +139,24 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		criteria.add(Restrictions.like("nome", letra, MatchMode.START));
 		List<Roteiro> result = criteria.list();
+		return result;
+	}
+	
+	public List<Roteiro> listRoteiroRange(int primeiro, int ultimo){
+		Criteria criteria = getSession().createCriteria(Roteiro.class);
+		ProjectionList projList = Projections.projectionList();  
+		
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		projList.add(Projections.property("idroteiro"),"idroteiro");
+		projList.add(Projections.property("nome"),"nome");
+		
+		criteria.setProjection(projList).setCacheable(true);
+	    criteria.setResultTransformer(Transformers.aliasToBean(Roteiro.class)); 
+	    
+	    criteria.addOrder(Order.asc("nome"));
+		List<Roteiro> result = criteria.list();
+		
 		return result;
 	}
 

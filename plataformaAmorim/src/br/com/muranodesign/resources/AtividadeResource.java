@@ -27,7 +27,6 @@ import br.com.muranodesign.model.Atividade;
 import br.com.muranodesign.model.Objetivo;
 
 
-
 /**
  * Classe tem como objetivo disponibilizar os serviços relacionandos cadastra de atividades.
  *
@@ -138,8 +137,7 @@ public class AtividadeResource {
 			@FormParam("objetivo") String objetivo, 
 			@FormParam("ativo") String ativo
 			
-			
-			
+
 			) {
 		Atividade objAtividade= new Atividade();
 		logger.info("eventoAction ...");
@@ -185,7 +183,5 @@ public class AtividadeResource {
 		
 		return Integer.toString(resultado.getIdatividade());
 	}
-	
-	
-	
+
 }

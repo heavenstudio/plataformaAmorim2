@@ -1,6 +1,7 @@
 package br.com.muranodesign.resources;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -91,6 +92,14 @@ public class PlanoAulaResource {
 	}
 	
 	
+	@Path("{id}")
+	@GET
+	@Produces("application/json")
+	public List<PlanoAula> getPlanoAula(@PathParam("id") int id) {
+		
+		return new PlanoAulaService().listarkey(id);
+	}
+	
 	
 	@Path("RangeData/")
 	@GET
@@ -113,4 +122,23 @@ public class PlanoAulaResource {
 		return new PlanoAulaService().listarUltimo(idProfessor);
 	}
 
+	@Path("ProfessorData/{idProfessor}")
+	@GET
+	@Produces("application/json")
+	public List<PlanoAula> getProfessorData(@PathParam("idProfessor") int idProfessor){
+		
+		Date dataHoje = new Date();
+		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
+		String data = formataData.format(dataHoje);
+		
+		Calendar c = Calendar.getInstance();
+		int anoInt = c.get(Calendar.YEAR);
+		String anoString = Integer.toString(anoInt - 2000);
+		
+		StringUtil  t = new StringUtil();
+		
+		return new PlanoAulaService().listarProfessor(idProfessor, t.converteStringData(anoString+"-01-01")); 
+	}
+	
+	
 }

@@ -121,4 +121,12 @@ public class RoteiroService {
 		return result;
 	}
 	
+	public List<Roteiro> listRoteiroRange(int primeiro, int ultimo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroDAO dao = DAOFactory.getRoteiroDAO(pc);
+		List<Roteiro> result = dao.listRoteiroRange(primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
+	
 }

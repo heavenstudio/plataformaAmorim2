@@ -199,7 +199,10 @@ public class ProfessorFuncionarioResource {
 			@FormParam("ativo") String ativo,
 
 			@FormParam("dataEntradaEscola") String dataEntradaEscola,
+			@FormParam("perfil") int perfil,
 			@FormParam("observacao") String observacao
+			
+			
 
 
 	) {
@@ -258,6 +261,7 @@ public class ProfessorFuncionarioResource {
 				objProfessorFuncionario.setObservacao(observacao);
 			}
 
+			objProfessorFuncionario.setPerfil(24);
 			resultado = new ProfessorFuncionarioService().criarProfessorFuncionario(objProfessorFuncionario);
 
 		} else if (action.equals("update")) {
@@ -313,7 +317,7 @@ public class ProfessorFuncionarioResource {
 			if (!observacao.isEmpty()) {
 				objProfessorFuncionario.setObservacao(observacao);
 			}
-
+			objProfessorFuncionario.setPerfil(perfil);
 			resultado = new ProfessorFuncionarioService().atualizarProfessorFuncionario(objProfessorFuncionario);
 
 		} else {

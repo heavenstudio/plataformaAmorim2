@@ -13,7 +13,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import br.com.muranodesign.dao.ChamadaDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
@@ -155,9 +158,24 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		return result;
 	}
 	
-	
-
-
+	public List<Chamada> dataPresencaAtual(int id, Date data){
+		Criteria criteria = getSession().createCriteria(Chamada.class);
+		
+		ProjectionList projList = Projections.projectionList();  
+		projList.add(Projections.property("presenca"),"presenca");
+		
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", id));
+		criteria.add(Restrictions.eq("data", data));
+		
+		criteria.setProjection(projList).setCacheable(true);
+	    criteria.setResultTransformer(Transformers.aliasToBean(Chamada.class)); 
+		
+		List<Chamada> result = criteria.list();
+		
+	    
+		return result; 
+	}
 
 
 

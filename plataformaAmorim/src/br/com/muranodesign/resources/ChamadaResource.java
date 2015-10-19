@@ -12,7 +12,10 @@ package br.com.muranodesign.resources;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -25,8 +28,10 @@ import javax.ws.rs.Produces;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AlunoService;
+import br.com.muranodesign.business.AlunoVariavelService;
 import br.com.muranodesign.business.ChamadaService;
 import br.com.muranodesign.model.Aluno;
+import br.com.muranodesign.model.AlunoVariavel;
 import br.com.muranodesign.model.Chamada;
 import br.com.muranodesign.util.StringUtil;
 
@@ -111,6 +116,10 @@ public class ChamadaResource {
 		return resultado;
 
 	}
+	
+	
+	
+	
 	/**
 	 * Listar faltas por id de aluno
 	 * @param id
@@ -137,11 +146,83 @@ public class ChamadaResource {
 	public List<Chamada> dataPrecenca(@PathParam("id") int id, @PathParam("data") String data) throws ParseException{
 		String texto = data.replaceAll("-", "/");
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");  
+		DateFormat formatter = new SimpleDateFormat("yy/MM/dd");  
 		Date date = (Date)formatter.parse(texto); 
 		
 		return new ChamadaService().dataPresenca(id, date);
 	}
+	
+	@Path("dataChamadaAtual/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Hashtable<String, String>> getdataChamadaAtual(@PathParam("id") int id) throws ParseException{
+		String data = "";
+		
+		List<AlunoVariavel> alunoVariavel = new AlunoVariavelService().listaGrupo(id);
+		
+		Calendar cal = Calendar.getInstance();
+		int ano = cal.get(Calendar.YEAR);
+		int mes = cal.get(Calendar.MONTH);
+		mes++;
+		int dia = cal.get(Calendar.DAY_OF_MONTH);
+		
+		if(dia < 10 && mes < 10){
+			data = Integer.toString(ano) + "-0" + Integer.toString(mes) + "-0" +  Integer.toString(dia);
+			
+		}else if(dia < 10 && mes >= 10){
+			data = Integer.toString(ano) + "-" + Integer.toString(mes) + "-0" +  Integer.toString(dia);
+			
+		}else if(dia >= 10 && mes < 10){
+			data = Integer.toString(ano) + "-0" + Integer.toString(mes) + "-" +  Integer.toString(dia);
+			
+		}else if(dia >= 10 && mes >= 10){
+			data = Integer.toString(ano) + "-" + Integer.toString(mes) + "-" +  Integer.toString(dia);
+		}
+		
+		System.out.println(data);
+		
+		String texto = data.replaceAll("-", "/");
+		
+		DateFormat formatter = new SimpleDateFormat("yy/MM/dd");  
+		Date date = (Date)formatter.parse(texto);
+		
+	
+	
+		List<Hashtable<String, String>> retorno = new ArrayList<Hashtable<String,String>>();
+		
+		for (AlunoVariavel alunoVariavel2 : alunoVariavel) {
+			List<Chamada> chamadas = new ChamadaService().dataPresenca(alunoVariavel2.getAluno().getIdAluno(), date);//stringUtil.converteStringData(data));
+			
+			Hashtable<String, String> aux = new Hashtable<String, String>();
+			
+			if(!chamadas.isEmpty()){
+				aux.put("idAluno", Integer.toString(alunoVariavel2.getAluno().getIdAluno()));
+				aux.put("nome", alunoVariavel2.getAluno().getNome());
+				aux.put("idAlunoVariavel", Integer.toString(alunoVariavel2.getIdalunoVariavel()));
+				aux.put("status", Integer.toString(chamadas.get(0).getPresenca()));
+				aux.put("idChamada", Integer.toString(chamadas.get(0).getIdchamada()));
+				aux.put("existe", "0");
+				
+				retorno.add(aux);
+				
+			}else{
+				aux.put("idAluno", Integer.toString(alunoVariavel2.getAluno().getIdAluno()));
+				aux.put("nome", alunoVariavel2.getAluno().getNome());
+				aux.put("idAlunoVariavel", Integer.toString(alunoVariavel2.getIdalunoVariavel()));
+				aux.put("status", "não tem");
+				aux.put("idChamada", "nao tem");
+				aux.put("existe", "1");
+				
+				retorno.add(aux);
+			}
+		}
+		
+		
+		
+		return retorno;
+				
+	}
+	
 	
 	/**
 	 * Gets Chamada.
