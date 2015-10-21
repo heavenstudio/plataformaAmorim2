@@ -57,5 +57,19 @@ public interface OficinaDAO {
 	 * @return
 	 */
 	public List<Oficina> listarIdOficina(int id);
+	
+	/**
+	 * Listar por nome de oficina
+	 * @param nome
+	 * @return
+	 */
+	public long listarNomeOficina(String nome);
+	
+	/**
+	 * Listar por nome de oficina
+	 * @param nome
+	 * @return
+	 */
+	public List<Oficina> listarNomeOficinaid(String nome);
 
 }

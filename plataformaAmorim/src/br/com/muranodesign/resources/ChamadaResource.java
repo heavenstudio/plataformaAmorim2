@@ -155,11 +155,11 @@ public class ChamadaResource {
 	@Path("dataChamadaAtual/{id}")
 	@GET
 	@Produces("application/json")
-	public List<Hashtable<String, String>> getdataChamadaAtual(@PathParam("id") int id) throws ParseException{
+	public List<Hashtable<String, String>> getdataChamadaAtual(@PathParam("id") int id/*, @PathParam("data") String data*/) throws ParseException{
 		String data = "";
 		
 		List<AlunoVariavel> alunoVariavel = new AlunoVariavelService().listaGrupo(id);
-		
+	
 		Calendar cal = Calendar.getInstance();
 		int ano = cal.get(Calendar.YEAR);
 		int mes = cal.get(Calendar.MONTH);
@@ -186,7 +186,6 @@ public class ChamadaResource {
 		DateFormat formatter = new SimpleDateFormat("yy/MM/dd");  
 		Date date = (Date)formatter.parse(texto);
 		
-	
 	
 		List<Hashtable<String, String>> retorno = new ArrayList<Hashtable<String,String>>();
 		

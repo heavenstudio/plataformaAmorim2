@@ -64,4 +64,20 @@ public class OficinaService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	public long listarNomeOficina(String nome){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		OficinaDAO dao = DAOFactory.getOficinaDAO(pc);
+		long result = dao.listarNomeOficina(nome);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	public List<Oficina> listarNomeOficinaid(String nome){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		OficinaDAO dao = DAOFactory.getOficinaDAO(pc);
+		List<Oficina> result = dao.listarNomeOficinaid(nome);
+		pc.commitAndClose();
+		return result;
+	}
 }

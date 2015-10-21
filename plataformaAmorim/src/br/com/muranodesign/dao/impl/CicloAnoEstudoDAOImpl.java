@@ -50,4 +50,14 @@ public class CicloAnoEstudoDAOImpl extends AbstractHibernateDAO implements Ciclo
 		List<CicloAnoEstudo> result = criteria.list();
 		return result;
 	}
+	
+	public List<CicloAnoEstudo> listCiclo(int idCiclo){
+		Criteria criteria = getSession().createCriteria(CicloAnoEstudo.class);
+		criteria.createAlias("ciclo", "ciclo");
+		criteria.add(Restrictions.eq("ciclo.Idciclos", idCiclo));
+		
+		List<CicloAnoEstudo> result = criteria.list();
+		return result;
+		
+	}
 }

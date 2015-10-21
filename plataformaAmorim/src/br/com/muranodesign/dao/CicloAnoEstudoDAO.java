@@ -41,5 +41,12 @@ public interface CicloAnoEstudoDAO {
 	 * @return the list
 	 */
 	public List<CicloAnoEstudo> listarKey(int key);
+	
+	/**
+	 * Listar por id de ciclo
+	 * @param idCiclo
+	 * @return
+	 */
+	public List<CicloAnoEstudo> listCiclo(int idCiclo);
 
 }

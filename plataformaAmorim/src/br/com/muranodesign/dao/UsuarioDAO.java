@@ -92,6 +92,7 @@ public interface UsuarioDAO {
 		 */
 		public void updateUser(String senha,int id);
 		
+		
 	
 
 }

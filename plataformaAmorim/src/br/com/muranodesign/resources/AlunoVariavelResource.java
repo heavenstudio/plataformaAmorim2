@@ -33,12 +33,14 @@ import br.com.muranodesign.business.AlunoService;
 import br.com.muranodesign.business.AlunoVariavelService;
 import br.com.muranodesign.business.AnoEstudoService;
 import br.com.muranodesign.business.AnoLetivoService;
+import br.com.muranodesign.business.CicloAnoEstudoService;
 import br.com.muranodesign.business.GrupoService;
 import br.com.muranodesign.business.PeriodoService;
 import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.AlunoVariavel;
 import br.com.muranodesign.model.AnoEstudo;
 import br.com.muranodesign.model.AnoLetivo;
+import br.com.muranodesign.model.CicloAnoEstudo;
 import br.com.muranodesign.model.Grupo;
 import br.com.muranodesign.model.Periodo;
 import br.com.muranodesign.util.StringUtil;
@@ -110,6 +112,46 @@ public class AlunoVariavelResource {
 		return resultado;
 	}
 	*/
+	
+	
+	@Path("listarCicloRange/{idCiclo}/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public String getlistarCicloRange(@PathParam("idCiclo") int idCiclo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		List<CicloAnoEstudo> ciclos = new CicloAnoEstudoService().listCiclo(idCiclo);
+		int ano[] = new int[100];
+		List<Integer> anos = new ArrayList<Integer>();
+		
+		String html = "";
+		
+		for(int i = 0; i < ciclos.size(); i++) {
+			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
+				anos.add(ciclos.get(i).getAno().getIdanoEstudo());
+				
+			}
+		}
+		
+		String html1 = "";
+		
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAno(anos, primeiro, ultimo);
+		
+		for (AlunoVariavel alunoVariavel : retorno) {
+		html1 += 	"<div class="+"'Grupo_Aluno_Linha'"+">" +
+			 		"<span class="+"'Nome_Aluno'"+">"+alunoVariavel.getAluno().getNome()+"</span>"+
+			        "<input type="+"'checkbox'"+" id="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"' class="+"'Aluno_Ano_Check'" +"/>"+
+			        "<label for="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"'>"+
+			        "<span></span>" + 
+					"</label>" +
+					"<span class="+"Ano_Aluno"+">'"+alunoVariavel.getAnoEstudo().getAno()+"'º ano</span>"+
+          "</div>";
+		}
+		
+		
+		
+		
+		return html1;		
+		
+	}
 	
 	/**
 	 * Serviço reponsavel por Lista todos os alunos variaveis por status.

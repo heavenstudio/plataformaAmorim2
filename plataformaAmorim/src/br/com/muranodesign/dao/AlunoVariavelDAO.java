@@ -133,4 +133,6 @@ public interface AlunoVariavelDAO {
 		 */
 		public void update(int id, int grupo);
 		
+		public List<AlunoVariavel> ListarCicloAno(List<Integer> i,int primeiro,int ultimo);
+		
 }

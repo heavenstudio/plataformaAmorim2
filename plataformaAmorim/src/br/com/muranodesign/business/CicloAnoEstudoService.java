@@ -48,4 +48,12 @@ public class CicloAnoEstudoService {
 		pc.commitAndClose();
 		return p;
 	}
+	
+	public List<CicloAnoEstudo> listCiclo(int idCiclo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		CicloAnoEstudoDAO dao = DAOFactory.getCicloAnoEstudoDAO(pc);
+		List<CicloAnoEstudo> result = dao.listCiclo(idCiclo);
+		pc.commitAndClose();
+		return result;
+	}
 }

@@ -36,10 +36,10 @@ public class OficinaResource {
 	public String eventoAction(
 			@FormParam("action") String action,
 			@FormParam("id") int id,
-			@FormParam("cor") int cor,
 			@FormParam("ciclo") int ciclo,
 			@FormParam("anoLetivo") int anoLetivo,
 			@FormParam("periodo") int periodo,
+			@FormParam("tipo") String tipo,
 			@FormParam("nome") String nome){
 		
 		Oficina resultado = new Oficina();
@@ -50,8 +50,28 @@ public class OficinaResource {
 		else if(action.equals("create")){
 			Oficina oficina = new Oficina();
 			
-			oficina.setNome(nome);
-			oficina.setCor(new CoresService().listarkey(cor).get(0));
+			if(tipo.equals("outras")){
+				oficina.setNome(nome);
+				
+				// cor fake, mudar quando for subir pra produção
+				oficina.setCor(new CoresService().listarkey(4).get(0));
+			}else{
+				long tem = new OficinaService().listarNomeOficina(nome);
+				
+				Oficina ofi = new OficinaService().listarNomeOficinaid(nome).get(0);
+				
+				oficina.setCor(ofi.getCor());
+				
+				if(tem == 0){
+					oficina.setNome(nome+" -1");
+				}else{
+					oficina.setNome(nome+" -"+tem);
+				}
+			}
+			
+
+			//oficina.setNome(nome);
+			//oficina.setCor(new CoresService().listarkey(cor).get(0));
 			oficina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 			oficina.setCiclo(new CiclosService().listarkey(ciclo).get(0));
 			oficina.setPeriodo(new PeriodoService().listarkey(periodo).get(0));
@@ -60,8 +80,8 @@ public class OficinaResource {
 		}else if(action.equals("update")){
 			Oficina oficina = new OficinaService().listarkey(id).get(0);
 			
-			oficina.setNome(nome);
-			oficina.setCor(new CoresService().listarkey(cor).get(0));
+			//oficina.setNome(nome);
+			//oficina.setCor(new CoresService().listarkey(cor).get(0));
 			oficina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 			oficina.setCiclo(new CiclosService().listarkey(ciclo).get(0));
 			oficina.setPeriodo(new PeriodoService().listarkey(periodo).get(0));

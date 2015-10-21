@@ -28,8 +28,14 @@ public class Cores implements Serializable{
 	 @Column(name = "nome")
 	 private String nome;
 	 
-	 @Column(name = "hexadecimal")
-	 private String hexadecimal;
+	 @Column(name = "Forte")
+	 private String Forte;
+	 
+	 @Column(name = "Medio")
+	 private String Medio;
+	 
+	 @Column(name = "Fraco")
+	 private String Fraco;
 	 
 	 
 
@@ -53,13 +59,31 @@ public class Cores implements Serializable{
 		return serialVersionUID;
 	}
 
-	public String getHexadecimal() {
-		return hexadecimal;
+	public String getForte() {
+		return Forte;
 	}
 
-	public void setHexadecimal(String hexadecimal) {
-		this.hexadecimal = hexadecimal;
+	public void setForte(String forte) {
+		Forte = forte;
 	}
+
+	public String getMedio() {
+		return Medio;
+	}
+
+	public void setMedio(String medio) {
+		Medio = medio;
+	}
+
+	public String getFraco() {
+		return Fraco;
+	}
+
+	public void setFraco(String fraco) {
+		Fraco = fraco;
+	}
+
+
 	 
 	 
 	

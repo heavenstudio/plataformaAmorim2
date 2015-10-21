@@ -231,6 +231,14 @@ public class AlunoVariavelService {
 		return id;
 	}
 	
+	public List<AlunoVariavel> ListarCicloAno(List<Integer> i,int primeiro,int ultimo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.ListarCicloAno(i, primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
+	
 	
 	//getAluno
 	

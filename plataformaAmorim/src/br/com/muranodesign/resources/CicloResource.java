@@ -23,8 +23,12 @@ public class CicloResource {
 		logger.debug("Listar Ciclo ...");
 		List<Ciclos> resultado;
 		 resultado = new CiclosService().listarTodos();
-		 logger.debug("QTD Oficina : " +  resultado.size());
+		 logger.debug("QTD Ciclo : " +  resultado.size());
 		return resultado;
 	}
+	
+	
+	
+	
 	
 }

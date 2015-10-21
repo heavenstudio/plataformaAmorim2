@@ -3,6 +3,8 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.OficinaDAO;
@@ -96,4 +98,18 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 		return result;
 	}
 
+	public long listarNomeOficina(String nome){
+		Criteria criteria = getSession().createCriteria(Oficina.class);
+		criteria.add(Restrictions.like("nome", nome, MatchMode.START));
+		criteria.setProjection(Projections.count("nome"));
+		long result = (Long) criteria.list().get(0);
+		return result;
+	}
+	
+	public List<Oficina> listarNomeOficinaid(String nome){
+		Criteria criteria = getSession().createCriteria(Oficina.class);
+		criteria.add(Restrictions.like("nome", nome, MatchMode.START));
+		List<Oficina> result = criteria.list();
+		return result;
+	}
 }

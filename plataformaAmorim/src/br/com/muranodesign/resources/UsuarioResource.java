@@ -13,6 +13,8 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
 
@@ -102,6 +104,58 @@ public class UsuarioResource {
 
 		return evento;
 	}
+	
+	@Path("DadosUsuario/{id}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, String> getDadosUsuario(@PathParam("id") int id){
+		List<Usuario> user = new UsuarioService().listarkey(id);
+	
+		Hashtable<String, String> retorno = new Hashtable<String, String>();
+		if(!(user.get(0).getAluno() == null)){
+			
+			retorno.put("idAluno", Integer.toString(user.get(0).getAluno().getIdAluno()));
+			retorno.put("nome",(user.get(0).getAluno().getNome()));
+		}else{
+			
+			retorno.put("idProfessor", Integer.toString(user.get(0).getProfessor().getIdprofessorFuncionario()));
+			retorno.put("nome",(user.get(0).getProfessor().getNome()));
+		}
+		
+		return retorno;
+	}
+	
+	@Path("ListarObjParte")
+	@GET
+	@Produces("application/json")
+	public List<Hashtable<String, String>> getListarObjParte(){
+		List<Usuario> user = new UsuarioService().listarTodos();
+		
+		
+		List<Hashtable<String, String>> lista = new ArrayList<Hashtable<String,String>>();
+		
+		for (Usuario usuario : user) {
+				
+			if(!(usuario.getAluno() == null)){
+				Hashtable<String, String> retorno = new Hashtable<String, String>();
+				
+				retorno.put("idAluno", Integer.toString(usuario.getAluno().getIdAluno()));
+				retorno.put("nome",(usuario.getAluno().getNome()));
+				
+				lista.add(retorno);
+			}else if(!(usuario.getProfessor() == null)){
+				Hashtable<String, String> retorno = new Hashtable<String, String>();
+				
+				retorno.put("idProfessor", Integer.toString(usuario.getProfessor().getIdprofessorFuncionario()));
+				retorno.put("nome",(usuario.getProfessor().getNome()));
+				
+				lista.add(retorno);
+			}
+		}
+		
+		return lista;
+	}
+	
 	
 	/**
 	 * mata a sessao aberta

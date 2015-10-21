@@ -226,6 +226,17 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	}
 	
 	
+	public List<AlunoVariavel> ListarCicloAno(List<Integer> i, int primeiro, int ultimo){
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		criteria.createAlias("anoEstudo", "anoEstudo");
+		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", i) );
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+		
+	}
+	
 
 
 	
