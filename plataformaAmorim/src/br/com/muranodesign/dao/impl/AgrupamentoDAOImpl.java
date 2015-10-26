@@ -72,5 +72,17 @@ public class AgrupamentoDAOImpl extends AbstractHibernateDAO implements Agrupame
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AgrupamentoDAO#listaAnoLetivo(int)
+	 */
+	public List<Agrupamento> listaAnoLetivo(int idAno){
+		Criteria criteria = getSession().createCriteria(Agrupamento.class);
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", idAno));
+		List<Agrupamento> result = criteria.list();
+		return result;
+	}
+	
 
 }

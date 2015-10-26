@@ -9,7 +9,9 @@
  */
 package br.com.muranodesign.resources;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -155,6 +157,67 @@ public class MensagensResource {
 
 	}
 	
+	
+	@Path("emailHash/{caixa}/{proprietario}/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public List<HashMap<String, String>> getHashMensagemProprietarioCaixa(@PathParam("proprietario") int proprietario , @PathParam("caixa") String caixa,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo) {
+		List<HashMap<String, String>> hash = new ArrayList<HashMap<String,String>>();
+		
+		logger.info("Lista Mensagens  por id " + proprietario);
+		
+		List<Usuario> rsUsuario;
+		rsUsuario = new UsuarioService().listarkey(proprietario);
+		Usuario obj = rsUsuario.get(0);
+		
+		
+		List<Mensagens> resultado;
+		resultado = new MensagensService().listarProprietario(obj,caixa,primeiro,ultimo);
+		for (Mensagens mensagens : resultado) {
+			HashMap<String, String> aux = new HashMap<String, String>();
+			
+			String ids = "";
+			
+			aux.put("idMensagem", Integer.toString(mensagens.getIdmensagens()));
+			aux.put("lida", mensagens.getLida());
+			aux.put("cxEntrada", mensagens.getCxEntrada());
+			//aux.put("data", mensagens.getData());
+			aux.put("assunto", mensagens.getAssunto());
+			aux.put("mensagem",mensagens.getMensagem());
+			
+			if(mensagens.getRemetente().getPerfil().getIdperfil() == 23){
+				aux.put("remetente.perfil", "Aluno");
+				aux.put("remetente.nome", mensagens.getRemetente().getAluno().getNome());	
+				
+			}else if (mensagens.getRemetente().getPerfil().getIdperfil() == 24){
+				aux.put("remetente.perfil", "Professor");
+				aux.put("remetente.nome", mensagens.getRemetente().getProfessor().getNome());		
+			}
+			
+				
+			aux.put("remetente.idUsuario",  Integer.toString(mensagens.getRemetente().getIdusuario()));	
+			aux.put("Destinatarios", mensagens.getDestinatarios());	
+			
+			String [] arrayUsers =  mensagens.getDestinatarios().split(";");
+			for(int i = 0; i < arrayUsers.length; i++){
+				
+				List<Usuario> destinatariosId = new UsuarioService().listarLogin(arrayUsers[i]);
+					for (Usuario usuario : destinatariosId) {
+						ids = Integer.toString(usuario.getIdusuario()) + ";";
+					}
+				
+				
+			}
+			
+			aux.put("IdDestinatarios", ids);
+			ids = "";
+			
+			hash.add(aux);
+		}
+
+		return hash;
+
+	}
 	
 	
 	

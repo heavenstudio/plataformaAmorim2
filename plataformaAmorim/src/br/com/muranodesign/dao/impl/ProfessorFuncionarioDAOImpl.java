@@ -103,6 +103,8 @@ public class ProfessorFuncionarioDAOImpl extends AbstractHibernateDAO implements
 		List<ProfessorFuncionario> result = criteria.list();
 		return result;
 	}
+	
+	
 
 	
 }

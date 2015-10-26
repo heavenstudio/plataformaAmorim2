@@ -139,6 +139,7 @@ public class UsuarioResource {
 			if(!(usuario.getAluno() == null)){
 				Hashtable<String, String> retorno = new Hashtable<String, String>();
 				
+				retorno.put("idUsuario", Integer.toString(usuario.getIdusuario()));
 				retorno.put("idAluno", Integer.toString(usuario.getAluno().getIdAluno()));
 				retorno.put("nome",(usuario.getAluno().getNome()));
 				
@@ -146,6 +147,7 @@ public class UsuarioResource {
 			}else if(!(usuario.getProfessor() == null)){
 				Hashtable<String, String> retorno = new Hashtable<String, String>();
 				
+				retorno.put("idUsuario", Integer.toString(usuario.getIdusuario()));
 				retorno.put("idProfessor", Integer.toString(usuario.getProfessor().getIdprofessorFuncionario()));
 				retorno.put("nome",(usuario.getProfessor().getNome()));
 				

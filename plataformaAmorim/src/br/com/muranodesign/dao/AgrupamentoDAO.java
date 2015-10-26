@@ -42,6 +42,13 @@ public interface AgrupamentoDAO {
 	 */
 	public List<Agrupamento> listarKey(int key);
 	
+	/**
+	 * Listar por ano letivo
+	 * @param idAno
+	 * @return
+	 */
+	public List<Agrupamento> listaAnoLetivo(int idAno);
+	
 	
 
 }

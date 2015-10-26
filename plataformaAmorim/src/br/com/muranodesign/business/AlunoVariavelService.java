@@ -239,6 +239,16 @@ public class AlunoVariavelService {
 		return result;
 	}
 	
+	public List<AlunoVariavel> ListarCicloAnoPeriodo(List<Integer> i,int periodo,int primeiro,int ultimo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.ListarCicloAnoPeriodo(i, periodo, primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+		
+	}
+	
+	
 	
 	//getAluno
 	

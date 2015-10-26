@@ -135,4 +135,6 @@ public interface AlunoVariavelDAO {
 		
 		public List<AlunoVariavel> ListarCicloAno(List<Integer> i,int primeiro,int ultimo);
 		
+		public List<AlunoVariavel> ListarCicloAnoPeriodo(List<Integer> i,int periodo,int primeiro,int ultimo);
+		
 }

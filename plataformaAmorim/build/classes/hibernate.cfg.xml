@@ -11,7 +11,6 @@
 	
 		<property name="hibernate.cache.use_second_level_cache">true</property>
 		
-		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<property name="hibernate.c3p0.min_size">10</property>
 		<property name="hibernate.c3p0.max_size">50</property>

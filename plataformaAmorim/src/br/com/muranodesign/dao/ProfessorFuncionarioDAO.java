@@ -56,7 +56,5 @@ public interface ProfessorFuncionarioDAO {
 		 */
 		public List<ProfessorFuncionario> listarKey(int key);
 		
-		
-	
 
 }

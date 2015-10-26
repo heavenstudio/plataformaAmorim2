@@ -72,5 +72,13 @@ public class AgrupamentoService {
 		pc.commitAndClose();
 		return p;
 	}
+	
+	public List<Agrupamento> listaAnoLetivo(int idAno){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AgrupamentoDAO dao = DAOFactory.getAgrupamentoDAO(pc);
+		List<Agrupamento> result = dao.listaAnoLetivo(idAno);
+		pc.commitAndClose();
+		return result;
+	}
 
 }

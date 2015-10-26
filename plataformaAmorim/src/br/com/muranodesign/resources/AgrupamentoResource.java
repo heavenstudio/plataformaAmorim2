@@ -77,6 +77,14 @@ public class AgrupamentoResource {
 		return evento;
 	}
 	
+	
+	@Path("AnoLetivo/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Agrupamento> getAnoLetivo(@PathParam("id") int id){
+		return new AgrupamentoService().listaAnoLetivo(id);
+	}
+	
 	/**
 	 * Lista todos os agrupamentos
 	 * @return list

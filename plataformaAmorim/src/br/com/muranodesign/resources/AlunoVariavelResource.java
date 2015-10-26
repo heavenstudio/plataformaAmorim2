@@ -112,6 +112,45 @@ public class AlunoVariavelResource {
 		return resultado;
 	}
 	*/
+	/*
+	@Path("listarCicloPeriodoRange/{idCiclo}/{idPeriodo/}{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public String getlistarCicloPeriodoRange(@PathParam("idCiclo") int idCiclo,@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		List<CicloAnoEstudo> ciclos = new CicloAnoEstudoService().listCiclo(idCiclo);
+		int ano[] = new int[100];
+		List<Integer> anos = new ArrayList<Integer>();
+		
+		String html = "";
+		
+		for(int i = 0; i < ciclos.size(); i++) {
+			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
+				anos.add(ciclos.get(i).getAno().getIdanoEstudo());
+				
+			}
+		}
+		
+		String html1 = "";
+		
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAnoPeriodo(anos, idPeriodo, primeiro, ultimo);
+		
+		for (AlunoVariavel alunoVariavel : retorno) {
+		html1 += 	"<div class="+"'Grupo_Aluno_Linha'"+">" +
+			 		"<span class="+"'Nome_Aluno'"+">"+alunoVariavel.getAluno().getNome()+"</span>"+
+			        "<input type="+"'checkbox'"+" id="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"' class="+"'Aluno_Ano_Check'" +"/>"+
+			        "<label for="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"'>"+
+			        "<span></span>" + 
+					"</label>" +
+					"<span class="+"Ano_Aluno"+">'"+alunoVariavel.getAnoEstudo().getAno()+"'º ano</span>"+
+          "</div>";
+		}
+		
+		
+		
+		
+		return html1;		
+		
+	}*/
 	
 	
 	@Path("listarCicloRange/{idCiclo}/{primeiro}/{ultimo}")
@@ -147,6 +186,31 @@ public class AlunoVariavelResource {
 		}
 		
 		
+		
+		
+		return html1;		
+		
+	}
+	
+	@Path("listarPeriodoRange/{idPeriodo}/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public String getlistarPeriodoRange(@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		List<Periodo> periodo = new PeriodoService().listarkey(idPeriodo);
+		String html1 = "";
+		
+		List<AlunoVariavel> retorno = new AlunoVariavelService().listaPeriodo(periodo.get(0));
+		
+		for (AlunoVariavel alunoVariavel : retorno) {
+		html1 += 	"<div class="+"'Grupo_Aluno_Linha'"+">" +
+			 		"<span class="+"'Nome_Aluno'"+">"+alunoVariavel.getAluno().getNome()+"</span>"+
+			        "<input type="+"'checkbox'"+" id="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"' class="+"'Aluno_Ano_Check'" +"/>"+
+			        "<label for="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"'>"+
+			        "<span></span>" + 
+					"</label>" +
+					"<span class="+"Ano_Aluno"+">'"+alunoVariavel.getAnoEstudo().getAno()+"'º ano</span>"+
+          "</div>";
+		}
 		
 		
 		return html1;		
