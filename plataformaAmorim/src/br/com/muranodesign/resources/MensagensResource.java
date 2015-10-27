@@ -181,7 +181,7 @@ public class MensagensResource {
 			aux.put("idMensagem", Integer.toString(mensagens.getIdmensagens()));
 			aux.put("lida", mensagens.getLida());
 			aux.put("cxEntrada", mensagens.getCxEntrada());
-			//aux.put("data", mensagens.getData());
+
 			aux.put("assunto", mensagens.getAssunto());
 			aux.put("mensagem",mensagens.getMensagem());
 			
@@ -203,10 +203,9 @@ public class MensagensResource {
 				
 				List<Usuario> destinatariosId = new UsuarioService().listarLogin(arrayUsers[i]);
 					for (Usuario usuario : destinatariosId) {
-						ids = Integer.toString(usuario.getIdusuario()) + ";";
+						ids += Integer.toString(usuario.getIdusuario()) + ";";
 					}
-				
-				
+
 			}
 			
 			aux.put("IdDestinatarios", ids);
