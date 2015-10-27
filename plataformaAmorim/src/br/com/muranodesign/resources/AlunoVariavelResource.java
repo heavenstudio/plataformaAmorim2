@@ -46,8 +46,6 @@ import br.com.muranodesign.model.Periodo;
 import br.com.muranodesign.util.StringUtil;
 
 
-
-
 /**
  * Classe tem como objetivo disponibilizar os serviços relacionandos a Aluno Variavel.
  * 
@@ -101,19 +99,8 @@ public class AlunoVariavelResource {
 		return resultado;
 	}
 	
-	/*
-	@Path("teste")
-	@GET
-	@Produces("application/json")
-	public List<AlunoVariavel> teste() {
-		List<AlunoVariavel> resultado = new ArrayList<AlunoVariavel>();
-		String k = "h";
-		 new AlunoVariavelService().update(488,k);
-		return resultado;
-	}
-	*/
-	/*
-	@Path("listarCicloPeriodoRange/{idCiclo}/{idPeriodo/}{primeiro}/{ultimo}")
+	
+	@Path("listarCicloPeriodoRange/{idCiclo}/{idPeriodo}/{primeiro}/{ultimo}")
 	@GET
 	@Produces("application/json")
 	public String getlistarCicloPeriodoRange(@PathParam("idCiclo") int idCiclo,@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
@@ -150,7 +137,7 @@ public class AlunoVariavelResource {
 		
 		return html1;		
 		
-	}*/
+	}
 	
 	
 	@Path("listarCicloRange/{idCiclo}/{primeiro}/{ultimo}")
@@ -185,8 +172,7 @@ public class AlunoVariavelResource {
           "</div>";
 		}
 		
-		
-		
+				
 		
 		return html1;		
 		
@@ -386,8 +372,7 @@ public class AlunoVariavelResource {
 			
 			){
 		
-			
-				 
+			 
 			HSSFWorkbook workbook = new HSSFWorkbook();
 			HSSFSheet firstSheet = workbook.createSheet("Relatorio Aluno");
 			 
@@ -2628,7 +2613,6 @@ public class AlunoVariavelResource {
 	}
 	
 	
-	
 	/**
 	 * Removes o aluno variavel.
 	 *
@@ -2763,7 +2747,6 @@ public class AlunoVariavelResource {
 			objAlunoVariavel.setGrupo(objGrupo);
 			objAlunoVariavel.setAtivo(ativo);
 			objAlunoVariavel.setProgramaSocial(programaSocial);
-			
 			
 			
 			
