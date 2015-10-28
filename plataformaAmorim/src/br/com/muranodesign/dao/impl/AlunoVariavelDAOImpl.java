@@ -251,5 +251,15 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		
 	}
 	
+	public List<AlunoVariavel> ListarRangePeriodo(int id, int primeiro,int ultimo){
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		criteria.createAlias("periodo", "periodo");
+		criteria.add(Restrictions.eq("periodo.idperiodo", id) );
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+	}
+	
 
 }

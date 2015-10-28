@@ -20,23 +20,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 
-/**
- * 
- * @author Kevyn
- *
- */
 @Entity
 @Table(name = "historico_conexao")
 @XmlRootElement
 public class Historico_conexao implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
+	
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 @Basic(optional = false)
 	 @Column(name = "idConexao")
+	 
 	 private int idConexao;
 	 @Column(name = "data")
-	 //era string
+	
 	 private Date data;
 	 @Column(name = "cnx_escola")
 	 private String cnx_escola;

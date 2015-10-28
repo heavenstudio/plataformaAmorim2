@@ -185,7 +185,7 @@ public class AlunoVariavelResource {
 		List<Periodo> periodo = new PeriodoService().listarkey(idPeriodo);
 		String html1 = "";
 		
-		List<AlunoVariavel> retorno = new AlunoVariavelService().listaPeriodo(periodo.get(0));
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarRangePeriodo(idPeriodo, primeiro, ultimo);
 		
 		for (AlunoVariavel alunoVariavel : retorno) {
 		html1 += 	"<div class="+"'Grupo_Aluno_Linha'"+">" +

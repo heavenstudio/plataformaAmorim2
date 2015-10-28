@@ -184,18 +184,19 @@ public class MensagensResource {
 
 			aux.put("assunto", mensagens.getAssunto());
 			aux.put("mensagem",mensagens.getMensagem());
+			aux.put("data",mensagens.getData().toString());
 			
 			if(mensagens.getRemetente().getPerfil().getIdperfil() == 23){
-				aux.put("remetente.perfil", "Aluno");
-				aux.put("remetente.nome", mensagens.getRemetente().getAluno().getNome());	
+				aux.put("remetente_perfil", "Aluno");
+				aux.put("remetente_nome", mensagens.getRemetente().getAluno().getNome());	
 				
 			}else if (mensagens.getRemetente().getPerfil().getIdperfil() == 24){
-				aux.put("remetente.perfil", "Professor");
-				aux.put("remetente.nome", mensagens.getRemetente().getProfessor().getNome());		
+				aux.put("remetente_perfil", "Professor");
+				aux.put("remetente_nome", mensagens.getRemetente().getProfessor().getNome());		
 			}
 			
 				
-			aux.put("remetente.idUsuario",  Integer.toString(mensagens.getRemetente().getIdusuario()));	
+			aux.put("remetente_idUsuario",  Integer.toString(mensagens.getRemetente().getIdusuario()));	
 			aux.put("Destinatarios", mensagens.getDestinatarios());	
 			
 			String [] arrayUsers =  mensagens.getDestinatarios().split(";");

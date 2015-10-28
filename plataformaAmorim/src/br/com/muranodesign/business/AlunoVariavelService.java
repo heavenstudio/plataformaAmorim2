@@ -248,6 +248,13 @@ public class AlunoVariavelService {
 		
 	}
 	
+	public List<AlunoVariavel> ListarRangePeriodo(int id, int primeiro,int ultimo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.ListarRangePeriodo(id, primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
 	
 	
 	//getAluno

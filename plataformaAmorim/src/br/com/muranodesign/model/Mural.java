@@ -87,10 +87,4 @@ public class Mural implements Serializable{
 		this.data = data;
 	}
 	 
-	 
-	 
-	 
-	 
-	 
 }
-
