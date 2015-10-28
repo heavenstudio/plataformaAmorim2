@@ -157,6 +157,61 @@ public class MensagensResource {
 
 	}
 	
+	@Path("emailHashId/{id}")
+	@GET
+	@Produces("application/json")
+	public List<HashMap<String, String>> getemailHashId(@PathParam("id") int id){
+		List<HashMap<String, String>> hash = new ArrayList<HashMap<String,String>>();
+				
+		
+		List<Mensagens> resultado;
+		resultado = new MensagensService().listarkey(id);
+		
+		for (Mensagens mensagens : resultado) {
+			HashMap<String, String> aux = new HashMap<String, String>();
+			
+			String ids = "";
+			
+			aux.put("idMensagem", Integer.toString(mensagens.getIdmensagens()));
+			aux.put("lida", mensagens.getLida());
+			aux.put("cxEntrada", mensagens.getCxEntrada());
+
+			aux.put("assunto", mensagens.getAssunto());
+			aux.put("mensagem",mensagens.getMensagem());
+			aux.put("data",mensagens.getData().toString());
+			
+			if(mensagens.getRemetente().getPerfil().getIdperfil() == 23){
+				aux.put("remetente_perfil", "Aluno");
+				aux.put("remetente_nome", mensagens.getRemetente().getAluno().getNome());	
+				
+			}else if (mensagens.getRemetente().getPerfil().getIdperfil() == 24){
+				aux.put("remetente_perfil", "Professor");
+				aux.put("remetente_nome", mensagens.getRemetente().getProfessor().getNome());		
+			}
+			
+				
+			aux.put("remetente_idUsuario",  Integer.toString(mensagens.getRemetente().getIdusuario()));	
+			aux.put("Destinatarios", mensagens.getDestinatarios());	
+			
+			String [] arrayUsers =  mensagens.getDestinatarios().split(";");
+			for(int i = 0; i < arrayUsers.length; i++){
+				
+				List<Usuario> destinatariosId = new UsuarioService().listarLogin(arrayUsers[i]);
+					for (Usuario usuario : destinatariosId) {
+						ids += Integer.toString(usuario.getIdusuario()) + ";";
+					}
+
+			}
+			
+			aux.put("IdDestinatarios", ids);
+			ids = "";
+			
+			hash.add(aux);
+		}
+
+		return hash;
+	}
+	
 	
 	@Path("emailHash/{caixa}/{proprietario}/{primeiro}/{ultimo}")
 	@GET
