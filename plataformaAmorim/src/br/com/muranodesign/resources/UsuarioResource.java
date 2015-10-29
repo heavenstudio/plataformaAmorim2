@@ -125,6 +125,25 @@ public class UsuarioResource {
 		return retorno;
 	}
 	
+	@Path("NomeUsuario/{id}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, String> getNomeUsuario(@PathParam("id") int id){
+		List<Usuario> user = new UsuarioService().listarkey(id);
+	
+		Hashtable<String, String> retorno = new Hashtable<String, String>();
+		if(!(user.get(0).getAluno() == null)){
+			
+			retorno.put("nome",(user.get(0).getAluno().getNome()));
+		}else{
+			
+			retorno.put("nome",(user.get(0).getProfessor().getNome()));
+		}
+		
+		return retorno;
+	}
+	
+	
 	@Path("ListarObjParte")
 	@GET
 	@Produces("application/json")

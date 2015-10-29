@@ -135,4 +135,5 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 	}
 
 	
+	
 }
