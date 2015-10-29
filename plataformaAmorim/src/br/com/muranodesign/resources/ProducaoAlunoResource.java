@@ -227,8 +227,8 @@ public class ProducaoAlunoResource {
 		StringUtil stringUtil = new StringUtil();
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
 				50);
-		//String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
-		String uploadedFileLocation = "C:/Users/Kevyn/Documents/kevyn/"+arquivo;
+		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+		//String uploadedFileLocation = "C:/Users/Kevyn/Documents/kevyn/"+arquivo;
 
 		Upload upload = new Upload();
 		// save it
