@@ -10,10 +10,8 @@
 package br.com.muranodesign.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,10 +19,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -47,8 +43,9 @@ public class CategoriaProducaoAluno implements Serializable {
     @Basic(optional = false)
     @Column(name = "categoria")
     private String categoria;
+    /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private Collection<ProducaoAluno> producaoAlunoCollection;
+    private Collection<ProducaoAluno> producaoAlunoCollection;*/
 
     public CategoriaProducaoAluno() {
     }
@@ -77,7 +74,7 @@ public class CategoriaProducaoAluno implements Serializable {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
+/*
     @XmlTransient
     public Collection<ProducaoAluno> getProducaoAlunoCollection() {
         return producaoAlunoCollection;
@@ -86,7 +83,7 @@ public class CategoriaProducaoAluno implements Serializable {
     public void setProducaoAlunoCollection(Collection<ProducaoAluno> producaoAlunoCollection) {
         this.producaoAlunoCollection = producaoAlunoCollection;
     }
-
+*/
     @Override
     public int hashCode() {
         int hash = 0;

@@ -227,8 +227,8 @@ public class ProducaoAlunoResource {
 		StringUtil stringUtil = new StringUtil();
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
 				50);
-		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
-		//String uploadedFileLocation = "C:/Users/Kevyn/Documents/kevyn/"+arquivo;
+		//String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+		String uploadedFileLocation = "C:/Users/Kevyn/Documents/kevyn/"+arquivo;
 
 		Upload upload = new Upload();
 		// save it
@@ -365,11 +365,15 @@ public class ProducaoAlunoResource {
 		  
 		    objProducaoAluno.setTexto(texto);
 		    objProducaoAluno.setAnoLetivo(objAnoLetivo);
-		    objProducaoAluno.setData(date/*stringUtil.converteStringData(date)*/);
+		    objProducaoAluno.setData(date);
 		    objProducaoAluno.setAluno(objAluno);
 		    objProducaoAluno.setTipo(objTipoProducaoAluno);	
 		    objProducaoAluno.setStatus(1);
-		    objProducaoAluno.setCapa(capa);
+		    
+		    if(t == 5){
+		    	objProducaoAluno.setCapa(capa);
+		    }
+		    
 		    if(t == 6 ){
 		    	objProducaoAluno.setArquivo(arquivo);
 		    }
@@ -388,13 +392,16 @@ public class ProducaoAlunoResource {
 			rsProducaoAluno= new ProducaoAlunoService().listarkey(id);
 			objProducaoAluno= rsProducaoAluno.get(0);
 			
-			  objProducaoAluno.setTexto(texto);
+			    objProducaoAluno.setTexto(texto);
 			    objProducaoAluno.setAnoLetivo(objAnoLetivo);
-			    objProducaoAluno.setData(date/*stringUtil.converteStringData(date)*/);
+			    objProducaoAluno.setData(date);
 			    objProducaoAluno.setAluno(objAluno);
 			    objProducaoAluno.setTipo(objTipoProducaoAluno);
 			    objProducaoAluno.setStatus(status);
-			    objProducaoAluno.setCapa(capa);
+			    
+			    if(t == 5){
+			    	objProducaoAluno.setCapa(capa);
+			    }
 			    if(t != 6 ){
 			    	objProducaoAluno.setRoteiro(objRoteiro);
 			    }
