@@ -148,7 +148,7 @@ public class RoteiroAulaResource {
 
 		List<RoteiroAula> resultado;
 		resultado = new RoteiroAulaService().listarkey(id);
-		RoteiroAula sessao = null;
+		RoteiroAula sessao = new RoteiroAula();
 
 		if (!resultado.isEmpty()) {
 			sessao = resultado.get(0);

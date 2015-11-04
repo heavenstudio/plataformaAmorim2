@@ -44,11 +44,16 @@ public class AnoEstudo implements Serializable {
     @Basic(optional = false)
     @Column(name = "idano_estudo")
     private Integer idanoEstudo;
+    
+    
     @Basic(optional = false)
     @Column(name = "ano")
     private String ano;
+    
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anoEstudo")
     private Collection<AlunoVariavel> alunoVariavelCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anoEstudo")
     private Collection<Roteiro> roteiroCollection;
 
@@ -122,5 +127,9 @@ public class AnoEstudo implements Serializable {
     public String toString() {
         return "br.com.muranodesign.model.AnoEstudo[ idanoEstudo=" + idanoEstudo + " ]";
     }
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
 }

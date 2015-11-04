@@ -53,9 +53,11 @@ public class AlunoVariavel implements Serializable {
     private Date inicio;
     @Column(name = "programa_social")
     private String programaSocial;
+    
     @JoinColumn(name = "ano_estudo", referencedColumnName = "idano_estudo")
     @ManyToOne(optional = false)
     private AnoEstudo anoEstudo;
+    
     @JoinColumn(name = "ano_letivo", referencedColumnName = "idano_letivo")
     @ManyToOne(optional = false)
     private AnoLetivo anoLetivo;

@@ -118,6 +118,8 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
 		criteria.createAlias("roteiro", "roteiro");
 		criteria.add(Restrictions.eq("roteiro.idroteiro", id));
+		
+		
 		criteria.add(Restrictions.eq("ativo", 1));
 		List<Objetivo> result = criteria.list();
 		return result;
@@ -132,7 +134,9 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 		criteria.createAlias("roteiro", "roteiro");
 		criteria.add(Restrictions.eq("roteiro.idroteiro", id));
 		criteria.add(Restrictions.eq("roteiro.ativo", 1));
+		
 		criteria.setProjection(Projections.count("ativo"));
+		
 		long result = (Long) criteria.list().get(0);
 		return result;
 	}

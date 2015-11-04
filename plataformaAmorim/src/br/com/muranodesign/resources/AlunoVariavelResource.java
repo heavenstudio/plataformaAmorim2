@@ -128,7 +128,7 @@ public class AlunoVariavelResource {
 			        "<label for="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"'>"+
 			        "<span></span>" + 
 					"</label>" +
-					"<span class="+"Ano_Aluno"+">'"+alunoVariavel.getAnoEstudo().getAno()+"'º ano</span>"+
+					"<span class="+"Ano_Aluno"+">"+alunoVariavel.getAnoEstudo().getAno()+"º ano</span>"+
           "</div>";
 		}
 		
@@ -168,7 +168,7 @@ public class AlunoVariavelResource {
 			        "<label for="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"'>"+
 			        "<span></span>" + 
 					"</label>" +
-					"<span class="+"Ano_Aluno"+">'"+alunoVariavel.getAnoEstudo().getAno()+"'º ano</span>"+
+					"<span class="+"Ano_Aluno"+">"+alunoVariavel.getAnoEstudo().getAno()+"º ano</span>"+
           "</div>";
 		}
 		
@@ -194,7 +194,7 @@ public class AlunoVariavelResource {
 			        "<label for="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"'>"+
 			        "<span></span>" + 
 					"</label>" +
-					"<span class="+"Ano_Aluno"+">'"+alunoVariavel.getAnoEstudo().getAno()+"'º ano</span>"+
+					"<span class="+"Ano_Aluno"+">"+alunoVariavel.getAnoEstudo().getAno()+"º ano</span>"+
           "</div>";
 		}
 		
