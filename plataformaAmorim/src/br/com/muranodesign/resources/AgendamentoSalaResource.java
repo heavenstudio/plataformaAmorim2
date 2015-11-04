@@ -20,6 +20,11 @@ import br.com.muranodesign.business.SemanaService;
 import br.com.muranodesign.model.AgendamentoSala;
 import br.com.muranodesign.model.Rotina;
 
+/**
+ * TESTE
+ * @author kevyn
+ *
+ */
 @Path("AgendamentoSala")
 public class AgendamentoSalaResource {
 	
