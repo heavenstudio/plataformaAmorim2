@@ -12,6 +12,7 @@ package br.com.muranodesign.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,9 +26,11 @@ import br.com.muranodesign.business.AlunoService;
 import br.com.muranodesign.business.AnoEstudoService;
 import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.AtribuicaoRoteiroExtraService;
+import br.com.muranodesign.business.ObjetivoService;
 import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.model.AnoEstudo;
 import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
+import br.com.muranodesign.model.Objetivo;
 import br.com.muranodesign.model.Roteiro;
 
 
@@ -143,6 +146,29 @@ public class RoteiroResource {
 
 		return evento;
 
+	}
+	
+	@Path("InativarRoteiro/{id}")
+	@DELETE
+	@Produces("text/plain")
+	public String deletarRoteiro(@PathParam("id") int id){
+		List<Objetivo> objs = new ObjetivoService().listarRoteiro(id);
+		Roteiro roteiro = new RoteiroService().listarkey(id).get(0);
+		
+		String retorno = "";
+		
+		if(!objs.isEmpty()){
+			roteiro.setAtivo(0);
+			
+			retorno = "inativado";
+		}else{
+			new RoteiroService().deletarRoteiro(roteiro);
+			
+			retorno = "deletado";
+		}
+		
+		
+		return retorno;
 	}
 	
 	/**

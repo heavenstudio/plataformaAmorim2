@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -31,6 +32,12 @@ public class Blog implements Serializable{
 	 
 	 @Column(name = "imagem")
 	 private String imagem;
+	 
+	 @OneToOne
+	 private Oficina oficina;
+	 
+	 @OneToOne
+	 private AnoEstudo anoEstudo;
 
 	public int getIdblog() {
 		return Idblog;
@@ -62,6 +69,26 @@ public class Blog implements Serializable{
 
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
+	}
+
+	public Oficina getOficina() {
+		return oficina;
+	}
+
+	public void setOficina(Oficina oficina) {
+		this.oficina = oficina;
+	}
+
+	public AnoEstudo getAnoEstudo() {
+		return anoEstudo;
+	}
+
+	public void setAnoEstudo(AnoEstudo anoEstudo) {
+		this.anoEstudo = anoEstudo;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	 
 	 

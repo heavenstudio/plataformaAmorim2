@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
+import br.com.muranodesign.business.AnoEstudoService;
 import br.com.muranodesign.business.BlogService;
+import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.model.Blog;
 import br.com.muranodesign.util.StringUtil;
 import br.com.muranodesign.util.Upload;
@@ -40,7 +42,8 @@ public class BlogResource {
 	public String eventoAction(
 			@FormParam("action") String action,
 			@FormParam("id") int id,
-			//@FormParam("imagem") String imagem,
+			@FormParam("oficina") int oficina,
+			@FormParam("anoEstudo") int anoEstudo,
 			@FormParam("titulo") String titulo,
 			@FormParam("Descricao") String Descricao){
 		
@@ -54,6 +57,8 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
+			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
+			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
 			resultado = new BlogService().criarBlog(blog);
 			
@@ -62,6 +67,8 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
+			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
+			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
 			resultado = new BlogService().atualizarBloga(blog);
 		}
