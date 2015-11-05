@@ -23,6 +23,7 @@ import javax.ws.rs.Produces;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AlunoVariavelService;
+import br.com.muranodesign.business.AtividadeService;
 import br.com.muranodesign.business.AtribuicaoRoteiroExtraService;
 import br.com.muranodesign.business.GrupoService;
 import br.com.muranodesign.business.ObjetivoService;
@@ -30,6 +31,7 @@ import br.com.muranodesign.business.PlanejamentoRoteiroService;
 import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.business.TutoriaService;
 import br.com.muranodesign.model.AlunoVariavel;
+import br.com.muranodesign.model.Atividade;
 import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
 import br.com.muranodesign.model.Grupo;
 import br.com.muranodesign.model.Objetivo;
@@ -86,6 +88,31 @@ public class ObjetivoResource {
 
 		return Objetivo;
 
+	}
+	
+	
+	@Path("InativarObjetivo/{id}")
+	@DELETE
+	@Produces("text/plain")
+	public String deletarObjetivo(@PathParam("id") int id){
+		
+		List<Atividade> atividades = new AtividadeService().listarObjetivo(id);
+		Objetivo  objetivo = new Objetivo();
+		
+		String retorno = "";
+		
+		if(!atividades.isEmpty()){
+			objetivo.setAtivo(0);
+			new ObjetivoService().atualizarObjetivo(objetivo);
+			
+			retorno = "inativado";
+		}else{
+			new ObjetivoService().deletarObjetivo(objetivo);
+			
+			retorno = "deletado";
+		}
+		
+		return retorno;
 	}
 
 	/**

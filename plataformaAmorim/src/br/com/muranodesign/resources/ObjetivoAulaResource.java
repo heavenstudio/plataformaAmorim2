@@ -1,5 +1,7 @@
 package br.com.muranodesign.resources;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -74,6 +76,34 @@ public class ObjetivoAulaResource {
 		
 		return new ObjetivoAulaService().listarPorRoteiro(id);
 	}
+	
+	@Path("ListarPorRoteiroHash/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Hashtable<String, String>> getListarPorRoteiroHash(@PathParam("id") int id){
+		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String,String>>();
+		
+		List<ObjetivoAula> objetivos = new ObjetivoAulaService().listarPorRoteiro(id);
+		
+		for (ObjetivoAula objetivoAula : objetivos) {
+			Hashtable<String, String> hash = new Hashtable<String, String>();
+			
+			hash.put("idRoteiro_aula", Integer.toString(objetivoAula.getRoteiro().getIdroteiro_aula()));
+			hash.put("descricao ", objetivoAula.getRoteiro().getDescricao());
+			hash.put("reotiro ", objetivoAula.getRoteiro().getRoteiro());
+			
+			hash.put("idObjetivo_aula ", Integer.toString(objetivoAula.getIdobjetivo_aula()));
+			hash.put("objetivo ", objetivoAula.getObjetivo());
+			
+			list.add(hash);
+			
+		}
+		
+		
+		return list;		
+		
+	}
+	
 	
 	@Path("ListarPorRoteiroLazy/{id}")
 	@GET

@@ -159,6 +159,7 @@ public class RoteiroResource {
 		
 		if(!objs.isEmpty()){
 			roteiro.setAtivo(0);
+			new RoteiroService().atualizarRoteiro(roteiro);
 			
 			retorno = "inativado";
 		}else{
