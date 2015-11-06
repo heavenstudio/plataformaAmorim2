@@ -5,9 +5,9 @@
 		
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/amorim_prodV2</property>
-		<property name="hibernate.connection.username">amorim_prodV2</property>
-		<property name="hibernate.connection.password">amorim_prodV2</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/amorim_prod_testeV2</property>
+		<property name="hibernate.connection.username">amorim_prod</property>
+		<property name="hibernate.connection.password">amorim_prod</property>
 	
 		<property name="hibernate.cache.use_second_level_cache">true</property>
 		
