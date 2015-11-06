@@ -40,7 +40,6 @@ import br.com.muranodesign.model.Grupo;
 import br.com.muranodesign.model.Objetivo;
 import br.com.muranodesign.model.PlanejamentoRoteiro;
 import br.com.muranodesign.model.PlanoEstudo;
-import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.Tutoria;
 
 
@@ -377,10 +376,38 @@ public class PlanejamentoRoteiroResource {
 	@GET
 	@Produces("application/json")
 	public Hashtable<String, Integer> getHashAtribuicao(@PathParam("id") int id){
+		
+		Hashtable<String, Integer> retorno = new Hashtable<String, Integer>();
+		List<Objetivo> antes = new ArrayList<Objetivo>();
+		List<Objetivo> depois = new ArrayList<Objetivo>();
+		
+		AlunoVariavel aluno = new AlunoVariavelService().listarkey(id).get(0);
+		
+		List<AtribuicaoRoteiroExtra> roteiroExtra = new AtribuicaoRoteiroExtraService().listarAluno(aluno.getAluno());
+		
+	
+		
+		for(int i = 0; i < roteiroExtra.size(); i++){
+			if(Integer.parseInt(aluno.getAnoEstudo().getAno()) > Integer.parseInt(roteiroExtra.get(i).getRoteiro().getAnoEstudo().getAno())){
+				antes.addAll(new ObjetivoService().listarRoteiro(roteiroExtra.get(i).getRoteiro().getIdroteiro()));
+				
+				
+			}else if(Integer.parseInt(aluno.getAnoEstudo().getAno()) < Integer.parseInt(roteiroExtra.get(i).getRoteiro().getAnoEstudo().getAno())){
+				depois.addAll(new ObjetivoService().listarRoteiro(roteiroExtra.get(i).getRoteiro().getIdroteiro()));
+				
+				
+			}
+		}
+		
+	
+	
+		/*
 		Hashtable<String, Integer> retorno = new Hashtable<String, Integer>();
 		
-		List<PlanejamentoRoteiro> resultado = new PlanejamentoRoteiroService().listarIdAluno(id);
 		List<AlunoVariavel> aluno = new AlunoVariavelService().listaAluno(id);
+		
+		List<PlanejamentoRoteiro> resultado = new PlanejamentoRoteiroService().listarIdAluno(aluno.get(0).getAluno().getIdAluno());
+		
 		
 		List<AtribuicaoRoteiroExtra> atribuicao;
 		List<Roteiro> roteiro = new ArrayList<Roteiro>();
@@ -399,10 +426,10 @@ public class PlanejamentoRoteiroResource {
 			}else if(resultado.get(i).getObjetivo().getAtivo() == 1 && resultado.get(i).getObjetivo().getRoteiro().getIdroteiro() == roteiro.get(i).getIdroteiro() && resultado.get(i).getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() > aluno.get(i).getAnoEstudo().getIdanoEstudo()){
 				LimiteProximo++;
 			}
-		}
+		}*/
 		
-		retorno.put("LimiteAnterior", LimiteAnterior);
-		retorno.put("LimiteProximo", LimiteProximo);
+		retorno.put("LimiteAnterior", antes.size());
+		retorno.put("LimiteProximo", depois.size());
 		
 		return retorno;
 	}

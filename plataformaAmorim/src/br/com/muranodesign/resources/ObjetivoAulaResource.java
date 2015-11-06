@@ -89,11 +89,11 @@ public class ObjetivoAulaResource {
 			Hashtable<String, String> hash = new Hashtable<String, String>();
 			
 			hash.put("idRoteiro_aula", Integer.toString(objetivoAula.getRoteiro().getIdroteiro_aula()));
-			hash.put("descricao ", objetivoAula.getRoteiro().getDescricao());
-			hash.put("reotiro ", objetivoAula.getRoteiro().getRoteiro());
+			hash.put("descricao", objetivoAula.getRoteiro().getDescricao());
+			hash.put("roteiro", objetivoAula.getRoteiro().getRoteiro());
 			
-			hash.put("idObjetivo_aula ", Integer.toString(objetivoAula.getIdobjetivo_aula()));
-			hash.put("objetivo ", objetivoAula.getObjetivo());
+			hash.put("idObjetivo_aula", Integer.toString(objetivoAula.getIdobjetivo_aula()));
+			hash.put("objetivo", objetivoAula.getObjetivo());
 			
 			list.add(hash);
 			
