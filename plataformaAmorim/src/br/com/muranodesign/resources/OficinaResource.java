@@ -1,21 +1,28 @@
 package br.com.muranodesign.resources;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
 
+import br.com.muranodesign.business.AlunoAgrupamentoService;
 import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CiclosService;
 import br.com.muranodesign.business.CoresService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.PeriodoService;
+import br.com.muranodesign.business.RotinaService;
+import br.com.muranodesign.model.AlunoAgrupamento;
 import br.com.muranodesign.model.Oficina;
+import br.com.muranodesign.model.Rotina;
 
 
 @Path("Oficina")
@@ -103,6 +110,32 @@ public class OficinaResource {
 		 resultado = new OficinaService().listarTodos();
 		 logger.debug("QTD Oficina : " +  resultado.size());
 		return resultado;
+	}
+	
+	
+	@Path("ListarPorAluno/{id}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, String> getListarPorAluno(@PathParam("id") int id){
+		logger.debug("Listar Oficina por aluno ..."+id);
+		Hashtable<String, String> hash = new Hashtable<String, String>();
+		
+		List<AlunoAgrupamento> aluAgrup = new AlunoAgrupamentoService().listarAluno(id);
+		List<Rotina> rotinas = new ArrayList<Rotina>();
+		
+		for (AlunoAgrupamento alunoAgrupamento : aluAgrup) {
+			rotinas.addAll(new RotinaService().listarPorAgrupamento(alunoAgrupamento.getAgrupamento().getIdagrupamento()));
+		}
+		
+		for(int i = 0; i < rotinas.size(); i++){
+			hash.put("idOficina", Integer.toString(rotinas.get(i).getOficina().getIdoficina()));
+			hash.put("Nome", rotinas.get(i).getOficina().getNome());
+			hash.put("CorForte", rotinas.get(i).getOficina().getCor().getForte());
+			hash.put("CorFraca", rotinas.get(i).getOficina().getCor().getFraco());
+			hash.put("CorMedia", rotinas.get(i).getOficina().getCor().getMedio());
+		}
+		
+		return hash;
 	}
 
 }

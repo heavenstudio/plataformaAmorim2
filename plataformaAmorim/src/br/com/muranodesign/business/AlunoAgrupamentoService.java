@@ -99,5 +99,18 @@ public class AlunoAgrupamentoService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	/**
+	 * Lista por id de agrupamento
+	 * @param idAluno
+	 * @return
+	 */
+	public List<AlunoAgrupamento> listarAluno(int idAluno){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoAgrupamentoDAO dao = DAOFactory.getAlunoAgrupamentoDAO(pc);
+		List<AlunoAgrupamento> result = dao.listarAluno(idAluno);
+		pc.commitAndClose();
+		return result;
+	}
 
 }

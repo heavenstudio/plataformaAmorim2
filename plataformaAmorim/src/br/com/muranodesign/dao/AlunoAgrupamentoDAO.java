@@ -58,5 +58,12 @@ public interface AlunoAgrupamentoDAO {
 	 */
 	public List<AlunoAgrupamento> listarAlunoAgrupamento(int idAluno, int idAgrupamento);
 	
+	/**
+	 * Lista por id de aluno
+	 * @param idAluno
+	 * @return
+	 */
+	public List<AlunoAgrupamento> listarAluno(int idAluno);
+	
 
 }

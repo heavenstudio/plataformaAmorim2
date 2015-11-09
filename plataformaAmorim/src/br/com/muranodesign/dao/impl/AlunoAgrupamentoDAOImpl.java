@@ -99,5 +99,16 @@ public class AlunoAgrupamentoDAOImpl extends AbstractHibernateDAO implements Alu
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoAgrupamentoDAO#listarAluno(int)
+	 */
+	public List<AlunoAgrupamento> listarAluno(int idAluno){
+		Criteria criteria = getSession().createCriteria(AlunoAgrupamento.class);
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idalunoVariavel", idAluno));
+		List<AlunoAgrupamento> result = criteria.list();
+		return result;
+	}
 
 }

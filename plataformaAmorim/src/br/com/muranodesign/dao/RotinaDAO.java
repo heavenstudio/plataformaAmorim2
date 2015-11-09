@@ -53,4 +53,11 @@ public interface RotinaDAO {
 	 * @return
 	 */
 	public List<Rotina> listarPorOficina(int idOficina);
+	
+	/**
+	 * Listar por id de agrupamento
+	 * @param idAgrupamento
+	 * @return
+	 */
+	public List<Rotina> listarPorAgrupamento(int idAgrupamento);
 }

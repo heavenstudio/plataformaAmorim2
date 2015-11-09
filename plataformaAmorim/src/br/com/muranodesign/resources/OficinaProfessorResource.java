@@ -104,4 +104,12 @@ public class OficinaProfessorResource {
 		return new OficinaProfessorService().listarkey(idOficina);
 	}
 	
+	
+	@Path("listarPorOficina/{id}")
+	@GET
+	@Produces("application/json")
+	public List<OficinaProfessor> getlistarPorOficina(@PathParam("id") int id){
+		return new OficinaProfessorService().listarPorOficina(id);
+	}
+	
 }

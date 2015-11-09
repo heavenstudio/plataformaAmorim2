@@ -64,5 +64,13 @@ public class RotinaService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	public List<Rotina> listarPorAgrupamento(int idAgrupamento){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
+		List<Rotina> result = dao.listarPorAgrupamento(idAgrupamento);
+		pc.commitAndClose();
+		return result;
+	}
 
 }

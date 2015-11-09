@@ -17,6 +17,7 @@ import br.com.muranodesign.business.ObjetivoAulaService;
 import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.RoteiroAulaService;
 import br.com.muranodesign.model.ObjetivoAula;
+import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.model.RoteiroAula;
 
 @Path("ObjetivoAula")
@@ -115,6 +116,58 @@ public class ObjetivoAulaResource {
 		
 		return list;		
 		
+	}
+	
+	
+	@Path("ListarPorOficinaHash/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Hashtable<String, String>> getListarPorOficinaHash(@PathParam("id") int id){
+		
+		List<OficinaProfessor> oficinaProf = new OficinaProfessorService().listarPorOficina(id);
+		
+		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String,String>>();
+		
+		List<RoteiroAula> roteiros = new ArrayList<RoteiroAula>();
+		
+		for (OficinaProfessor oficinaProfessor : oficinaProf) {
+			roteiros.addAll(new RoteiroAulaService().listarOficinaProfessor(oficinaProfessor.getIdoficina_professor()));
+		}
+		
+		
+		for (RoteiroAula roteiroAula : roteiros) {
+
+			List<ObjetivoAula> objetivos = new ObjetivoAulaService().listarPorRoteiro(roteiroAula.getIdroteiro_aula());
+			
+			if(!objetivos.isEmpty()){
+				for (ObjetivoAula objetivoAula : objetivos) {
+					Hashtable<String, String> hash = new Hashtable<String, String>();
+					
+					hash.put("idRoteiro_aula", Integer.toString(objetivoAula.getRoteiro().getIdroteiro_aula()));
+					hash.put("descricao", objetivoAula.getRoteiro().getDescricao());
+					hash.put("roteiro", objetivoAula.getRoteiro().getRoteiro());
+					
+					hash.put("idObjetivo_aula", Integer.toString(objetivoAula.getIdobjetivo_aula()));
+					hash.put("objetivo", objetivoAula.getObjetivo());
+					
+					list.add(hash);
+					
+				}
+			}else{
+				Hashtable<String, String> hash = new Hashtable<String, String>();
+				
+				List<RoteiroAula> roteiro = new RoteiroAulaService().listarkey(id);
+				
+				hash.put("idRoteiro_aula", Integer.toString(roteiro.get(0).getIdroteiro_aula()));
+				hash.put("descricao", roteiro.get(0).getDescricao());
+				hash.put("roteiro", roteiro.get(0).getRoteiro());
+				
+				list.add(hash);
+				
+		}
+		
+	 }
+		return list;
 	}
 	
 	
