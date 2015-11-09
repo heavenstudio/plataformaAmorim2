@@ -85,20 +85,33 @@ public class ObjetivoAulaResource {
 		
 		List<ObjetivoAula> objetivos = new ObjetivoAulaService().listarPorRoteiro(id);
 		
-		for (ObjetivoAula objetivoAula : objetivos) {
+		if(!objetivos.isEmpty()){
+			for (ObjetivoAula objetivoAula : objetivos) {
+				Hashtable<String, String> hash = new Hashtable<String, String>();
+				
+				hash.put("idRoteiro_aula", Integer.toString(objetivoAula.getRoteiro().getIdroteiro_aula()));
+				hash.put("descricao", objetivoAula.getRoteiro().getDescricao());
+				hash.put("roteiro", objetivoAula.getRoteiro().getRoteiro());
+				
+				hash.put("idObjetivo_aula", Integer.toString(objetivoAula.getIdobjetivo_aula()));
+				hash.put("objetivo", objetivoAula.getObjetivo());
+				
+				list.add(hash);
+				
+			}
+		}else{
 			Hashtable<String, String> hash = new Hashtable<String, String>();
 			
-			hash.put("idRoteiro_aula", Integer.toString(objetivoAula.getRoteiro().getIdroteiro_aula()));
-			hash.put("descricao", objetivoAula.getRoteiro().getDescricao());
-			hash.put("roteiro", objetivoAula.getRoteiro().getRoteiro());
+			List<RoteiroAula> roteiro = new RoteiroAulaService().listarkey(id);
 			
-			hash.put("idObjetivo_aula", Integer.toString(objetivoAula.getIdobjetivo_aula()));
-			hash.put("objetivo", objetivoAula.getObjetivo());
+			hash.put("idRoteiro_aula", Integer.toString(roteiro.get(0).getIdroteiro_aula()));
+			hash.put("descricao", roteiro.get(0).getDescricao());
+			hash.put("roteiro", roteiro.get(0).getRoteiro());
 			
 			list.add(hash);
 			
 		}
-		
+
 		
 		return list;		
 		
