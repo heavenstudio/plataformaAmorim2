@@ -82,6 +82,14 @@ public interface MensagensDAO {
 		 * @return the list
 		 */
 		public List<Mensagens> listarProprietario(Usuario proprietario,String caixa,int primeiro, int ultimo);
+		
+		/**
+		 * Listar proprietario
+		 * @param proprietario
+		 * @param caixa
+		 * @return
+		 */
+		public List<Mensagens> listarProprietarioUnica(Usuario proprietario,String caixa);
 	
 		/**
 		 * 

@@ -130,24 +130,44 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	public List<Mensagens> listarProprietario(Usuario proprietario,String caixa,int primeiro, int ultimo) {
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		
-       //criteria.createAlias("proprietario", "proprietario");
-		
-		
-		criteria.addOrder(Order.desc("data"));
-		
+
 		if (caixa.equals("entrada")){ 
-			criteria.add(Restrictions.eq("cxEntrada", "s"));
+			criteria.add(Restrictions.eq("cxEntrada", "S"));
 			
 		} else if  (caixa.equals("enviado")){
 			criteria.add(Restrictions.eq("cxEnviada", "S"));
 			
 		}
 		
-		criteria.add(Restrictions.eq("proprietario", proprietario));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		
+		criteria.add(Restrictions.eq("proprietario", proprietario));
 		
+		
+		criteria.addOrder(Order.desc("data"));
+		List<Mensagens> result = criteria.list();
+		return result;
+	}
+	
+	public List<Mensagens> listarProprietarioUnica(Usuario proprietario,String caixa){
+		Criteria criteria = getSession().createCriteria(Mensagens.class);
+		
+		if (caixa.equals("entrada")){ 
+			criteria.add(Restrictions.eq("cxEntrada", "S"));
+			
+		} else if  (caixa.equals("enviado")){
+			criteria.add(Restrictions.eq("cxEnviada", "S"));
+			
+		}
+		
+		//criteria.setFirstResult(primeiro);
+		//criteria.setMaxResults(ultimo);
+		
+		criteria.add(Restrictions.eq("proprietario", proprietario));
+		
+		
+		criteria.addOrder(Order.desc("data"));
 		List<Mensagens> result = criteria.list();
 		return result;
 	}

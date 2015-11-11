@@ -116,10 +116,10 @@ public class OficinaResource {
 	@Path("ListarPorAluno/{id}")
 	@GET
 	@Produces("application/json")
-	public Hashtable<String, String> getListarPorAluno(@PathParam("id") int id){
+	public List<Hashtable<String, String>> getListarPorAluno(@PathParam("id") int id){
 		logger.debug("Listar Oficina por aluno ..."+id);
-		Hashtable<String, String> hash = new Hashtable<String, String>();
 		
+		List<Hashtable<String, String>> lista = new ArrayList<Hashtable<String,String>>();
 		List<AlunoAgrupamento> aluAgrup = new AlunoAgrupamentoService().listarAluno(id);
 		List<Rotina> rotinas = new ArrayList<Rotina>();
 		
@@ -128,14 +128,18 @@ public class OficinaResource {
 		}
 		
 		for(int i = 0; i < rotinas.size(); i++){
+			Hashtable<String, String> hash = new Hashtable<String, String>();
+			
 			hash.put("idOficina", Integer.toString(rotinas.get(i).getOficina().getIdoficina()));
 			hash.put("Nome", rotinas.get(i).getOficina().getNome());
 			hash.put("CorForte", rotinas.get(i).getOficina().getCor().getForte());
 			hash.put("CorFraca", rotinas.get(i).getOficina().getCor().getFraco());
 			hash.put("CorMedia", rotinas.get(i).getOficina().getCor().getMedio());
+			
+			lista.add(hash);
 		}
 		
-		return hash;
+		return lista;
 	}
 
 }

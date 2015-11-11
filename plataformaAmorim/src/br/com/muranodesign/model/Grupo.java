@@ -43,8 +43,12 @@ public class Grupo implements Serializable {
     @Basic(optional = false)
     @Column(name = "idgrupo")
     private Integer idgrupo;
+    
     @Column(name = "nome_grupo")
     private String nomeGrupo;
+    
+    @Column(name = "ciclo")
+    private String ciclo;
     
     @Column(name = "status")
     private String status;
@@ -125,6 +129,18 @@ public class Grupo implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getCiclo() {
+		return ciclo;
+	}
+
+	public void setCiclo(String ciclo) {
+		this.ciclo = ciclo;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
     
 }

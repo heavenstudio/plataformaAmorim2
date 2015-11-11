@@ -59,6 +59,7 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 	} 
 	
 	public List<Objetivo> listAllTeste(){
+		
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
 	    ProjectionList projList = Projections.projectionList();  
 	    projList.add(Projections.property("descricao"),"descricao"); 

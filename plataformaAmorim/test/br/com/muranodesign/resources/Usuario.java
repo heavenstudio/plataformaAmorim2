@@ -154,8 +154,8 @@ public class Usuario extends JerseyTest  {
 	
 	@Test
 	public void insert2() {
-		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/ProducaoAluno");
-	webResource.post("action=create&anoLetivo=60&texto=ECONOMIA GLOBAL&aluno=918&tipo=2&categoria=1&roteiro=59");
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Oficina");
+	webResource.post("action=create&tipo=outras&nome=Outras&periodo=8&ciclo=2&anoLetivo=60");
 	
 	
 	}

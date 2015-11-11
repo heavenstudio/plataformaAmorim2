@@ -111,6 +111,20 @@ public class MensagensService {
 	}
 	
 	/**
+	 * 
+	 * @param proprietario
+	 * @param caixa
+	 * @return
+	 */
+	public List<Mensagens> listarProprietarioUnica(Usuario proprietario,String caixa){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
+		List<Mensagens> result = dao.listarProprietarioUnica(proprietario, caixa);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	/**
 	 * Criar mensagens.
 	 *
 	 * @param p the p

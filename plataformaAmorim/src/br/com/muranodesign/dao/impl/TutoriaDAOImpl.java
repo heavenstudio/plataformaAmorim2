@@ -13,7 +13,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import br.com.muranodesign.dao.TutoriaDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
@@ -169,6 +172,25 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 		criteria.addOrder(Order.asc("tutoria"));
 		List<Tutoria> result = criteria.list();
 		return result;
+	}
+	
+	public List<Tutoria> listarDadosPertinentes(){
+		
+		Criteria criteria = getSession().createCriteria(Tutoria.class);
+		
+	    ProjectionList projList = Projections.projectionList();  
+	    
+	    projList.add(Projections.property("idtutoria"),"idtutoria"); 
+	    projList.add(Projections.property("tutoria"),"tutoria"); 
+	     
+	    
+	    criteria.setProjection(projList).setCacheable(true);
+	    
+	    criteria.setResultTransformer(Transformers.aliasToBean(Tutoria.class));  
+	    
+	    List<Tutoria> results = criteria.list();
+	    
+		return results; 
 	}
 
 }

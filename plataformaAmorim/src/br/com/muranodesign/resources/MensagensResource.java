@@ -148,10 +148,12 @@ public class MensagensResource {
 		rsUsuario = new UsuarioService().listarkey(proprietario);
 		Usuario obj = rsUsuario.get(0);
 		
-		
 		List<Mensagens> resultado;
 		resultado = new MensagensService().listarProprietario(obj,caixa,primeiro,ultimo);
 	
+		if(resultado.isEmpty()){
+			return  new MensagensService().listarProprietarioUnica(obj, caixa);
+		}
 
 		return resultado;
 

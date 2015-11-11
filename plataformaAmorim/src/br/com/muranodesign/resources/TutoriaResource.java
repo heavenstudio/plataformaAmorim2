@@ -10,6 +10,7 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -75,6 +76,33 @@ public class TutoriaResource {
 		}
 		
 		return HtmlContent;
+	}
+	
+	/*
+	@Path("ListarDadosPertinentes")
+	@GET
+	@Produces("application/json")
+	public List<Tutoria> getListarDadosPertinentes(){
+		return new TutoriaService().listarDadosPertinentes();
+	}*/
+	
+	@Path("ListarDadosPertinentes")
+	@GET
+	@Produces("application/json")
+	public List<Hashtable<String, String>> getListarDadosPertinentes(){
+		List<Tutoria> tutores = new TutoriaService().listarTodos();
+		
+		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String, String>>();
+		
+		for (Tutoria tutoria : tutores) {
+			Hashtable<String, String> hash = new Hashtable<String, String>();
+			hash.put("tutoria", tutoria.getTutoria());
+			hash.put("idprofessor_funcionario", Integer.toString(tutoria.getTutor().getIdprofessorFuncionario()));
+			
+			list.add(hash);
+		}
+		
+		return list;
 	}
 	
 	/**

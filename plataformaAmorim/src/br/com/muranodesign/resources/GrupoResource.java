@@ -198,7 +198,9 @@ public class GrupoResource {
 			@FormParam("anoEstudo") String anoEstudo,
 			@FormParam("periodo") String periodo,
 			@FormParam("idPeriodo") int idPerido,
-			@FormParam("idGrupo") int idGrupo
+			@FormParam("idGrupo") int idGrupo,
+			@FormParam("ciclo") String ciclo
+			
 
 	) {
 		
@@ -277,9 +279,10 @@ public class GrupoResource {
 			}
 			
 			
-			objGrupo.setNomeGrupo(anoEstudo+periodo+Integer.toString(numResult));
+			objGrupo.setNomeGrupo(ciclo+periodo+Integer.toString(numResult));
 			objGrupo.setLider(objAluno);
 			objGrupo.setStatus("0");
+			objGrupo.setCiclo(ciclo);
 
 			resultado = new GrupoService().criarGrupo(objGrupo);
 			

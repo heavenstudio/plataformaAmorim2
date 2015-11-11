@@ -56,6 +56,16 @@ public class TutoriaService {
 		return result;
 	}
 	
+	
+	public List<Tutoria> listarDadosPertinentes(){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		TutoriaDAO dao = DAOFactory.getTutoriaDAO(pc);
+		List<Tutoria> result = dao.listarDadosPertinentes();
+				
+		pc.commitAndClose();
+		return result;
+	}
+	
 	/**
 	 * Listarkey.
 	 *

@@ -27,6 +27,10 @@ public class Ciclos implements Serializable{
 	
 	 @Column(name = "ciclo")
 	 private String ciclo;
+	 
+	 @Column(name = "sigla")
+	 private String sigla;
+	 
 
 
 	public int getIdciclos() {
@@ -51,6 +55,16 @@ public class Ciclos implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+
+	public String getSigla() {
+		return sigla;
+	}
+
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 	 
 	

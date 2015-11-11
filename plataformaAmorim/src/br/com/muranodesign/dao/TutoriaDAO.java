@@ -94,5 +94,11 @@ public interface TutoriaDAO {
 		 * @return
 		 */
 		public List<Tutoria> listarPeriodo(int id);
+		
+		/**
+		 * Listar apenas dados pertinentes
+		 * @return
+		 */
+		public List<Tutoria> listarDadosPertinentes();
 
 }
