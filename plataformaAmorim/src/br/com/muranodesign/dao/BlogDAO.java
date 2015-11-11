@@ -41,4 +41,7 @@ public interface BlogDAO {
 	 * @return the list
 	 */
 	public List<Blog> listarKey(int key);
+	
+	public List<Blog> listarOficina(int id);
+	
 }

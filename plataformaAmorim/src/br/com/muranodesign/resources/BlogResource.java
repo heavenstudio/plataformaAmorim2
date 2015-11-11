@@ -85,6 +85,15 @@ public class BlogResource {
 		 logger.debug("QTD Oficina : " +  resultado.size());
 		return resultado;
 	}
+	
+	@Path("BlogOficina/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Blog> getBlogOficina(@PathParam("id") int id) {
+		logger.debug("Lista Blog por Oficina " + id);
+		List<Blog> obj = new BlogService().listarOficina(id);
+		return obj;
+	}
 
 	
 	@POST

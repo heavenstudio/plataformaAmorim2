@@ -50,4 +50,13 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 		List<Blog> result = criteria.list();
 		return result;
 	}
+	
+	public List<Blog> listarOficina(int id){
+		Criteria criteria = getSession().createCriteria(Blog.class);
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", id));
+		List<Blog> result = criteria.list();
+		return result;
+	}
+	
 }
