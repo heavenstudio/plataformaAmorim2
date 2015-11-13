@@ -129,6 +129,15 @@ public class GrupoService {
 		return result;
 	}
 	
+	public List<Grupo> ListarUltimoCiclo(String ciclo){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		GrupoDAO dao = DAOFactory.getGrupoDAO(pc);
+		List<Grupo> result = dao.ListarUltimoCiclo(ciclo);
+				
+		pc.commitAndClose();
+		return result;
+	}
+	
 	public List<Grupo> verifica(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		GrupoDAO dao = DAOFactory.getGrupoDAO(pc);

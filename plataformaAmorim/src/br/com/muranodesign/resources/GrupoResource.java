@@ -268,7 +268,17 @@ public class GrupoResource {
 			
 			int numResult;
 			
-			List<Grupo> retornoGrupo = new GrupoService().listarUltimo(anoEstudo, periodo);
+			List<Grupo> retornoGrupo = new GrupoService().ListarUltimoCiclo(ciclo);
+			if(retornoGrupo.isEmpty()){
+				numResult = 1;
+			}else{
+				
+				grupo = retornoGrupo.get(0);
+				String num = grupo.getNomeGrupo().substring(3);
+				numResult = 1 + Integer.parseInt(num);
+			}
+			
+			/*List<Grupo> retornoGrupo = new GrupoService().listarUltimo(anoEstudo, periodo);
 			if(retornoGrupo.isEmpty()){
 				numResult = 1;
 			}else{
@@ -276,7 +286,8 @@ public class GrupoResource {
 				grupo = retornoGrupo.get(0);
 				String num = grupo.getNomeGrupo().substring(2);
 				numResult = 1 + Integer.parseInt(num);
-			}
+			}*/
+			
 			
 			
 			objGrupo.setNomeGrupo(ciclo+periodo+Integer.toString(numResult));

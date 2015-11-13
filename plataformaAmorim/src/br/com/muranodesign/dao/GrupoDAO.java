@@ -79,5 +79,7 @@ public interface GrupoDAO {
 		 */
 		public List<Grupo> verifica(int id);
 		
+		public List<Grupo> ListarUltimoCiclo(String ciclo);
+		
 		
 }
