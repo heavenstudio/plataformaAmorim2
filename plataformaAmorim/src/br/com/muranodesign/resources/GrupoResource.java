@@ -277,7 +277,7 @@ public class GrupoResource {
 			}else{
 				
 				grupo = retornoGrupo.get(0);
-				String num = grupo.getNomeGrupo().substring(7);
+				String num = grupo.getNomeGrupo().substring(3);
 				System.out.println(num);
 				
 				
