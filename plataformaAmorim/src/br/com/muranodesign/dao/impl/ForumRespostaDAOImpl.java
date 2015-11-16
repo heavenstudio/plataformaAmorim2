@@ -43,6 +43,7 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumRespostaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumResposta> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(ForumResposta.class);
@@ -84,6 +85,7 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumRespostaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumResposta> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ForumResposta.class);
 		criteria.add(Restrictions.eq("idforumResposta", key));
@@ -96,6 +98,7 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumRespostaDAO#Total(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public long Total(int id){
 		Criteria criteria = getSession().createCriteria(ForumResposta.class);
 		criteria.createAlias("forumQuestao", "forumQuestao");
@@ -110,6 +113,7 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumRespostaDAO#ListarTotal(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumResposta> ListarTotal(int id){
 		Criteria criteria = getSession().createCriteria(ForumResposta.class);
 		criteria.createAlias("forumQuestao", "forumQuestao");
@@ -122,6 +126,7 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumRespostaDAO#ListaNVisto(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumResposta> ListaNVisto(int id){
 		Criteria criteria = getSession().createCriteria(ForumResposta.class);
 		criteria.createAlias("forumQuestao", "forumQuestao");

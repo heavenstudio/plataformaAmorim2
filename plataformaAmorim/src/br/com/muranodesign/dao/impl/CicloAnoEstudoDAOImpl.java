@@ -17,6 +17,7 @@ public class CicloAnoEstudoDAOImpl extends AbstractHibernateDAO implements Ciclo
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<CicloAnoEstudo> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(CicloAnoEstudo.class);
@@ -44,6 +45,7 @@ public class CicloAnoEstudoDAOImpl extends AbstractHibernateDAO implements Ciclo
 		getSession().flush();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<CicloAnoEstudo> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(CicloAnoEstudo.class);
 		criteria.add(Restrictions.eq("Idciclo_anoEstudo", key));
@@ -51,6 +53,7 @@ public class CicloAnoEstudoDAOImpl extends AbstractHibernateDAO implements Ciclo
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<CicloAnoEstudo> listCiclo(int idCiclo){
 		Criteria criteria = getSession().createCriteria(CicloAnoEstudo.class);
 		criteria.createAlias("ciclo", "ciclo");

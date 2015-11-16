@@ -16,8 +16,12 @@ public class ImagensDAOImpl extends AbstractHibernateDAO implements ImagensDAO {
 		super(persistenceContext);
 		
 	}
-	
-public List<Imagens> listAll() {
+	@SuppressWarnings("unchecked")
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ImagensDAO#listAll()
+	 */
+	public List<Imagens> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Imagens.class);
 		List<Imagens> result = criteria.list();
@@ -60,6 +64,7 @@ public List<Imagens> listAll() {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ImagensDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Imagens> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Imagens.class);
 		criteria.add(Restrictions.eq("Idimagens", key));

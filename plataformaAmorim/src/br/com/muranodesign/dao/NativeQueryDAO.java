@@ -27,8 +27,8 @@ public interface NativeQueryDAO {
 	 * @param query the query
 	 * @return the list
 	 */
-	public List listAll(String query);
-	public List listArgs(String query,String ... args);
+	public List<Object[]> listAll(String query);
+	public List<Object[]> listArgs(String query,String ... args);
 	
 	
 

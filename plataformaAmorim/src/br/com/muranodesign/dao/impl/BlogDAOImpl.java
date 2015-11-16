@@ -16,7 +16,11 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 		super(persistenceContext);
 		
 	}
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.BlogDAO#listAll()
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Blog> listAll() {
 			
 			Criteria criteria = getSession().createCriteria(Blog.class);
@@ -26,6 +30,10 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 			return result;
 		}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.BlogDAO#criar(br.com.muranodesign.model.Blog)
+	 */
 	public void criar(Blog c) {
 		synchronized (BlogDAOImpl.class) {
 			getSession().persist(c);
@@ -34,16 +42,29 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.BlogDAO#deletar(br.com.muranodesign.model.Blog)
+	 */
 	public void deletar(Blog c) {
 		getSession().delete(c);
 		getSession().flush();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.BlogDAO#atualizar(br.com.muranodesign.model.Blog)
+	 */
 	public void atualizar(Blog p) {
 		getSession().merge(p);
 		getSession().flush();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.BlogDAO#listarKey(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Blog> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Blog.class);
 		criteria.add(Restrictions.eq("Idblog", key));
@@ -51,6 +72,11 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.BlogDAO#listarOficina(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Blog> listarOficina(int id){
 		Criteria criteria = getSession().createCriteria(Blog.class);
 		criteria.createAlias("oficina", "oficina");

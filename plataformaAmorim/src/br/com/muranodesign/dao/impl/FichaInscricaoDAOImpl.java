@@ -22,6 +22,7 @@ public class FichaInscricaoDAOImpl extends AbstractHibernateDAO implements Ficha
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.FichaInscricaoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<FichaInscricao> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(FichaInscricao.class);
@@ -65,6 +66,7 @@ public class FichaInscricaoDAOImpl extends AbstractHibernateDAO implements Ficha
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.FichaInscricaoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<FichaInscricao> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(FichaInscricao.class);
 		criteria.add(Restrictions.eq("roteiro", new RoteiroService().listarkey(key).get(0)));

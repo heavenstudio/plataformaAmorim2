@@ -21,6 +21,7 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaProfessorDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<OficinaProfessor> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
@@ -64,6 +65,7 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaProfessorDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<OficinaProfessor> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
 		criteria.add(Restrictions.eq("Idoficina_professor", key));
@@ -75,6 +77,7 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaProfessorDAO#listarProfessor(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<OficinaProfessor> listarProfessor(int id){
 		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
 		criteria.createAlias("professor", "professor");
@@ -87,6 +90,7 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaProfessorDAO#listarOficina(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<OficinaProfessor> listarOficina(int idOficina, int idProfessor){
 		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
 		
@@ -98,6 +102,11 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.OficinaProfessorDAO#listarPorOficina(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<OficinaProfessor> listarPorOficina(int idOficina){
 		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
 		

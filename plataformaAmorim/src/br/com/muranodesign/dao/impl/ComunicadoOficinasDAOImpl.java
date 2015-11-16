@@ -21,6 +21,7 @@ public class ComunicadoOficinasDAOImpl extends AbstractHibernateDAO implements C
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ComunicadoOficinasDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ComunicadoOficinas> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(ComunicadoOficinas.class);
@@ -64,6 +65,7 @@ public class ComunicadoOficinasDAOImpl extends AbstractHibernateDAO implements C
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ComunicadoOficinasDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ComunicadoOficinas> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ComunicadoOficinas.class);
 		criteria.add(Restrictions.eq("idComunicado", key));

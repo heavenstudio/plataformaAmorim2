@@ -43,6 +43,7 @@ public class MateriaDAOImpl extends AbstractHibernateDAO implements MateriaDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MateriaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Materia> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Materia.class);
@@ -84,6 +85,7 @@ public class MateriaDAOImpl extends AbstractHibernateDAO implements MateriaDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MateriaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Materia> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Materia.class);
 		criteria.add(Restrictions.eq("idmateria", key));
@@ -92,9 +94,5 @@ public class MateriaDAOImpl extends AbstractHibernateDAO implements MateriaDAO {
 	}
 
 
-
-
-
-	
 
 }

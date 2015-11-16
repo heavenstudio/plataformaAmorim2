@@ -43,6 +43,7 @@ public class PerfilDAOImpl extends AbstractHibernateDAO implements PerfilDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PerfilDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Perfil> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Perfil.class);
@@ -84,6 +85,7 @@ public class PerfilDAOImpl extends AbstractHibernateDAO implements PerfilDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PerfilDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Perfil> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Perfil.class);
 		criteria.add(Restrictions.eq("idperfil", key));

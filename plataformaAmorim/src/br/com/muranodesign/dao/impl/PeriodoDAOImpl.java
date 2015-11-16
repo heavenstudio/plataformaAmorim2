@@ -43,6 +43,7 @@ public class PeriodoDAOImpl extends AbstractHibernateDAO implements PeriodoDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PeriodoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Periodo> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Periodo.class);
@@ -84,6 +85,7 @@ public class PeriodoDAOImpl extends AbstractHibernateDAO implements PeriodoDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PeriodoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Periodo> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Periodo.class);
 		criteria.add(Restrictions.eq("idperiodo", key));
@@ -95,6 +97,7 @@ public class PeriodoDAOImpl extends AbstractHibernateDAO implements PeriodoDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PeriodoDAO#listByPeriodo(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Periodo> listByPeriodo(String p){
 		Criteria criteria = getSession().createCriteria(Periodo.class);
 		criteria.add(Restrictions.eq("periodo", p));

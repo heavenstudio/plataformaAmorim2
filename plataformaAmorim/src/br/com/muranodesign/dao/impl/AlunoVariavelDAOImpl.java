@@ -47,6 +47,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
@@ -61,6 +62,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listAll(int status) {
 		
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
@@ -108,6 +110,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("idalunoVariavel", key));
@@ -119,6 +122,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaAluno(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaAluno(int idAluno){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("aluno", "aluno");
@@ -131,6 +135,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaGrupo(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaGrupo(int idGrupo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("grupo", "grupo");
@@ -145,6 +150,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaAnoEstudo(br.com.muranodesign.model.AnoEstudo)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaAnoEstudo(AnoEstudo ano){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("anoEstudo", ano));
@@ -157,6 +163,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaAnoEstudoPeriodo(br.com.muranodesign.model.AnoEstudo, br.com.muranodesign.model.Periodo)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("anoEstudo", ano));
@@ -169,6 +176,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaAnoEstudoPeriodoComgrupo(br.com.muranodesign.model.AnoEstudo, br.com.muranodesign.model.Periodo)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaAnoEstudoPeriodoComgrupo(AnoEstudo ano, Periodo periodo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("anoEstudo", ano));
@@ -180,6 +188,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaPeriodo(br.com.muranodesign.model.Periodo)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaPeriodo(Periodo periodo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("periodo", periodo));
@@ -188,6 +197,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public AlunoVariavel getAluno(int aluno) {
 		
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
@@ -208,6 +218,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listarNamed(){
 		
 		Query q =  getSession().getNamedQuery("AlunoVariavel.findAll");
@@ -225,7 +236,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		query.executeUpdate();
 	}
 	
-	
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> ListarCicloAno(List<Integer> i, int primeiro, int ultimo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("anoEstudo", "anoEstudo");
@@ -237,7 +248,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		
 	}
 	
-
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> ListarCicloAnoPeriodo(List<Integer> i,int periodo,int primeiro,int ultimo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("anoEstudo", "anoEstudo");
@@ -250,7 +261,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		return result;
 		
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> ListarRangePeriodo(int id, int primeiro,int ultimo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("periodo", "periodo");

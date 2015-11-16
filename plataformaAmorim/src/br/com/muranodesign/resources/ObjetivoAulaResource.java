@@ -77,6 +77,15 @@ public class ObjetivoAulaResource {
 		return new ObjetivoAulaService().listarPorRoteiro(id);
 	}
 
+	
+	@Path("{id}")
+	@GET
+	@Produces("application/json")
+	public List<ObjetivoAula> getobj(@PathParam("id") int id){
+		return new ObjetivoAulaService().listarkey(id);
+	}
+	
+	
 	@Path("ListarPorRoteiroHash/{id}")
 	@GET
 	@Produces("application/json")
@@ -182,7 +191,7 @@ public class ObjetivoAulaResource {
 
 	@Path("ClonarObjetivo/")
 	@POST
-	@Produces("application/json")
+	@Produces("text/plain")
 	public String ClonarObjetivo(
 			@FormParam("idOficinaProfessor") int idOficinaProfessor,
 			@FormParam("idRoteiroAula") int idRoteiroAula) {

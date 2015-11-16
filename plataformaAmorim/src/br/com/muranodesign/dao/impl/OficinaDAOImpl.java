@@ -23,6 +23,7 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Oficina> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Oficina.class);
@@ -66,6 +67,7 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Oficina> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Oficina.class);
 		criteria.add(Restrictions.eq("Idoficina", key));
@@ -77,6 +79,7 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaDAO#listarIdCiclo(int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Oficina> listarIdCiclo(int id, int ciclo){
 		Criteria criteria = getSession().createCriteria(Oficina.class);
 		criteria.add(Restrictions.eq("Idoficina", id));
@@ -91,6 +94,7 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaDAO#listarIdOficina(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Oficina> listarIdOficina(int id){
 		Criteria criteria = getSession().createCriteria(Oficina.class);
 		criteria.add(Restrictions.eq("Idoficina", id));
@@ -98,6 +102,10 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.OficinaDAO#listarNomeOficina(java.lang.String)
+	 */
 	public long listarNomeOficina(String nome){
 		Criteria criteria = getSession().createCriteria(Oficina.class);
 		criteria.add(Restrictions.like("nome", nome, MatchMode.START));
@@ -106,6 +114,11 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.OficinaDAO#listarNomeOficinaid(java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Oficina> listarNomeOficinaid(String nome){
 		Criteria criteria = getSession().createCriteria(Oficina.class);
 		criteria.add(Restrictions.like("nome", nome, MatchMode.START));

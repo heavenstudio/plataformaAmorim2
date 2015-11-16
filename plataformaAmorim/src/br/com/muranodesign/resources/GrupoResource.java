@@ -116,11 +116,13 @@ public class GrupoResource {
 	@Path("Teste/{ano}/{periodo}")
 	@GET
 	@Produces("application/json")
+	
 	public List<Grupo> teste(@PathParam("ano") String ano,@PathParam("periodo") String periodo){
+		
 		Grupo grupo = new Grupo();
 		grupo = new GrupoService().listarUltimo(ano, periodo).get(0);
 		String num = grupo.getNomeGrupo().substring(2);
-		int numResult = 1 + Integer.parseInt(num);
+		
 		
 		return new GrupoService().listarUltimo(ano, periodo);
 	}
@@ -135,9 +137,10 @@ public class GrupoResource {
 	@Produces("application/json")
 	public List<Grupo> getTutoria(@PathParam("id") int id){
 		logger.info("Lista Grupo  por id tutoria" + id);
-		List<Grupo> resultado; 
-		resultado = new GrupoService().listarTutor(id);
-		Grupo evento = resultado.get(0);
+		 
+		List<Grupo> resultado  = new GrupoService().listarTutor(id);
+		Grupo evento =  new Grupo();
+		resultado.get(0);
 
 		return resultado;
 	}
@@ -274,7 +277,10 @@ public class GrupoResource {
 			}else{
 				
 				grupo = retornoGrupo.get(0);
-				String num = grupo.getNomeGrupo().substring(3);
+				String num = grupo.getNomeGrupo().substring(7);
+				System.out.println(num);
+				
+				
 				numResult = 1 + Integer.parseInt(num);
 			}
 			
@@ -493,10 +499,10 @@ public class GrupoResource {
 	@Produces("application/json")
 	public /*List<*/List<AlunoVariavel>/*>*/ alunogrupo(@PathParam("id") int id){
 		List<AlunoVariavel> rsAluno;
-		List<AlunoVariavel> listaTotal = null;
+		/*List<AlunoVariavel> listaTotal = null;
 		List<List<AlunoVariavel>> full = new ArrayList<List<AlunoVariavel>>();
 		
-		int quantidade;
+		int quantidade;*/
 		rsAluno = new AlunoVariavelService().listaGrupo(id);
 		/*
 		quantidade = rsAluno.size();
@@ -518,7 +524,7 @@ public class GrupoResource {
 	@GET
 	@Produces("application/json")
 	public List<Grupo> tutoriaGrupo(@PathParam("id") int id){
-		List<ProfessorFuncionario> professor = new ArrayList<ProfessorFuncionario>();
+	//	List<ProfessorFuncionario> professor = new ArrayList<ProfessorFuncionario>();
 		//professor = new ProfessorFuncionarioService().listarkey(id);
 		List<Tutoria> tutor = new TutoriaService().listarProfessorId(id);
 		List<Grupo> grupos = new ArrayList<Grupo>();

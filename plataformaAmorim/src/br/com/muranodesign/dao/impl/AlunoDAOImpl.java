@@ -43,11 +43,10 @@ public class AlunoDAOImpl extends AbstractHibernateDAO implements AlunoDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Aluno> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Aluno.class);
-		//criteria.setFirstResult(arg0);
-		//criteria.setMaxResults(arg0);
 		List<Aluno> result = criteria.list();
 		
 		
@@ -58,6 +57,7 @@ public class AlunoDAOImpl extends AbstractHibernateDAO implements AlunoDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoDAO#listIntervalo(int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Aluno> listIntervalo(int primeiro, int ultimo){
 		Criteria criteria = getSession().createCriteria(Aluno.class);
 		criteria.setFirstResult(primeiro);
@@ -72,6 +72,7 @@ public class AlunoDAOImpl extends AbstractHibernateDAO implements AlunoDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoDAO#listAllLike(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Aluno> listAllLike(String letra){
 		Criteria criteria = getSession().createCriteria(Aluno.class);
 		criteria.add(Restrictions.like("nome", letra, MatchMode.START));
@@ -111,6 +112,7 @@ public class AlunoDAOImpl extends AbstractHibernateDAO implements AlunoDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Aluno> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Aluno.class);
 		criteria.add(Restrictions.eq("idAluno", key));
@@ -121,6 +123,7 @@ public class AlunoDAOImpl extends AbstractHibernateDAO implements AlunoDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoDAO#listarAluno(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Aluno> listarAluno(String user) {
 		
 		Criteria criteria = getSession().createCriteria(Aluno.class);

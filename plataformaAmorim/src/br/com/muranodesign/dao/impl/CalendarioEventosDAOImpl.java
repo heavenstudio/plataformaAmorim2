@@ -43,6 +43,7 @@ public class CalendarioEventosDAOImpl extends AbstractHibernateDAO implements Ca
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioEventosDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<CalendarioEventos> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(CalendarioEventos.class);
@@ -84,6 +85,7 @@ public class CalendarioEventosDAOImpl extends AbstractHibernateDAO implements Ca
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioEventosDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<CalendarioEventos> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(CalendarioEventos.class);
 		criteria.add(Restrictions.eq("ideventos", key));
@@ -95,6 +97,7 @@ public class CalendarioEventosDAOImpl extends AbstractHibernateDAO implements Ca
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioEventosDAO#listarNotMural()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<CalendarioEventos> listarNotMural(){
 		Criteria criteria = getSession().createCriteria(CalendarioEventos.class);
 		criteria.createAlias("tipoEvento", "tipoEvento");
@@ -104,10 +107,5 @@ public class CalendarioEventosDAOImpl extends AbstractHibernateDAO implements Ca
 		
 	}
 
-
-
-
-
-	
 
 }

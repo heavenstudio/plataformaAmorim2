@@ -42,6 +42,7 @@ public class CategoriaProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CategoriaProducaoAlunoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<CategoriaProducaoAluno> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(CategoriaProducaoAluno.class);
@@ -83,6 +84,7 @@ public class CategoriaProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CategoriaProducaoAlunoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<CategoriaProducaoAluno> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(CategoriaProducaoAluno.class);
 		criteria.add(Restrictions.eq("idcategoriaProducaoAluno", key));
@@ -91,12 +93,5 @@ public class CategoriaProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 	}
 
 
-	
-
-
-
-
-
-	
 
 }

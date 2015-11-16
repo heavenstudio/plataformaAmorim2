@@ -22,6 +22,7 @@ public class AtribuicaoRoteiroExtraDAOImpl extends AbstractHibernateDAO  impleme
 		 * (non-Javadoc)
 		 * @see br.com.muranodesign.dao.AtribuicaoRoteiroExtraDAO#listAll()
 		 */
+		@SuppressWarnings("unchecked")
 		public List<AtribuicaoRoteiroExtra> listAll(){
 			Criteria criteria = getSession().createCriteria(AtribuicaoRoteiroExtra.class);
 			List<AtribuicaoRoteiroExtra> result = criteria.list();
@@ -62,6 +63,7 @@ public class AtribuicaoRoteiroExtraDAOImpl extends AbstractHibernateDAO  impleme
 		 * (non-Javadoc)
 		 * @see br.com.muranodesign.dao.AtribuicaoRoteiroExtraDAO#listarKey(br.com.muranodesign.model.Aluno, br.com.muranodesign.model.Roteiro)
 		 */
+		@SuppressWarnings("unchecked")
 		public List<AtribuicaoRoteiroExtra> listarKey(Aluno aluno, Roteiro roteiro){
 			Criteria criteria = getSession().createCriteria(AtribuicaoRoteiroExtra.class);
 			criteria.add(Restrictions.eq("aluno", aluno));
@@ -74,6 +76,7 @@ public class AtribuicaoRoteiroExtraDAOImpl extends AbstractHibernateDAO  impleme
 		 * (non-Javadoc)
 		 * @see br.com.muranodesign.dao.AtribuicaoRoteiroExtraDAO#listarid(int)
 		 */
+		@SuppressWarnings("unchecked")
 		public List<AtribuicaoRoteiroExtra> listarid(int id){
 			Criteria criteria = getSession().createCriteria(AtribuicaoRoteiroExtra.class);
 			criteria.add(Restrictions.eq("idatribuicaoRoteiroExtra", id));
@@ -85,6 +88,7 @@ public class AtribuicaoRoteiroExtraDAOImpl extends AbstractHibernateDAO  impleme
 		 * (non-Javadoc)
 		 * @see br.com.muranodesign.dao.AtribuicaoRoteiroExtraDAO#listarRoteiro(br.com.muranodesign.model.Aluno, br.com.muranodesign.model.AnoLetivo)
 		 */
+		@SuppressWarnings("unchecked")
 		public List<AtribuicaoRoteiroExtra> listarRoteiro(Aluno aluno, AnoLetivo ano){
 			Criteria criteria = getSession().createCriteria(AtribuicaoRoteiroExtra.class);
 			criteria.add(Restrictions.eq("aluno", aluno));
@@ -98,6 +102,7 @@ public class AtribuicaoRoteiroExtraDAOImpl extends AbstractHibernateDAO  impleme
 		 * (non-Javadoc)
 		 * @see br.com.muranodesign.dao.AtribuicaoRoteiroExtraDAO#listarAluno(br.com.muranodesign.model.Aluno)
 		 */
+		@SuppressWarnings("unchecked")
 		public List<AtribuicaoRoteiroExtra> listarAluno(Aluno aluno){
 			Criteria criteria = getSession().createCriteria(AtribuicaoRoteiroExtra.class);
 			criteria.add(Restrictions.eq("aluno", aluno));

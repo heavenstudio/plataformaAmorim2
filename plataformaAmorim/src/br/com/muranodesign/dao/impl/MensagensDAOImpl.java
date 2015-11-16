@@ -44,6 +44,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mensagens> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
@@ -57,6 +58,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#listIntervalo(int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mensagens> listIntervalo(int primeiro, int ultimo){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.setFirstResult(primeiro);
@@ -100,6 +102,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mensagens> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.add(Restrictions.eq("idmensagens", key));
@@ -108,11 +111,13 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listarProprietario(br.com.muranodesign.model.Usuario)
+	 */
 	public List<Mensagens> listarProprietario(Usuario proprietario) {
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
-		
-       //criteria.createAlias("proprietario", "proprietario");
-		
 		
 		criteria.addOrder(Order.desc("data"));
 		
@@ -127,6 +132,11 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	
 	
 	@Override
+	@SuppressWarnings("unchecked")
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listarProprietario(br.com.muranodesign.model.Usuario, java.lang.String, int, int)
+	 */
 	public List<Mensagens> listarProprietario(Usuario proprietario,String caixa,int primeiro, int ultimo) {
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		
@@ -150,6 +160,11 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MensagensDAO#listarProprietarioUnica(br.com.muranodesign.model.Usuario, java.lang.String)
+	 */
 	public List<Mensagens> listarProprietarioUnica(Usuario proprietario,String caixa){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		
@@ -176,6 +191,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#listarMensagemByProprietario(int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mensagens> listarMensagemByProprietario(int idProprietario, int idMensagem){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.createAlias("proprietario", "proprietario");
@@ -191,6 +207,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#listarRemetente(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mensagens> listarRemetente(int id){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.createAlias("remetente", "remetente");
@@ -205,6 +222,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#listarProprietario(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mensagens> listarProprietario(int id){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.createAlias("proprietario", "proprietario");
@@ -219,6 +237,7 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MensagensDAO#listarProprietarioCount(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mensagens> listarProprietarioCount(int id){
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		criteria.createAlias("proprietario", "proprietario");

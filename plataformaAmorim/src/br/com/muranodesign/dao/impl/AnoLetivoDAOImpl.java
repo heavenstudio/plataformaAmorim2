@@ -43,6 +43,7 @@ public class AnoLetivoDAOImpl extends AbstractHibernateDAO implements AnoLetivoD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AnoLetivoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AnoLetivo> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(AnoLetivo.class);
@@ -84,6 +85,7 @@ public class AnoLetivoDAOImpl extends AbstractHibernateDAO implements AnoLetivoD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AnoLetivoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AnoLetivo> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(AnoLetivo.class);
 		criteria.add(Restrictions.eq("idanoLetivo", key));
@@ -94,6 +96,7 @@ public class AnoLetivoDAOImpl extends AbstractHibernateDAO implements AnoLetivoD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AnoLetivoDAO#listarAnoLetivo(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AnoLetivo> listarAnoLetivo(String anoLetivo) {
 		
 		Criteria criteria = getSession().createCriteria(AnoLetivo.class);

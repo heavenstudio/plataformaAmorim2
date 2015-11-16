@@ -46,6 +46,7 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.GrupoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Grupo> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Grupo.class);
@@ -89,6 +90,7 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.GrupoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Grupo> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Grupo.class);
 		criteria.add(Restrictions.eq("idgrupo", key));
@@ -101,6 +103,7 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.GrupoDAO#listarTutoria(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Grupo> listarTutoria(int tutor){
 		Criteria criteria = getSession().createCriteria(Grupo.class);
 		criteria.add(Restrictions.eq("status", "0"));
@@ -130,6 +133,7 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.GrupoDAO#listarUltimo()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Grupo> listarUltimo(String ano, String periodo){
 		Criteria criteria = getSession().createCriteria(Grupo.class);
 		criteria.add(Restrictions.eq("status", "0"));
@@ -141,6 +145,11 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.GrupoDAO#ListarUltimoCiclo(java.lang.String)
+	 */
 	public List<Grupo> ListarUltimoCiclo(String ciclo){
 		Criteria criteria = getSession().createCriteria(Grupo.class);
 		criteria.add(Restrictions.eq("ciclo", ciclo));
@@ -154,6 +163,7 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.GrupoDAO#verifica()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Grupo> verifica(int id){
 		Criteria criteria = getSession().createCriteria(Grupo.class);
 		criteria.add(Restrictions.eq("idgrupo", id));

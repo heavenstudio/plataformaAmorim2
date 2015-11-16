@@ -79,7 +79,7 @@ public class ReportEspeciais {
 	@Produces("text/plain")
 	public String getExistAlunoVariavelGrupo(@PathParam("id") int id){
 		
-		List<ReportStatusPlanoEstudos> listReportStatusPlanoEstudos = new ArrayList<ReportStatusPlanoEstudos>();
+		
 		String QUERY = " select * from aluno_variavel where ativo = 1 and  "
 				+ " grupo in (select idgrupo from grupo where grupo.tutoria in "
 				+ " ( SELECT idtutoria FROM `tutoria` WHERE tutoria.tutor = "+ id + " ))";

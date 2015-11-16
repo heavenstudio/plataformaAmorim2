@@ -22,6 +22,7 @@ public class AgrupamentoDAOImpl extends AbstractHibernateDAO implements Agrupame
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AgrupamentoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Agrupamento> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Agrupamento.class);
@@ -65,6 +66,7 @@ public class AgrupamentoDAOImpl extends AbstractHibernateDAO implements Agrupame
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AgrupamentoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Agrupamento> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Agrupamento.class);
 		criteria.add(Restrictions.eq("Idagrupamento", key));
@@ -76,6 +78,7 @@ public class AgrupamentoDAOImpl extends AbstractHibernateDAO implements Agrupame
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AgrupamentoDAO#listaAnoLetivo(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Agrupamento> listaAnoLetivo(int idAno){
 		Criteria criteria = getSession().createCriteria(Agrupamento.class);
 		criteria.createAlias("anoLetivo", "anoLetivo");

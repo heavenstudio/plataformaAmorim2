@@ -16,7 +16,8 @@ public class HistoricoEventosDAOImpl extends AbstractHibernateDAO implements His
 		
 	}
 	
-public List<historicoEventos> listAll() {
+	@SuppressWarnings("unchecked")
+	public List<historicoEventos> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(historicoEventos.class);
 		List<historicoEventos> result = criteria.list();
@@ -59,6 +60,7 @@ public List<historicoEventos> listAll() {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.HistoricoEventosDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<historicoEventos> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(historicoEventos.class);
 		criteria.add(Restrictions.eq("idHistEventos", key));

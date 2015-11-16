@@ -43,6 +43,7 @@ public class AnoEstudoDAOImpl extends AbstractHibernateDAO implements AnoEstudoD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AnoEstudoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AnoEstudo> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(AnoEstudo.class);
@@ -85,6 +86,7 @@ public class AnoEstudoDAOImpl extends AbstractHibernateDAO implements AnoEstudoD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AnoEstudoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AnoEstudo> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(AnoEstudo.class);
 		criteria.add(Restrictions.eq("idanoEstudo", key));
@@ -95,6 +97,7 @@ public class AnoEstudoDAOImpl extends AbstractHibernateDAO implements AnoEstudoD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AnoEstudoDAO#idAno(String)
 	 */
+	@SuppressWarnings("unchecked")
 	public Integer idAno(String a){
 		Criteria criteria = getSession().createCriteria(AnoEstudo.class);
 		criteria.add(Restrictions.eq("ano", a));

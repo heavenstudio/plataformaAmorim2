@@ -24,6 +24,7 @@ public class ObjetivoAulaDAOImpl extends AbstractHibernateDAO implements Objetiv
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoAulaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ObjetivoAula> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(ObjetivoAula.class);
@@ -67,6 +68,7 @@ public class ObjetivoAulaDAOImpl extends AbstractHibernateDAO implements Objetiv
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoAulaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ObjetivoAula> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ObjetivoAula.class);
 		criteria.add(Restrictions.eq("Idobjetivo_aula", key));
@@ -78,6 +80,7 @@ public class ObjetivoAulaDAOImpl extends AbstractHibernateDAO implements Objetiv
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoAulaDAO#listarPorRoteiro(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ObjetivoAula> listarPorRoteiro(int idroteiro){
 		Criteria criteria = getSession().createCriteria(ObjetivoAula.class);
 		criteria.createAlias("roteiro", "roteiro");
@@ -86,6 +89,11 @@ public class ObjetivoAulaDAOImpl extends AbstractHibernateDAO implements Objetiv
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ObjetivoAulaDAO#listarPorRoteiroLazy(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<ObjetivoAula> listarPorRoteiroLazy(int id){
 		
 		Criteria criteria = getSession().createCriteria(ObjetivoAula.class);

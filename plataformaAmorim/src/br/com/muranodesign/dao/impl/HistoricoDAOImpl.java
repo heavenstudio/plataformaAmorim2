@@ -19,7 +19,8 @@ public class HistoricoDAOImpl extends AbstractHibernateDAO implements HistoricoD
 		
 	}
 	
-public List<Historico_conexao> listAll() {
+	@SuppressWarnings("unchecked")
+	public List<Historico_conexao> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		List<Historico_conexao> result = criteria.list();
@@ -59,6 +60,7 @@ public List<Historico_conexao> listAll() {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.SODAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Historico_conexao> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		criteria.add(Restrictions.eq("idConexao", key));
@@ -70,6 +72,7 @@ public List<Historico_conexao> listAll() {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.HistoricoDAO#listarQtdAcessoEscola(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Historico_conexao> listarQtdAcessoEscola(String data){
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		criteria.add(Restrictions.isNotNull("cnx_escola"));
@@ -83,6 +86,7 @@ public List<Historico_conexao> listAll() {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.HistoricoDAO#listarQtdAcessoExterno(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Historico_conexao> listarQtdAcessoExterno(String data){
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		criteria.add(Restrictions.isNotNull("cnx_externo"));
@@ -95,6 +99,7 @@ public List<Historico_conexao> listAll() {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.HistoricoDAO#listarSo(br.com.muranodesign.model.SO)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Historico_conexao> listarSo(SO so){
 		Criteria criteria = getSession().createCriteria(Historico_conexao.class);
 		criteria.add(Restrictions.eq("s_o", so));

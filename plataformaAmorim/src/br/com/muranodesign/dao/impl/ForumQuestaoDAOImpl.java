@@ -44,6 +44,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
@@ -57,6 +58,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listAllOrder()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> listAllOrder(){
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
 		criteria.addOrder(Order.desc("data"));
@@ -97,6 +99,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
 		criteria.add(Restrictions.eq("idforumQuestao", key));
@@ -108,6 +111,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
  * (non-Javadoc)
  * @see br.com.muranodesign.dao.ForumQuestaoDAO#topN(int)
  */
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> topN(int qtd){
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
 		criteria.addOrder( Order.desc( "idforumQuestao" ) ); 
@@ -117,7 +121,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 		return result;
 	}
 	
-	//Pendente
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> Range(String data2, String data){
 		
 		StringUtil stringUtil = new StringUtil();
@@ -171,6 +175,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listaRoteiro(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> listaRoteiro(int roteiro){
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
 		criteria.createAlias("roteiro", "roteiro");
@@ -184,6 +189,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#listaUser(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> listaUser(int idUser){
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
 		criteria.createAlias("usuario", "usuario");
@@ -198,6 +204,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumQuestaoDAO#ListaLikeRoteiro(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumQuestao> ListaLikeRoteiro(String letra){
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
 		criteria.createAlias("roteiro", "roteiro");
@@ -208,6 +215,5 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 		return result;
 	}
 
-	
 
 }

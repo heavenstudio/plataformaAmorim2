@@ -17,6 +17,11 @@ public class PlanejamentoAulaDAOImpl extends AbstractHibernateDAO implements Pla
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#listAll()
+	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoAula> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(PlanejamentoAula.class);
@@ -26,6 +31,10 @@ public class PlanejamentoAulaDAOImpl extends AbstractHibernateDAO implements Pla
 		return result;
 	} 
 
+	/*
+	 * 0(non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#criar(br.com.muranodesign.model.PlanejamentoAula)
+	 */
 	public void criar(PlanejamentoAula c) {
 		synchronized (PlanejamentoAulaDAOImpl.class) {
 			getSession().persist(c);
@@ -34,16 +43,29 @@ public class PlanejamentoAulaDAOImpl extends AbstractHibernateDAO implements Pla
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#deletar(br.com.muranodesign.model.PlanejamentoAula)
+	 */
 	public void deletar(PlanejamentoAula c) {
 		getSession().delete(c);
 		getSession().flush();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#atualizar(br.com.muranodesign.model.PlanejamentoAula)
+	 */
 	public void atualizar(PlanejamentoAula p) {
 		getSession().merge(p);
 		getSession().flush();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#listarKey(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoAula> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(PlanejamentoAula.class);
 		criteria.add(Restrictions.eq("Idplanejamento_aula", key));
@@ -51,6 +73,11 @@ public class PlanejamentoAulaDAOImpl extends AbstractHibernateDAO implements Pla
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#listarProfessor(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoAula> listarProfessor(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoAula.class);
 		criteria.createAlias("professor", "professor");
@@ -59,6 +86,11 @@ public class PlanejamentoAulaDAOImpl extends AbstractHibernateDAO implements Pla
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#listarPlanoAula(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoAula> listarPlanoAula(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoAula.class);
 		criteria.createAlias("planoAula", "planoAula");
@@ -67,6 +99,11 @@ public class PlanejamentoAulaDAOImpl extends AbstractHibernateDAO implements Pla
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.PlanejamentoAulaDAO#listarProfessorObjetivoAula(int, int, int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoAula> listarProfessorObjetivoAula(int idProfessor, int idObjetivoAula, int idplanoAula){
 		Criteria criteria = getSession().createCriteria(PlanejamentoAula.class);
 		criteria.createAlias("professor", "professor");

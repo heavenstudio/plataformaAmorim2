@@ -17,7 +17,8 @@ public class CoresDAOImpl extends AbstractHibernateDAO implements CoresDAO {
 		
 	}
 
-public List<Cores> listAll() {
+	@SuppressWarnings("unchecked")
+	public List<Cores> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Cores.class);
 		List<Cores> result = criteria.list();
@@ -60,6 +61,7 @@ public List<Cores> listAll() {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.OficinaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Cores> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Cores.class);
 		criteria.add(Restrictions.eq("Idcor", key));

@@ -48,6 +48,7 @@ public class TipoEventoDAOImpl extends AbstractHibernateDAO implements TipoEvent
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TipoEventoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TipoEvento> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(TipoEvento.class);
@@ -93,6 +94,7 @@ public class TipoEventoDAOImpl extends AbstractHibernateDAO implements TipoEvent
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TipoEventoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TipoEvento> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(TipoEvento.class);
 		criteria.add(Restrictions.eq("idtipoEvento", key));
@@ -103,6 +105,7 @@ public class TipoEventoDAOImpl extends AbstractHibernateDAO implements TipoEvent
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TipoEventoDAO#listarTipoEvento(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TipoEvento> listarTipoEvento(String tipoEvento) {
 		
 		Criteria criteria = getSession().createCriteria(TipoEvento.class);

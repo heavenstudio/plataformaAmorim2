@@ -1,6 +1,6 @@
 package br.com.muranodesign.business;
 
-import java.util.Date;
+
 import java.util.List;
 
 import br.com.muranodesign.dao.DAOFactory;
@@ -29,7 +29,7 @@ public class NativeQueryService {
 	
 	
 	
-	public List listArgs(String query,String ... args){
+	public List<Object[]> listArgs(String query,String ... args){
 		
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		NativeQueryDAO dao = DAOFactory.getNativeQueryDAO(pc);

@@ -21,6 +21,7 @@ public class ForumGeralRespostaDAOImpl   extends AbstractHibernateDAO implements
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumGeralRespostaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumGeralResposta> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(ForumGeralResposta.class);
@@ -63,6 +64,7 @@ public class ForumGeralRespostaDAOImpl   extends AbstractHibernateDAO implements
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ForumGeralRespostaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ForumGeralResposta> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ForumGeralResposta.class);
 		criteria.add(Restrictions.eq("idForumResposta", key));

@@ -48,6 +48,7 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ChamadaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Chamada> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Chamada.class);
@@ -61,6 +62,7 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ChamadaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Chamada> listaPrecenca(Aluno aluno , int precenca) {
 		
 		Criteria criteria = getSession().createCriteria(Chamada.class);
@@ -109,6 +111,7 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ChamadaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Chamada> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Chamada.class);
 		criteria.add(Restrictions.eq("idchamada", key));
@@ -120,6 +123,7 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ChamadaDAO#countFaltas(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public long countFaltas(int id){
 		short t = 0;
 		Criteria criteria = getSession().createCriteria(Chamada.class);
@@ -136,6 +140,7 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ChamadaDAO#dataPresenca(int, java.util.Date)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Chamada> dataPresenca(int id, Date data){
 		Criteria criteria = getSession().createCriteria(Chamada.class);
 		criteria.createAlias("aluno", "aluno");
@@ -143,21 +148,10 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		criteria.add(Restrictions.eq("data", data));
 		List<Chamada> result = criteria.list();
 		
-		/*
-		int retorno = 0;
-		if(!result.isEmpty()){
-			retorno = -1;
-		}else{
-			if(result.get(0).getPresenca() == 1){
-				retorno =  1;
-			}
-			if(result.get(0).getPresenca() == 0){
-				retorno = 0;
-			}
-		}*/
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Chamada> dataPresencaAtual(int id, Date data){
 		Criteria criteria = getSession().createCriteria(Chamada.class);
 		

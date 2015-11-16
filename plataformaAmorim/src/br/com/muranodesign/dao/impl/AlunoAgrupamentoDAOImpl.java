@@ -23,6 +23,7 @@ public class AlunoAgrupamentoDAOImpl extends AbstractHibernateDAO implements Alu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoAgrupamentoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoAgrupamento> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(AlunoAgrupamento.class);
@@ -66,6 +67,7 @@ public class AlunoAgrupamentoDAOImpl extends AbstractHibernateDAO implements Alu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoAgrupamentoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoAgrupamento> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(AlunoAgrupamento.class);
 		criteria.add(Restrictions.eq("Idaluno_agrupamento", key));
@@ -77,6 +79,7 @@ public class AlunoAgrupamentoDAOImpl extends AbstractHibernateDAO implements Alu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoAgrupamentoDAO#listarAgrupamento(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoAgrupamento> listarAgrupamento(int id){
 		Criteria criteria = getSession().createCriteria(AlunoAgrupamento.class);
 		criteria.createAlias("agrupamento", "agrupamento");
@@ -89,6 +92,7 @@ public class AlunoAgrupamentoDAOImpl extends AbstractHibernateDAO implements Alu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoAgrupamentoDAO#listarAlunoAgrupamento(int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoAgrupamento> listarAlunoAgrupamento(int idAluno, int idAgrupamento){
 		Criteria criteria = getSession().createCriteria(AlunoAgrupamento.class);
 		criteria.createAlias("agrupamento", "agrupamento");
@@ -103,6 +107,7 @@ public class AlunoAgrupamentoDAOImpl extends AbstractHibernateDAO implements Alu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoAgrupamentoDAO#listarAluno(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AlunoAgrupamento> listarAluno(int idAluno){
 		Criteria criteria = getSession().createCriteria(AlunoAgrupamento.class);
 		criteria.createAlias("aluno", "aluno");

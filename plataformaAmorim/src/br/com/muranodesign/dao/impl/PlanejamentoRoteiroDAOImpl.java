@@ -44,6 +44,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
@@ -85,6 +86,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("idplanejamentoRoteiro", key));
@@ -140,6 +142,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarIdAluno(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("idAluno", id));
@@ -152,6 +155,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarStatus(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarStatus(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("idAluno", id));
@@ -164,6 +168,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarPendente(int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarPendente(int aluno, int objetivo){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("idAluno", aluno));
@@ -178,6 +183,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarPlanoEstudo(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarPlanoEstudo(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.createAlias("planoEstudo", "planoEstudo");
@@ -193,6 +199,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarPlanoEstudoTotal(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarPlanoEstudoTotal(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.createAlias("planoEstudo", "planoEstudo");
@@ -206,6 +213,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarObjetivoPendente(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarObjetivoPendente(int obj){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("status", "2"));
@@ -220,6 +228,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarObjetivoCompleto(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarObjetivoCompleto(int obj){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("status", "3"));
@@ -233,6 +242,7 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarObjetivoTotal(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanejamentoRoteiro> listarObjetivoTotal(int obj){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.createAlias("objetivo", "objetivo");

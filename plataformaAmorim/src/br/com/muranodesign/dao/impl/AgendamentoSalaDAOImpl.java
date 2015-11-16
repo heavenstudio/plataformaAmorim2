@@ -23,6 +23,7 @@ public class AgendamentoSalaDAOImpl extends AbstractHibernateDAO implements Agen
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AgendamentoSalaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AgendamentoSala> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(AgendamentoSala.class);
@@ -66,6 +67,7 @@ public class AgendamentoSalaDAOImpl extends AbstractHibernateDAO implements Agen
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AgendamentoSalaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AgendamentoSala> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(AgendamentoSala.class);
 		criteria.add(Restrictions.eq("Idagendamento_sala", key));
@@ -77,6 +79,7 @@ public class AgendamentoSalaDAOImpl extends AbstractHibernateDAO implements Agen
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AgendamentoSalaDAO#listarValidacao(int, int, long)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AgendamentoSala> listarValidacao(int dia, int sala, long hora){
 		Criteria criteria = getSession().createCriteria(AgendamentoSala.class);
 		criteria.add(Restrictions.eq("hora", hora));

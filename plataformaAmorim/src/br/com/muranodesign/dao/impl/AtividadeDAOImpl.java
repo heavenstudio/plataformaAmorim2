@@ -43,6 +43,7 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AtividadeDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Atividade> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Atividade.class);
@@ -85,6 +86,7 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AtividadeDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Atividade> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Atividade.class);
 		criteria.add(Restrictions.eq("idatividade", key));
@@ -95,6 +97,7 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AtividadeDAO#listarAtividade(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Atividade> listarAtividade(String atividade) {
 		
 		Criteria criteria = getSession().createCriteria(Atividade.class);
@@ -109,6 +112,7 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AtividadeDAO#listarObjetivo(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Atividade> listarObjetivo(int objetivo){
 		Criteria criteria = getSession().createCriteria(Atividade.class);
 		criteria.createAlias("objetivo", "objetivo");

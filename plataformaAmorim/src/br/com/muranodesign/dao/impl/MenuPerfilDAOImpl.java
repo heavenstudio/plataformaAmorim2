@@ -17,7 +17,11 @@ public class MenuPerfilDAOImpl extends AbstractHibernateDAO implements MenuPerfi
 		super(persistenceContext);
 		
 	}
-	
+	@SuppressWarnings("unchecked")
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MenuPerfilDAO#listAll()
+	 */
 	public List<MenuPerfil> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(MenuPerfil.class);
@@ -27,6 +31,10 @@ public class MenuPerfilDAOImpl extends AbstractHibernateDAO implements MenuPerfi
 		return result;
 	} 
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MenuPerfilDAO#criar(br.com.muranodesign.model.MenuPerfil)
+	 */
 	public void criar(MenuPerfil c) {
 		synchronized (MenuPerfilDAOImpl.class) {
 			getSession().persist(c);
@@ -35,16 +43,29 @@ public class MenuPerfilDAOImpl extends AbstractHibernateDAO implements MenuPerfi
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MenuPerfilDAO#deletar(br.com.muranodesign.model.MenuPerfil)
+	 */
 	public void deletar(MenuPerfil c) {
 		getSession().delete(c);
 		getSession().flush();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MenuPerfilDAO#atualizar(br.com.muranodesign.model.MenuPerfil)
+	 */
 	public void atualizar(MenuPerfil p) {
 		getSession().merge(p);
 		getSession().flush();
 	}
 	
+	@SuppressWarnings("unchecked")
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MenuPerfilDAO#listarKey(int)
+	 */
 	public List<MenuPerfil> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(MenuPerfil.class);
 		criteria.add(Restrictions.eq("Idmenu_perfil", key));
@@ -52,6 +73,11 @@ public class MenuPerfilDAOImpl extends AbstractHibernateDAO implements MenuPerfi
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MenuPerfilDAO#listarUser(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<MenuPerfil> listarUser(int id){
 		Criteria criteria = getSession().createCriteria(MenuPerfil.class);
 		criteria.createAlias("perfil", "perfil");

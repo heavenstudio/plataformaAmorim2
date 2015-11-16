@@ -15,7 +15,6 @@ import org.apache.log4j.Logger;
 import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.RoteiroAulaService;
-import br.com.muranodesign.model.ObjetivoAula;
 import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.model.RoteiroAula;
@@ -191,7 +190,7 @@ public class RoteiroAulaResource {
 			oficinas = new OficinaService().listarIdOficina(idOficina);
 		}
 		
-		List<ObjetivoAula> objetivos = new ArrayList<ObjetivoAula>();
+		
 		
 		List<RoteiroAula> roteiros = new ArrayList<RoteiroAula>();
 		

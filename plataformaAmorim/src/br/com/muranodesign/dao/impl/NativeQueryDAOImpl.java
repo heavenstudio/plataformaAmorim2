@@ -42,6 +42,7 @@ public class NativeQueryDAOImpl extends AbstractHibernateDAO implements NativeQu
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.NativeQueryDAO#listAll(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Object[]> listAll(String query){
 		SQLQuery q = getSession().createSQLQuery(query);
 	    List<Object[]> entities = q.list();
@@ -53,7 +54,8 @@ public class NativeQueryDAOImpl extends AbstractHibernateDAO implements NativeQu
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.NativeQueryDAO#listArgs(java.lang.String, java.lang.String[])
 	 */
-    public List listArgs(String query,String ... args){
+	@SuppressWarnings("unchecked")
+    public List<Object[]> listArgs(String query,String ... args){
 		
 		SQLQuery q = getSession().createSQLQuery(query);
 		int qtdArq = 0;

@@ -50,6 +50,7 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Calendario> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Calendario.class);
@@ -64,6 +65,7 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioDAO#listVisivel()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Calendario> listVisivel(){
 		Criteria criteria = getSession().createCriteria(Calendario.class);
 		criteria.add(Restrictions.ge("visivel",1));
@@ -77,6 +79,7 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Calendario> listFiltroData(Date dataInicio, Date dataFim) {
 		
 		Criteria criteria = getSession().createCriteria(Calendario.class);
@@ -94,6 +97,7 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Calendario> listFeriados(int ano) {
 		
 		Criteria criteria = getSession().createCriteria(Calendario.class);
@@ -143,6 +147,7 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Calendario> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Calendario.class);
 		criteria.add(Restrictions.eq("idcalendario", key));
@@ -155,10 +160,8 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.CalendarioDAO#listarEvento(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Calendario> listarEvento(int id) throws ParseException{
-		//String date_s = new Date().toString();
-		//SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd"); 
-		//Date date = new SimpleDateFormat("yyyy-MM-dd").parse(date_s);
 		
 		DateFormat df = new SimpleDateFormat("yyyyy-MM-dd");
 		Date data = Calendar.getInstance().getTime();
@@ -177,6 +180,7 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Calendario> listarRange(){
 		Criteria criteria = getSession().createCriteria(Calendario.class);
 		

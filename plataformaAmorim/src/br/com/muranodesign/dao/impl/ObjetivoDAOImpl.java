@@ -46,6 +46,7 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Objetivo> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
@@ -58,6 +59,11 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 		return result;
 	} 
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ObjetivoDAO#listAllTeste()
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Objetivo> listAllTeste(){
 		
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
@@ -104,6 +110,7 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Objetivo> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
 		criteria.add(Restrictions.eq("idobjetivo", key));
@@ -115,6 +122,7 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoDAO#listarRoteiro(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Objetivo> listarRoteiro(int id){
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
 		criteria.createAlias("roteiro", "roteiro");
@@ -153,7 +161,7 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 		criteria.add(Restrictions.eq("roteiro.ativo", 1));
 		criteria.add(Restrictions.eq("roteiro.anoEstudo.idanoEstudo", id));
 		criteria.setProjection(Projections.count("ativo"));
-		//List<Objetivo> result = criteria.list();
+		
 		long result = (Long) criteria.list().get(0);
 		return result;
 	}
@@ -162,6 +170,7 @@ public class ObjetivoDAOImpl extends AbstractHibernateDAO implements ObjetivoDAO
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ObjetivoDAO#listarGraficoEntregues(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Objetivo> listarGraficoEntregues(int id){
 		Criteria criteria = getSession().createCriteria(Objetivo.class);
 		criteria.add(Restrictions.eq("ativo",1));

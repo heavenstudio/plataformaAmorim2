@@ -43,6 +43,7 @@ public class AvaliacaoProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AvaliacaoProducaoAlunoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AvaliacaoProducaoAluno> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(AvaliacaoProducaoAluno.class);
@@ -84,6 +85,7 @@ public class AvaliacaoProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AvaliacaoProducaoAlunoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AvaliacaoProducaoAluno> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(AvaliacaoProducaoAluno.class);
 		criteria.add(Restrictions.eq("idavaliacaoProducaoAluno", key));
@@ -91,9 +93,7 @@ public class AvaliacaoProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 		return result;
 	}
 
-	/*
-	 * 
-	 */
+	@SuppressWarnings("unchecked")
 	public List<AvaliacaoProducaoAluno> listarAvaliacaoProducaoAluno(String AvaliacaoProducaoAluno) {
 		
 		Criteria criteria = getSession().createCriteria(AvaliacaoProducaoAluno.class);
@@ -105,12 +105,6 @@ public class AvaliacaoProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 		return result;
 	}
 
-	
 
-
-
-
-
-	
 
 }

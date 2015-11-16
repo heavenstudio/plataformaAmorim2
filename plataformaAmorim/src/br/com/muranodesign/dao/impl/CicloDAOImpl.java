@@ -18,6 +18,7 @@ public class CicloDAOImpl extends AbstractHibernateDAO implements CicloDAO{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ciclos> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Ciclos.class);
@@ -45,6 +46,7 @@ public class CicloDAOImpl extends AbstractHibernateDAO implements CicloDAO{
 		getSession().flush();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ciclos> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Ciclos.class);
 		criteria.add(Restrictions.eq("Idciclos", key));

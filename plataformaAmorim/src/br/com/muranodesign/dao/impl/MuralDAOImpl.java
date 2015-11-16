@@ -22,6 +22,7 @@ public class MuralDAOImpl extends AbstractHibernateDAO implements MuralDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MuralDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mural> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Mural.class);
@@ -65,6 +66,7 @@ public class MuralDAOImpl extends AbstractHibernateDAO implements MuralDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MuralDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mural> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Mural.class);
 		criteria.add(Restrictions.eq("Idmural", key));
@@ -76,6 +78,7 @@ public class MuralDAOImpl extends AbstractHibernateDAO implements MuralDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.MuralDAO#Range(java.lang.String, java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Mural>Range(String data2, String data, int idAluno){
 		Criteria criteria = getSession().createCriteria(Mural.class);
 
