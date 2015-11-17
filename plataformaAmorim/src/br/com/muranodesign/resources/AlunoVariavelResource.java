@@ -105,10 +105,10 @@ public class AlunoVariavelResource {
 	@Produces("application/json")
 	public String getlistarCicloPeriodoRange(@PathParam("idCiclo") int idCiclo,@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
 		List<CicloAnoEstudo> ciclos = new CicloAnoEstudoService().listCiclo(idCiclo);
-		int ano[] = new int[100];
+		//int ano[] = new int[100];
 		List<Integer> anos = new ArrayList<Integer>();
 		
-		String html = "";
+		//String html = "";
 		
 		for(int i = 0; i < ciclos.size(); i++) {
 			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
@@ -145,10 +145,10 @@ public class AlunoVariavelResource {
 	@Produces("application/json")
 	public String getlistarCicloRange(@PathParam("idCiclo") int idCiclo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
 		List<CicloAnoEstudo> ciclos = new CicloAnoEstudoService().listCiclo(idCiclo);
-		int ano[] = new int[100];
+		//int ano[] = new int[100];
 		List<Integer> anos = new ArrayList<Integer>();
 		
-		String html = "";
+	//	String html = "";
 		
 		for(int i = 0; i < ciclos.size(); i++) {
 			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
@@ -182,7 +182,7 @@ public class AlunoVariavelResource {
 	@GET
 	@Produces("application/json")
 	public String getlistarPeriodoRange(@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
-		List<Periodo> periodo = new PeriodoService().listarkey(idPeriodo);
+		//List<Periodo> periodo = new PeriodoService().listarkey(idPeriodo);
 		String html1 = "";
 		
 		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarRangePeriodo(idPeriodo, primeiro, ultimo);
@@ -385,8 +385,7 @@ public class AlunoVariavelResource {
 			nomeArquivo = new StringUtil().geraNomeAleatorio("xls", 15);
 			fos = new FileOutputStream(new File("/home/tomcat/webapps/files/" + nomeArquivo));
 			//fos = new FileOutputStream(new File("C:/Users/Kevyn/Documents/teste/" + nomeArquivo));
-			System.out.println("este é o nome do arquivo " +nomeArquivo); 
-			
+						
 			// Este trecho obtem uma lista de objetos do tipo CD
 			 
 			// do banco de dados através de um DAO e itera sobre a lista
@@ -423,8 +422,8 @@ public class AlunoVariavelResource {
 		List<AlunoVariavel> alunos = new ArrayList<AlunoVariavel>();
 		List<Grupo> grupo = new ArrayList<Grupo>();
 		
-		String html = "";
-		String parte = "";
+		//String html = "";
+		//String parte = "";
 		
 		int h = 0;
 		row = firstSheet.createRow(h);
@@ -552,7 +551,7 @@ public class AlunoVariavelResource {
 						if(email != "" && email != null){
 							
 							String valor = alunos.get(k).getAluno().getEmail();
-							System.out.println(valor);
+							
 							if(valor != null && valor != "-"){
 								retorno.add(valor);
 				
@@ -641,7 +640,7 @@ public class AlunoVariavelResource {
 						if(emailResponsavel != "" && emailResponsavel != null){
 							
 							String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-							System.out.println(valor);
+							
 							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
@@ -729,7 +728,7 @@ public class AlunoVariavelResource {
 						if(emailMae != "" && emailMae != null){
 							
 							String valor = alunos.get(k).getAluno().getEmail1Mae();
-							System.out.println(valor);
+							
 							if(valor != null && valor != "-"){
 								retorno.add(valor);
 							
@@ -854,7 +853,7 @@ public class AlunoVariavelResource {
 					if(email != "" && email != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
@@ -949,7 +948,7 @@ public class AlunoVariavelResource {
 					if(emailResponsavel != "" && emailResponsavel != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
@@ -1043,7 +1042,7 @@ public class AlunoVariavelResource {
 					if(emailMae != "" && emailMae != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Mae();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 							h++;
@@ -1158,7 +1157,7 @@ public class AlunoVariavelResource {
 					if(email != "" && email != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 			
@@ -1247,7 +1246,7 @@ public class AlunoVariavelResource {
 					if(emailResponsavel != "" && emailResponsavel != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
@@ -1335,7 +1334,7 @@ public class AlunoVariavelResource {
 					if(emailMae != "" && emailMae != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Mae();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
@@ -1454,7 +1453,7 @@ public class AlunoVariavelResource {
 							if(email != "" && email != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
@@ -1543,7 +1542,7 @@ public class AlunoVariavelResource {
 							if(emailResponsavel != "" && emailResponsavel != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
@@ -1631,7 +1630,7 @@ public class AlunoVariavelResource {
 							if(emailMae != "" && emailMae != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Mae();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
@@ -1752,7 +1751,7 @@ public class AlunoVariavelResource {
 							if(email != "" && email != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
@@ -1841,7 +1840,7 @@ public class AlunoVariavelResource {
 							if(emailResponsavel != "" && emailResponsavel != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
@@ -1929,7 +1928,7 @@ public class AlunoVariavelResource {
 							if(emailMae != "" && emailMae != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Mae();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
@@ -2044,7 +2043,7 @@ public class AlunoVariavelResource {
 					if(email != "" && email != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 			
@@ -2133,7 +2132,7 @@ public class AlunoVariavelResource {
 					if(emailResponsavel != "" && emailResponsavel != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
@@ -2221,7 +2220,7 @@ public class AlunoVariavelResource {
 					if(emailMae != "" && emailMae != null){
 						
 						String valor = alunos.get(k).getAluno().getEmail1Mae();
-						System.out.println(valor);
+						
 						if(valor != null && valor != "-"){
 							retorno.add(valor);
 						
@@ -2337,7 +2336,7 @@ public class AlunoVariavelResource {
 							if(email != "" && email != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 					
@@ -2426,7 +2425,7 @@ public class AlunoVariavelResource {
 							if(emailResponsavel != "" && emailResponsavel != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Responsavel();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
@@ -2514,7 +2513,7 @@ public class AlunoVariavelResource {
 							if(emailMae != "" && emailMae != null){
 								
 								String valor = alunos.get(k).getAluno().getEmail1Mae();
-								System.out.println(valor);
+								
 								if(valor != null && valor != "-"){
 									retorno.add(valor);
 								
@@ -2546,7 +2545,8 @@ public class AlunoVariavelResource {
 			 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("Erro ao exportar arquivo");
+				logger.info("Erro ao exportar arquivo");
+				
 			} finally {
 				try {
 					fos.flush();
@@ -2824,7 +2824,7 @@ public class AlunoVariavelResource {
 			logger.info("Buscando aluno ..." + arrayAlunos[i] );
 			AlunoVariavel objAlunoVariavel;
 			int id=Integer.parseInt(arrayAlunos[i]);
-			List<AlunoVariavel> rsAlunoVariavel;
+			//List<AlunoVariavel> rsAlunoVariavel;
 			
 			objAlunoVariavel= new AlunoVariavelService().getAluno(id); 
 			

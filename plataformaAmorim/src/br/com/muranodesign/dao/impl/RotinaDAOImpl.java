@@ -21,6 +21,7 @@ public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RotinaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Rotina> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Rotina.class);
@@ -64,6 +65,7 @@ public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RotinaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Rotina> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Rotina.class);
 		criteria.add(Restrictions.eq("Idrotina", key));
@@ -75,17 +77,21 @@ public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RotinaDAO#listarInconsistencia(long, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Rotina> listarInconsistencia(long hora, int idSemana/*, int idSala*/){
 		Criteria criteria = getSession().createCriteria(Rotina.class);
 		criteria.add(Restrictions.eq("hora", hora));
 		criteria.createAlias("dia", "dia");
 		criteria.add(Restrictions.eq("dia.Idsemana", idSemana));
-		/*criteria.createAlias("sala", "sala");
-		criteria.add(Restrictions.eq("sala.Idsalas", idSala));*/
 		List<Rotina> result = criteria.list();
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RotinaDAO#listarPorOficina(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Rotina> listarPorOficina(int idOficina){
 		Criteria criteria = getSession().createCriteria(Rotina.class);
 		criteria.createAlias("oficina", "oficina");
@@ -94,6 +100,11 @@ public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RotinaDAO#listarPorAgrupamento(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Rotina> listarPorAgrupamento(int idAgrupamento){
 		Criteria criteria = getSession().createCriteria(Rotina.class);
 		criteria.createAlias("agrupamento", "agrupamento");

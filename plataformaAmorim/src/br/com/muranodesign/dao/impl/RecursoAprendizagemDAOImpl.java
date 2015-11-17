@@ -42,6 +42,7 @@ public class RecursoAprendizagemDAOImpl extends AbstractHibernateDAO implements 
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RecursoAprendizagemDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RecursoAprendizagem> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(RecursoAprendizagem.class);
@@ -83,6 +84,7 @@ public class RecursoAprendizagemDAOImpl extends AbstractHibernateDAO implements 
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RecursoAprendizagemDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RecursoAprendizagem> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(RecursoAprendizagem.class);
 		criteria.add(Restrictions.eq("idrecursoAprendizagem", key));
@@ -90,7 +92,11 @@ public class RecursoAprendizagemDAOImpl extends AbstractHibernateDAO implements 
 		return result;
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RecursoAprendizagemDAO#listarProRoteiro(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<RecursoAprendizagem> listarProRoteiro(int id){
 		Criteria criteria = getSession().createCriteria(RecursoAprendizagem.class);
 		criteria.createAlias("roteiro", "roteiro");

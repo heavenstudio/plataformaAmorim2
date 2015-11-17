@@ -43,6 +43,7 @@ public class PresencaProfessorDAOImpl extends AbstractHibernateDAO implements Pr
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PresencaProfessorDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PresencaProfessor> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(PresencaProfessor.class);
@@ -84,6 +85,7 @@ public class PresencaProfessorDAOImpl extends AbstractHibernateDAO implements Pr
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PresencaProfessorDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PresencaProfessor> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(PresencaProfessor.class);
 		criteria.add(Restrictions.eq("idpresencaProfessor", key));
@@ -95,6 +97,7 @@ public class PresencaProfessorDAOImpl extends AbstractHibernateDAO implements Pr
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PresencaProfessorDAO#listarFaltas(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PresencaProfessor> listarFaltas(int id){
 		Criteria criteria = getSession().createCriteria(PresencaProfessor.class);
 		criteria.createAlias("professor", "professor");

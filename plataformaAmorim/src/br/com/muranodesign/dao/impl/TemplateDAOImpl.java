@@ -17,6 +17,11 @@ public class TemplateDAOImpl extends AbstractHibernateDAO implements TemplateDAO
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.TemplateDAO#listAll()
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Template> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Template.class);
@@ -26,6 +31,10 @@ public class TemplateDAOImpl extends AbstractHibernateDAO implements TemplateDAO
 		return result;
 	} 
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.TemplateDAO#criar(br.com.muranodesign.model.Template)
+	 */
 	public void criar(Template c) {
 		synchronized (TemplateDAOImpl.class) {
 			getSession().persist(c);
@@ -34,17 +43,29 @@ public class TemplateDAOImpl extends AbstractHibernateDAO implements TemplateDAO
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.TemplateDAO#deletar(br.com.muranodesign.model.Template)
+	 */
 	public void deletar(Template c) {
 		getSession().delete(c);
 		getSession().flush();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.TemplateDAO#atualizar(br.com.muranodesign.model.Template)
+	 */
 	public void atualizar(Template p) {
 		getSession().merge(p);
 		getSession().flush();
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.TemplateDAO#listarKey(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Template> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Template.class);
 		criteria.add(Restrictions.eq("Idtemplate", key));

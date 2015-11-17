@@ -43,6 +43,7 @@ public class ProfessorFuncionarioVariavelDAOImpl extends AbstractHibernateDAO im
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProfessorFuncionarioVariavelDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionarioVariavel> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionarioVariavel.class);
@@ -55,6 +56,7 @@ public class ProfessorFuncionarioVariavelDAOImpl extends AbstractHibernateDAO im
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProfessorFuncionarioVariavelDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionarioVariavel> listAll(int status) {
 		
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionarioVariavel.class);
@@ -97,6 +99,7 @@ public class ProfessorFuncionarioVariavelDAOImpl extends AbstractHibernateDAO im
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProfessorFuncionarioVariavelDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionarioVariavel> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionarioVariavel.class);
 		criteria.add(Restrictions.eq("idprofessorFuncionarioVariavel", key));
@@ -108,6 +111,7 @@ public class ProfessorFuncionarioVariavelDAOImpl extends AbstractHibernateDAO im
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProfessorFuncionarioVariavelDAO#listarProfessor(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionarioVariavel> listarProfessor(int id){
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionarioVariavel.class);
 		criteria.createAlias("professorFuncionario", "professorFuncionario");

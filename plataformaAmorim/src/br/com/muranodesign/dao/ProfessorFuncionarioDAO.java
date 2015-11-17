@@ -56,5 +56,11 @@ public interface ProfessorFuncionarioDAO {
 		 */
 		public List<ProfessorFuncionario> listarKey(int key);
 		
+		/**
+		 * Listar apenas id e nome de professor funcionario
+		 * @return
+		 */
+		public List<ProfessorFuncionario> listarIdNome();
+		
 
 }

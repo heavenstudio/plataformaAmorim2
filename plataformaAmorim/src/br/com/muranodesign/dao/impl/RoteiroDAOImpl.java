@@ -48,6 +48,7 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RoteiroDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Roteiro> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
@@ -91,6 +92,7 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RoteiroDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Roteiro> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		criteria.add(Restrictions.eq("idroteiro", key));
@@ -102,18 +104,11 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RoteiroDAO#listarAno(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Roteiro> listarAno(Integer i){
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.add(Restrictions.eq("anoEstudo.idanoEstudo", i));
-		/*criteria.createAlias("anoEstudo", "anoEstudo");
-		
-		Criteria criteria2 = getSession().createCriteria(Roteiro.class);
-		criteria2.createAlias("anoEstudo", "anoEstudo");
-		
-		criteria2.add(Restrictions.eq("anoEstudo.idanoEstudo", i));
-		
-		criteria.add(Restrictions.eq("anoEstudo.idanoEstudo", i));*/
 		criteria.add(Restrictions.eq("ativo", 1));
 		
 		List<Roteiro> result = criteria.list();
@@ -126,6 +121,7 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RoteiroDAO#listarid(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public Roteiro listarid(int id){
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		criteria.add(Restrictions.eq("idroteiro", id));
@@ -135,6 +131,11 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RoteiroDAO#ListaLikeRoteiro(java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Roteiro> ListaLikeRoteiro(String letra){
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		criteria.add(Restrictions.like("nome", letra, MatchMode.START));
@@ -142,6 +143,11 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RoteiroDAO#listRoteiroRange(int, int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Roteiro> listRoteiroRange(int primeiro, int ultimo){
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		ProjectionList projList = Projections.projectionList();  

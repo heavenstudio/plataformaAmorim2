@@ -66,6 +66,36 @@ public class ForumRespostaResource {
 		return resultado;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Path("DeletarForumRespQuest/{id}")
+	@GET
+	@Produces("text/plain")
+	public String DeletarForum(@PathParam("id") int id){
+		List<ForumResposta> resp = new ForumRespostaService().ListarTotal(id);
+		
+		
+		for (ForumResposta forumResposta : resp) {
+			new ForumRespostaService().deletarForumResposta(forumResposta);
+		}
+		
+		 new ForumQuestaoService().deletarForumQuestao(new ForumQuestaoService().listarkey(id).get(0));
+		
+		return "ok";//Integer.toString(retorno.getIdforumQuestao());
+	}
+	
+	
+	@Path("DeletarForumResp/{id}")
+	@GET
+	@Produces("text/plain")
+	public String DeletarForumResp(@PathParam("id") int id){
+		new ForumRespostaService().deletarForumResposta(new ForumRespostaService().listarkey(id).get(0));
+		
+		return "ok";
+	}
 	
 	
 	

@@ -167,9 +167,7 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 		Date data = Calendar.getInstance().getTime();
 		String reportDate = df.format(data);
 		
-		System.out.println(reportDate);
-		
-		
+
 		
 		Criteria criteria = getSession().createCriteria(Calendario.class);
 		criteria.createAlias("tipoEvento", "tipoEvento");

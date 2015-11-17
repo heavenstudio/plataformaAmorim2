@@ -80,4 +80,11 @@ public interface AlunoDAO {
 		public List<Aluno> listarAluno(String Aluno);
 		
 		
+		/**
+		 * 
+		 * @return
+		 */
+		public List<Aluno> ListarNomeId();
+		
+		
 }

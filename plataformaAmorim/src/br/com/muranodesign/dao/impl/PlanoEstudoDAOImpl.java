@@ -43,6 +43,7 @@ public class PlanoEstudoDAOImpl extends AbstractHibernateDAO implements PlanoEst
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanoEstudoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanoEstudo> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(PlanoEstudo.class);
@@ -84,6 +85,7 @@ public class PlanoEstudoDAOImpl extends AbstractHibernateDAO implements PlanoEst
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanoEstudoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanoEstudo> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(PlanoEstudo.class);
 		criteria.add(Restrictions.eq("idplanoEstudo", key));
@@ -96,6 +98,7 @@ public class PlanoEstudoDAOImpl extends AbstractHibernateDAO implements PlanoEst
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanoEstudoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanoEstudo> utimoPlanoEstudos(int idAluno){
 		
 		Criteria criteria = getSession().createCriteria(PlanoEstudo.class);
@@ -113,12 +116,6 @@ public class PlanoEstudoDAOImpl extends AbstractHibernateDAO implements PlanoEst
 		criteria.add(Restrictions.eq("dataInicio", criteria2.uniqueResult()));
 		
 		
-		///criteria.add(Restrictions.eq("idplanoEstudo.idAluno", idAluno));
-		
-		//return (Integer) c.uniqueResult();  
-		
-		
-		//criteria.add(Restrictions.eq("idplanoEstudo", key));
 		List<PlanoEstudo> result = criteria.list();
 		return result;
 	}
@@ -127,6 +124,7 @@ public class PlanoEstudoDAOImpl extends AbstractHibernateDAO implements PlanoEst
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanoEstudoDAO#TodosPlanoEstudos(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<PlanoEstudo> TodosPlanoEstudos(int idAluno){
 		Criteria criteria = getSession().createCriteria(PlanoEstudo.class);
 		criteria.createAlias("aluno", "aluno");

@@ -43,6 +43,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProducaoAluno> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
@@ -84,6 +85,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProducaoAluno> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.add(Restrictions.eq("idproducaoAluno", key));
@@ -95,6 +97,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listarFiltro(int, int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProducaoAluno> listarFiltro(int id, int tipo, int roteiro){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.createAlias("aluno", "aluno");
@@ -113,6 +116,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listarAluno(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProducaoAluno> listarAluno(int id){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.createAlias("aluno", "aluno");
@@ -124,6 +128,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listarPortifolio(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProducaoAluno> listarPortifolio(int id){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.createAlias("aluno", "aluno");
@@ -138,6 +143,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#listaAlunoRoteiroTipo(int, int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProducaoAluno> listaAlunoRoteiroTipo(int idAluno, int idRoteiro, int idTipo){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.createAlias("aluno", "aluno");
@@ -156,6 +162,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#NCapa(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProducaoAluno> NCapa(int id){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.add(Restrictions.isNotNull("capa"));

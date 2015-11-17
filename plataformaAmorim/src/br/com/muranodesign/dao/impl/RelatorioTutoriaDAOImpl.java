@@ -43,6 +43,7 @@ public class RelatorioTutoriaDAOImpl extends AbstractHibernateDAO implements Rel
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RelatorioTutoriaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RelatorioTutoria> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(RelatorioTutoria.class);
@@ -84,6 +85,7 @@ public class RelatorioTutoriaDAOImpl extends AbstractHibernateDAO implements Rel
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RelatorioTutoriaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RelatorioTutoria> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(RelatorioTutoria.class);
 		criteria.add(Restrictions.eq("idrelatorioTutoria", key));
@@ -95,6 +97,7 @@ public class RelatorioTutoriaDAOImpl extends AbstractHibernateDAO implements Rel
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RelatorioTutoriaDAO#listarTutoriaAluno(int, int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RelatorioTutoria> listarTutoriaAluno(int tutoria, int aluno){
 		Criteria criteria = getSession().createCriteria(RelatorioTutoria.class);
 		criteria.createAlias("aluno", "aluno");
@@ -106,10 +109,5 @@ public class RelatorioTutoriaDAOImpl extends AbstractHibernateDAO implements Rel
 	}
 	
 
-
-
-
-
-	
 
 }

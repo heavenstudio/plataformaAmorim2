@@ -19,6 +19,11 @@ public class SessaoForumGeralDAOImpl extends AbstractHibernateDAO implements
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.SessaoForumGeralDAO#listAll()
+	 */
+	@SuppressWarnings("unchecked")
 	public List<SessaoForumGeral> listAll() {
 
 		Criteria criteria = getSession().createCriteria(SessaoForumGeral.class);
@@ -27,6 +32,10 @@ public class SessaoForumGeralDAOImpl extends AbstractHibernateDAO implements
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.SessaoForumGeralDAO#criar(br.com.muranodesign.model.SessaoForumGeral)
+	 */
 	public void criar(SessaoForumGeral c) {
 		synchronized (SessaoForumGeralDAOImpl.class) {
 			getSession().persist(c);
@@ -35,16 +44,29 @@ public class SessaoForumGeralDAOImpl extends AbstractHibernateDAO implements
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.SessaoForumGeralDAO#deletar(br.com.muranodesign.model.SessaoForumGeral)
+	 */
 	public void deletar(SessaoForumGeral c) {
 		getSession().delete(c);
 		getSession().flush();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.SessaoForumGeralDAO#atualizar(br.com.muranodesign.model.SessaoForumGeral)
+	 */
 	public void atualizar(SessaoForumGeral p) {
 		getSession().merge(p);
 		getSession().flush();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.SessaoForumGeralDAO#listarKey(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<SessaoForumGeral> listarKey(int key) {
 		Criteria criteria = getSession().createCriteria(SessaoForumGeral.class);
 		criteria.add(Restrictions.eq("idSessaoForum", key));

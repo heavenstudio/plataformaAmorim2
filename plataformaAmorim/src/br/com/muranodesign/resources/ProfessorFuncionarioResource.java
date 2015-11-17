@@ -129,6 +129,29 @@ public class ProfessorFuncionarioResource {
 		
 	}
 	
+	
+	@Path("ProfessorNomeId/")
+	@GET
+	@Produces("application/json")
+	public List<ProfessorFuncionario> getProfessorNomeId(){
+		return new ProfessorFuncionarioService().listarIdNome();
+	}
+	
+	@Path("ProfessorUpdate/")
+	@POST
+	@Produces("text/plain")
+	public String ProfessorUpdate(@FormParam("id") int id, @FormParam("nome") String nome){
+		
+		ProfessorFuncionario result = new ProfessorFuncionario();
+		
+		ProfessorFuncionario prof = new ProfessorFuncionarioService().listarkey(id).get(0);
+		prof.setNome(nome);
+		
+		result = new ProfessorFuncionarioService().atualizarProfessorFuncionario(prof);
+		
+		return Integer.toString(result.getIdprofessorFuncionario());
+	}
+	
 
 	/**
 	 * Removes the professor funcionario.
@@ -156,6 +179,8 @@ public class ProfessorFuncionarioResource {
 		}
 
 	}
+	
+	
 
 	/**
 	 * Criar e alterar professor funcionario

@@ -43,6 +43,7 @@ public class TipoRecursoAprendizagemDAOImpl extends AbstractHibernateDAO impleme
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TipoRecursoAprendizagemDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TipoRecursoAprendizagem> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(TipoRecursoAprendizagem.class);
@@ -84,6 +85,7 @@ public class TipoRecursoAprendizagemDAOImpl extends AbstractHibernateDAO impleme
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TipoRecursoAprendizagemDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TipoRecursoAprendizagem> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(TipoRecursoAprendizagem.class);
 		criteria.add(Restrictions.eq("idtipoRecursoAprendizagem", key));

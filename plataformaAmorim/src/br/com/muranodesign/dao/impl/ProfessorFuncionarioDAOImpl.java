@@ -46,10 +46,8 @@ public class ProfessorFuncionarioDAOImpl extends AbstractHibernateDAO implements
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProfessorFuncionarioDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionario> listAll() {
-		
-		//Criteria criteria = getSession().createCriteria(ProfessorFuncionario.class);
-		//List<ProfessorFuncionario> result = criteria.list();
 		
 		
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionario.class);
@@ -97,6 +95,7 @@ public class ProfessorFuncionarioDAOImpl extends AbstractHibernateDAO implements
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProfessorFuncionarioDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionario> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionario.class);
 		criteria.add(Restrictions.eq("idprofessorFuncionario", key));
@@ -104,7 +103,22 @@ public class ProfessorFuncionarioDAOImpl extends AbstractHibernateDAO implements
 		return result;
 	}
 	
-	
-
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ProfessorFuncionarioDAO#listarIdNome()
+	 */
+	public List<ProfessorFuncionario> listarIdNome(){
+		Criteria criteria = getSession().createCriteria(ProfessorFuncionario.class);
+		 ProjectionList projList = Projections.projectionList();  
+		 projList.add(Projections.property("idprofessorFuncionario"),"idprofessorFuncionario"); 
+		 projList.add(Projections.property("nome"),"nome"); 
+		 
+		 criteria.setProjection(projList);
+		    
+		 criteria.setResultTransformer(Transformers.aliasToBean(ProfessorFuncionario.class));  
+		 List<ProfessorFuncionario> results = criteria.list();
+		
+		 return results;
+	}
 	
 }

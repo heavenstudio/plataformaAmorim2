@@ -10,6 +10,7 @@
 package br.com.muranodesign.resources;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -89,6 +90,33 @@ public class AlunoResource {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	@Path("AlunosNomeId/")
+	@GET
+	@Produces("application/json")
+	public List<Aluno> getAlunosNomeId(){
+		return new AlunoService().ListarNomeId();
+	}
+	
+	
+	@Path("AlunoUpdate/")
+	@POST
+	@Produces("text/plain")
+	public String AlunoUpdate(@FormParam("id") int id, @FormParam("nome") String nome){
+		
+		Aluno result = new Aluno();
+		
+		Aluno aluno = new AlunoService().listarkey(id).get(0);
+		aluno.setNome(nome);
+		
+		result = new AlunoService().atualizarAluno(aluno);
+		
+		return Integer.toString(result.getIdAluno());
+	}
+	
+	/**
 	 * Lista aluno por intervalo de ids
 	 * @param primeiro
 	 * @param ultimo
@@ -99,7 +127,7 @@ public class AlunoResource {
 	@Produces("application/json")
 	public String getHtmlAluno(@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
 		List<Aluno> alunos;
-		List<AlunoVariavel> variavel;
+		List<AlunoVariavel> variavel = new ArrayList<AlunoVariavel>();
 		alunos = new AlunoService().listIntervalo(primeiro, ultimo);
 		int qtd = alunos.size();
 		String html = "";

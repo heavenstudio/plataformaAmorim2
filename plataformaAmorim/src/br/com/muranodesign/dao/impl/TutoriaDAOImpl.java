@@ -46,6 +46,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
@@ -88,6 +89,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.add(Restrictions.eq("idtutoria", key));
@@ -99,6 +101,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listarProfessor(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarProfessor(String tutoria){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.add(Restrictions.eq("tutoria", tutoria));
@@ -110,6 +113,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listarProfessorId(int, java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarProfessorId(int tutor, String ano){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.createAlias("tutor", "tutor");
@@ -125,6 +129,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listarProfessorId(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarProfessorId(int tutor){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.createAlias("tutor", "tutor");
@@ -137,6 +142,8 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listarAno(java.lang.String)
 	 */
+	
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarAno(String ano){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.createAlias("anoLetivo", "anoLetivo");
@@ -152,6 +159,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listarAnoid(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarAnoid(int id){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.add(Restrictions.eq("anoLetivo", id)); 
@@ -165,6 +173,7 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TutoriaDAO#listarPerido(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarPeriodo(int id){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
 		criteria.createAlias("periodo", "periodo");
@@ -174,6 +183,11 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.TutoriaDAO#listarDadosPertinentes()
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarDadosPertinentes(){
 		
 		Criteria criteria = getSession().createCriteria(Tutoria.class);

@@ -96,6 +96,19 @@ public class ProfessorFuncionarioService {
 		pc.commitAndClose();
 		return p;
 	}
+	
+	/**
+	 * Listar apenas id e nome de professor funcionario
+	 * @return
+	 */
+	public List<ProfessorFuncionario> listarIdNome(){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ProfessorFuncionarioDAO dao = DAOFactory.getProfessorFuncionarioDAO(pc);
+		List<ProfessorFuncionario> result = dao.listarIdNome();
+				
+		pc.commitAndClose();
+		return result;
+	}
 
 	
 }

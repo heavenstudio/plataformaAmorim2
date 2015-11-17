@@ -13,7 +13,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import br.com.muranodesign.dao.AlunoDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
@@ -136,6 +139,23 @@ public class AlunoDAOImpl extends AbstractHibernateDAO implements AlunoDAO {
 	}
 
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoDAO#ListarNomeId()
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Aluno> ListarNomeId(){
+		Criteria criteria = getSession().createCriteria(Aluno.class);
+		 ProjectionList projList = Projections.projectionList();  
+		 projList.add(Projections.property("idAluno"),"idAluno"); 
+		 projList.add(Projections.property("nome"),"nome"); 
+		 
+		 criteria.setProjection(projList);
+		    
+	    criteria.setResultTransformer(Transformers.aliasToBean(Aluno.class));  
+	    List<Aluno> results = criteria.list();
+	    
+	    return results;
+	}
 
 }

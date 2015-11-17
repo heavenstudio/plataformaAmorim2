@@ -43,6 +43,7 @@ public class TipoProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Ti
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TipoProducaoAlunoDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TipoProducaoAluno> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(TipoProducaoAluno.class);
@@ -84,6 +85,7 @@ public class TipoProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Ti
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.TipoProducaoAlunoDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TipoProducaoAluno> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(TipoProducaoAluno.class);
 		criteria.add(Restrictions.eq("idtipoProducaoAluno", key));
@@ -91,14 +93,6 @@ public class TipoProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Ti
 		return result;
 	}
 
-	
 
-	
-
-
-
-
-
-	
 
 }

@@ -133,9 +133,33 @@ public interface AlunoVariavelDAO {
 		 */
 		public void update(int id, int grupo);
 		
+		/**
+		 * 
+		 * @param i
+		 * @param primeiro
+		 * @param ultimo
+		 * @return
+		 */
 		public List<AlunoVariavel> ListarCicloAno(List<Integer> i,int primeiro,int ultimo);
 		
+		/**
+		 * 
+		 * @param i
+		 * @param periodo
+		 * @param primeiro
+		 * @param ultimo
+		 * @return
+		 */
 		public List<AlunoVariavel> ListarCicloAnoPeriodo(List<Integer> i,int periodo,int primeiro,int ultimo);
 		
+		/**
+		 * 
+		 * @param id
+		 * @param primeiro
+		 * @param ultimo
+		 * @return
+		 */
 		public List<AlunoVariavel> ListarRangePeriodo(int id, int primeiro,int ultimo);
+		
+		
 }

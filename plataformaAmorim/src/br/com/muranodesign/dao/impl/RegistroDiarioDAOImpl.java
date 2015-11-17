@@ -45,6 +45,7 @@ public class RegistroDiarioDAOImpl extends AbstractHibernateDAO implements Regis
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RegistroDiarioDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RegistroDiario> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(RegistroDiario.class);
@@ -86,6 +87,7 @@ public class RegistroDiarioDAOImpl extends AbstractHibernateDAO implements Regis
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RegistroDiarioDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RegistroDiario> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(RegistroDiario.class);
 		criteria.add(Restrictions.eq("idregistroDiario", key));
@@ -97,6 +99,7 @@ public class RegistroDiarioDAOImpl extends AbstractHibernateDAO implements Regis
  * (non-Javadoc)
  * @see br.com.muranodesign.dao.RegistroDiarioDAO#listarPlanoEstudo(int)
  */
+	@SuppressWarnings("unchecked")
 	public List<RegistroDiario> listarPlanoEstudo(int id){
 		Criteria criteria = getSession().createCriteria(RegistroDiario.class);
 		criteria.createAlias("planoEstudo", "planoEstudo");
@@ -109,6 +112,7 @@ public class RegistroDiarioDAOImpl extends AbstractHibernateDAO implements Regis
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RegistroDiarioDAO#listarUltimo()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RegistroDiario> listarUltimo(){
 		Criteria criteria = getSession().createCriteria(RegistroDiario.class);
 		criteria.setProjection(Projections.max("data")); 
@@ -120,6 +124,7 @@ public class RegistroDiarioDAOImpl extends AbstractHibernateDAO implements Regis
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.RegistroDiarioDAO#listarMes(java.util.Date, java.util.Date)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RegistroDiario> listarMes(Date ini, Date fim){
 		Criteria criteria = getSession().createCriteria(RegistroDiario.class);
 		criteria.add(Restrictions.between("data", ini, fim));
@@ -127,6 +132,11 @@ public class RegistroDiarioDAOImpl extends AbstractHibernateDAO implements Regis
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RegistroDiarioDAO#listaPlanoEstudoDara(int, java.util.Date)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<RegistroDiario> listaPlanoEstudoDara(int id, Date data){
 		Criteria criteria = getSession().createCriteria(RegistroDiario.class);
 		criteria.createAlias("planoEstudo", "planoEstudo");

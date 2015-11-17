@@ -154,11 +154,9 @@ public class Usuario extends JerseyTest  {
 	
 	@Test
 	public void insert2() {
-		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Grupo");
-	webResource.post("action=create&status=0&anoEstudo=0&periodo=M&idProfessor=52&lider=0&id=0&idPeriodo=8&ciclo=C1");
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Blog");
+	webResource.post("action=create&id=&titulo=Lorem&oficina=43&anoEstudo=37&Descricao=Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed nibh eu ex tempor ullamcorper. Phasellus mi velit, tincidunt et diam sit amet, volutpat ullamcorper enim. In non tincidunt dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam ut facilisis enim, vel molestie augue. Aenean id mattis justo. Nam vel arcu posuere, faucibus risus quis, rhoncus leo. Nulla facilisi. Sed in purus purus. Pellentesque fringilla ipsum eget tortor ultricies, eget tincidunt lacus tempor. Vivamus molestie imperdiet risus nec feugiat. Curabitur ipsum risus, malesuada nec tincidunt non, aliquet finibus ligula. Ut vel dolor sit amet nunc sollicitudin egestas vel at justo. Morbi ante nunc, consequat sed faucibus id, mollis vitae lacus. Suspendisse pretium, diam ac semper vestibulum, dolor arcu hendrerit felis, ut porta lorem mi non nisl. Curabitur vitae aliquam risus, at tristique lectus. Proin sagittis accumsan elit, ut efficitur ipsum euismod sit amet. Vestibulum ornare lorem et sem condimentum iaculis. Quisque et felis eget ligula gravida sagittis vestibulum et lorem. Suspendisse fringilla gravida purus nec eleifend. Duis bibendum tellus a sapien aliquam lacinia. Etiam semper gravida lorem, sit amet commodo felis lobortis eu. Nulla imperdiet elit et nunc tincidunt ultrices. Vestibulum vel urna augue. Pellentesque iaculis, magna ut porta mollis, nisi purus rhoncus massa, quis imperdiet felis tellus quis erat. Nulla facilisi. Etiam fermentum, nulla quis sodales gravida, ligula ex vulputate eros, vel commodo erat diam eget risus. Nullam malesuada augue eleifend, aliquet mauris dictum, mollis nisl. Donec consequat mauris arcu, ac ornare ante fringilla et. Nulla velit eros, vehicula ut nisl sit amet, convallis ultrices velit. Nulla lacus elit, mattis quis venenatis posuere, fringilla ac turpis. Praesent vel pharetra erat, non sollicitudin lorem.");
 
-	
-	
 	}
 	/*
 	@Test

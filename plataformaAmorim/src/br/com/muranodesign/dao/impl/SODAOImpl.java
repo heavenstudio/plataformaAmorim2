@@ -18,6 +18,11 @@ public class SODAOImpl extends AbstractHibernateDAO implements SODAO {
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.SODAO#listAll()
+	 */
+	@SuppressWarnings("unchecked")
 	public List<SO> listAll(){
 		Criteria criteria = getSession().createCriteria(SO.class);
 		List<SO> result = criteria.list();
@@ -57,7 +62,7 @@ public class SODAOImpl extends AbstractHibernateDAO implements SODAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.SODAO#listarKey(int)
 	 */
-	//era int
+	@SuppressWarnings("unchecked")
 	public List<SO> listarSo(String so){
 		Criteria criteria = getSession().createCriteria(SO.class);
 		criteria.add(Restrictions.eq("so", so));
@@ -65,6 +70,11 @@ public class SODAOImpl extends AbstractHibernateDAO implements SODAO {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.SODAO#listarid(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<SO> listarid(int idso){
 		Criteria criteria = getSession().createCriteria(SO.class);
 		criteria.add(Restrictions.eq("idso", idso));

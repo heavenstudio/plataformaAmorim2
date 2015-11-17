@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 @Entity
 @Table(name = "blog")
 @XmlRootElement
@@ -29,6 +30,8 @@ public class Blog implements Serializable{
 	 
 	 @Column(name = "Descricao")
 	 private String Descricao;
+	 
+	 
 	 
 	 @Column(name = "imagem")
 	 private String imagem;
@@ -90,7 +93,10 @@ public class Blog implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	 
+
+
+
+	
 	 
 	 
 	 

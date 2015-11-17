@@ -43,6 +43,7 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.UsuarioDAO#listAll()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Usuario> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Usuario.class);
@@ -84,6 +85,7 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 	/* (non-Javadoc)
 	 * @see br.com.muranodesign.dao.UsuarioDAO#listarKey(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Usuario> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Usuario.class);
 		criteria.add(Restrictions.eq("idusuario", key));
@@ -91,6 +93,11 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.UsuarioDAO#listarUsuario(java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> listarUsuario(String usuario) {
 		
@@ -101,6 +108,11 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.UsuarioDAO#listaAluno(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Usuario> listaAluno(int idAluno){
 		Criteria criteria = getSession().createCriteria(Usuario.class);
 		criteria.createAlias("aluno", "aluno");
@@ -109,6 +121,11 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.UsuarioDAO#listarProfessor(int)
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Usuario> listarProfessor(int idProfessor){
 		Criteria criteria = getSession().createCriteria(Usuario.class);
 		criteria.createAlias("professor", "professor");
@@ -117,6 +134,10 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.UsuarioDAO#updateUser(java.lang.String, int)
+	*/
 	public void updateUser(String senha,int id){
 		Query query = getSession().getNamedQuery("Usuario.UPDATE");
 		query.setParameter("senha", senha);
@@ -125,6 +146,11 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 		query.executeUpdate();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.UsuarioDAO#listaUsuarioEmail(java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> listaUsuarioEmail(String email) {
 		Criteria criteria = getSession().createCriteria(Usuario.class);

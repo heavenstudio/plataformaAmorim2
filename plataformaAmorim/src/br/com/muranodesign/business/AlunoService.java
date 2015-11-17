@@ -128,6 +128,15 @@ public class AlunoService {
 		return p;
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Aluno> ListarNomeId(){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoDAO dao = DAOFactory.getAlunoDAO(pc);
+		List<Aluno> result = dao.ListarNomeId();
+		pc.commitAndClose();
+		return result;
+	}
 }

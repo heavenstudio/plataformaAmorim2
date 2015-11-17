@@ -125,42 +125,7 @@ public class ForumQuestaoDAOImpl extends AbstractHibernateDAO implements ForumQu
 	public List<ForumQuestao> Range(String data2, String data){
 		
 		StringUtil stringUtil = new StringUtil();
-		/*
-		Date dataHoje = new Date();
-		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
-		String data = formataData.format(dataHoje);
-		StringUtil stringUtil = new StringUtil();
 		
-		Calendar c = Calendar.getInstance();
-		int dia = c.get(Calendar.DAY_OF_MONTH);
-		String data2;
-		if(dia > 7){
-			dia = dia - 7;
-			String quebra[] = data.split("-");
-			
-			if(dia > 10){
-				//data2 = Integer.toString(dia)+"-"+quebra[1]+"-"+quebra[2];
-				data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(dia);
-			}else{
-				data2 = quebra[0]+"-"+quebra[1]+"-"+"0"+Integer.toString(dia);
-			}
-			
-		}else{
-			int aux = 30;
-			dia = dia - 7;
-			aux = aux + dia;
-			
-			String quebra[] = data.split("/");
-			int mes = Integer.parseInt(quebra[1]);
-			mes = mes + 1;
-			
-			//data2 = Integer.toString(aux)+"/"+Integer.toString(mes)+"/"+quebra[2];
-			data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(aux);
-			
-		}
-		
-		System.out.print("inicio "+stringUtil.converteStringData(data2));
-		System.out.print("fim "+stringUtil.converteStringData(data));*/
 		
 		
 		Criteria criteria = getSession().createCriteria(ForumQuestao.class);
