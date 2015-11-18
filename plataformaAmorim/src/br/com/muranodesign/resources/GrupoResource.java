@@ -121,7 +121,6 @@ public class GrupoResource {
 		
 		Grupo grupo = new Grupo();
 		grupo = new GrupoService().listarUltimo(ano, periodo).get(0);
-		String num = grupo.getNomeGrupo().substring(2);
 		
 		
 		return new GrupoService().listarUltimo(ano, periodo);
@@ -139,7 +138,7 @@ public class GrupoResource {
 		logger.info("Lista Grupo  por id tutoria" + id);
 		 
 		List<Grupo> resultado  = new GrupoService().listarTutor(id);
-		Grupo evento =  new Grupo();
+		
 		resultado.get(0);
 
 		return resultado;
@@ -278,7 +277,7 @@ public class GrupoResource {
 				
 				grupo = retornoGrupo.get(0);
 				String num = grupo.getNomeGrupo().substring(3);
-				System.out.println(num);
+			
 				
 				
 				numResult = 1 + Integer.parseInt(num);

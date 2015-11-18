@@ -35,9 +35,7 @@ public class Auth {
     @Produces("text/plain")
   
     public String authText(@FormParam("userName") String user, @FormParam("password") String pass){
-        /*System.out.println("authText");
-        System.out.println("userName : " + user);
-        System.out.println("password : " + pass);*/
+        
     	return String.format("%d", session(user, pass));
     }
  
@@ -51,7 +49,7 @@ public class Auth {
     @POST
     @Produces("text/xml")
     public String authXML(@FormParam("user") String user, @FormParam("pass") String pass){
-    	//System.out.println("authXML");
+    	
         return String.format("<?xml version=\"1.0\" encoding=\"UTF-8\"?><auth username=\"%s\">%d</auth>", user, session(user, pass));
     }
  
@@ -64,9 +62,7 @@ public class Auth {
      * @return -1 se a auth falha com long caso contrario
      */
     private long session(String user, String pass){
-    	/*System.out.println("session");
-        System.out.println(user);
-        System.out.println(pass);*/
+    	
         if(user.equals(pass)){
             return System.nanoTime();
         }

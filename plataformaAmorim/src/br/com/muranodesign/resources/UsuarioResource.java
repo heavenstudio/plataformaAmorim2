@@ -275,7 +275,7 @@ public class UsuarioResource {
 		m = MessageDigest.getInstance("MD5");
 	
 		m.update(novaSenha.getBytes(),0,novaSenha.length());
-		//System.out.println("MD5: "+new BigInteger(1,m.digest()).toString(16));
+	
 		senhaMD5 = new BigInteger(1,m.digest()).toString(16);
 		CommonsMail commonsMail = new CommonsMail();
 		commonsMail.enviaEmailSimples(usuario.getEmail(), novaSenha, usuario.getLogin());
@@ -381,7 +381,7 @@ public class UsuarioResource {
 					try {
 						m = MessageDigest.getInstance("MD5");
 						m.update(senha.getBytes(),0,senha.length());
-						//System.out.println("MD5: "+new BigInteger(1,m.digest()).toString(16));
+						
 						 senhaMD5 = new BigInteger(1,m.digest()).toString(16);
 						
 					} catch (NoSuchAlgorithmException e) {

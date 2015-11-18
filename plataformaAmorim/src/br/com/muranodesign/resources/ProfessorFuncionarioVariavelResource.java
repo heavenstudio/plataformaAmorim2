@@ -193,8 +193,6 @@ public class ProfessorFuncionarioVariavelResource {
 		ProfessorFuncionarioVariavel objProfessorFuncionarioVariavel = new ProfessorFuncionarioVariavel();
 		logger.info("eventoAction ...");
 		ProfessorFuncionarioVariavel resultado;
-		StringUtil stringUtil = new StringUtil();
-
 		List<ProfessorFuncionario> rsProfessorFuncionario;
 		rsProfessorFuncionario = new ProfessorFuncionarioService().listarkey(Integer.parseInt(professorFuncionario));
 		ProfessorFuncionario objProfessorFuncionario = rsProfessorFuncionario.get(0);
@@ -209,9 +207,6 @@ public class ProfessorFuncionarioVariavelResource {
 
 		if (action.equals("create")) {
 
-			// objProfessorFuncionarioVariavel.setDataInicio(stringUtil.converteStringParaData(dataInicio));
-
-			
 		
 			objProfessorFuncionarioVariavel.setFormacao(formacao);
 		

@@ -104,7 +104,7 @@ public class LoginResource {
 					DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 					Date data = Calendar.getInstance().getTime();
 					String reportDate = df.format(data);
-					System.out.println("Report Date: " + reportDate);
+					
 					
 				
 					

@@ -63,7 +63,7 @@ public class RotinaResource {
 		if(action.equals("delete")){
 			resultado = new RotinaService().deletarRotina(new RotinaService().listarkey(id).get(0));
 		}else if(action.equals("create")){
-			System.out.println("teste");
+			
 			
 			
 			Rotina rotina = new Rotina();

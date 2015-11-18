@@ -23,11 +23,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
-import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CalendarioEventosService;
 import br.com.muranodesign.business.CalendarioService;
 import br.com.muranodesign.business.TipoEventoService;
-import br.com.muranodesign.model.AnoLetivo;
 import br.com.muranodesign.model.Calendario;
 import br.com.muranodesign.model.CalendarioEventos;
 import br.com.muranodesign.model.TipoEvento;
@@ -180,11 +178,6 @@ public class CalendarioEventosResource {
 		
 		
 		
-		List<AnoLetivo> rsAnoLetivo;
-		rsAnoLetivo = new AnoLetivoService().listarkey(Integer.parseInt(anoLetivo));
-		AnoLetivo objAnoLetivo= rsAnoLetivo.get(0);
-		
-		
 		Calendario objCalendario = null;
 		
 		if (!calendario.isEmpty()) {
@@ -205,7 +198,7 @@ public class CalendarioEventosResource {
 			objCalendarioEventos.setEvento(evento);
 			objCalendarioEventos.setDescricao(descricao);
 			
-			//objCalendarioEventos.setAnoLetivo(objAnoLetivo);
+			
 			objCalendarioEventos.setTipoEvento(objTipoEvento);
 			if (!calendario.isEmpty()) {
 			objCalendarioEventos.setCalendario(objCalendario);
@@ -226,7 +219,7 @@ public class CalendarioEventosResource {
 			objCalendarioEventos.setEvento(evento);
 			objCalendarioEventos.setDescricao(descricao);
 			
-			//objCalendarioEventos.setAnoLetivo(objAnoLetivo);
+		
 			objCalendarioEventos.setTipoEvento(objTipoEvento);
 			if (!calendario.isEmpty()) {
 			objCalendarioEventos.setCalendario(objCalendario);

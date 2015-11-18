@@ -98,11 +98,11 @@ public class ChamadaResource {
 	public List<Chamada> getPrecenca(@PathParam("idAluno") int idAluno , @PathParam("precenca") int precenca ) {
 		logger.info("Buscar precenca por id do Aluno " + idAluno);
 		
-		//int id = Integer.parseInt(strid);
+		
 		List<Aluno> rsAluno;
 		rsAluno = new AlunoService().listarkey(idAluno);
 		Aluno objAluno = null;
-		Chamada chamada = null;
+		
 		List<Chamada> resultado = null;
 		if (! rsAluno.isEmpty()){
 			objAluno = rsAluno.get(0);
@@ -179,7 +179,7 @@ public class ChamadaResource {
 			data = Integer.toString(ano) + "-" + Integer.toString(mes) + "-" +  Integer.toString(dia);
 		}
 		
-		System.out.println(data);
+		
 		
 		String texto = data.replaceAll("-", "/");
 		
@@ -236,11 +236,11 @@ public class ChamadaResource {
 	public int getPrecencaTotal(@PathParam("idAluno") int idAluno , @PathParam("precenca") int precenca ) {
 		logger.info("Buscar precenca por id do Aluno " + idAluno);
 		
-		//int id = Integer.parseInt(strid);
+		
 		List<Aluno> rsAluno;
 		rsAluno = new AlunoService().listarkey(idAluno);
 		Aluno objAluno = null;
-		Chamada chamada = null;
+	
 		int total = 0;
 		if (! rsAluno.isEmpty()){
 			objAluno = rsAluno.get(0);

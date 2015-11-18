@@ -175,7 +175,7 @@ public class ForumQuestaoResource {
 		Date dataHoje = new Date();
 		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
 		String data = formataData.format(dataHoje);
-		//StringUtil stringUtil = new StringUtil();
+	
 		
 		Calendar c = Calendar.getInstance();
 		int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -185,7 +185,7 @@ public class ForumQuestaoResource {
 			String quebra[] = data.split("-");
 			
 			if(dia > 10){
-				//data2 = Integer.toString(dia)+"-"+quebra[1]+"-"+quebra[2];
+			
 				data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(dia);
 			}else{
 				data2 = quebra[0]+"-"+quebra[1]+"-"+"0"+Integer.toString(dia);
@@ -200,13 +200,12 @@ public class ForumQuestaoResource {
 			int mes = Integer.parseInt(quebra[1]);
 			mes = mes - 1;
 			
-			//data2 = Integer.toString(aux)+"/"+Integer.toString(mes)+"/"+quebra[2];
+			
 			data2 = quebra[0]+"-"+Integer.toString(mes)+"-"+Integer.toString(aux);
 			
 		}
 		
-		//System.out.print("inicio "+stringUtil.converteStringData(data2));
-		//System.out.print("fim "+stringUtil.converteStringData(data));
+		
 		
 		return new ForumQuestaoService().Range(data2,data);
 	}
@@ -234,7 +233,7 @@ public class ForumQuestaoResource {
 				String quebra[] = data.split("-");
 				
 				if(dia > 10){
-					//data2 = Integer.toString(dia)+"-"+quebra[1]+"-"+quebra[2];
+					;
 					data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(dia);
 				}else{
 					data2 = quebra[0]+"-"+quebra[1]+"-"+"0"+Integer.toString(dia);
@@ -249,13 +248,12 @@ public class ForumQuestaoResource {
 				int mes = Integer.parseInt(quebra[1]);
 				mes = mes - 1;
 				
-				//data2 = Integer.toString(aux)+"/"+Integer.toString(mes)+"/"+quebra[2];
+				
 				data2 = quebra[0]+"-"+Integer.toString(mes)+"-"+Integer.toString(aux);
 				
 			}
 			
-			//System.out.print("inicio "+stringUtil.converteStringData(data2));
-			//System.out.print("fim "+stringUtil.converteStringData(data));
+			
 			
 			return new ForumQuestaoService().Range(data2,data).size();
 		}
@@ -319,8 +317,8 @@ public class ForumQuestaoResource {
 	@GET
 	@Produces("application/json")
 	public List<ForumQuestao> getTopN(@PathParam("qtd") int qtd){
-		List<ForumQuestao> result;
-    	return result = new ForumQuestaoService().topN(qtd);
+		
+    	return new ForumQuestaoService().topN(qtd);
 		
 	}
 

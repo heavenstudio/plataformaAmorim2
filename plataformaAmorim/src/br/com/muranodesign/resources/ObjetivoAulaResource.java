@@ -85,6 +85,23 @@ public class ObjetivoAulaResource {
 		return new ObjetivoAulaService().listarkey(id);
 	}
 	
+	@Path("ListarLazy/{id}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, String> getListarLazy(@PathParam("id") int id){
+		List<ObjetivoAula> objs = new ObjetivoAulaService().listarkey(id);
+		Hashtable<String, String> result = new Hashtable<String, String>();
+		
+		if(!objs.isEmpty()){
+			
+			result.put("idObjetivo", Integer.toString(objs.get(0).getIdobjetivo_aula()));
+			result.put("idRoteiro", Integer.toString(objs.get(0).getRoteiro().getIdroteiro_aula()));
+			result.put("Objetivo", objs.get(0).getObjetivo());
+		}
+		
+		return result;
+	}
+	
 	
 	@Path("ListarPorRoteiroHash/{id}")
 	@GET

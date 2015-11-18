@@ -9,9 +9,7 @@
  */
 
 package br.com.muranodesign.dao.impl;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -163,12 +161,9 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 	@SuppressWarnings("unchecked")
 	public List<Calendario> listarEvento(int id) throws ParseException{
 		
-		DateFormat df = new SimpleDateFormat("yyyyy-MM-dd");
+		
 		Date data = Calendar.getInstance().getTime();
-		String reportDate = df.format(data);
-		
 
-		
 		Criteria criteria = getSession().createCriteria(Calendario.class);
 		criteria.createAlias("tipoEvento", "tipoEvento");
 		criteria.add(Restrictions.eq("tipoEvento.idtipoEvento", id));
@@ -178,6 +173,10 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CalendarioDAO#listarRange()
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Calendario> listarRange(){
 		Criteria criteria = getSession().createCriteria(Calendario.class);

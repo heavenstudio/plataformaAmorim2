@@ -117,7 +117,7 @@ public class CalendarioResource {
 	public List<Calendario> getCalendarioFeriados(@PathParam("ano") int ano) {
 		logger.info("Listar Calendario ...");
 		List<Calendario> resultado;
-		StringUtil stringUtil = new StringUtil();
+		
 		resultado = new CalendarioService().listaFeriado(ano);
 		logger.info("QTD Calendario : " + resultado.size());
 		return resultado;
@@ -137,7 +137,7 @@ public class CalendarioResource {
 		logger.info("Lista Calendario  por id " + id);
 		List<Calendario> resultado;
 		resultado = new CalendarioService().listarEvento(id);
-		System.out.println();
+		
 		
 		return resultado;
 

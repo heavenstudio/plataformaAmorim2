@@ -47,9 +47,9 @@ public class ReportEspeciais {
 				+ " (grupo = idgrupo) where tutoria = " + id +" ) as alungrupTut) on (alungrupTut.id_aluno = planejamento_roteiro.id_aluno)";
 		List<Object[]> entities_percent ;
 		
-		//System.out.println("query:" +  QUERY);
+		
 		entities_percent = new NativeQueryService().listar(QUERY);
-		//System.out.println(entities_percent.isEmpty());
+		
 		   for (Object[] entity : entities_percent) {
 			  
 			   ReportStatusPlanoEstudos reportStatusPlanoEstudos = new ReportStatusPlanoEstudos();
@@ -85,7 +85,7 @@ public class ReportEspeciais {
 				+ " ( SELECT idtutoria FROM `tutoria` WHERE tutoria.tutor = "+ id + " ))";
 		List<Object[]> entities ;
 		
-		System.out.println("query:" +  QUERY);
+		
 		entities = new NativeQueryService().listar(QUERY);
 		
 		String retorno = "0";

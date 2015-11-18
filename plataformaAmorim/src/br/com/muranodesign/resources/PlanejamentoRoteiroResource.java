@@ -102,15 +102,10 @@ public class PlanejamentoRoteiroResource {
 	@Produces("application/json")
 	public List<PlanejamentoRoteiro> getPlanejamento(@PathParam("id") int id){
 		logger.info("Lista PlanoEstudo  por id " + id);
-		List<PlanejamentoRoteiro> resultado = new ArrayList<PlanejamentoRoteiro>();
+	
 		List<PlanejamentoRoteiro> retorno = new PlanejamentoRoteiroService().listarPlanoEstudo(id);
 		
-	/*	int quantidade = retorno.size();
-		for(int i = 0; i < quantidade; i++){
-			if(!retorno.get(i).getStatus().equals("1")){
-				resultado.add(retorno.get(i));
-			}
-		}*/
+
 		
 		return retorno;
 	}
@@ -125,17 +120,10 @@ public class PlanejamentoRoteiroResource {
 	@GET
 	@Produces("application/json")
 	public Hashtable<String, Long> ObjetivoAluno(@PathParam("id") int id){
-		//List<PlanejamentoRoteiro> resultadoTotal;
-		//List<PlanejamentoRoteiro> resultadoCompletos;
-		//List<PlanejamentoRoteiro> resultadoCorrigidos;
-		int quantidade;
+		
 		long total = 0, completos = 0, corrigidos = 0, resultadoTotal = 0, resultadoCompletos = 0, resultadoCorrigidos =0;
 		Hashtable<String, Long> retorno = new Hashtable<String, Long>();
 		
-		
-		//quantidade = resultadoTotal.size();
-		//quantidade = resultadoCompletos.size();
-		//quantidade = resultadoCorrigidos.size();
 		
 		resultadoTotal = new PlanejamentoRoteiroService().listarAlunoTotal(id);
 		total = total + resultadoTotal;
@@ -163,7 +151,7 @@ public class PlanejamentoRoteiroResource {
 	@Produces("application/json")
 	public Hashtable<String, Integer> ObjetivoAlunoProfessor(@PathParam("id") int id){
 		Hashtable<String, Integer> retorno = new Hashtable<String, Integer>();
-		int total = 0, completos = 0, corrigidos = 0, resultadoTotal = 0, resultadoCompletos = 0, resultadoCorrigidos =0;
+		int total = 0, completos = 0, corrigidos = 0;
 		List<AlunoVariavel> alunos = new ArrayList<AlunoVariavel>();
 
 		List<Grupo> grupos = new ArrayList<Grupo>();
@@ -176,19 +164,7 @@ public class PlanejamentoRoteiroResource {
 		List<Objetivo> objetivotoltal = new ArrayList<Objetivo>();
 		
 		List<PlanejamentoRoteiro> planos = new ArrayList<PlanejamentoRoteiro>();
-		List<PlanejamentoRoteiro> planosTotal = new ArrayList<PlanejamentoRoteiro>();
-		/*
-		List<PlanejamentoRoteiro> planejamentoRoteirosentregues = new ArrayList<PlanejamentoRoteiro>();
-		List<PlanejamentoRoteiro> planejamentoRoteiroscompletos = new ArrayList<PlanejamentoRoteiro>();
 		
-		
-		List<PlanejamentoRoteiro> planejamentoRoteirosentreguesTotal = new ArrayList<PlanejamentoRoteiro>();
-		List<PlanejamentoRoteiro> planejamentoRoteiroscompletoTotal = new ArrayList<PlanejamentoRoteiro>();
-		
-		List<PlanejamentoRoteiro> planejamentoRoteiroFull = new ArrayList<PlanejamentoRoteiro>();
-		List<PlanejamentoRoteiro> planejamentoRoteiroFullTotal = new ArrayList<PlanejamentoRoteiro>();
-*/
-
 
 		long obj = 0;
 		int qtdAluno = 0;
@@ -216,7 +192,6 @@ public class PlanejamentoRoteiroResource {
 
 				
 				obj = new ObjetivoService().listarGrafico(anos.get(l));
-				//count = count + obj;
 				
 				objetivo = new ObjetivoService().listarEntregues(anos.get(l));
 				objetivotoltal.addAll(objetivo);
@@ -234,37 +209,13 @@ public class PlanejamentoRoteiroResource {
 					corrigidos++;
 				}
 				total++;
-				//planosTotal.addAll(planos);
+				
 			}
 		}
-		/*
-		for(int k = 0; k < count; k++){
-			planejamentoRoteiroscompletos = new PlanejamentoRoteiroService().listarObjetivoCompleto(objetivotoltal.get(k).getIdobjetivo());
-			if(!planejamentoRoteiroscompletos.isEmpty()){
-				planejamentoRoteiroscompletoTotal.add(planejamentoRoteiroscompletos.get(0));
-			}
-		}
-			
-		for(int k = 0; k < count; k++){
-			planejamentoRoteirosentregues = new PlanejamentoRoteiroService().listarObjetivoPendente(objetivotoltal.get(k).getIdobjetivo());
-			if(!planejamentoRoteirosentregues.isEmpty()){
-				planejamentoRoteirosentreguesTotal.add(planejamentoRoteirosentregues.get(0));
-			}
-		}
-	
-		
-		for(int k = 0; k < count; k++){
-			planejamentoRoteiroFull = new PlanejamentoRoteiroService().listarObjetivoTotal(objetivotoltal.get(k).getIdobjetivo());
-			if(!planejamentoRoteiroFull.isEmpty()){
-				planejamentoRoteiroFullTotal.add(planejamentoRoteiroFull.get(0));
-			}
-		}
-		*/
 
-		System.out.println(anos);
-		retorno.put("QuantidadeTotal", total/*planejamentoRoteiroFullTotal.size()*/);
-		retorno.put("QuantidadeCompletos",completos /*planejamentoRoteirosentreguesTotal.size()*/);
-		retorno.put("QuantidadeCorrigidos", corrigidos/*planejamentoRoteiroscompletoTotal.size()*/);
+		retorno.put("QuantidadeTotal", total);
+		retorno.put("QuantidadeCompletos",completos );
+		retorno.put("QuantidadeCorrigidos", corrigidos);
 		
 	return retorno;
 	}
@@ -399,34 +350,6 @@ public class PlanejamentoRoteiroResource {
 			}
 		}
 		
-	
-	
-		/*
-		Hashtable<String, Integer> retorno = new Hashtable<String, Integer>();
-		
-		List<AlunoVariavel> aluno = new AlunoVariavelService().listaAluno(id);
-		
-		List<PlanejamentoRoteiro> resultado = new PlanejamentoRoteiroService().listarIdAluno(aluno.get(0).getAluno().getIdAluno());
-		
-		
-		List<AtribuicaoRoteiroExtra> atribuicao;
-		List<Roteiro> roteiro = new ArrayList<Roteiro>();
-		
-		atribuicao = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(id).get(0));
-		
-		int LimiteAnterior = 0, LimiteProximo = 0;
-		
-		for(int i = 0; i < atribuicao.size(); i++){
-			roteiro.add(atribuicao.get(i).getRoteiro());
-		}
-		
-		for(int i = 0; i < roteiro.size(); i++){
-			if(resultado.get(i).getObjetivo().getAtivo() == 1 && resultado.get(i).getObjetivo().getRoteiro().getIdroteiro() == roteiro.get(i).getIdroteiro() && resultado.get(i).getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() < aluno.get(i).getAnoEstudo().getIdanoEstudo() ){
-				LimiteAnterior++;
-			}else if(resultado.get(i).getObjetivo().getAtivo() == 1 && resultado.get(i).getObjetivo().getRoteiro().getIdroteiro() == roteiro.get(i).getIdroteiro() && resultado.get(i).getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() > aluno.get(i).getAnoEstudo().getIdanoEstudo()){
-				LimiteProximo++;
-			}
-		}*/
 		
 		retorno.put("LimiteAnterior", antes.size());
 		retorno.put("LimiteProximo", depois.size());
@@ -496,7 +419,7 @@ public class PlanejamentoRoteiroResource {
 		
 		int qtd = planos.size();
 		int c = 0;
-		System.out.println(qtd);
+		
 		
 		for(int i = 0; i < qtd; i++){
 			
@@ -549,7 +472,7 @@ public class PlanejamentoRoteiroResource {
 		PlanejamentoRoteiro planejamento = new PlanejamentoRoteiroService().listarkey(id).get(0);
 		PlanejamentoRoteiro resultado;
 		
-		Date data = null;
+		
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 		String k = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
@@ -605,7 +528,7 @@ public class PlanejamentoRoteiroResource {
 		
 		logger.info("eventoAction ...");
 		
-		Date data = null;
+		
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 		String k = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
@@ -656,7 +579,6 @@ public class PlanejamentoRoteiroResource {
 			}
 			objPlanejamentoRoteiro.setIdAluno(Integer.parseInt(idAluno));
 			objPlanejamentoRoteiro.setStatus(status);
-			//objEventoEdit = objEvento;
 			
 			resultado = new PlanejamentoRoteiroService().atualizarPlanejamentoRoteiro(objPlanejamentoRoteiro);
 			

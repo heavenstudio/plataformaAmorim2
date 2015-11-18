@@ -33,8 +33,6 @@ public class ConverteToPdf {
         //step 5
          document.close();
  
-        System.out.println( "PDF Created!" );
-		
 		return "";
 	}
 }

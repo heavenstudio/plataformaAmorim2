@@ -164,11 +164,9 @@ public class RegistroDiarioResource {
 	public List<RegistroDiario> getMes(@PathParam("mes") String mes,@PathParam("ano") String ano) throws ParseException{
 		List<RegistroDiario> resultado = new ArrayList<RegistroDiario>();
 		
-		Date k = new Date();
+	
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		
-		String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
-		Date date = (Date)formatter.parse(data);
+	
 		
 		String ini = "";
 		String fim = "";
@@ -208,14 +206,12 @@ public class RegistroDiarioResource {
 		ini = ini +"/"+mes+"/"+ano;
 		fim = fim +"/"+mes+"/"+ano;
 		
-		System.out.println("Maior dia de Fevereiro:" + c.getActualMaximum(Calendar.DAY_OF_MONTH));  
-		System.out.println("Maior dia de Fevereiro:" + c.getActualMinimum(Calendar.DAY_OF_MONTH));  
+		
 	
 		comeco = (Date)formatter.parse(ini);
 		termino = (Date)formatter.parse(fim);
 		
-		System.out.println(comeco);
-		System.out.println(termino);
+	
 		
 		resultado = new RegistroDiarioService().listarMes(comeco, termino);
 		
@@ -247,29 +243,6 @@ public class RegistroDiarioResource {
 			) throws ParseException {
 		RegistroDiario objRegistroDiario = new RegistroDiario();
 		RegistroDiario resultado;
-		/*
-		Date dataConvertido = null;
-		
-		String data = new Date().toString();
-		
-		
-		//TODO: Ajustar o tratamento de erro
-		DateFormat formatter = new SimpleDateFormat("yy-MM-dd");
-		try {
-			dataConvertido = (Date) formatter.parse(data);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-			
-		}
-		*/
-		/*
-		Date k = null;
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		
-		String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
-		Date date = (Date)formatter.parse(data);
-		*/
 			
 		
 		// get tipo evento
@@ -300,13 +273,12 @@ public class RegistroDiarioResource {
 			List<RegistroDiario> rsRegistroDiario;
 			rsRegistroDiario= new RegistroDiarioService().listarkey(id);
 			objRegistroDiario = rsRegistroDiario.get(0);
-			//objRegistroDiario.setData(date);
+
 			objRegistroDiario.setData(stringUtil.converteStringData(data));
 			objRegistroDiario.setRegistro(registro);
 			objRegistroDiario.setPlanoEstudo(objPlanoEstudo);
 		
 			
-			//objEventoEdit = objEvento;
 			
 			resultado = new RegistroDiarioService().atualizarRegistroDiario(objRegistroDiario);
 			

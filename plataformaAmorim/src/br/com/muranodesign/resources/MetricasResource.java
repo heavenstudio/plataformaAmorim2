@@ -111,7 +111,7 @@ public class MetricasResource {
 		versao.put(10,"Windows 10");
 		
 		for(int i = 1; i <= versao.size(); i++){
-			//hist = historicoSer.listarSo(sistema = sisSer.listarSO(i).get(0));
+			
 			hist = historicoSer.listarSo(sistema = sisSer.listarBySO(i).get(0));
 			
 			Quantidade = hist.size();

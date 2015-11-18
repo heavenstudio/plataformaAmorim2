@@ -86,7 +86,7 @@ public class AuthFilter implements ContainerRequestFilter {
 		try {
 			m = MessageDigest.getInstance("MD5");
 			m.update(lap[1].getBytes(),0,lap[1].length());
-			//System.out.println("MD5: "+new BigInteger(1,m.digest()).toString(16));
+			
 			String senhaMD5 = new BigInteger(1,m.digest()).toString(16);
 			
 			for (Usuario user : resultado) {

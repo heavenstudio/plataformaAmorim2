@@ -33,7 +33,7 @@ public class hteste {
 		    	
 		    	Html2Pdf.convert(texto, os);
 		    	os.close();
-		    	System.out.println(texto);
+		    
 		    	br.close();
 				fr.close();
 		    

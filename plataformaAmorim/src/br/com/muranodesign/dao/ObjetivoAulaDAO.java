@@ -55,5 +55,6 @@ public interface ObjetivoAulaDAO {
 	 * @return
 	 */
 	public List<ObjetivoAula> listarPorRoteiroLazy(int id);
+	
 
 }

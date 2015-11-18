@@ -9,7 +9,6 @@
  */
 package br.com.muranodesign.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -60,9 +59,7 @@ public class RoteiroResource {
 		List<Roteiro> resultado;
 		
 		resultado = new RoteiroService().listarTodos();
-		/*pega a versão do sistema operacional
-		 * System.out.println(System.getProperty("os.name")); 
-		 */
+		
 		
 		logger.info("QTD Roteiro : " + resultado.size());
 		return resultado;
@@ -112,8 +109,7 @@ public class RoteiroResource {
 	public List<AtribuicaoRoteiroExtra> getRoteiroAluno(@PathParam("idAluno") int idAluno, @PathParam("ano") String ano){
 		logger.info("Lista Roteiro  por ano e aluno" + ano + idAluno);
 		List<AtribuicaoRoteiroExtra> resultado;
-		List<Roteiro> roteiros = new ArrayList<Roteiro>();
-		Roteiro roteiro;
+		
 		
 		resultado = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(idAluno).get(0), new AnoLetivoService().listarAnoLetivo(ano).get(0));
 

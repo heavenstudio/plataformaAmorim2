@@ -152,8 +152,6 @@ public class PlanejamentoAulaResource {
 		
 		for (PlanejamentoAula planejamentoAula : resultado) {
 			
-			System.out.println(planejamentoAula.getObjetivoAula().getObjetivo());
-			System.out.println(planejamentoAula.getStatus());
 			
 			Hashtable<String, String> hash = new Hashtable<String, String>();
 			

@@ -78,13 +78,7 @@ public class TutoriaResource {
 		return HtmlContent;
 	}
 	
-	/*
-	@Path("ListarDadosPertinentes")
-	@GET
-	@Produces("application/json")
-	public List<Tutoria> getListarDadosPertinentes(){
-		return new TutoriaService().listarDadosPertinentes();
-	}*/
+
 	
 	@Path("ListarDadosPertinentes")
 	@GET
@@ -230,7 +224,7 @@ public class TutoriaResource {
 		List<Tutoria> tutor = new TutoriaService().listarProfessorId(id);
 		List<Integer> ids = new ArrayList<Integer>();
 		int qtdGrupo = 0;
-		String html = "";
+		
 		
 		grupos = new GrupoService().listarTutor(tutor.get(0).getIdtutoria());
 		qtdGrupo = grupos.size();

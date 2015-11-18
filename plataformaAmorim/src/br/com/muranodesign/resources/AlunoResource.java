@@ -214,7 +214,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public String getHtmlAlunoAno(@PathParam("ano") int ano){
-		List<Aluno> alunos;
+		
 		//alunos = new AlunoService().listarTodos();
 		List<AlunoVariavel> variaveis;
 		variaveis  = new AlunoVariavelService().listaAnoEstudo(new AnoEstudoService().listarkey(ano).get(0));
@@ -250,8 +250,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public String getHtmlAlunoAnoPeriodo(@PathParam("ano") int ano,@PathParam("periodo") int periodo){
-		List<Aluno> alunos;
-	//	alunos = new AlunoService().listarTodos();
+		
 		List<AlunoVariavel> variaveis;
 		variaveis  = new AlunoVariavelService().listaAnoEstudoPeriodo(new AnoEstudoService().listarkey(ano).get(0), new PeriodoService().listarkey(periodo).get(0));
 		int qtd = variaveis.size();
@@ -470,7 +469,6 @@ public class AlunoResource {
 	 * @return string identificador de controle interno da aplicação
 	 */
 	@POST
-	// @Path("upload")
 	@Produces("application/json")
 	public String eventoAction(
 
@@ -934,7 +932,7 @@ public class AlunoResource {
 			if (!ufResponsavel.isEmpty()) {
 				objAluno.setUfResponsavel(ufResponsavel);
 			}
-			// objAluno.setFotoAluno(fotoAluno);
+			
 			if (!sexo.isEmpty()) {
 				objAluno.setSexo(sexo);
 			}

@@ -107,6 +107,7 @@ public class ProfessorFuncionarioDAOImpl extends AbstractHibernateDAO implements
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProfessorFuncionarioDAO#listarIdNome()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionario> listarIdNome(){
 		Criteria criteria = getSession().createCriteria(ProfessorFuncionario.class);
 		 ProjectionList projList = Projections.projectionList();  

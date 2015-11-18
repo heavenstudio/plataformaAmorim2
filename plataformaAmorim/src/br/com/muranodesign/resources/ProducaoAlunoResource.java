@@ -323,7 +323,6 @@ public class ProducaoAlunoResource {
 		ProducaoAluno resultado = null;
 
 		
-		Date k = null;
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 		String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
@@ -341,7 +340,7 @@ public class ProducaoAlunoResource {
 		
 		int t =Integer.parseInt(tipo);
 		
-		List<Roteiro> rsRoteiro;
+
 		Roteiro objRoteiro = new Roteiro();
 		
 		if(roteiro != null){
@@ -359,7 +358,6 @@ public class ProducaoAlunoResource {
 		AnoLetivo objAnoLetivo= rsAnoLetivo.get(0);
 	
 		
-		StringUtil stringUtil = new StringUtil();
 		
 		if (action.equals("create")) {
 		  

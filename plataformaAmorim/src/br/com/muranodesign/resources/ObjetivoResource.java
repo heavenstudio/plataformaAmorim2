@@ -136,9 +136,7 @@ public class ObjetivoResource {
 					.getIdroteiro());
 			total.addAll(obj);
 		}
-		System.out.println(obj);
-
-		System.out.println(total);
+		
 		return total;
 	}
 
@@ -189,8 +187,7 @@ public class ObjetivoResource {
 				.getAnoEstudo().getIdanoEstudo());
 		List<AtribuicaoRoteiroExtra> atribuicao = new AtribuicaoRoteiroExtraService()
 				.listarAluno(aluno.get(0).getAluno());
-		List<PlanejamentoRoteiro> planejamento = new PlanejamentoRoteiroService()
-				.listarIdAluno(aluno.get(0).getAluno().getIdAluno());
+		
 
 		long totalObjetivos = 0;
 
@@ -298,7 +295,7 @@ public class ObjetivoResource {
 		anos.clear();
 		t++;
 
-		System.out.println(t);
+		
 		return retorno;
 	}
 
@@ -356,7 +353,7 @@ public class ObjetivoResource {
 	 * 
 	 * alunosTOTAL.clear(); anos.clear(); t++;
 	 * 
-	 * System.out.println(t); return planejamentoRoteirosTotal.size();
+	 *
 	 * 
 	 * }
 	 */
@@ -412,22 +409,22 @@ public class ObjetivoResource {
 			lista.addAll(retorno1);
 		}
 		for (int j = 0; j <plano.size(); j++) {
-			System.out.println(plano.get(j).getObjetivo().getIdobjetivo().toString());
+			
 			retorno1.add(plano.get(j).getObjetivo().getIdobjetivo().toString());
 			
-			System.out.println(plano.get(j).getObjetivo().getNumero().toString());
+			
 			retorno1.add(plano.get(j).getObjetivo().getNumero().toString());
 
 			if (plano.isEmpty()) {
-				System.out.println("0");
+				
 				retorno1.add("0");
 			} else {
 				if (plano.get(j).getStatus().equals("1") && plano.get(j).getPlanoEstudo().getIdplanoEstudo() != idPlanoEstudo){
-					System.out.println("0");
+					
 					retorno1.add("0");
 
 				}else{
-					System.out.println(plano.get(j).getStatus()+"d");
+					
 					retorno1.add(plano.get(j).getStatus());
 				}
 			}

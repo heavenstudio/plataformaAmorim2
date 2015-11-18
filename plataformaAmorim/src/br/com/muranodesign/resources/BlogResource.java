@@ -44,10 +44,13 @@ public class BlogResource {
 			@FormParam("id") int id,
 			@FormParam("oficina") int oficina,
 			@FormParam("anoEstudo") int anoEstudo,
+			@FormParam("data") String data,
 			@FormParam("titulo") String titulo,
 			@FormParam("Descricao") String Descricao){
 		
 		Blog resultado = new Blog();
+		
+		StringUtil stringUtil = new StringUtil();
 		
 		if(action.equals("delete")){
 			resultado = new BlogService().deletarBlog(new BlogService().listarkey(id).get(0));
@@ -57,6 +60,7 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
+			//blog.setData(stringUtil.converteStringData(data));
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
 			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
@@ -67,6 +71,7 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
+			//blog.setData(stringUtil.converteStringData(data));
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
 			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
@@ -76,6 +81,45 @@ public class BlogResource {
 		return Integer.toString(resultado.getIdblog());
 	}
 	
+	
+	
+	@POST
+	@Path("upload/Blog/{id}")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Blog eventoAction(
+			@PathParam("id") String strId,
+			@FormDataParam("fotoAluno") InputStream uploadedInputStream,
+			@FormDataParam("fotoAluno") FormDataContentDisposition fileDetail
+			){
+		
+		Blog blog = new Blog();
+		int id = Integer.parseInt(strId);
+		List<Blog> Lblog = new BlogService().listarkey(id);
+		blog = Lblog.get(0);
+		
+		// TODO: Criar uma configiracao para o caminho
+		StringUtil stringUtil = new StringUtil();
+		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
+				50);
+		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+
+		Upload upload = new Upload();
+		// save it
+		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
+
+		String anexo = "http://177.55.99.90/files/" + arquivo;
+
+		blog.setImagem(anexo);
+		Blog result = new BlogService().atualizarBloga(blog);
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	@GET
 	@Produces("application/json")
 	public List<Blog> getBlog() {
@@ -86,6 +130,11 @@ public class BlogResource {
 		return resultado;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Path("BlogOficina/{id}")
 	@GET
 	@Produces("application/json")
@@ -95,7 +144,13 @@ public class BlogResource {
 		return obj;
 	}
 
-	
+	/**
+	 * 
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return
+	 */
 	@POST
 	@Path("upload/imagem/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
