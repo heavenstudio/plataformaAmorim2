@@ -107,11 +107,5 @@ public class Blog implements Serializable{
 		this.data = data;
 	}
 
-
-
-	
-	 
-	 
-	 
 	
 }

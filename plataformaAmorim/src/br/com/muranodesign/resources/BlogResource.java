@@ -60,7 +60,7 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
-			//blog.setData(stringUtil.converteStringData(data));
+			blog.setData(stringUtil.converteStringData(data));
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
 			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
@@ -71,7 +71,7 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
-			//blog.setData(stringUtil.converteStringData(data));
+			blog.setData(stringUtil.converteStringData(data));
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
 			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			

@@ -89,7 +89,7 @@ public class MetricasResource {
 	@Produces("application/json")
 	public Hashtable<String, Integer> so(){
 		Hashtable<String, Integer> listaSos = new Hashtable<String,Integer>();
-		//Hashtable<String, Integer> so = new Hashtable<String, Integer>();
+		
 		
 		int Quantidade = 0;
 		
