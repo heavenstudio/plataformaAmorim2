@@ -127,9 +127,6 @@ public class PlanoAulaResource {
 	@Produces("application/json")
 	public List<PlanoAula> getProfessorData(@PathParam("idProfessor") int idProfessor){
 		
-		Date dataHoje = new Date();
-		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
-		String data = formataData.format(dataHoje);
 		
 		Calendar c = Calendar.getInstance();
 		int anoInt = c.get(Calendar.YEAR);

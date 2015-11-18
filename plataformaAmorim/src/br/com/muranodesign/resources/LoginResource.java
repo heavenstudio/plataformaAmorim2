@@ -13,8 +13,6 @@ package br.com.muranodesign.resources;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +32,6 @@ import br.com.muranodesign.business.HistoricoService;
 import br.com.muranodesign.business.MenuPerfilService;
 import br.com.muranodesign.business.SOService;
 import br.com.muranodesign.business.UsuarioService;
-import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.Historico_conexao;
 import br.com.muranodesign.model.MenuPerfil;
 import br.com.muranodesign.model.Usuario;
@@ -71,7 +68,7 @@ public class LoginResource {
 		logger.info("Logar Usuario ..." + usuario);
 		
 		String ip = req.getRemoteAddr();  //pega o ip da requisição
-		String remoteHost = req.getRemoteHost();
+		//String remoteHost = req.getRemoteHost();
 		String so, ipescola= "201.91.1.98";
 
 
@@ -101,11 +98,9 @@ public class LoginResource {
 					logger.info("Usuario " + usuario
 							+ " liberado para acessa a aplicação");
 					
-					DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+					
 					Date data = Calendar.getInstance().getTime();
-					String reportDate = df.format(data);
-					
-					
+	
 				
 					
 					if(ip.equals(ipescola)){
@@ -221,7 +216,7 @@ public class LoginResource {
 		@FormParam("senha") String senha,
 		@FormParam("id") int id){
 		
-		Aluno aluno = new Aluno();
+	
 		Usuario user = new Usuario();
 		MessageDigest m = null;
 		

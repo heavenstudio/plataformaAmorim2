@@ -29,6 +29,7 @@ import br.com.muranodesign.hibernate.impl.PersistenceContext;
  * @since Release 1 da aplicação
  */
 
+@SuppressWarnings("deprecation")
 public class HibernatePersistenceContext implements PersistenceContext {
 
 	//private static final Logger logger = LoggerFactory.getLogger(HibernatePersistenceContext.class);

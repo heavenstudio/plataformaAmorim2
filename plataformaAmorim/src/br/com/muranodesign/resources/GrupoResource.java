@@ -119,8 +119,8 @@ public class GrupoResource {
 	
 	public List<Grupo> teste(@PathParam("ano") String ano,@PathParam("periodo") String periodo){
 		
-		Grupo grupo = new Grupo();
-		grupo = new GrupoService().listarUltimo(ano, periodo).get(0);
+		//Grupo grupo = new Grupo();
+		//grupo = new GrupoService().listarUltimo(ano, periodo).get(0);
 		
 		
 		return new GrupoService().listarUltimo(ano, periodo);

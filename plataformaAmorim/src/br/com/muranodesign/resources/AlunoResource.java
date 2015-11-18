@@ -127,6 +127,8 @@ public class AlunoResource {
 	@Produces("application/json")
 	public String getHtmlAluno(@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
 		List<Aluno> alunos;
+		
+		@SuppressWarnings("unused")
 		List<AlunoVariavel> variavel = new ArrayList<AlunoVariavel>();
 		alunos = new AlunoService().listIntervalo(primeiro, ultimo);
 		int qtd = alunos.size();
@@ -155,6 +157,8 @@ public class AlunoResource {
 	@Produces("application/json")
 	public String getHtmlAluno(){
 		List<Aluno> alunos;
+		
+		@SuppressWarnings("unused")
 		List<AlunoVariavel> variavel;
 		alunos = new AlunoService().listarTodos();
 		int qtd = alunos.size();
@@ -185,6 +189,8 @@ public class AlunoResource {
 	@Produces("application/json")
 	public String gethtmlLikeAluno(@PathParam("letra") String letra){
 		List<Aluno> alunos;
+		
+		@SuppressWarnings("unused")
 		List<AlunoVariavel> variavel;
 		alunos = new AlunoService().listAllLike(letra);
 		int qtd = alunos.size();
