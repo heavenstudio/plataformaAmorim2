@@ -93,7 +93,9 @@ public class MetricasResource {
 		
 		int Quantidade = 0;
 		
+		@SuppressWarnings("unused")
 		SO sistema = new SO();
+		
 		List<Historico_conexao> hist = new ArrayList<Historico_conexao>();
 		HistoricoService historicoSer = new HistoricoService();
 		SOService sisSer = new SOService();

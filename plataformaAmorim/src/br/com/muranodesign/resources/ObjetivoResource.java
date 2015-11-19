@@ -235,6 +235,8 @@ public class ObjetivoResource {
 		List<Long> retorno = new ArrayList<Long>();
 
 		long count = 0;
+		
+		@SuppressWarnings("unused")
 		int t = 0;
 		long obj = 0;
 		int qtdAluno = 0;

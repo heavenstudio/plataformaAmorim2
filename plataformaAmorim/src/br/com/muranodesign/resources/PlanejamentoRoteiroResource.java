@@ -166,6 +166,7 @@ public class PlanejamentoRoteiroResource {
 		List<PlanejamentoRoteiro> planos = new ArrayList<PlanejamentoRoteiro>();
 		
 
+		@SuppressWarnings("unused")
 		long obj = 0;
 		int qtdAluno = 0;
 		
@@ -420,6 +421,8 @@ public class PlanejamentoRoteiroResource {
 		List<PlanejamentoRoteiro> result = new ArrayList<PlanejamentoRoteiro>();
 		
 		int qtd = planos.size();
+		
+		@SuppressWarnings("unused")
 		int c = 0;
 		
 		
