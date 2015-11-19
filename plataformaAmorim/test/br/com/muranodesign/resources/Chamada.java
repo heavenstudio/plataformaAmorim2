@@ -67,7 +67,7 @@ public class Chamada extends JerseyTest  {
 
 		webResource.header("Authorization", "Basic " + encoded);
 		String  total = webResource.path("plataformaAmorim/Chamada/total/1/1").toString();
-		System.out.println(total );
+		
 	}
 	
 }
