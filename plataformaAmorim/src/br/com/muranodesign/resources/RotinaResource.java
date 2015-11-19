@@ -84,7 +84,8 @@ public class RotinaResource {
 				
 				for(int i = 0; i < agrupamentoAlunos.size();i++){
 					for(int j = 0; j < agrupamentoAlunosNovo.size();j++){
-						if(agrupamentoAlunos.get(i).getAluno().getIdalunoVariavel() == agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()){
+						//if(agrupamentoAlunos.get(i).getAluno().getIdalunoVariavel() == agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()){
+						if(agrupamentoAlunos.get(i).getAluno().equals(agrupamentoAlunosNovo.get(j).getAluno())){
 							return "Erro: O aluno de id "+agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()+"já tem uma rotina para esse horario";
 						}
 					}
@@ -122,7 +123,8 @@ public class RotinaResource {
 				
 				for(int i = 0; i < agrupamentoAlunos.size();i++){
 					for(int j = 0; j < agrupamentoAlunosNovo.size();j++){
-						if(agrupamentoAlunos.get(i).getAluno().getIdalunoVariavel() == agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()){
+						//if(agrupamentoAlunos.get(i).getAluno().getIdalunoVariavel() == agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()){
+						if(agrupamentoAlunos.get(i).getAluno().equals(agrupamentoAlunosNovo.get(j).getAluno())){
 							return "Erro: O aluno de id "+agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()+"já tem uma rotina para esse horario";
 						}
 					}

@@ -65,9 +65,9 @@ public class AuthFilter implements ContainerRequestFilter {
         //lap : loginAndPassword
         String[] lap = BasicAuth.decode(auth);
  
-        if(lap != null){
+        /*if(lap != null){
         	logger.debug("lap : " + lap);
-        }
+        }*/
        
         //If login or password fail
         if(lap == null || lap.length != 2){

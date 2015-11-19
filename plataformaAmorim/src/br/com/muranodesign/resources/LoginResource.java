@@ -231,13 +231,18 @@ public class LoginResource {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				m.update(senha.getBytes(), 0, senha.length());
-				String senhaMD5 = new BigInteger(1, m.digest()).toString(16);
+				if(m != null){
+					m.update(senha.getBytes(), 0, senha.length());
+					String senhaMD5 = new BigInteger(1, m.digest()).toString(16);
+					
+					user.setSenha(senhaMD5);
+					new UsuarioService().updateUser(senhaMD5, id);
+					
+					retorno = "ok";
+				}else{
+					retorno = "usuario não existe";
+				}
 				
-				user.setSenha(senhaMD5);
-				new UsuarioService().updateUser(senhaMD5, id);
-				
-				retorno = "ok";
 			}else{
 				retorno = "usuario não existe";
 			}
