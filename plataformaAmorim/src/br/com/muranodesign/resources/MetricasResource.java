@@ -117,15 +117,7 @@ public class MetricasResource {
 			Quantidade = hist.size();
 			listaSos.put(versao.get(i), Quantidade);
 		}
-		/*
-		so.put("Windows 95", 3);
-		so.put("Windows 2000", 5);
-		so.put("Mac", 10);
-		so.put("linux", 7);
 		
-		listaSos.add(so);
-		return listaSos;
-		*/
 		return listaSos;	
 	}	
 }

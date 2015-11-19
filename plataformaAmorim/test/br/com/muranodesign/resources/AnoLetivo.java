@@ -1,7 +1,6 @@
 package br.com.muranodesign.resources;
 
 import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.WebResource;
@@ -36,8 +35,7 @@ public class AnoLetivo extends JerseyTest  {
 		WebResource webResource = client().resource("http://localhost:8082/");
 
 		webResource.header("Authorization", "Basic " + encoded);
-		JSONObject json = webResource.path("plataformaAmorim/AnoLetivo/9").get(
-				JSONObject.class);
+		//JSONObject json = webResource.path("plataformaAmorim/AnoLetivo/9").get(JSONObject.class);
 	}
 
     

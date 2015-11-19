@@ -104,7 +104,9 @@ public class OficinaProfessorResource {
 		return new OficinaProfessorService().listarkey(idOficina);
 	}
 	
-	
+	/**
+	 * Listar por oficina
+	 */
 	@Path("listarPorOficina/{id}")
 	@GET
 	@Produces("application/json")

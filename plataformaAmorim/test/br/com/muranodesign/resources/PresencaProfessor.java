@@ -3,6 +3,7 @@ package br.com.muranodesign.resources;
 import org.apache.commons.codec.binary.Base64;
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
+
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
@@ -36,6 +37,7 @@ public class PresencaProfessor extends JerseyTest  {
 
 		webResource.header("Authorization", "Basic " + encoded);
 		JSONArray json = webResource.path("plataformaAmorim/PresencaProfessor").get(JSONArray.class);
+		
 	}
 
     

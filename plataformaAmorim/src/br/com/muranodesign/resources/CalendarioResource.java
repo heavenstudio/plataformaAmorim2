@@ -162,53 +162,23 @@ public class CalendarioResource {
 	}
 	
 	/**
-	 * Removes the calendario.
-	 *
-	 * @param action the action
-	 * @param id the id
-	 * @return the string
-	 */
-	/*
-	@Path("{action}/{id}")
-	@Produces("text/plain")
-	public String removeCalendario(@PathParam("action") String action,
-			@PathParam("id") int id) {
-
-		logger.info("Calendario  " + action);
-		if ( action.equals("delete")) {
-			List<Calendario> resultado;
-			resultado = new CalendarioService().listarkey(id);
-			Calendario res = resultado.get(0);
-			new CalendarioService().deletarCalendario(res);
-			return "true";
-		} else {
-			return "false";
-		}
-
-	}
-*/
-	/**
 	 * Delete de calendario
 	 * @param id
 	 * @return String
 	 */
 	@Path("delete/{id}")
 	@Produces("text/plain")
-	public String removeCalendario(/*@PathParam("action") String action,*/
-			@PathParam("id") int id) {
+	public String removeCalendario(@PathParam("id") int id) {
 
 
-		logger.info("Calendario  " /*+ action*/);
-		//if ( action.equals("delete")) {
+		logger.info("Calendario  " );
+		
 			List<Calendario> resultado;
 			resultado = new CalendarioService().listarkey(id);
 			Calendario res = resultado.get(0);
 			new CalendarioService().deletarCalendario(res);
 			return "true";
-		//} else {
-		//	return "false";
-		//}
-
+		
 	}
 	
 	/**
