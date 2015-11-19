@@ -1,6 +1,10 @@
 package br.com.muranodesign.resources;
 
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -14,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
-import br.com.muranodesign.business.AnoEstudoService;
 import br.com.muranodesign.business.BlogService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.model.Blog;
@@ -36,6 +39,7 @@ public class BlogResource {
 	 * @param titulo
 	 * @param Descricao
 	 * @return
+	 * @throws ParseException 
 	 */
 	@POST
 	@Produces("text/plain")
@@ -43,14 +47,22 @@ public class BlogResource {
 			@FormParam("action") String action,
 			@FormParam("id") int id,
 			@FormParam("oficina") int oficina,
-			@FormParam("anoEstudo") int anoEstudo,
-			@FormParam("data") String data,
+			//@FormParam("anoEstudo") int anoEstudo,
+			//@FormParam("data") String data,
 			@FormParam("titulo") String titulo,
-			@FormParam("Descricao") String Descricao){
+			@FormParam("Descricao") String Descricao) throws ParseException{
+		
+		
+		
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+		String k = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
+		Date date = (Date)formatter.parse(k);
+		
 		
 		Blog resultado = new Blog();
 		
-		StringUtil stringUtil = new StringUtil();
+		//StringUtil stringUtil = new StringUtil();
 		
 		if(action.equals("delete")){
 			resultado = new BlogService().deletarBlog(new BlogService().listarkey(id).get(0));
@@ -60,9 +72,9 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
-			blog.setData(stringUtil.converteStringData(data));
+			blog.setData(date);
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
-			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
+			//blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
 			resultado = new BlogService().criarBlog(blog);
 			
@@ -71,9 +83,9 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
-			blog.setData(stringUtil.converteStringData(data));
+			blog.setData(date);
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
-			blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
+			//blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
 			resultado = new BlogService().atualizarBloga(blog);
 		}

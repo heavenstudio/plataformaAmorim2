@@ -270,7 +270,7 @@ public class GrupoResource {
 			
 			int numResult;
 			
-			List<Grupo> retornoGrupo = new GrupoService().ListarUltimoCiclo(ciclo);
+			List<Grupo> retornoGrupo = new GrupoService().ListarUltimoCiclo(ciclo,periodo);
 			if(retornoGrupo.isEmpty()){
 				numResult = 1;
 			}else{

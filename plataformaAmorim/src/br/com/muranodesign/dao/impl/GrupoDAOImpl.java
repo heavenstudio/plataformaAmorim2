@@ -150,9 +150,12 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.GrupoDAO#ListarUltimoCiclo(java.lang.String)
 	 */
-	public List<Grupo> ListarUltimoCiclo(String ciclo){
+	public List<Grupo> ListarUltimoCiclo(String ciclo, String periodo){
 		Criteria criteria = getSession().createCriteria(Grupo.class);
 		criteria.add(Restrictions.eq("ciclo", ciclo));
+		criteria.add(Restrictions.eq("status", "0"));
+		criteria.add(Restrictions.like("nomeGrupo", periodo, MatchMode.ANYWHERE));
+		
 		criteria.addOrder( Order.desc( "idgrupo" ) ); 
 		criteria.setMaxResults(1);
 		List<Grupo> result = criteria.list();

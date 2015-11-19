@@ -44,6 +44,7 @@ public class FichaInscricaoResource {
 		FichaInscricao ficha = new FichaInscricao();
 		logger.info("eventoAction ...");
 		FichaInscricao resultado = null;
+		String result = "";
 		
 		if (action.equals("create")) {
 			ficha.setLocal(local);
@@ -58,13 +59,18 @@ public class FichaInscricaoResource {
 			ficha.setAnoLetivo(new AnoLetivoService().listarkey(ano_letivo).get(0));
 			ficha.setRoteiro(new RoteiroService().listarkey(roteiro).get(0));
 			
+			resultado = new FichaInscricaoService().atualizarFichaInscricao(ficha);
 		} else{
 			return "0";
 		}
 		
+		if(resultado == null){
+			result = "erro";
+		}else{
+			result = Integer.toString(resultado.getIdfichainscricao());
+		}
 		
-		
-		return Integer.toString(resultado.getIdfichainscricao());
+		return result;
 	}
 	
 	/**

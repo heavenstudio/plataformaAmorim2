@@ -249,7 +249,9 @@ public class PlanejamentoRoteiroResource {
 		
 		int total = 0;
 		for (PlanejamentoRoteiro planejamentoRoteiro : resultado) {
-			if(planejamentoRoteiro.getObjetivo().getRoteiro().getAtivo() == 1 && planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+			//if(planejamentoRoteiro.getObjetivo().getRoteiro().getAtivo() == 1 && planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+			if(planejamentoRoteiro.getObjetivo().getRoteiro().getAtivo() == 1 && planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().equals(aluno.get(0).getAnoEstudo())){
+				
 				total++;	
 			}
 		}
@@ -272,7 +274,7 @@ public class PlanejamentoRoteiroResource {
 			
 			if(planejamentoRoteiro.getStatus().equals("2")){
 				
-				if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+				if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().equals(aluno.get(0).getAnoEstudo())){
 					completos++;	
 				}else if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() < aluno.get(0).getAnoEstudo().getIdanoEstudo()){
 					completosAnterior++;
@@ -305,7 +307,7 @@ public class PlanejamentoRoteiroResource {
 			
 			if(planejamentoRoteiro.getStatus().equals("3")){
 				
-				if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
+				if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().equals(aluno.get(0).getAnoEstudo())){
 					completos++;	
 				}else if(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() < aluno.get(0).getAnoEstudo().getIdanoEstudo()){
 					completosAnterior++;
