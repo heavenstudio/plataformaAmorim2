@@ -22,20 +22,5 @@ public class AnoLetivo extends JerseyTest  {
 		 
 				
 	}
-	/*
-	@Test
-	public void testFound() {
-
-		String orig = "admin:admin";
-
-		// encoding byte array into base 64
-		byte[] encoded = Base64.encodeBase64(orig.getBytes());
-
-		WebResource webResource = client().resource("http://localhost:8082/");
-
-		webResource.header("Authorization", "Basic " + encoded);
-		//JSONObject json = webResource.path("plataformaAmorim/AnoLetivo/9").get(JSONObject.class);
-	}
-
-    */
+	
 }

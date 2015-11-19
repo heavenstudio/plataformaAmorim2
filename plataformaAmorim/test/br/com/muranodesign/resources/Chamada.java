@@ -22,50 +22,6 @@ public class Chamada extends JerseyTest  {
 		 
 				
 	}
-	/*
-	@Test
-	public void testList() {
-
-		String orig = "admin:admin";
-
-		// encoding byte array into base 64
-		byte[] encoded = Base64.encodeBase64(orig.getBytes());
-
-		WebResource webResource = client().resource("http://localhost:8082/");
-
-		webResource.header("Authorization", "Basic " + encoded);
-		JSONArray json = webResource.path("plataformaAmorim/Chamada").get(JSONArray.class);
-	}
-
-    
-	@Test
-	public void testListPrecenca() {
-
-		String orig = "admin:admin";
-
-		// encoding byte array into base 64
-		byte[] encoded = Base64.encodeBase64(orig.getBytes());
-
-		WebResource webResource = client().resource("http://localhost:8082/");
-
-		webResource.header("Authorization", "Basic " + encoded);
-		JSONArray json = webResource.path("plataformaAmorim/Chamada/1/1").get(JSONArray.class);
-	}
-
 	
-	@Test
-	public void testListPrecencaTotal() {
-
-		String orig = "admin:admin";
-
-		// encoding byte array into base 64
-		byte[] encoded = Base64.encodeBase64(orig.getBytes());
-
-		WebResource webResource = client().resource("http://localhost:8082/");
-
-		webResource.header("Authorization", "Basic " + encoded);
-		String  total = webResource.path("plataformaAmorim/Chamada/total/1/1").toString();
-		
-	}*/
 	
 }
