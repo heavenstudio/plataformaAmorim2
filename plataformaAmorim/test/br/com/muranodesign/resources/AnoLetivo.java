@@ -1,6 +1,5 @@
 package br.com.muranodesign.resources;
 
-import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.WebResource;
@@ -23,7 +22,7 @@ public class AnoLetivo extends JerseyTest  {
 		 
 				
 	}
-	
+	/*
 	@Test
 	public void testFound() {
 
@@ -38,5 +37,5 @@ public class AnoLetivo extends JerseyTest  {
 		//JSONObject json = webResource.path("plataformaAmorim/AnoLetivo/9").get(JSONObject.class);
 	}
 
-    
+    */
 }

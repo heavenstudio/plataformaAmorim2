@@ -1,9 +1,6 @@
 package br.com.muranodesign.resources;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.WebResource;
@@ -30,7 +27,7 @@ public class RegistroDiario extends JerseyTest  {
 		 
 				
 	}
-	
+	/*
 	@Test
 	public void testFound() {
 
@@ -62,7 +59,7 @@ public class RegistroDiario extends JerseyTest  {
 		JSONArray json = webResource.path("plataformaAmorim/RegistroDiario").get(JSONArray.class);
 		
 		logger.debug("Resultado ..."+json);
-	}
+	}*/
 
     
 }

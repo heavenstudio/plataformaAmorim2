@@ -1,9 +1,5 @@
 package br.com.muranodesign.resources;
 
-import org.junit.Test;
-
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
@@ -22,6 +18,7 @@ public class Grupo extends JerseyTest  {
 		 webResource.post("url=C:/Users/Kevyn/Downloads/4º/4º/Animais.html&id=919"); 		
 	}
 	*/
+	/*
 	@Test
 	public void Roteiro() {
 		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Roteiro");
@@ -77,5 +74,5 @@ public class Grupo extends JerseyTest  {
 		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AlunoVariavel");
 		ClientResponse r = webResource.type("application/json").post(ClientResponse.class);
 	}
-	
+	*/
 }

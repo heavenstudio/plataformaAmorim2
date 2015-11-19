@@ -1,7 +1,5 @@
 package br.com.muranodesign.resources;
 
-import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.WebResource;
@@ -34,6 +32,7 @@ public class CalendarioEventos extends JerseyTest  {
 				
 	}
 	
+	/*
 	@Test
 	public void testFound() {
 
@@ -48,5 +47,5 @@ public class CalendarioEventos extends JerseyTest  {
 		JSONObject json = webResource.path("plataformaAmorim/Calendario/2").get(
 				JSONObject.class);
 	}
-    
+    */
 }

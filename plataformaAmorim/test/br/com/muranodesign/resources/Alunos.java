@@ -1,11 +1,5 @@
 package br.com.muranodesign.resources;
 
-import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jettison.json.JSONObject;
-import org.junit.Test;
-
-import com.sun.jersey.api.client.UniformInterfaceException;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
@@ -16,7 +10,7 @@ public class Alunos extends JerseyTest {
 		return new WebAppDescriptor.Builder().build();
 	}
 
-	@Test
+/*	@Test
 	public void testFound() {
 
 		String orig = "admin:admin";
@@ -77,6 +71,6 @@ public class Alunos extends JerseyTest {
 		 		+ "&observacao=null&parentescoResponsavel=null&enecessidadeEspecial=N&eresponsavelLegalMae=S"
 		 		+ "&eresponsavelLegalPai=S&eresponsavelLegalResponsavel=N");
 	}
-
+*/
 	
 }

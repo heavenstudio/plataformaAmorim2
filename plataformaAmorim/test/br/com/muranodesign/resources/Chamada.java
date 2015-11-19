@@ -1,7 +1,5 @@
 package br.com.muranodesign.resources;
 
-import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.WebResource;
@@ -24,7 +22,7 @@ public class Chamada extends JerseyTest  {
 		 
 				
 	}
-	
+	/*
 	@Test
 	public void testList() {
 
@@ -68,6 +66,6 @@ public class Chamada extends JerseyTest  {
 		webResource.header("Authorization", "Basic " + encoded);
 		String  total = webResource.path("plataformaAmorim/Chamada/total/1/1").toString();
 		
-	}
+	}*/
 	
 }

@@ -1,15 +1,8 @@
 package br.com.muranodesign.resources;
 
-import org.codehaus.jettison.json.JSONObject;
-import org.junit.Test;
-
-import com.sun.jersey.api.client.UniformInterfaceException;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
-
-import org.apache.commons.codec.binary.Base64;
 
 
 public class AlunosVariavel extends JerseyTest  {
@@ -17,7 +10,7 @@ public class AlunosVariavel extends JerseyTest  {
 	protected AppDescriptor configure() {
 		return new WebAppDescriptor.Builder().build();
 	}
-	
+	/*
 	@Test
 	public void insert() {
 		WebResource webResource = client().resource("http://localhost:8082/plataformaAmorim/AlunoVariavel");
@@ -45,6 +38,6 @@ public class AlunosVariavel extends JerseyTest  {
 		WebResource webResource = client().resource("http://localhost:8082/");
 		webResource.path("plataformaAmorim/AlunoVariavel/99499").get(JSONObject.class);
 	}
-				
+		*/		
 	
 }
