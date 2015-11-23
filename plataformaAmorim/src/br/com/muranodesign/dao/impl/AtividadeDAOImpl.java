@@ -90,6 +90,7 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 	public List<Atividade> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Atividade.class);
 		criteria.add(Restrictions.eq("idatividade", key));
+		criteria.add(Restrictions.eq("ativo",1));
 		List<Atividade> result = criteria.list();
 		return result;
 	}
@@ -117,6 +118,7 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 		Criteria criteria = getSession().createCriteria(Atividade.class);
 		criteria.createAlias("objetivo", "objetivo");
 		criteria.add(Restrictions.eq("objetivo.idobjetivo", objetivo));
+		criteria.add(Restrictions.eq("ativo",1));
 		List<Atividade> result = criteria.list();
 		return result;	
 	}

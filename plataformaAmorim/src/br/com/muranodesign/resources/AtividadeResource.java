@@ -89,6 +89,20 @@ public class AtividadeResource {
 		resultado = new AtividadeService().listarObjetivo(id);
 		return resultado;
 	}
+	
+	@Path("Inativar/{id}")
+	@GET
+	@Produces("application/json")
+	public void Inativar(@PathParam("id") int id){
+		List<Atividade> atividade = new AtividadeService().listarkey(id);
+		
+		if(!atividade.isEmpty()){
+			Atividade ati = atividade.get(0);
+			
+			ati.setAtivo(0);
+			new AtividadeService().atualizarAtividade(ati);
+		}
+	}
 
    
 	/**
