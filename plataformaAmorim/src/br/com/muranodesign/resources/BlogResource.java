@@ -47,8 +47,6 @@ public class BlogResource {
 			@FormParam("action") String action,
 			@FormParam("id") int id,
 			@FormParam("oficina") int oficina,
-			//@FormParam("anoEstudo") int anoEstudo,
-			//@FormParam("data") String data,
 			@FormParam("titulo") String titulo,
 			@FormParam("Descricao") String Descricao) throws ParseException{
 		
@@ -62,7 +60,6 @@ public class BlogResource {
 		
 		Blog resultado = new Blog();
 		
-		//StringUtil stringUtil = new StringUtil();
 		
 		if(action.equals("delete")){
 			resultado = new BlogService().deletarBlog(new BlogService().listarkey(id).get(0));
@@ -74,7 +71,6 @@ public class BlogResource {
 			blog.setTitulo(titulo);
 			blog.setData(date);
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
-			//blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
 			resultado = new BlogService().criarBlog(blog);
 			
@@ -85,7 +81,6 @@ public class BlogResource {
 			blog.setTitulo(titulo);
 			blog.setData(date);
 			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
-			//blog.setAnoEstudo(new AnoEstudoService().listarkey(anoEstudo).get(0));
 			
 			resultado = new BlogService().atualizarBloga(blog);
 		}
