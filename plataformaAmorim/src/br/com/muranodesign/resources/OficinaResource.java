@@ -17,11 +17,13 @@ import br.com.muranodesign.business.AlunoAgrupamentoService;
 import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CiclosService;
 import br.com.muranodesign.business.CoresService;
+import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.PeriodoService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.model.AlunoAgrupamento;
 import br.com.muranodesign.model.Oficina;
+import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.model.Rotina;
 
 
@@ -142,4 +144,20 @@ public class OficinaResource {
 		return lista;
 	}
 
+	
+	@Path("ListaPorProfessor/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Oficina> getListarPorProfessor(@PathParam("id") int id)
+	{
+		List<OficinaProfessor> resultado;
+		List<Oficina> oficinas = new ArrayList<Oficina>();
+		
+		resultado = new OficinaProfessorService().listarProfessor(id);
+		for (OficinaProfessor oficinaProfessor : resultado) {
+			oficinas.add(new OficinaService().listarLazyNome(oficinaProfessor.getOficina().getIdoficina()).get(0));
+		}
+		return oficinas;
+		//logger.debug("QTD OficinaProfessor: " +  resultado.size());
+	}
 }

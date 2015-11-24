@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import br.com.muranodesign.dao.OficinaDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
@@ -124,5 +126,22 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 		criteria.add(Restrictions.like("nome", nome, MatchMode.START));
 		List<Oficina> result = criteria.list();
 		return result;
+	}
+	
+	public List<Oficina> listarLazyNome(int id){
+		Criteria criteria = getSession().createCriteria(Oficina.class);
+		criteria.add(Restrictions.eq("Idoficina", id));
+		
+		ProjectionList projList = Projections.projectionList();
+		projList.add(Projections.property("Idoficina"),"idoficina"); 
+		projList.add(Projections.property("nome"),"nome");
+		
+		 criteria.setProjection(projList);
+		 
+		 criteria.setResultTransformer(Transformers.aliasToBean(Oficina.class));  
+		 
+		 List<Oficina> result = criteria.list();
+		 
+		 return result;
 	}
 }

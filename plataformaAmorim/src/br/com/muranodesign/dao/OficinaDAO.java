@@ -72,4 +72,10 @@ public interface OficinaDAO {
 	 */
 	public List<Oficina> listarNomeOficinaid(String nome);
 	
+	/**
+	 * Listar Nome e Id de oficinas
+	 * @param id
+	 * @return
+	 */
+	public List<Oficina> listarLazyNome(int id);
 }

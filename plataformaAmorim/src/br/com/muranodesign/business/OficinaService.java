@@ -80,4 +80,12 @@ public class OficinaService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	public List<Oficina> listarLazyNome(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		OficinaDAO dao = DAOFactory.getOficinaDAO(pc);
+		List<Oficina> result = dao.listarLazyNome(id);
+		pc.commitAndClose();
+		return result;
+	}
 }
