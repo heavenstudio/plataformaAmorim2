@@ -74,9 +74,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ehcache-core-2.6.0-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-jdk14.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Desktop/ni/Tidy.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Desktop/ni/itext-155.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Desktop/ni/core-renderer.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/core-renderer.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/itext-155.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/Tidy.jar"/>

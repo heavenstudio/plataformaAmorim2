@@ -148,16 +148,21 @@ public class OficinaResource {
 	@Path("ListaPorProfessor/{id}")
 	@GET
 	@Produces("application/json")
-	public List<Oficina> getListarPorProfessor(@PathParam("id") int id)
+	public List<Oficina> getListaPorProfessor(@PathParam("id") int id)
 	{
 		List<OficinaProfessor> resultado;
 		List<Oficina> oficinas = new ArrayList<Oficina>();
+		//List<Cores> cores = new ArrayList<Cores>();
 		
 		resultado = new OficinaProfessorService().listarProfessor(id);
 		for (OficinaProfessor oficinaProfessor : resultado) {
 			oficinas.add(new OficinaService().listarLazyNome(oficinaProfessor.getOficina().getIdoficina()).get(0));
 		}
+		
+		/*for(int i = 0; i < oficinas.size(); i++){
+			cores.add(new CoresService().listarkey(oficinas.get(i).getCor().getIdcor()).get(0));
+		}*/
+		
 		return oficinas;
-		//logger.debug("QTD OficinaProfessor: " +  resultado.size());
 	}
 }
