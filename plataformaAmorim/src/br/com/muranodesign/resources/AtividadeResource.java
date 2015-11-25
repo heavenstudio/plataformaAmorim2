@@ -99,9 +99,28 @@ public class AtividadeResource {
 		if(!atividade.isEmpty()){
 			Atividade ati = atividade.get(0);
 			
-			ati.setAtivo(0);
-			new AtividadeService().atualizarAtividade(ati);
+			new AtividadeService().deletarAtividade(ati);
 		}
+	}
+	
+	@Path("DeletarAtividade/{id}")
+	@GET
+	@Produces("application/json")
+	public void DeletarAtividade(@PathParam("id") int id){
+		List<Objetivo> obj = new ObjetivoService().listarkey(id);
+		
+		if(!obj.isEmpty()){
+			Objetivo objs = obj.get(0);
+			
+			List<Atividade> atividade = new AtividadeService().listarObjetivo(id);
+			
+			for (Atividade atividade2 : atividade) {
+				new AtividadeService().deletarAtividade(atividade2);
+			}
+			
+			new ObjetivoService().deletarObjetivo(objs);
+		}
+		
 	}
 
    

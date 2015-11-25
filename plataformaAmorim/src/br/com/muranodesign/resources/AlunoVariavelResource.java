@@ -2678,22 +2678,50 @@ public class AlunoVariavelResource {
 
 		
 		List<AnoEstudo> rsAnoEstudo;
-		rsAnoEstudo = new AnoEstudoService().listarkey(Integer.parseInt(anoEstudo));
-		AnoEstudo objAnoEstudo= rsAnoEstudo.get(0);
+		AnoEstudo objAnoEstudo;
+		
+		if(anoEstudo != null){
+			rsAnoEstudo = new AnoEstudoService().listarkey(Integer.parseInt(anoEstudo));
+			 objAnoEstudo= rsAnoEstudo.get(0);
+		}else{
+			 objAnoEstudo = new AnoEstudo();
+		}
 		
 		List<AnoLetivo> rsAnoLetivo;
-		rsAnoLetivo = new AnoLetivoService().listarkey(Integer.parseInt(anoLetivo));
-		AnoLetivo objAnoLetivo= rsAnoLetivo.get(0);
+		AnoLetivo objAnoLetivo;
 		
+		if(anoLetivo != null){
+			rsAnoLetivo = new AnoLetivoService().listarkey(Integer.parseInt(anoLetivo));
+			 objAnoLetivo= rsAnoLetivo.get(0);
+		}else{
+			 objAnoLetivo = new AnoLetivo();
+		}
 		
 		List<Periodo> rsPeriodo;
-		rsPeriodo= new PeriodoService().listarkey(Integer.parseInt(periodo));
-		Periodo objPeriodo= rsPeriodo.get(0);
+		Periodo objPeriodo;
+		
+		if(periodo != null){
+			rsPeriodo = new PeriodoService().listarkey(Integer.parseInt(periodo));
+			 objPeriodo= rsPeriodo.get(0);
+		}else{
+			 objPeriodo = new Periodo();
+		}
+		
+		
 		
 		
 		List<Aluno> rsAluno;
-		rsAluno = new AlunoService().listarkey(Integer.parseInt(aluno));
-		Aluno objAluno= rsAluno.get(0);
+		Aluno objAluno;
+		
+		if(aluno != null){
+			rsAluno = new AlunoService().listarkey(Integer.parseInt(aluno));
+			 objAluno= rsAluno.get(0);
+		}else{
+			 objAluno = new Aluno();
+		}
+		
+		
+		
 		
 		Grupo objGrupo = new Grupo();
 		
@@ -2735,19 +2763,38 @@ public class AlunoVariavelResource {
 			int id=Integer.parseInt(strid);
 			List<AlunoVariavel> rsAlunoVariavel;
 			rsAlunoVariavel= new AlunoVariavelService().listarkey(id);
+			
 			objAlunoVariavel= rsAlunoVariavel.get(0);
 		
-			objAlunoVariavel.setAluno(objAluno);
-			objAlunoVariavel.setInicio(stringUtil.converteStringData(inicio));
+			if(objAluno != null){
+				objAlunoVariavel.setAluno(objAluno);
+			}
 			
-			objAlunoVariavel.setAnoEstudo(objAnoEstudo);
-			objAlunoVariavel.setAnoLetivo(objAnoLetivo);
-			objAlunoVariavel.setPeriodo(objPeriodo);
-			objAlunoVariavel.setAluno(objAluno);
-			objAlunoVariavel.setGrupo(objGrupo);
+			if(inicio != null){
+				objAlunoVariavel.setInicio(stringUtil.converteStringData(inicio));
+			}
+			
+			if(objAnoEstudo != null){
+				objAlunoVariavel.setAnoEstudo(objAnoEstudo);
+			}
+			
+			if(objAnoLetivo != null){
+				objAlunoVariavel.setAnoLetivo(objAnoLetivo);
+			}
+			if(objPeriodo != null){
+				objAlunoVariavel.setPeriodo(objPeriodo);
+			}
+			if(objAluno != null){
+				objAlunoVariavel.setAluno(objAluno);
+			}
+			if(objGrupo != null){
+				objAlunoVariavel.setGrupo(objGrupo);
+			}
 			objAlunoVariavel.setAtivo(ativo);
-			objAlunoVariavel.setProgramaSocial(programaSocial);
 			
+			if(programaSocial != null){
+				objAlunoVariavel.setProgramaSocial(programaSocial);
+			}
 			
 			
 			 resultado =  new AlunoVariavelService().atualizarAlunoVariavel(objAlunoVariavel);

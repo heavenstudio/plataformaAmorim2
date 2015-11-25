@@ -154,8 +154,8 @@ public class Usuario extends JerseyTest  {
 	
 	@Test
 	public void insert2() {
-		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Blog");
-	webResource.post("action=create&id=&titulo=Lorem&oficina=43&anoEstudo=37&Descricao=O presidente da França, François Hollande, disse nesta quarta-feira (18) que o país manterá sua política de acolhimento a refugiados e receberá 30 mil pessoas nos próximos anos e pediu apoio dos prefeitos para reforçar as medidas de segurança.De acordo com Hollande, rnão haverá mudanças na política de acohida dos migrantes, mas assumiu, sem dar detalhes, que verificações são necessárias antes de aceitar a entrada dos estrangeiros. “A acolhida dos refugiados caminha junto com o dever de proteger os franceses.");
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AlunoVariavel");
+	webResource.post("action=update&id=489&grupo=500");
 	}
 	/*
 	@Test
