@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AtividadeService;
 import br.com.muranodesign.business.ObjetivoService;
+import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.model.Atividade;
 import br.com.muranodesign.model.Objetivo;
 
@@ -122,6 +123,33 @@ public class AtividadeResource {
 		}
 		
 	}
+	
+	@Path("DeletarRoteiroAtividade/{id}")
+	@GET
+	@Produces("application/json")
+	public void DeletarRoteiroAtividade(@PathParam("id") int id){
+		List<Objetivo> obj = new ObjetivoService().listarRoteiro(id);
+		
+		
+		if(!obj.isEmpty()){
+			
+			for (Objetivo objetivo : obj) {
+				
+				List<Atividade> atividade = new AtividadeService().listarObjetivo(objetivo.getIdobjetivo());
+				
+				for (Atividade atividade2 : atividade) {
+					new AtividadeService().deletarAtividade(atividade2);
+				}
+				
+				new ObjetivoService().deletarObjetivo(objetivo);
+			}
+			
+			new RoteiroService().deletarRoteiro(new RoteiroService().listarkey(id).get(0));
+			
+		}
+	}
+	
+	
 
    
 	/**

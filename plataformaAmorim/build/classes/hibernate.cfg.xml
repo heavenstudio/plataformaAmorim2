@@ -107,12 +107,12 @@
 		<mapping class="br.com.muranodesign.model.AlunoAgrupamento" />
 		<mapping class="br.com.muranodesign.model.Oficina" />
 		<mapping class="br.com.muranodesign.model.OficinaProfessor" />
+		
 		<mapping class="br.com.muranodesign.model.Rotina" />
 		<mapping class="br.com.muranodesign.model.Salas" />
 		<mapping class="br.com.muranodesign.model.Semana" />
 		<mapping class="br.com.muranodesign.model.Ciclos" />
 		<mapping class="br.com.muranodesign.model.CicloAnoEstudo" />
-		
 		<mapping class="br.com.muranodesign.model.Mural" />
 		<mapping class="br.com.muranodesign.model.Cores" />
 		<mapping class="br.com.muranodesign.model.RoteiroAula" />
