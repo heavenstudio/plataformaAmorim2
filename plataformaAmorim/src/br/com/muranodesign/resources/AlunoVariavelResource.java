@@ -139,6 +139,26 @@ public class AlunoVariavelResource {
 		
 	}
 	
+	@Path("listarCicloPeriodoRangeObjeto/{idCiclo}/{idPeriodo}/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public List<AlunoVariavel> getlistarCicloPeriodoRangeObjeto(@PathParam("idCiclo") int idCiclo,@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		List<CicloAnoEstudo> ciclos = new CicloAnoEstudoService().listCiclo(idCiclo);
+		List<Integer> anos = new ArrayList<Integer>();
+		
+		for(int i = 0; i < ciclos.size(); i++) {
+			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
+				anos.add(ciclos.get(i).getAno().getIdanoEstudo());
+				
+			}
+		}
+		
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAnoPeriodo(anos, idPeriodo, primeiro, ultimo);
+		
+		return retorno;		
+		
+	}
+	
 	
 	@Path("listarCicloRange/{idCiclo}/{primeiro}/{ultimo}")
 	@GET
@@ -178,6 +198,29 @@ public class AlunoVariavelResource {
 		
 	}
 	
+	@Path("listarCicloRangeObjeto/{idCiclo}/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public List<AlunoVariavel> getlistarCicloRangeObjeto(@PathParam("idCiclo") int idCiclo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		List<CicloAnoEstudo> ciclos = new CicloAnoEstudoService().listCiclo(idCiclo);
+		//int ano[] = new int[100];
+		List<Integer> anos = new ArrayList<Integer>();
+		
+	//	String html = "";
+		
+		for(int i = 0; i < ciclos.size(); i++) {
+			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
+				anos.add(ciclos.get(i).getAno().getIdanoEstudo());
+				
+			}
+		}
+				
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAno(anos, primeiro, ultimo);
+	
+		return retorno;		
+		
+	}
+	
 	@Path("listarPeriodoRange/{idPeriodo}/{primeiro}/{ultimo}")
 	@GET
 	@Produces("application/json")
@@ -200,6 +243,18 @@ public class AlunoVariavelResource {
 		
 		
 		return html1;		
+		
+	}
+	
+	@Path("listarPeriodoRangeObjeto/{idPeriodo}/{primeiro}/{ultimo}")
+	@GET
+	@Produces("application/json")
+	public List<AlunoVariavel> getlistarPeriodoRangeObjeto(@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		//List<Periodo> periodo = new PeriodoService().listarkey(idPeriodo);
+
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarRangePeriodo(idPeriodo, primeiro, ultimo);
+		
+		return retorno;		
 		
 	}
 	
