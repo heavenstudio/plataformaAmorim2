@@ -66,7 +66,6 @@ public class MuralResource {
 			@FormParam("idOficina") int idOficina,
 			@FormParam("tutor") int tutor,
 			@FormParam("ano") String ano,
-			//@FormParam("data") String data,
 			@FormParam("idAluno") int idAluno) throws ParseException{
 		
 		
@@ -106,11 +105,9 @@ public class MuralResource {
 					mural.setMensagem(mensagem);
 					mural.setAluno(listAluno.get(k));
 					mural.setData(data);
-					//mural.setData(new Date());
 					
 					mural.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
 					
-					//new MuralService().criarMural(mural);
 					new MuralService().atualizarMural(mural);
 				  }
 				
@@ -134,10 +131,9 @@ public class MuralResource {
 					mural.setMensagem(mensagem);
 					mural.setAluno(alunoVariavel);
 					mural.setData(data);
-					//mural.setData(new Date());
+		
 					mural.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
-					
-					//new MuralService().criarMural(mural);
+				
 					new MuralService().atualizarMural(mural);
 				}
 				
@@ -172,7 +168,7 @@ public class MuralResource {
 					mural.setMensagem(mensagem);
 					mural.setAluno(alunoVariavel);
 					mural.setData(data);
-					//mural.setData(new Date());
+			
 					mural.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
 					
 					new MuralService().criarMural(mural);
@@ -221,7 +217,7 @@ public class MuralResource {
 						mural.setMensagem(mensagem);
 						mural.setAluno(alunosComTutor.get(i));
 						mural.setData(data);
-						//mural.setData(new Date());
+					
 						mural.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
 						
 						new MuralService().criarMural(mural);
@@ -233,7 +229,7 @@ public class MuralResource {
 						mural.setMensagem(mensagem);
 						mural.setAluno(alunosComOficina.get(j));
 						mural.setData(data);
-						//mural.setData(new Date());
+			
 						mural.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
 						
 						new MuralService().criarMural(mural);
@@ -275,7 +271,6 @@ public class MuralResource {
 		Date dataHoje = new Date();
 		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
 		String data = formataData.format(dataHoje);
-		//StringUtil stringUtil = new StringUtil();
 		
 		Calendar c = Calendar.getInstance();
 		int mes = c.get(Calendar.MONTH);
@@ -285,10 +280,8 @@ public class MuralResource {
 			String quebra[] = data.split("-");
 			
 			if(mes > 10){
-				//data2 = quebra[0]+"-"+quebra[1]+"-"+Integer.toString(dia);
 				data2 = quebra[0]+"-"+Integer.toString(mes)+"-"+quebra[2];
 			}else{
-				//data2 = quebra[0]+"-"+quebra[1]+"-"+"0"+Integer.toString(dia);
 				data2 = quebra[0]+"-"+"0"+Integer.toString(mes)+"-"+quebra[2];
 			}
 			
@@ -301,7 +294,6 @@ public class MuralResource {
 			int ano = Integer.parseInt(quebra[0]);
 			ano = ano - 1;
 			
-			//data2 = Integer.toString(aux)+"/"+Integer.toString(mes)+"/"+quebra[2];
 			data2 = Integer.toString(ano)+"-"+Integer.toString(aux)+"-"+quebra[2];
 			
 		}

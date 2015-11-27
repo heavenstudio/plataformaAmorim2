@@ -140,6 +140,12 @@ public class TutoriaService {
 		return p;
 	}
 
+	/**
+	 * Listar por professor e ano
+	 * @param tutor
+	 * @param ano
+	 * @return
+	 */
 	public List<Tutoria> listarProfessorId(int tutor, String ano){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		TutoriaDAO dao = DAOFactory.getTutoriaDAO(pc);
@@ -149,6 +155,11 @@ public class TutoriaService {
 		
 	}
 	
+	/**
+	 * Listar por professor
+	 * @param tutor
+	 * @return
+	 */
 	public List<Tutoria> listarProfessorId(int tutor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		TutoriaDAO dao = DAOFactory.getTutoriaDAO(pc);

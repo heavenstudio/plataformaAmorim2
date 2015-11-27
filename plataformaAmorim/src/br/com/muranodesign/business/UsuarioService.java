@@ -52,7 +52,11 @@ public class UsuarioService {
 		return result;
 	}
 	
-	
+	/**
+	 * Listar aluno
+	 * @param idAluno
+	 * @return
+	 */
 	public List<Usuario> listaAluno(int idAluno) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		UsuarioDAO dao = DAOFactory.getUsuarioDAO(pc);
@@ -61,6 +65,11 @@ public class UsuarioService {
 		return result;
 	}
 	
+	/**
+	 * Listar professor
+	 * @param idProfessor
+	 * @return
+	 */
 	public List<Usuario> listaProfessor(int idProfessor) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		UsuarioDAO dao = DAOFactory.getUsuarioDAO(pc);
@@ -69,6 +78,11 @@ public class UsuarioService {
 		return result;
 	}
 
+	/**
+	 * Listar aluno email
+	 * @param email
+	 * @return
+	 */
 	public List<Usuario> listaAlunoEmail(String email) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		UsuarioDAO dao = DAOFactory.getUsuarioDAO(pc);
@@ -137,6 +151,12 @@ public class UsuarioService {
 		return p;
 	}
 	
+	/**
+	 * update user
+	 * @param senha
+	 * @param id
+	 * @return
+	 */
 	public int updateUser(String senha,int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		UsuarioDAO dao = DAOFactory.getUsuarioDAO(pc);
