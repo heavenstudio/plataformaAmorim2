@@ -10,7 +10,7 @@ import br.com.muranodesign.model.ComunicadoOficinas;
 public class ComunicadoOficinasService {
 	
 	/**
-	 * 
+	 * Listar todos
 	 * @return
 	 */
 	public List<ComunicadoOficinas> listarTodos() {
@@ -23,7 +23,7 @@ public class ComunicadoOficinasService {
 	}
 	
 	/**
-	 * 
+	 * Listar chave
 	 * @param key
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public class ComunicadoOficinasService {
 	
 	
 	/**
-	 * 
+	 * Criar
 	 * @param p
 	 * @return
 	 */
@@ -50,7 +50,7 @@ public class ComunicadoOficinasService {
 	}
 	
 	/**
-	 * 
+	 * Deletar
 	 * @param p
 	 * @return
 	 */
@@ -64,7 +64,7 @@ public class ComunicadoOficinasService {
 	
 	
 	/**
-	 * 
+	 * Atualizar
 	 * @param p
 	 * @return
 	 */

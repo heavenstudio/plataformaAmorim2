@@ -9,6 +9,10 @@ import br.com.muranodesign.model.Menu;
 
 public class MenuService {
 	
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<Menu> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuDAO dao = DAOFactory.getMenuDAO(pc);
@@ -17,6 +21,11 @@ public class MenuService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<Menu> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuDAO dao = DAOFactory.getMenuDAO(pc);
@@ -25,6 +34,11 @@ public class MenuService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public Menu criarMenu(Menu p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuDAO dao = DAOFactory.getMenuDAO(pc);
@@ -33,6 +47,11 @@ public class MenuService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public Menu atualizarMenu(Menu p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuDAO dao = DAOFactory.getMenuDAO(pc);
@@ -41,6 +60,11 @@ public class MenuService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public Menu deletarMenu(Menu p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuDAO dao = DAOFactory.getMenuDAO(pc);

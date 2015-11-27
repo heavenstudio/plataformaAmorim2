@@ -9,6 +9,10 @@ import br.com.muranodesign.model.Cores;
 
 public class CoresService {
 	
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<Cores> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CoresDAO dao = DAOFactory.getCorDAO(pc);
@@ -17,6 +21,11 @@ public class CoresService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<Cores> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CoresDAO dao = DAOFactory.getCorDAO(pc);
@@ -25,6 +34,11 @@ public class CoresService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public Cores criarCores(Cores p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CoresDAO dao = DAOFactory.getCorDAO(pc);
@@ -33,6 +47,11 @@ public class CoresService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public Cores atualizarCores(Cores p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CoresDAO dao = DAOFactory.getCorDAO(pc);
@@ -41,6 +60,11 @@ public class CoresService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public Cores deletarCores(Cores p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CoresDAO dao = DAOFactory.getCorDAO(pc);

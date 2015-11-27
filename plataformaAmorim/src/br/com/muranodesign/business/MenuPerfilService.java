@@ -9,6 +9,10 @@ import br.com.muranodesign.model.MenuPerfil;
 
 public class MenuPerfilService {
 
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<MenuPerfil> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuPerfilDAO dao = DAOFactory.getMenuPerfilDAO(pc);
@@ -17,6 +21,11 @@ public class MenuPerfilService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<MenuPerfil> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuPerfilDAO dao = DAOFactory.getMenuPerfilDAO(pc);
@@ -25,6 +34,11 @@ public class MenuPerfilService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public MenuPerfil criarMenuPerfil(MenuPerfil p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuPerfilDAO dao = DAOFactory.getMenuPerfilDAO(pc);
@@ -33,6 +47,11 @@ public class MenuPerfilService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public MenuPerfil atualizarMenuPerfil(MenuPerfil p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuPerfilDAO dao = DAOFactory.getMenuPerfilDAO(pc);
@@ -41,6 +60,11 @@ public class MenuPerfilService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public MenuPerfil deletarMenuPerfil(MenuPerfil p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuPerfilDAO dao = DAOFactory.getMenuPerfilDAO(pc);
@@ -49,7 +73,11 @@ public class MenuPerfilService {
 		return p;
 	}
 	
-	
+	/**
+	 * Listar user 
+	 * @param id
+	 * @return
+	 */
 	public List<MenuPerfil> listarUser(int id) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MenuPerfilDAO dao = DAOFactory.getMenuPerfilDAO(pc);

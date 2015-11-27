@@ -9,6 +9,10 @@ import br.com.muranodesign.model.FichaInscricao;
 
 public class FichaInscricaoService {
 	
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<FichaInscricao> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		FichaInscricaoDAO dao = DAOFactory.getFichaInscricao(pc);
@@ -17,6 +21,11 @@ public class FichaInscricaoService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<FichaInscricao> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		FichaInscricaoDAO dao = DAOFactory.getFichaInscricao(pc);
@@ -25,6 +34,11 @@ public class FichaInscricaoService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public FichaInscricao criarFichaInscricao(FichaInscricao p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		FichaInscricaoDAO dao = DAOFactory.getFichaInscricao(pc);
@@ -33,6 +47,11 @@ public class FichaInscricaoService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public FichaInscricao atualizarFichaInscricao(FichaInscricao p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		FichaInscricaoDAO dao = DAOFactory.getFichaInscricao(pc);
@@ -41,6 +60,11 @@ public class FichaInscricaoService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public FichaInscricao deletarFichaInscricao(FichaInscricao p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		FichaInscricaoDAO dao = DAOFactory.getFichaInscricao(pc);

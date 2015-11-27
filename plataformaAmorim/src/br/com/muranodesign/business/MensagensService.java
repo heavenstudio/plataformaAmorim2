@@ -82,7 +82,7 @@ public class MensagensService {
 	}
 	
 	/**
-	 * 
+	 * Listar proprietario
 	 * @param proprietario
 	 * @return
 	 */
@@ -95,7 +95,7 @@ public class MensagensService {
 	}
 	
 	/**
-	 * 
+	 * Listar proprietario 
 	 * @param proprietario
 	 * @param caixa
 	 * @param primeiro
@@ -111,7 +111,7 @@ public class MensagensService {
 	}
 	
 	/**
-	 * 
+	 * Listar proprietario
 	 * @param proprietario
 	 * @param caixa
 	 * @return
@@ -168,6 +168,11 @@ public class MensagensService {
 		return p;
 	}
 	
+	/**
+	 * Listar Remetente
+	 * @param id
+	 * @return
+	 */
 	public List<Mensagens> listarRemetente(int id) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
@@ -176,7 +181,11 @@ public class MensagensService {
 		return result;
 	}
 	
-	
+	/**
+	 * Listar proprietario
+	 * @param id
+	 * @return
+	 */
 	public List<Mensagens> listarProprietario(int id) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);
@@ -185,6 +194,11 @@ public class MensagensService {
 		return result;
 	}
 	
+	/**
+	 * Listar proprietario
+	 * @param id
+	 * @return
+	 */
 	public List<Mensagens> listarProprietarioCount(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MensagensDAO dao = DAOFactory.getMensagensDAO(pc);

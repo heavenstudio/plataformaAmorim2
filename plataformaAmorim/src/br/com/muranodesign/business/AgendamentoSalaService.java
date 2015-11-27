@@ -73,6 +73,13 @@ public class AgendamentoSalaService {
 		return p;
 	}
 	
+	/**
+	 * Listar Agendamento Sala
+	 * @param dia
+	 * @param sala
+	 * @param hora
+	 * @return
+	 */
 	public List<AgendamentoSala> listarValidacao(int dia, int sala, long hora){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AgendamentoSalaDAO dao = DAOFactory.getAgendamentoSalaDAO(pc);

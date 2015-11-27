@@ -9,6 +9,10 @@ import br.com.muranodesign.model.Blog;
 
 public class BlogService {
 
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<Blog> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		BlogDAO dao = DAOFactory.getBlogDAO(pc);
@@ -17,6 +21,11 @@ public class BlogService {
 		return result;
 	}
 	
+	/**
+	 * Listar por chave
+	 * @param key
+	 * @return
+	 */
 	public List<Blog> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		BlogDAO dao = DAOFactory.getBlogDAO(pc);
@@ -25,6 +34,11 @@ public class BlogService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public Blog criarBlog(Blog p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		BlogDAO dao = DAOFactory.getBlogDAO(pc);
@@ -33,6 +47,11 @@ public class BlogService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public Blog atualizarBloga(Blog p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		BlogDAO dao = DAOFactory.getBlogDAO(pc);
@@ -41,6 +60,11 @@ public class BlogService {
 		return p;
 	}
 	
+	/**
+	 * Deletar Blog
+	 * @param p
+	 * @return
+	 */
 	public Blog deletarBlog(Blog p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		BlogDAO dao = DAOFactory.getBlogDAO(pc);
@@ -49,6 +73,11 @@ public class BlogService {
 		return p;
 	}
 	
+	/**
+	 * 	Listar por oficina
+	 * @param id
+	 * @return
+	 */
 	public List<Blog> listarOficina(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		BlogDAO dao = DAOFactory.getBlogDAO(pc);

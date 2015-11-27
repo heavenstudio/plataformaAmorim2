@@ -98,7 +98,7 @@ public class GrupoService {
 	}
 
 	/**
-	 * 
+	 * Listar tutor
 	 * @param tutor
 	 * @return
 	 */
@@ -110,7 +110,13 @@ public class GrupoService {
 		return result;
 	}
 	
-	
+	/**
+	 * update
+	 * @param id
+	 * @param nome
+	 * @param lider
+	 * @return
+	 */
 	public int update(int id,  String nome, int lider){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		GrupoDAO dao = DAOFactory.getGrupoDAO(pc);
@@ -120,6 +126,12 @@ public class GrupoService {
 		
 	}
 	
+	/**
+	 * Listar ultimo
+	 * @param ano
+	 * @param periodo
+	 * @return
+	 */
 	public List<Grupo> listarUltimo(String ano, String periodo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		GrupoDAO dao = DAOFactory.getGrupoDAO(pc);
@@ -129,6 +141,12 @@ public class GrupoService {
 		return result;
 	}
 	
+	/**
+	 * Listar ultimo ciclo
+	 * @param ciclo
+	 * @param periodo
+	 * @return
+	 */
 	public List<Grupo> ListarUltimoCiclo(String ciclo, String periodo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		GrupoDAO dao = DAOFactory.getGrupoDAO(pc);
@@ -138,6 +156,11 @@ public class GrupoService {
 		return result;
 	}
 	
+	/**
+	 * Verifica
+	 * @param id
+	 * @return
+	 */
 	public List<Grupo> verifica(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		GrupoDAO dao = DAOFactory.getGrupoDAO(pc);

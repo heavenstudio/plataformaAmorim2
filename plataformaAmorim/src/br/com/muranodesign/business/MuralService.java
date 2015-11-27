@@ -9,6 +9,10 @@ import br.com.muranodesign.model.Mural;
 
 public class MuralService {
 	
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<Mural> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralDAO dao = DAOFactory.getMuralDAO(pc);
@@ -17,6 +21,11 @@ public class MuralService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<Mural> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralDAO dao = DAOFactory.getMuralDAO(pc);
@@ -25,6 +34,11 @@ public class MuralService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public Mural criarMural(Mural p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralDAO dao = DAOFactory.getMuralDAO(pc);
@@ -33,6 +47,11 @@ public class MuralService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public Mural atualizarMural(Mural p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralDAO dao = DAOFactory.getMuralDAO(pc);
@@ -41,6 +60,11 @@ public class MuralService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public Mural deletarMural(Mural p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralDAO dao = DAOFactory.getMuralDAO(pc);
@@ -49,6 +73,13 @@ public class MuralService {
 		return p;
 	}
 	
+	/**
+	 * Range
+	 * @param data2
+	 * @param data
+	 * @param idAluno
+	 * @return
+	 */
 	public List<Mural>Range(String data2, String data, int idAluno){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralDAO dao = DAOFactory.getMuralDAO(pc);

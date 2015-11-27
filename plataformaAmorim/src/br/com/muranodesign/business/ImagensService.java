@@ -9,6 +9,10 @@ import br.com.muranodesign.model.Imagens;
 
 public class ImagensService {
 	
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<Imagens> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ImagensDAO dao = DAOFactory.getImagensDAO(pc);
@@ -17,6 +21,11 @@ public class ImagensService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<Imagens> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ImagensDAO dao = DAOFactory.getImagensDAO(pc);
@@ -25,6 +34,11 @@ public class ImagensService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public Imagens criarImagens(Imagens p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ImagensDAO dao = DAOFactory.getImagensDAO(pc);
@@ -33,6 +47,11 @@ public class ImagensService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public Imagens atualizarImagens(Imagens p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ImagensDAO dao = DAOFactory.getImagensDAO(pc);
@@ -41,6 +60,11 @@ public class ImagensService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public Imagens deletarImagens(Imagens p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ImagensDAO dao = DAOFactory.getImagensDAO(pc);

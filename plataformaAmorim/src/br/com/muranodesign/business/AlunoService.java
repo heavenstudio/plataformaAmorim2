@@ -111,9 +111,6 @@ public class AlunoService {
 		return p;
 	}
 	
-	
-
-	
 	/**
 	 * Deletar Aluno.
 	 *

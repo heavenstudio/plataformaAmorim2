@@ -91,6 +91,10 @@ public class AtividadeResource {
 		return resultado;
 	}
 	
+	/**
+	 * Inativar Atividade
+	 * @param id
+	 */
 	@Path("Inativar/{id}")
 	@GET
 	@Produces("application/json")
@@ -104,6 +108,10 @@ public class AtividadeResource {
 		}
 	}
 	
+	/**
+	 * Deletar Atividade
+	 * @param id
+	 */
 	@Path("DeletarAtividade/{id}")
 	@GET
 	@Produces("application/json")
@@ -124,6 +132,10 @@ public class AtividadeResource {
 		
 	}
 	
+	/**
+	 * Deletar Roteiro Atividade
+	 * @param id
+	 */
 	@Path("DeletarRoteiroAtividade/{id}")
 	@GET
 	@Produces("application/json")
@@ -211,7 +223,6 @@ public class AtividadeResource {
 		
 		if (action.equals("create")) {
 			
-			//objUsuario.setLogin(login);
 			objAtividade.setNome(nome);
 			objAtividade.setDescricao(descricao);
 			objAtividade.setNumero(Integer.parseInt(numero));

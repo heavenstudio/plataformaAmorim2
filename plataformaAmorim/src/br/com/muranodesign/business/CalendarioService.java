@@ -157,6 +157,10 @@ public class CalendarioService {
 		return result;
 	}
 	
+	/**
+	 * Listar range
+	 * @return
+	 */
 	public List<Calendario> listarRange(){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CalendarioDAO dao = DAOFactory.getCalendarioDAO(pc);

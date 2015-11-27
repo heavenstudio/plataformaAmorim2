@@ -9,6 +9,10 @@ import br.com.muranodesign.model.CicloAnoEstudo;
 
 public class CicloAnoEstudoService {
 
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<CicloAnoEstudo> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CicloAnoEstudoDAO dao = DAOFactory.getCicloAnoEstudoDAO(pc);
@@ -17,6 +21,11 @@ public class CicloAnoEstudoService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<CicloAnoEstudo> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CicloAnoEstudoDAO dao = DAOFactory.getCicloAnoEstudoDAO(pc);
@@ -25,6 +34,11 @@ public class CicloAnoEstudoService {
 		return result;
 	}
 	
+	/**
+	 * Criar ciclo
+	 * @param p
+	 * @return
+	 */
 	public CicloAnoEstudo criarCicloAnoEstudo(CicloAnoEstudo p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CicloAnoEstudoDAO dao = DAOFactory.getCicloAnoEstudoDAO(pc);
@@ -33,6 +47,11 @@ public class CicloAnoEstudoService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public CicloAnoEstudo atualizarCicloAnoEstudo(CicloAnoEstudo p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CicloAnoEstudoDAO dao = DAOFactory.getCicloAnoEstudoDAO(pc);
@@ -41,6 +60,11 @@ public class CicloAnoEstudoService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public CicloAnoEstudo deletarCicloAnoEstudo(CicloAnoEstudo p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CicloAnoEstudoDAO dao = DAOFactory.getCicloAnoEstudoDAO(pc);
@@ -49,6 +73,11 @@ public class CicloAnoEstudoService {
 		return p;
 	}
 	
+	/**
+	 * Listar ciclo
+	 * @param idCiclo
+	 * @return
+	 */
 	public List<CicloAnoEstudo> listCiclo(int idCiclo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		CicloAnoEstudoDAO dao = DAOFactory.getCicloAnoEstudoDAO(pc);

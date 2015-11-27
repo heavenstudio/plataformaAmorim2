@@ -9,6 +9,10 @@ import br.com.muranodesign.model.historicoEventos;
 
 public class HistoricoEventosService {
 	
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<historicoEventos> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		HistoricoEventosDAO dao = DAOFactory.getHistoricoEventosDAO(pc);
@@ -17,6 +21,11 @@ public class HistoricoEventosService {
 		return result;
 	}
 	
+	/**
+	 * Listar chave
+	 * @param key
+	 * @return
+	 */
 	public List<historicoEventos> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		HistoricoEventosDAO dao = DAOFactory.getHistoricoEventosDAO(pc);
@@ -25,6 +34,11 @@ public class HistoricoEventosService {
 		return result;
 	}
 	
+	/**
+	 * Criar
+	 * @param p
+	 * @return
+	 */
 	public historicoEventos criarhistoricoEventos(historicoEventos p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		HistoricoEventosDAO dao = DAOFactory.getHistoricoEventosDAO(pc);
@@ -33,6 +47,11 @@ public class HistoricoEventosService {
 		return p;
 	}
 	
+	/**
+	 * Atualizar
+	 * @param p
+	 * @return
+	 */
 	public historicoEventos atualizarhistoricoEventos(historicoEventos p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		HistoricoEventosDAO dao = DAOFactory.getHistoricoEventosDAO(pc);
@@ -41,6 +60,11 @@ public class HistoricoEventosService {
 		return p;
 	}
 	
+	/**
+	 * Deletar
+	 * @param p
+	 * @return
+	 */
 	public historicoEventos deletarhistoricoEventos(historicoEventos p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		HistoricoEventosDAO dao = DAOFactory.getHistoricoEventosDAO(pc);

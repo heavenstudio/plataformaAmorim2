@@ -73,6 +73,11 @@ public class AgrupamentoService {
 		return p;
 	}
 	
+	/**
+	 * Listar ano letivo
+	 * @param idAno
+	 * @return
+	 */
 	public List<Agrupamento> listaAnoLetivo(int idAno){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AgrupamentoDAO dao = DAOFactory.getAgrupamentoDAO(pc);
