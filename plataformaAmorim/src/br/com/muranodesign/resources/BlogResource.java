@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +20,11 @@ import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.BlogService;
+import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.model.Blog;
+import br.com.muranodesign.model.Oficina;
+import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.util.StringUtil;
 import br.com.muranodesign.util.Upload;
 
@@ -149,6 +153,29 @@ public class BlogResource {
 		logger.debug("Lista Blog por Oficina " + id);
 		List<Blog> obj = new BlogService().listarOficina(id);
 		return obj;
+	}
+	
+	@Path("BlogProfessor/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Blog> getBlogProfessor(@PathParam("id") int id){
+		logger.debug("Lista Blog por Professor " + id);
+		List<Blog> resultado = new ArrayList<Blog>();
+		List<OficinaProfessor> oficinasProfessor;
+		List<Oficina> oficinas = new ArrayList<Oficina>();
+		//List<Cores> cores = new ArrayList<Cores>();
+		
+		oficinasProfessor = new OficinaProfessorService().listarProfessor(id);
+		
+		for (OficinaProfessor oficinaProfessor : oficinasProfessor) {
+			oficinas.add(new OficinaService().listarkey(oficinaProfessor.getOficina().getIdoficina()).get(0));
+		}
+		
+		for (Oficina oficina : oficinas){
+			resultado.addAll(new BlogService().listarOficina(oficina.getIdoficina()));
+		}
+		
+		return resultado;
 	}
 
 	/**
