@@ -45,7 +45,7 @@
 
 
 
-<!--  -->
+<!-- 
     <security-constraint>
          <web-resource-collection>
              <web-resource-name>Rest</web-resource-name>
@@ -64,7 +64,7 @@
     <security-role>
         <role-name>admin</role-name>
     </security-role>
-<!--  -->
+  -->
 
 
 <!-- 
