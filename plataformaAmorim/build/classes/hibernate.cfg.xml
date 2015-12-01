@@ -92,6 +92,10 @@
 		<mapping class="br.com.muranodesign.model.Tutoria" />
 		<mapping class="br.com.muranodesign.model.Usuario" />
 		
+		
+		
+		
+		
 		<mapping class="br.com.muranodesign.model.Historico_conexao" />
 		<mapping class="br.com.muranodesign.model.SO" />
 		<mapping class="br.com.muranodesign.model.FichaInscricao" />

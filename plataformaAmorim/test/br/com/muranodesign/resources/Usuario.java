@@ -1,4 +1,4 @@
-	package br.com.muranodesign.resources;
+package br.com.muranodesign.resources;
 
 import org.junit.Test;
 
@@ -184,6 +184,4 @@ public class Usuario extends JerseyTest  {
 		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Oficina");
 	webResource.post("action=delete&id=1");
 	}*/
-	
-			
 }

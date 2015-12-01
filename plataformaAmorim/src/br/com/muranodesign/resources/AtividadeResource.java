@@ -95,6 +95,19 @@ public class AtividadeResource {
 	 * Inativar Atividade
 	 * @param id
 	 */
+	@Path("Delete/{id}")
+	@GET
+	@Produces("application/json")
+	public void Delete(@PathParam("id") int id){
+		List<Atividade> atividade = new AtividadeService().listarkey(id);
+		
+		if(!atividade.isEmpty()){
+			Atividade ati = atividade.get(0);
+			
+			new AtividadeService().deletarAtividade(ati);
+		}
+	}
+	
 	@Path("Inativar/{id}")
 	@GET
 	@Produces("application/json")
@@ -104,9 +117,12 @@ public class AtividadeResource {
 		if(!atividade.isEmpty()){
 			Atividade ati = atividade.get(0);
 			
-			new AtividadeService().deletarAtividade(ati);
+			ati.setAtivo(0);
+			
+			new AtividadeService().atualizarAtividade(ati);
 		}
 	}
+	
 	
 	/**
 	 * Deletar Atividade
