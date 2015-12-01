@@ -166,6 +166,10 @@ public class LoginResource {
 						so = "Unix";
 						historico.setS_o(soService.listarSO(so).get(0));
 					}
+					else if(versao.contains("Linux")){
+						so = "Linux";
+						historico.setS_o(soService.listarSO(so).get(0));
+					}
 					else { 
 						so = "Outro";
 						historico.setS_o(soService.listarSO(so).get(0));

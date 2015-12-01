@@ -141,7 +141,6 @@ public class AtividadeResource {
 	public void DeletarRoteiroAtividade(@PathParam("id") int id){
 		List<Objetivo> obj = new ObjetivoService().listarRoteiro(id);
 		
-		
 		if(!obj.isEmpty()){
 			
 			for (Objetivo objetivo : obj) {
