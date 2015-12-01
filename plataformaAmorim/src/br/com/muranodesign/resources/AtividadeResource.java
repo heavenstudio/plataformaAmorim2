@@ -129,7 +129,6 @@ public class AtividadeResource {
 			
 			new ObjetivoService().deletarObjetivo(objs);
 		}
-		
 	}
 	
 	/**
@@ -161,9 +160,7 @@ public class AtividadeResource {
 		}
 	}
 	
-	
 
-   
 	/**
 	 * Remove  atividade.
 	 *
@@ -198,8 +195,7 @@ public class AtividadeResource {
 	 */
 	@POST
 	@Produces("text/plain")
-	public String eventoAction(
-			
+	public String eventoAction(	
 			@FormParam("action") String action,
 			@FormParam("id") String strid,
 			@FormParam("nome") String nome,
@@ -210,7 +206,6 @@ public class AtividadeResource {
 			@FormParam("objetivo") String objetivo, 
 			@FormParam("ativo") String ativo
 			
-
 			) {
 		Atividade objAtividade= new Atividade();
 		logger.info("eventoAction ...");
