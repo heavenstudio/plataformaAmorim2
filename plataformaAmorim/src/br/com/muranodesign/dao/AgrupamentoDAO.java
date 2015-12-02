@@ -49,6 +49,13 @@ public interface AgrupamentoDAO {
 	 */
 	public List<Agrupamento> listaAnoLetivo(int idAno);
 	
-	
+	/**
+	 * Listar por ciclo
+	 * @param id
+	 * @return
+	 */
+	//Alteração que pode mudar
+	public List<Agrupamento> ListarPorCiclo(int id);
+	//Alteração que pode mudar
 
 }

@@ -30,7 +30,12 @@ public class Agrupamento  implements Serializable{
 	 
 	 @OneToOne
 	 private AnoLetivo anoLetivo;
-
+	 
+	 //Alteração que pode mudar
+	 @OneToOne
+	 private Ciclos ciclo;
+	 //Alteração que pode mudar
+	 
 	public int getIdagrupamento() {
 		return Idagrupamento;
 	}
@@ -58,7 +63,16 @@ public class Agrupamento  implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	 
+
+	//Alteração que pode mudar
+	public Ciclos getCiclo() {
+		return ciclo;
+	}
+
+	public void setCiclo(Ciclos ciclo) {
+		this.ciclo = ciclo;
+	}
+	//Alteração que pode mudar
 	 
 
 }

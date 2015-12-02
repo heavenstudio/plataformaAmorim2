@@ -99,12 +99,12 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.PlanejamentoRoteiroDAO#listarAlunoTotal(int)
 	 */
-	public /*List<PlanejamentoRoteiro>*/long listarAlunoTotal(int id){
+	public long listarAlunoTotal(int id){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("idAluno", id));
 		criteria.add(Restrictions.isNotNull("objetivo"));
 		criteria.setProjection(Projections.count("idAluno"));
-		//List<PlanejamentoRoteiro> result = criteria.list();
+	
 		long result = (Long) criteria.list().get(0);
 		return result;
 	}

@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AgrupamentoService;
 import br.com.muranodesign.business.AnoLetivoService;
+import br.com.muranodesign.business.CiclosService;
 import br.com.muranodesign.model.Agrupamento;
 
 
@@ -35,6 +36,9 @@ public class AgrupamentoResource {
 			@FormParam("action") String action,
 			@FormParam("id") int id,
 			@FormParam("anoLetivo") int anoLetivo,
+			//Alteração que pode mudar
+			@FormParam("ciclo") int ciclo,
+			//Alteração que pode mudar
 			@FormParam("nome") String nome){
 		
 		Agrupamento resultado = new Agrupamento();
@@ -47,6 +51,11 @@ public class AgrupamentoResource {
 			
 			agrupamento.setNome(nome);
 			agrupamento.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
+			
+			//Alteração que pode mudar
+			agrupamento.setCiclo(new CiclosService().listarkey(ciclo).get(0));
+			//Alteração que pode mudar
+			
 			resultado = new AgrupamentoService().criarAgrupamento(agrupamento);
 			
 		}else if(action.equals("update")){
@@ -54,11 +63,31 @@ public class AgrupamentoResource {
 			
 			agrupamento.setNome(nome);
 			agrupamento.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
+			
+			//Alteração que pode mudar
+			agrupamento.setCiclo(new CiclosService().listarkey(ciclo).get(0));
+			//Alteração que pode mudar
+			
 			resultado = new AgrupamentoService().atualizarAgrupamento(agrupamento);
 		}
 		
 		return Integer.toString(resultado.getIdagrupamento());
 	}
+	
+	
+	//Alteração que pode mudar
+	@Path("ListarPorCiclo/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Agrupamento> getListarPorCiclo(@PathParam("id") int id){
+		logger.info("Lista Agrupamento  por id de ciclo" + id);
+		List<Agrupamento> resultado;
+		resultado = new AgrupamentoService().ListarPorCiclo(id);
+		
+		return resultado;
+	}
+	//Alteração que pode mudar
+	
 	
 	/**
 	 * Lista agrupamento por id

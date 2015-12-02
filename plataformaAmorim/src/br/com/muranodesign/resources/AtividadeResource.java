@@ -92,7 +92,7 @@ public class AtividadeResource {
 	}
 	
 	/**
-	 * Inativar Atividade
+	 * Deletar Atividade
 	 * @param id
 	 */
 	@Path("Delete/{id}")
@@ -108,6 +108,10 @@ public class AtividadeResource {
 		}
 	}
 	
+	/**
+	 * Inativar Atividade
+	 * @param id
+	 */
 	@Path("Inativar/{id}")
 	@GET
 	@Produces("application/json")
