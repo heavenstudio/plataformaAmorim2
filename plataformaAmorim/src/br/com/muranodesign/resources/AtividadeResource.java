@@ -170,9 +170,9 @@ public class AtividadeResource {
 				new ObjetivoService().deletarObjetivo(objetivo);
 			}
 			
-			new RoteiroService().deletarRoteiro(new RoteiroService().listarkey(id).get(0));
-			
 		}
+		
+		new RoteiroService().deletarRoteiro(new RoteiroService().listarkey(id).get(0));
 	}
 	
 
