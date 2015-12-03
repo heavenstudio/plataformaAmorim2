@@ -461,7 +461,7 @@ public class ObjetivoResource {
 	@FormParam("action") String action, @FormParam("id") String strid,
 			@FormParam("nome") String nome,
 			@FormParam("descricao") String descricao,
-			@FormParam("numero") String numero,
+			//@FormParam("numero") String numero,
 			@FormParam("roteiro") String roteiro,
 			@FormParam("ativo") String ativo
 
@@ -479,7 +479,7 @@ public class ObjetivoResource {
 			// objUsuario.setLogin(login);
 			objObjetivo.setNome(nome);
 			objObjetivo.setDescricao(descricao);
-			objObjetivo.setNumero(Integer.parseInt(numero));
+			//objObjetivo.setNumero(Integer.parseInt(numero));
 			objObjetivo.setRoteiro(objRoteiro);
 			objObjetivo.setAtivo(Integer.parseInt(ativo));
 
@@ -494,7 +494,7 @@ public class ObjetivoResource {
 			objObjetivo.setAtivo(Integer.parseInt(ativo));
 			objObjetivo.setNome(nome);
 			objObjetivo.setDescricao(descricao);
-			objObjetivo.setNumero(Integer.parseInt(numero));
+			//objObjetivo.setNumero(Integer.parseInt(numero));
 			objObjetivo.setRoteiro(objRoteiro);
 
 			resultado = new ObjetivoService().atualizarObjetivo(objObjetivo);

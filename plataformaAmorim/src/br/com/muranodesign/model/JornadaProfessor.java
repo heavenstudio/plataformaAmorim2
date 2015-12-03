@@ -105,6 +105,4 @@ public class JornadaProfessor implements Serializable{
 	public void setProfessor(ProfessorFuncionario professor) {
 		this.professor = professor;
 	}
-	
-	
 }

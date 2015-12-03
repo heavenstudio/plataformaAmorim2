@@ -219,7 +219,7 @@ public class AtividadeResource {
 			@FormParam("id") String strid,
 			@FormParam("nome") String nome,
 			@FormParam("descricao") String descricao,
-			@FormParam("numero") String numero,
+			//@FormParam("numero") String numero,
 			@FormParam("paginaLivro") String paginaLivro,
 			@FormParam("livro") String livro,
 			@FormParam("objetivo") String objetivo, 
@@ -239,7 +239,7 @@ public class AtividadeResource {
 			
 			objAtividade.setNome(nome);
 			objAtividade.setDescricao(descricao);
-			objAtividade.setNumero(Integer.parseInt(numero));
+			//objAtividade.setNumero(Integer.parseInt(numero));
 			objAtividade.setPaginaLivro(paginaLivro);
 			objAtividade.setLivro(livro);
 			objAtividade.setObjetivo(objObjetivo);
@@ -255,7 +255,7 @@ public class AtividadeResource {
 			
 			objAtividade.setNome(nome);
 			objAtividade.setDescricao(descricao);
-			objAtividade.setNumero(Integer.parseInt(numero));
+			//objAtividade.setNumero(Integer.parseInt(numero));
 			objAtividade.setAtivo(Integer.parseInt(ativo));
 			objAtividade.setPaginaLivro(paginaLivro);
 			objAtividade.setLivro(livro);
