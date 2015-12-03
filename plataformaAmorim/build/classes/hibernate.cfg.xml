@@ -9,7 +9,9 @@
 		<property name="hibernate.connection.username">amorim_prod</property>
 		<property name="hibernate.connection.password">amorim_prod</property>
 		
-		<!--  <property name="hibernate.cache.use_second_level_cache">true</property> -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<property name="hibernate.c3p0.min_size">10</property>
 		<property name="hibernate.c3p0.max_size">50</property>
@@ -94,8 +96,6 @@
 		
 		
 		
-		
-		
 		<mapping class="br.com.muranodesign.model.Historico_conexao" />
 		<mapping class="br.com.muranodesign.model.SO" />
 		<mapping class="br.com.muranodesign.model.FichaInscricao" />
@@ -126,6 +126,7 @@
 		<mapping class="br.com.muranodesign.model.Blog" />
 		<mapping class="br.com.muranodesign.model.PlanoAula" />
 		<mapping class="br.com.muranodesign.model.PlanejamentoAula" />
+		<mapping class="br.com.muranodesign.model.JornadaProfessor" />
 		
 		
 	</session-factory>
