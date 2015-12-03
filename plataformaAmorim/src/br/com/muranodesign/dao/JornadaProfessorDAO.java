@@ -43,22 +43,28 @@ public interface JornadaProfessorDAO {
 	 */
 	public List<JornadaProfessor> listarKey(int key);
 
+	/**
+	 * Listar os horarios professor
+	 * @param professor
+	 * @return
+	 */
+	public List<JornadaProfessor> ListarTodos(int professor);
 	
 	/**
 	 * Total
 	 * @return
 	 */
-	public long Total();
+	public long Total(int professor);
 	
 	/**
 	 * Disponivel
 	 * @return
 	 */
-	public long Disponivel();
+	public long Disponivel(int professor);
 	
 	/**
 	 * extra
 	 * @return
 	 */
-	public long extra();
+	public long extra(int professor);
 }

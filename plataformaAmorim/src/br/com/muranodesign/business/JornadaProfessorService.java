@@ -50,26 +50,35 @@ public class JornadaProfessorService {
 		return p;
 	}
 	
-	public long Total(){
+	
+	public List<JornadaProfessor> ListarTodos(int professor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
-		long result = dao.Total();
+		List<JornadaProfessor> result = dao.ListarTodos(professor);
 		pc.commitAndClose();
 		return result;
 	}
 	
-	public long Disponivel(){
+	public long Total(int professor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
-		long result = dao.Disponivel();
+		long result = dao.Total(professor);
 		pc.commitAndClose();
 		return result;
 	}
 	
-	public long extra(){
+	public long Disponivel(int professor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
-		long result = dao.extra();
+		long result = dao.Disponivel(professor);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	public long extra(int professor){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
+		long result = dao.extra(professor);
 		pc.commitAndClose();
 		return result;
 	}

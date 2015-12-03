@@ -37,7 +37,11 @@ public class JornadaProfessor implements Serializable{
 	private Semana dia; 
 	
 	@OneToOne
-	private OficinaProfessor oficina_professor; 
+	private OficinaProfessor oficina_professor;
+	
+	@OneToOne
+	private ProfessorFuncionario professor;
+	
 	
 	@Column(name = "ocupado")
 	private int ocupado;
@@ -92,6 +96,14 @@ public class JornadaProfessor implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public ProfessorFuncionario getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(ProfessorFuncionario professor) {
+		this.professor = professor;
 	}
 	
 	

@@ -1,7 +1,6 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -15,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.JornadaProfessorService;
 import br.com.muranodesign.business.OficinaProfessorService;
+import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.business.SemanaService;
 import br.com.muranodesign.model.JornadaProfessor;
 import br.com.muranodesign.model.OficinaProfessor;
@@ -36,6 +36,7 @@ public class JornadaProfessorResource {
 			@FormParam("extra") int extra,
 			@FormParam("dia") int dia,
 			@FormParam("oficina_professor") int oficina_professor,
+			@FormParam("professor") int professor,
 			@FormParam("ocupado") int ocupado){
 		
 		JornadaProfessor resultado = new JornadaProfessor();
@@ -54,6 +55,7 @@ public class JornadaProfessorResource {
 				jornada.setExtra(extra);
 			}
 			
+			jornada.setProfessor(new ProfessorFuncionarioService().listarkey(professor).get(0));
 			jornada.setHorario(horario);
 			jornada.setOcupado(0);
 			
@@ -71,14 +73,23 @@ public class JornadaProfessorResource {
 			}
 			
 			jornada.setHorario(horario);
-			jornada.setOcupado(ocupado);
+			//jornada.setOcupado(ocupado);
 			
 			resultado = new JornadaProfessorService().atualizarJornadaProfessor(jornada);
+			
+		}else if(action.equals("ocupar")){
+			JornadaProfessor jornada = new JornadaProfessorService().listarkey(id).get(0);		
+			
+			jornada.setOcupado(1);
+			
+			resultado = new  JornadaProfessorService().atualizarJornadaProfessor(jornada);
 			
 		}
 		
 		return Integer.toString(resultado.getIdjornada_professor());
 	}
+	
+	
 	
 	@GET
 	@Produces("application/json")
@@ -90,37 +101,78 @@ public class JornadaProfessorResource {
 		return resultado;
 	}
 	
-	@Path("Total")
+	@Path("Total/{id}/{ciclo}")
 	@GET
 	@Produces("application/json")
-	public long total(){
-		return new JornadaProfessorService().Total();
+	public long total(@PathParam("id") int id,@PathParam("ciclo") int ciclo){
+		
+		List<OficinaProfessor> oficina = new OficinaProfessorService().listarProfessor(id);
+		List<OficinaProfessor> con = new ArrayList<OficinaProfessor>();
+		
+		for (OficinaProfessor oficinaProfessor : oficina) {
+			if(oficinaProfessor.getOficina().getCiclo().getIdciclos() == ciclo){
+				con.add(oficinaProfessor);
+			}
+		}
+		
+		
+		return new JornadaProfessorService().Total(con.get(0).getProfessor().getIdprofessorFuncionario());
 	}
 	
 
-	@Path("Disponivel")
+	@Path("Disponivel/{id}/{ciclo}")
 	@GET
 	@Produces("application/json")
-	public long disponivel(){
-		return new JornadaProfessorService().Disponivel();
+	public long disponivel(@PathParam("id") int id,@PathParam("ciclo") int ciclo){
+		
+		List<OficinaProfessor> oficina = new OficinaProfessorService().listarProfessor(id);
+		List<OficinaProfessor> con = new ArrayList<OficinaProfessor>();
+		
+		for (OficinaProfessor oficinaProfessor : oficina) {
+			if(oficinaProfessor.getOficina().getCiclo().getIdciclos() == ciclo){
+				con.add(oficinaProfessor);
+			}
+		}
+		
+		return new JornadaProfessorService().Disponivel(con.get(0).getProfessor().getIdprofessorFuncionario());
 	}
 	
 	
-	@Path("CompletaRotina/{id}")
+	@Path("Extra/{id}/{ciclo}")
 	@GET
 	@Produces("application/json")
-	public Hashtable<String, String> CompletaRotina(@PathParam("id") int id){
-		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String,String>>();
+	public long Extra(@PathParam("id") int id,@PathParam("ciclo") int ciclo){
 		
 		List<OficinaProfessor> oficina = new OficinaProfessorService().listarProfessor(id);
+		List<OficinaProfessor> con = new ArrayList<OficinaProfessor>();
 		
-		
-		
-		if(!oficina.isEmpty()){
-			for (OficinaProfessor oficinaProfessor : oficina) {
-				
+		for (OficinaProfessor oficinaProfessor : oficina) {
+			if(oficinaProfessor.getOficina().getCiclo().getIdciclos() == ciclo){
+				con.add(oficinaProfessor);
 			}
 		}
-		return null;
+		
+		return new JornadaProfessorService().extra(con.get(0).getProfessor().getIdprofessorFuncionario());
+	}
+	
+	@Path("CompletaRotina/{id}/{ciclo}")
+	@GET
+	@Produces("application/json")
+	public List<JornadaProfessor>/*Hashtable<String, String>*/ CompletaRotina(@PathParam("id") int id,@PathParam("ciclo") int ciclo){
+		//List<Hashtable<String, String>> list = new ArrayList<Hashtable<String,String>>();
+		
+		List<OficinaProfessor> oficina = new OficinaProfessorService().listarProfessor(id);
+		List<OficinaProfessor> con = new ArrayList<OficinaProfessor>();
+		
+		for (OficinaProfessor oficinaProfessor : oficina) {
+			if(oficinaProfessor.getOficina().getCiclo().getIdciclos() == ciclo){
+				con.add(oficinaProfessor);
+			}
+		}
+		
+		List<JornadaProfessor> jornada = new JornadaProfessorService().ListarTodos(con.get(0).getProfessor().getIdprofessorFuncionario());
+		
+
+		return jornada;
 	}
 }

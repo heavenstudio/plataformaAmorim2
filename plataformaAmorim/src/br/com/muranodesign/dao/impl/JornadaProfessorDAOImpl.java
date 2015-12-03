@@ -79,10 +79,25 @@ public class JornadaProfessorDAOImpl extends AbstractHibernateDAO implements Jor
 	
 	/*
 	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.JornadaProfessorDAO#ListarTodos(int)
+	 */
+	@SuppressWarnings("unchecked")
+	public List<JornadaProfessor> ListarTodos(int professor){
+		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
+		criteria.add(Restrictions.eq("ocupado", 0));
+		criteria.add(Restrictions.eq("professor", professor));
+		criteria.add(Restrictions.isNotNull("oficina_professor"));
+		List<JornadaProfessor> result = criteria.list();
+		return result;
+	}
+	
+	/*
+	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.JornadaProfessorDAO#Total()
 	 */
-	public long Total(){
+	public long Total(int professor){
 		Criteria criteria = getSession().createCriteria(JornadaProfessor.class);
+		criteria.add(Restrictions.eq("professor", professor));
 		criteria.setProjection(Projections.count("Idjornada_professor"));
 	
 		long result = (Long) criteria.list().get(0);
@@ -93,9 +108,11 @@ public class JornadaProfessorDAOImpl extends AbstractHibernateDAO implements Jor
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.JornadaProfessorDAO#Disponivel(int)
 	 */
-	public long Disponivel(){
+	public long Disponivel(int professor){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
 		criteria.add(Restrictions.eq("ocupado", 0));
+		criteria.add(Restrictions.eq("professor", professor));
+		criteria.add(Restrictions.isNotNull("oficina_professor"));
 		criteria.setProjection(Projections.count("Idjornada_professor"));
 	
 		long result = (Long) criteria.list().get(0);
@@ -106,8 +123,10 @@ public class JornadaProfessorDAOImpl extends AbstractHibernateDAO implements Jor
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.JornadaProfessorDAO#extra(int)
 	 */
-	public long extra(){
+	public long extra(int professor){
 		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
+		criteria.add(Restrictions.eq("ocupado", 0));
+		criteria.add(Restrictions.eq("professor", professor));
 		criteria.add(Restrictions.isNotNull("extra"));
 		criteria.setProjection(Projections.count("Idjornada_professor"));
 	
