@@ -87,5 +87,20 @@ public class AgrupamentoDAOImpl extends AbstractHibernateDAO implements Agrupame
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AgrupamentoDAO#ListarPorCiclo(int)
+	 */
+	
+	//Alteração que pode mudar
+	@SuppressWarnings("unchecked")
+	public List<Agrupamento> ListarPorCiclo(int id){
+		Criteria criteria = getSession().createCriteria(Agrupamento.class);
+		criteria.createAlias("ciclo", "ciclo");
+		criteria.add(Restrictions.eq("ciclo.Idciclos", id));
+		List<Agrupamento> result = criteria.list();
+		return result;
+	}
+	//Alteração que pode mudar
 
 }

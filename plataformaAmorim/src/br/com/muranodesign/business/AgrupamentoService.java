@@ -85,5 +85,20 @@ public class AgrupamentoService {
 		pc.commitAndClose();
 		return result;
 	}
+	
+	/**
+	 * Listar por ciclo
+	 * @param id
+	 * @return
+	 */
+	//Alteração que pode mudar
+	public List<Agrupamento> ListarPorCiclo(int id){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AgrupamentoDAO dao = DAOFactory.getAgrupamentoDAO(pc);
+		List<Agrupamento> result = dao.ListarPorCiclo(id);
+		pc.commitAndClose();
+		return result;
+	}
+	//Alteração que pode mudar
 
 }

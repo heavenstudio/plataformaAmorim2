@@ -13,7 +13,7 @@
 		<property name="hibernate.connection.password"></property>
 		
 		
-		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<!--  <property name="hibernate.cache.use_second_level_cache">true</property> -->
 		
 		<property name="hibernate.c3p0.min_size">10</property>
 		<property name="hibernate.c3p0.max_size">50</property>
@@ -95,6 +95,10 @@
 		<mapping class="br.com.muranodesign.model.TipoRecursoAprendizagem" />
 		<mapping class="br.com.muranodesign.model.Tutoria" />
 		<mapping class="br.com.muranodesign.model.Usuario" />
+		
+		
+		
+		
 		
 		<mapping class="br.com.muranodesign.model.Historico_conexao" />
 		<mapping class="br.com.muranodesign.model.SO" />

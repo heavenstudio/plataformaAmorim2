@@ -37,6 +37,7 @@ import br.com.muranodesign.dao.impl.GrupoDAOImpl;
 import br.com.muranodesign.dao.impl.HistoricoDAOImpl;
 import br.com.muranodesign.dao.impl.HistoricoEventosDAOImpl;
 import br.com.muranodesign.dao.impl.ImagensDAOImpl;
+import br.com.muranodesign.dao.impl.JornadaProfessorDAOImpl;
 import br.com.muranodesign.dao.impl.MateriaDAOImpl;
 import br.com.muranodesign.dao.impl.MensagensDAOImpl;
 import br.com.muranodesign.dao.impl.MenuDAOImpl;
@@ -710,6 +711,17 @@ public static MensagensDAO getMensagensDAO(
 	public static OficinaDAO getOficinaDAO(PersistenceContext persistenceContext){
 		return new OficinaDAOImpl((HibernatePersistenceContext) persistenceContext);
 	}
+	
+	/**
+	 * 
+	 * @param persistenceContext
+	 * @return
+	 */
+	//Alteração que pode mudar
+	public static JornadaProfessorDAO getJornadaProfessorDAO(PersistenceContext persistenceContext){
+		return new JornadaProfessorDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+	//Alteração que pode mudar
 	
 	/**
 	 * 

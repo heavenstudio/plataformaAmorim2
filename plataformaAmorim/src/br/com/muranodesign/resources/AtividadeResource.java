@@ -92,6 +92,23 @@ public class AtividadeResource {
 	}
 	
 	/**
+	 * Deletar Atividade
+	 * @param id
+	 */
+	@Path("Delete/{id}")
+	@GET
+	@Produces("application/json")
+	public void Delete(@PathParam("id") int id){
+		List<Atividade> atividade = new AtividadeService().listarkey(id);
+		
+		if(!atividade.isEmpty()){
+			Atividade ati = atividade.get(0);
+			
+			new AtividadeService().deletarAtividade(ati);
+		}
+	}
+	
+	/**
 	 * Inativar Atividade
 	 * @param id
 	 */
@@ -104,9 +121,12 @@ public class AtividadeResource {
 		if(!atividade.isEmpty()){
 			Atividade ati = atividade.get(0);
 			
-			new AtividadeService().deletarAtividade(ati);
+			ati.setAtivo(0);
+			
+			new AtividadeService().atualizarAtividade(ati);
 		}
 	}
+	
 	
 	/**
 	 * Deletar Atividade
@@ -154,9 +174,9 @@ public class AtividadeResource {
 				new ObjetivoService().deletarObjetivo(objetivo);
 			}
 			
-			new RoteiroService().deletarRoteiro(new RoteiroService().listarkey(id).get(0));
-			
 		}
+		
+		new RoteiroService().deletarRoteiro(new RoteiroService().listarkey(id).get(0));
 	}
 	
 
