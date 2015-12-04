@@ -104,6 +104,4 @@ public class FichaInscricaoResource {
 		return resultado;
 
 	}
-	
-
 }

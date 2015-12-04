@@ -170,12 +170,9 @@ public class ForumQuestaoResource {
 	@GET
 	@Produces("application/json")
 	public List<ForumQuestao> RangeData(){
-		
-		
 		Date dataHoje = new Date();
 		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
 		String data = formataData.format(dataHoje);
-	
 		
 		Calendar c = Calendar.getInstance();
 		int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -204,16 +201,11 @@ public class ForumQuestaoResource {
 			data2 = quebra[0]+"-"+Integer.toString(mes)+"-"+Integer.toString(aux);
 			
 		}
-		
-		
-		
+
 		return new ForumQuestaoService().Range(data2,data);
 	}
 	
-	
-	
-	
-	//Pendente
+
 		@Path("RangeDataCount/")
 		@GET
 		@Produces("application/json")
@@ -223,7 +215,6 @@ public class ForumQuestaoResource {
 			Date dataHoje = new Date();
 			SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
 			String data = formataData.format(dataHoje);
-			//StringUtil stringUtil = new StringUtil();
 			
 			Calendar c = Calendar.getInstance();
 			int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -252,8 +243,7 @@ public class ForumQuestaoResource {
 				data2 = quebra[0]+"-"+Integer.toString(mes)+"-"+Integer.toString(aux);
 				
 			}
-			
-			
+
 			
 			return new ForumQuestaoService().Range(data2,data).size();
 		}
@@ -348,9 +338,7 @@ public class ForumQuestaoResource {
 			@FormDataParam("roteiro") String roteiro
 
 			) {
-		
-		
-	
+			
 				StringUtil stringUtil = new StringUtil();
 				String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),50);
 				String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
@@ -366,25 +354,11 @@ public class ForumQuestaoResource {
 		 
 				String anexo = "http://177.55.99.90/files/"+ arquivo;
  
-
-		
-		
 		
 		ForumQuestao objForumQuestao = new ForumQuestao();
 		logger.info("eventoAction ...");
 		ForumQuestao  resultado;
-		/*
-		Date dataConvertida = null;
-
-		DateFormat formatter = new SimpleDateFormat("yy-MM-dd");
-		try {
-			dataConvertida = (Date) formatter.parse(data);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-			
-		}
-		*/
+		
 
 		// get tipo usuario
 		List<Usuario> rsUsuario;
@@ -397,9 +371,6 @@ public class ForumQuestaoResource {
 		rsRoteiro = new RoteiroService().listarkey(Integer.parseInt(roteiro));
 		Roteiro objRoteiro= rsRoteiro.get(0);
 		//TODO: Validar valores.
-
-
-
 
 		if (action.equals("create")) {
 			logger.info("Criando no  Forum Questao");
@@ -427,9 +398,6 @@ public class ForumQuestaoResource {
 			objForumQuestao.setRoteiro(objRoteiro);
 
 			resultado = new ForumQuestaoService().atualizarForumQuestao(objForumQuestao);
-			
-
-
 
 
 		}else {
@@ -437,12 +405,8 @@ public class ForumQuestaoResource {
 			return "0";
 		}
 
-
-
 		return Integer.toString(resultado.getIdforumQuestao());
 
-
 	}
-
 
 }
