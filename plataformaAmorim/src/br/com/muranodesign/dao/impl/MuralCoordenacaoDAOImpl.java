@@ -27,7 +27,7 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 	@SuppressWarnings("unchecked")
 	public List<MuralCoordenacao> listarKey(int key) {
 		Criteria criteria = getSession().createCriteria(MuralCoordenacao.class);
-		criteria.add(Restrictions.eqOrIsNull("IdMuralCoordenacao", key));
+		criteria.add(Restrictions.eq("IdMuralCoordenacao", key));
 		List<MuralCoordenacao> result = criteria.list();
 		return result;
 	}
@@ -38,7 +38,6 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 			getSession().persist(p);
 			getSession().flush();
 		}
-		
 	}
 
 	@SuppressWarnings("unchecked")

@@ -45,6 +45,8 @@ public class MuralCoordenacaoResource {
 			resultado.setHora(hora);
 			resultado.setMensagem(mensagem);
 			resultado.setProfessor(new ProfessorFuncionarioService().listarkey(professor).get(0));
+			
+			resultado = new MuralCoordenacaoService().criarMuralCoordenacao(resultado);
 		}
 		else if (action == "update")
 		{
@@ -55,6 +57,8 @@ public class MuralCoordenacaoResource {
 			resultado.setHora(hora);
 			resultado.setMensagem(mensagem);
 			resultado.setProfessor(new ProfessorFuncionarioService().listarkey(professor).get(0));
+			
+			resultado = new MuralCoordenacaoService().atualizarMuralCoordenacao(resultado);
 		}
 		
 		return Integer.toString(resultado.getIdMuralCoordenacao());
