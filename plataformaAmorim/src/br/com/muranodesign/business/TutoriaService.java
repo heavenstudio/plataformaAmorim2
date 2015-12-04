@@ -38,6 +38,11 @@ public class TutoriaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param ano
+	 * @return
+	 */
 	public List<Tutoria> listarAno(String ano) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		TutoriaDAO dao = DAOFactory.getTutoriaDAO(pc);
@@ -47,6 +52,11 @@ public class TutoriaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<Tutoria> listarAnoid(int id) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		TutoriaDAO dao = DAOFactory.getTutoriaDAO(pc);
@@ -56,7 +66,10 @@ public class TutoriaService {
 		return result;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Tutoria> listarDadosPertinentes(){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		TutoriaDAO dao = DAOFactory.getTutoriaDAO(pc);

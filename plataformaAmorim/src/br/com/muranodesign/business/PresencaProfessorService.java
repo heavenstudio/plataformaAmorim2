@@ -52,6 +52,11 @@ public class PresencaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<PresencaProfessor> listarFaltas(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PresencaProfessorDAO dao = DAOFactory.getPresencaProfessorDAO(pc);

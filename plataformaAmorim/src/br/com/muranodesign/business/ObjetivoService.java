@@ -38,7 +38,10 @@ public class ObjetivoService {
 		return result;
 	}
 	
-	
+	/**
+	 * Listar todos os testes
+	 * @return
+	 */
 	public List<Objetivo> listAllTeste(){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoDAO dao = DAOFactory.getObjetivoDAO(pc);
@@ -62,6 +65,11 @@ public class ObjetivoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<Objetivo> listarRoteiro(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoDAO dao = DAOFactory.getObjetivoDAO(pc);
@@ -70,6 +78,11 @@ public class ObjetivoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public long listarRoteiroTotal(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoDAO dao = DAOFactory.getObjetivoDAO(pc);
@@ -78,7 +91,11 @@ public class ObjetivoService {
 		return result;
 	}
 	
-	//public List<Objetivo> listarGrafico(int id) {
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public long listarGrafico(int id) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoDAO dao = DAOFactory.getObjetivoDAO(pc);
@@ -88,6 +105,11 @@ public class ObjetivoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<Objetivo> listarEntregues(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoDAO dao = DAOFactory.getObjetivoDAO(pc);

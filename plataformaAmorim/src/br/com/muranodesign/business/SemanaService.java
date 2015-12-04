@@ -9,6 +9,10 @@ import br.com.muranodesign.model.Semana;
 
 public class SemanaService {
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Semana> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SemanaDAO dao = DAOFactory.getSemanaDAO(pc);
@@ -17,6 +21,11 @@ public class SemanaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<Semana> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SemanaDAO dao = DAOFactory.getSemanaDAO(pc);
@@ -25,6 +34,11 @@ public class SemanaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public Semana criarSemana(Semana p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SemanaDAO dao = DAOFactory.getSemanaDAO(pc);
@@ -33,6 +47,11 @@ public class SemanaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public Semana atualizarSemana(Semana p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SemanaDAO dao = DAOFactory.getSemanaDAO(pc);
@@ -41,6 +60,11 @@ public class SemanaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public Semana deletarSemana(Semana p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SemanaDAO dao = DAOFactory.getSemanaDAO(pc);

@@ -97,6 +97,12 @@ public class RelatorioTutoriaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param tutoria
+	 * @param aluno
+	 * @return
+	 */
 	public List<RelatorioTutoria> listarTutoriaAluno(int tutoria, int aluno){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RelatorioTutoriaDAO dao = DAOFactory.getRelatorioTutoriaDAO(pc);

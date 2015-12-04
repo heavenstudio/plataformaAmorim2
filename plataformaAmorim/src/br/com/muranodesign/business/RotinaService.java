@@ -9,6 +9,10 @@ import br.com.muranodesign.model.Rotina;
 
 public class RotinaService {
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Rotina> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
@@ -17,6 +21,11 @@ public class RotinaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<Rotina> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
@@ -25,6 +34,11 @@ public class RotinaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public Rotina criarRotina(Rotina p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
@@ -33,6 +47,11 @@ public class RotinaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public Rotina atualizarRotina(Rotina p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
@@ -41,6 +60,11 @@ public class RotinaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public Rotina deletarRotina(Rotina p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
@@ -49,6 +73,12 @@ public class RotinaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param hora
+	 * @param idSemana
+	 * @return
+	 */
 	public List<Rotina> listarInconsistencia(long hora, int idSemana/*,int idSala*/){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
@@ -57,6 +87,11 @@ public class RotinaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idOficina
+	 * @return
+	 */
 	public List<Rotina> listarPorOficina(int idOficina){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
@@ -65,6 +100,11 @@ public class RotinaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idAgrupamento
+	 * @return
+	 */
 	public List<Rotina> listarPorAgrupamento(int idAgrupamento){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);

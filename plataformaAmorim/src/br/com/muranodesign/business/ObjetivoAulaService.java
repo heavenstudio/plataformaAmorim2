@@ -8,6 +8,11 @@ import br.com.muranodesign.hibernate.impl.PersistenceContext;
 import br.com.muranodesign.model.ObjetivoAula;
 
 public class ObjetivoAulaService {
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<ObjetivoAula> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);
@@ -16,6 +21,11 @@ public class ObjetivoAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<ObjetivoAula> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);
@@ -24,6 +34,11 @@ public class ObjetivoAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public ObjetivoAula criarObjetivoAula(ObjetivoAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);
@@ -32,6 +47,11 @@ public class ObjetivoAulaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public ObjetivoAula atualizarObjetivoAula(ObjetivoAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);
@@ -40,6 +60,11 @@ public class ObjetivoAulaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public ObjetivoAula deletarObjetivoAula(ObjetivoAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);
@@ -48,6 +73,11 @@ public class ObjetivoAulaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param idroteiro
+	 * @return
+	 */
 	public List<ObjetivoAula> listarPorRoteiro(int idroteiro){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);
@@ -56,6 +86,11 @@ public class ObjetivoAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<ObjetivoAula> listarPorRoteiroLazy(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoAulaDAO dao = DAOFactory.getObjetivoAulaDAO(pc);

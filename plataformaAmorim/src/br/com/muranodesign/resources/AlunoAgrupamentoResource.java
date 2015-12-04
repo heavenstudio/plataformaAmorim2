@@ -42,8 +42,6 @@ public class AlunoAgrupamentoResource {
 		AlunoAgrupamento resultado = new AlunoAgrupamento();
 		
 		
-		//String [] arrayAlunos = Alunos.split(";");
-		
 		if(action.equals("delete")){
 			resultado = new AlunoAgrupamentoService().deletarAlunoAgrupamento(new AlunoAgrupamentoService().listarkey(id).get(0));
 		}

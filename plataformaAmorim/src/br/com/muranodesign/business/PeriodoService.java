@@ -97,7 +97,11 @@ public class PeriodoService {
 		return p;
 	}
 
-	
+	/**
+	 * Listar periodo
+	 * @param p
+	 * @return
+	 */
 	public List<Periodo>  listarPeriodo(String p){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PeriodoDAO dao = DAOFactory.getPeriodoDAO(pc);

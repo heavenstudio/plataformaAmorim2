@@ -9,6 +9,10 @@ import br.com.muranodesign.model.RoteiroAula;
 
 public class RoteiroAulaService {
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<RoteiroAula> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -17,6 +21,11 @@ public class RoteiroAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<RoteiroAula> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -25,6 +34,11 @@ public class RoteiroAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public RoteiroAula criarRoteiroAula(RoteiroAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -33,6 +47,11 @@ public class RoteiroAulaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public RoteiroAula atualizarRoteiroAula(RoteiroAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -41,6 +60,11 @@ public class RoteiroAulaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public RoteiroAula deletarRoteiroAula(RoteiroAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -49,6 +73,11 @@ public class RoteiroAulaService {
 		return p;
 	}
 
+	/**
+	 * 
+	 * @param letra
+	 * @return
+	 */
 	public List<RoteiroAula> listarLikeRoteiro(String letra){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -57,6 +86,11 @@ public class RoteiroAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<RoteiroAula> listarOficinaProfessor(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -65,6 +99,11 @@ public class RoteiroAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<RoteiroAula> listarNaoOficinaProfessor(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -73,6 +112,12 @@ public class RoteiroAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idOficinaProfessor
+	 * @param letras
+	 * @return
+	 */
 	public List<RoteiroAula> listarLike(int idOficinaProfessor, String letras){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -81,6 +126,12 @@ public class RoteiroAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param letra
+	 * @return
+	 */
 	public List<RoteiroAula> listarOficinaProfessorLike(int id, String letra){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
@@ -89,6 +140,12 @@ public class RoteiroAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param letra
+	 * @return
+	 */
 	public List<RoteiroAula> listarNaoOficinaProfessorLike(int id, String letra){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);

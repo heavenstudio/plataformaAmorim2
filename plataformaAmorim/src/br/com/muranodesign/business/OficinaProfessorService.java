@@ -9,6 +9,10 @@ import br.com.muranodesign.model.OficinaProfessor;
 
 public class OficinaProfessorService {
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<OficinaProfessor> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
@@ -17,6 +21,11 @@ public class OficinaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<OficinaProfessor> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
@@ -25,6 +34,11 @@ public class OficinaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public OficinaProfessor criarOficinaProfessor(OficinaProfessor p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
@@ -33,6 +47,11 @@ public class OficinaProfessorService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public OficinaProfessor atualizarOficinaProfessor(OficinaProfessor p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
@@ -41,6 +60,11 @@ public class OficinaProfessorService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public OficinaProfessor deletarOficinaProfessor(OficinaProfessor p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
@@ -49,6 +73,11 @@ public class OficinaProfessorService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<OficinaProfessor> listarProfessor(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
@@ -57,6 +86,12 @@ public class OficinaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idOficina
+	 * @param idProfessor
+	 * @return
+	 */
 	public List<OficinaProfessor> listarOficina(int idOficina, int idProfessor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
@@ -65,6 +100,11 @@ public class OficinaProfessorService {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param idOficina
+	 * @return
+	 */
 	public List<OficinaProfessor> listarPorOficina(int idOficina){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);

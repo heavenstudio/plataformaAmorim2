@@ -65,6 +65,11 @@ public class PlanoEstudoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idAluno
+	 * @return
+	 */
 	public List<PlanoEstudo> TotalPlanoEstudos(int idAluno) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoEstudoDAO dao = DAOFactory.getPlanoEstudoDAO(pc);

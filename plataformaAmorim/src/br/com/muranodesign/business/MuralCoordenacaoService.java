@@ -9,6 +9,10 @@ import br.com.muranodesign.model.MuralCoordenacao;
 
 public class MuralCoordenacaoService {
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<MuralCoordenacao> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralCoordenacaoDAO dao = DAOFactory.getMuralCoordenacaoDAO(pc);
@@ -17,6 +21,11 @@ public class MuralCoordenacaoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<MuralCoordenacao> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralCoordenacaoDAO dao = DAOFactory.getMuralCoordenacaoDAO(pc);
@@ -25,6 +34,11 @@ public class MuralCoordenacaoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public MuralCoordenacao criarMuralCoordenacao(MuralCoordenacao p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralCoordenacaoDAO dao = DAOFactory.getMuralCoordenacaoDAO(pc);
@@ -33,6 +47,11 @@ public class MuralCoordenacaoService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public MuralCoordenacao atualizarMuralCoordenacao(MuralCoordenacao p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralCoordenacaoDAO dao = DAOFactory.getMuralCoordenacaoDAO(pc);
@@ -41,6 +60,11 @@ public class MuralCoordenacaoService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public MuralCoordenacao deletarMuralCoordenacao(MuralCoordenacao p){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralCoordenacaoDAO dao = DAOFactory.getMuralCoordenacaoDAO(pc);

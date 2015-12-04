@@ -10,6 +10,10 @@ import br.com.muranodesign.model.JornadaProfessor;
 //Alteração que pode mudar
 public class JornadaProfessorService {
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<JornadaProfessor> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -18,6 +22,11 @@ public class JornadaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<JornadaProfessor> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -26,6 +35,11 @@ public class JornadaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public JornadaProfessor criarJornadaProfessor(JornadaProfessor p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -34,6 +48,11 @@ public class JornadaProfessorService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public JornadaProfessor atualizarJornadaProfessor(JornadaProfessor p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -42,6 +61,11 @@ public class JornadaProfessorService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public JornadaProfessor deletarJornadaProfessor(JornadaProfessor p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -50,7 +74,11 @@ public class JornadaProfessorService {
 		return p;
 	}
 	
-	
+	/**
+	 * 
+	 * @param professor
+	 * @return
+	 */
 	public List<JornadaProfessor> ListarTodos(int professor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -59,6 +87,11 @@ public class JornadaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param professor
+	 * @return
+	 */
 	public long Total(int professor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -67,6 +100,11 @@ public class JornadaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param professor
+	 * @return
+	 */
 	public long Disponivel(int professor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);
@@ -75,6 +113,11 @@ public class JornadaProfessorService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param professor
+	 * @return
+	 */
 	public long extra(int professor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JornadaProfessorDAO dao = DAOFactory.getJornadaProfessorDAO(pc);

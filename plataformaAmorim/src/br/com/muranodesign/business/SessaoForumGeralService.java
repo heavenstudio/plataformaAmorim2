@@ -9,6 +9,10 @@ import br.com.muranodesign.model.SessaoForumGeral;
 
 public class SessaoForumGeralService {
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<SessaoForumGeral> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SessaoForumGeralDAO dao = DAOFactory.getSessaoForumGeralDAO(pc);
@@ -17,6 +21,11 @@ public class SessaoForumGeralService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<SessaoForumGeral> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SessaoForumGeralDAO dao = DAOFactory.getSessaoForumGeralDAO(pc);
@@ -25,6 +34,11 @@ public class SessaoForumGeralService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public SessaoForumGeral criarSessao(SessaoForumGeral p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SessaoForumGeralDAO dao = DAOFactory.getSessaoForumGeralDAO(pc);
@@ -33,6 +47,11 @@ public class SessaoForumGeralService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public SessaoForumGeral atualizarSessao(SessaoForumGeral p){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SessaoForumGeralDAO dao = DAOFactory.getSessaoForumGeralDAO(pc);
@@ -41,6 +60,11 @@ public class SessaoForumGeralService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public SessaoForumGeral deletarSessao(SessaoForumGeral p){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SessaoForumGeralDAO dao = DAOFactory.getSessaoForumGeralDAO(pc);

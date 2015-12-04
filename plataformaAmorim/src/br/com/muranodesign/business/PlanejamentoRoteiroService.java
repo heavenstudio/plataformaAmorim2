@@ -152,14 +152,19 @@ public class PlanejamentoRoteiroService {
 	 * @param id
 	 * @return
 	 */
-	public /*List<PlanejamentoRoteiro>*/ long listarAlunoCorrigidos(int id){
+	public long listarAlunoCorrigidos(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanejamentoRoteiroDAO dao = DAOFactory.getPlanejamentoRoteiroDAO(pc);
-		/*List<PlanejamentoRoteiro>*/ long result = dao.listarAlunoCorrigidos(id);
+		long result = dao.listarAlunoCorrigidos(id);
 		pc.commitAndClose();
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<PlanejamentoRoteiro> listarPlanoEstudo(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanejamentoRoteiroDAO dao = DAOFactory.getPlanejamentoRoteiroDAO(pc);
@@ -168,6 +173,11 @@ public class PlanejamentoRoteiroService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param obj
+	 * @return
+	 */
 	public List<PlanejamentoRoteiro> listarObjetivoTotal(int obj){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanejamentoRoteiroDAO dao = DAOFactory.getPlanejamentoRoteiroDAO(pc);
@@ -176,6 +186,11 @@ public class PlanejamentoRoteiroService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<PlanejamentoRoteiro> listarPlanoEstudoTotal(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanejamentoRoteiroDAO dao = DAOFactory.getPlanejamentoRoteiroDAO(pc);
@@ -227,8 +242,5 @@ public class PlanejamentoRoteiroService {
 		pc.commitAndClose();
 		return p;
 	}
-	
-
-
 	
 }

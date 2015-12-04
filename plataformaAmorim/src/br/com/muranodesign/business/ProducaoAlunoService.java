@@ -97,7 +97,13 @@ public class ProducaoAlunoService {
 		return p;
 	}
 
-	
+	/**
+	 * 
+	 * @param id
+	 * @param tipo
+	 * @param roteiro
+	 * @return
+	 */
 	public List<ProducaoAluno> listarFiltro(int id, int tipo, int roteiro){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
@@ -106,6 +112,11 @@ public class ProducaoAlunoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<ProducaoAluno> listarAluno(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
@@ -114,6 +125,11 @@ public class ProducaoAlunoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<ProducaoAluno> listarPortifolio(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
@@ -123,6 +139,13 @@ public class ProducaoAlunoService {
 		
 	}
 	
+	/**
+	 * 
+	 * @param idAluno
+	 * @param idRoteiro
+	 * @param idTipo
+	 * @return
+	 */
 	public List<ProducaoAluno> listaAlunoRoteiroTipo(int idAluno, int idRoteiro, int idTipo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
@@ -131,6 +154,11 @@ public class ProducaoAlunoService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<ProducaoAluno> NCapa(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);

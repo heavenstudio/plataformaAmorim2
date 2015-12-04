@@ -78,6 +78,12 @@ public class RegistroDiarioService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param ini
+	 * @param fim
+	 * @return
+	 */
 	public List<RegistroDiario> listarMes(Date ini, Date fim){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RegistroDiarioDAO dao = DAOFactory.getRegistroDiarioDAO(pc);

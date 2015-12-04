@@ -126,7 +126,7 @@ public class AlunoService {
 	}
 	
 	/**
-	 * 
+	 * Listar nome e idAluno 
 	 * @return
 	 */
 	public List<Aluno> ListarNomeId(){

@@ -10,6 +10,10 @@ import br.com.muranodesign.model.PlanoAula;
 
 public class PlanoAulaService {
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<PlanoAula> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
@@ -18,6 +22,11 @@ public class PlanoAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public List<PlanoAula> listarkey(int key) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
@@ -26,6 +35,11 @@ public class PlanoAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public PlanoAula criarPlanoAula(PlanoAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
@@ -34,6 +48,11 @@ public class PlanoAulaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public PlanoAula atualizarPlanoAula(PlanoAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
@@ -42,6 +61,11 @@ public class PlanoAulaService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public PlanoAula deletarPlanoAula(PlanoAula p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
@@ -50,7 +74,11 @@ public class PlanoAulaService {
 		return p;
 	}
 	
-	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
 	public List<PlanoAula> range(Date data){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
@@ -59,6 +87,11 @@ public class PlanoAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idProfessor
+	 * @return
+	 */
 	public List<PlanoAula> listarUltimo(int idProfessor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
@@ -67,6 +100,12 @@ public class PlanoAulaService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idProfessor
+	 * @param data
+	 * @return
+	 */
 	public List<PlanoAula> listarProfessor(int idProfessor,Date data){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);

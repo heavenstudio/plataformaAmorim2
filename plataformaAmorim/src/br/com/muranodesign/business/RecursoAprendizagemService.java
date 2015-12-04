@@ -97,6 +97,11 @@ public class RecursoAprendizagemService {
 		return p;
 	}
 
+	/**
+	 * Listar por roteiro
+	 * @param id
+	 * @return
+	 */
 	public List<RecursoAprendizagem> listarProRoteiro(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RecursoAprendizagemDAO dao = DAOFactory.getRecursoAprendizagemDAO(pc);

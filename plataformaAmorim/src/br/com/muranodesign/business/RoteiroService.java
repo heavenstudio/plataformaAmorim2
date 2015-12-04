@@ -52,6 +52,11 @@ public class RoteiroService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Roteiro listarid(int id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroDAO dao = DAOFactory.getRoteiroDAO(pc);
@@ -104,6 +109,11 @@ public class RoteiroService {
 		return p;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<Roteiro> listarAno(Integer id){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroDAO dao = DAOFactory.getRoteiroDAO(pc);
@@ -112,7 +122,11 @@ public class RoteiroService {
 		return result;
 	}
 
-	
+	/**
+	 * 
+	 * @param letra
+	 * @return
+	 */
 	public List<Roteiro> ListaLikeRoteiro(String letra){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroDAO dao = DAOFactory.getRoteiroDAO(pc);
@@ -121,6 +135,12 @@ public class RoteiroService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param primeiro
+	 * @param ultimo
+	 * @return
+	 */
 	public List<Roteiro> listRoteiroRange(int primeiro, int ultimo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroDAO dao = DAOFactory.getRoteiroDAO(pc);

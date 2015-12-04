@@ -11,6 +11,11 @@ import br.com.muranodesign.model.SO;
 
 public class SOService {
 	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public SO criarSO(SO p) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SODAO dao = DAOFactory.getSodao(pc);
@@ -18,7 +23,11 @@ public class SOService {
 		pc.commitAndClose();
 		return p;
 	}
-	//era int
+	/**
+	 * 
+	 * @param so
+	 * @return
+	 */
 	public List<SO> listarSO(String so){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SODAO dao = DAOFactory.getSodao(pc);
@@ -26,6 +35,11 @@ public class SOService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param idso
+	 * @return
+	 */
 	public List<SO> listarBySO(int idso){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		SODAO dao = DAOFactory.getSodao(pc);
