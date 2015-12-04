@@ -32,7 +32,7 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void criar(MuralCoordenacao p) {
 		synchronized (MuralCoordenacaoDAOImpl.class){
 			getSession().persist(p);
@@ -41,14 +41,14 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void atualizar(MuralCoordenacao p) {
 		getSession().merge(p);
 		getSession().flush();
 		
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void deletar(MuralCoordenacao p) {
 		getSession().delete(p);
 		getSession().flush();
