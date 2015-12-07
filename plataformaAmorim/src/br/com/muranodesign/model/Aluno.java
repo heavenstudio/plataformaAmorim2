@@ -1957,5 +1957,41 @@ public class Aluno implements Serializable {
     public String toString() {
         return "br.com.muranodesign.model.Aluno[ idAluno=" + idAluno + " ]";
     }
+
+	public String geteNecessidadeEspecial() {
+		return eNecessidadeEspecial;
+	}
+
+	public void seteNecessidadeEspecial(String eNecessidadeEspecial) {
+		this.eNecessidadeEspecial = eNecessidadeEspecial;
+	}
+
+	public String geteResponsavelLegalMae() {
+		return eResponsavelLegalMae;
+	}
+
+	public void seteResponsavelLegalMae(String eResponsavelLegalMae) {
+		this.eResponsavelLegalMae = eResponsavelLegalMae;
+	}
+
+	public String geteResponsavelLegalPai() {
+		return eResponsavelLegalPai;
+	}
+
+	public void seteResponsavelLegalPai(String eResponsavelLegalPai) {
+		this.eResponsavelLegalPai = eResponsavelLegalPai;
+	}
+
+	public String geteResponsavelLegalResponsavel() {
+		return eResponsavelLegalResponsavel;
+	}
+
+	public void seteResponsavelLegalResponsavel(String eResponsavelLegalResponsavel) {
+		this.eResponsavelLegalResponsavel = eResponsavelLegalResponsavel;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
 }

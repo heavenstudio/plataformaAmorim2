@@ -143,16 +143,12 @@ public class RecursoAprendizagemResource {
 			@FormParam("curtir") String curtir,
 			
 			@FormParam("link") String link,
-			
-			
-		
+
 			@FormParam("tipoRecursoAprendizagem") String tipoRecursoAprendizagem,
 			@FormParam("materia") String materia,
 			@FormParam("roteiro") String roteiro
 			
-			
-			
-			
+
 			) {
 		RecursoAprendizagem objRecursoAprendizagem = new RecursoAprendizagem();
 		logger.info("eventoAction ...");
@@ -204,9 +200,6 @@ public class RecursoAprendizagemResource {
 			objRecursoAprendizagem.setMateria(objMateria);
 			objRecursoAprendizagem.setTipoRecursoAprendizagem(objTipoRecursoAprendizagem);
 			objRecursoAprendizagem.setRoteiro(objRoteiro);
-			
-			
-			
 			
 			
 			 resultado =  new RecursoAprendizagemService().atualizarRecursoAprendizagem(objRecursoAprendizagem);

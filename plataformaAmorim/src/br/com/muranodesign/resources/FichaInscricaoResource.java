@@ -61,7 +61,9 @@ public class FichaInscricaoResource {
 			
 			resultado = new FichaInscricaoService().atualizarFichaInscricao(ficha);
 		} else{
-			return "0";
+			
+			result = "0";
+			return result;//"0";
 		}
 		
 		if(resultado == null){

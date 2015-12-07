@@ -31,7 +31,7 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 		return resultado;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void criar(PendenciasProducaoAluno p) {
 		synchronized (PendenciasProducaoAluno.class){
 			getSession().persist(p);
@@ -39,7 +39,7 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 		}	
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void deletar(PendenciasProducaoAluno p) {
 		synchronized (PendenciasProducaoAluno.class){
 			getSession().delete(p);
@@ -47,7 +47,7 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 		}	
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void atualizar(PendenciasProducaoAluno p) {
 		synchronized (PendenciasProducaoAluno.class){
 			getSession().merge(p);

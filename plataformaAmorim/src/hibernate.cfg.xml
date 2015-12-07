@@ -112,8 +112,8 @@
 		<mapping class="br.com.muranodesign.model.AlunoAgrupamento" />
 		<mapping class="br.com.muranodesign.model.Oficina" />
 		<mapping class="br.com.muranodesign.model.OficinaProfessor" />
-		
 		<mapping class="br.com.muranodesign.model.Rotina" />
+		
 		<mapping class="br.com.muranodesign.model.Salas" />
 		<mapping class="br.com.muranodesign.model.Semana" />
 		<mapping class="br.com.muranodesign.model.Ciclos" />
@@ -128,7 +128,6 @@
 		<mapping class="br.com.muranodesign.model.PlanoAula" />
 		<mapping class="br.com.muranodesign.model.PlanejamentoAula" />
 		<mapping class="br.com.muranodesign.model.JornadaProfessor" />
-		
 		<mapping class="br.com.muranodesign.model.MuralCoordenacao" />
 		<mapping class="br.com.muranodesign.model.PendenciasProducaoAluno" />
 		
