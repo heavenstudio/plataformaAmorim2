@@ -313,8 +313,11 @@ public class LoginResource {
 	}
 	
 
-	
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Path("html/{id}")
 	@GET
 	@Produces("application/json")
