@@ -138,7 +138,6 @@ public class CalendarioResource {
 		List<Calendario> resultado;
 		resultado = new CalendarioService().listarEvento(id);
 		
-		
 		return resultado;
 
 	}
@@ -169,7 +168,6 @@ public class CalendarioResource {
 	@Path("delete/{id}")
 	@Produces("text/plain")
 	public String removeCalendario(@PathParam("id") int id) {
-
 
 		logger.info("Calendario  " );
 		
@@ -279,13 +277,6 @@ public class CalendarioResource {
 		}
 		
 		
-		
-		
-		
-	
-		
-		
-		
 		if (action.equals("create")) {
 			
 		
@@ -302,7 +293,6 @@ public class CalendarioResource {
 			objCalendario.setHora(hora);
 			objCalendario.setVisivel(visivel);
 
-			
 	
 			resultado = new CalendarioService().criarCalendario(objCalendario);
 			
@@ -312,8 +302,6 @@ public class CalendarioResource {
 			List<Calendario> rsCalendario;
 			rsCalendario= new CalendarioService().listarkey(id);
 			objCalendario= rsCalendario.get(0);
-		
-			
 
 			objCalendario.setAno(Integer.parseInt(ano));
 			objCalendario.setDataInicio(stringUtil.converteStringData(dataInicio));

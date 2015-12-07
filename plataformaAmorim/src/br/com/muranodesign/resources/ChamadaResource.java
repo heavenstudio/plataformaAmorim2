@@ -98,7 +98,6 @@ public class ChamadaResource {
 	public List<Chamada> getPrecenca(@PathParam("idAluno") int idAluno , @PathParam("precenca") int precenca ) {
 		logger.info("Buscar precenca por id do Aluno " + idAluno);
 		
-		
 		List<Aluno> rsAluno;
 		rsAluno = new AlunoService().listarkey(idAluno);
 		Aluno objAluno = null;
@@ -107,18 +106,14 @@ public class ChamadaResource {
 		if (! rsAluno.isEmpty()){
 			objAluno = rsAluno.get(0);
 			
-			
 			logger.info("Buscar precenca por id do Aluno " + idAluno + "precenca = " + precenca  );
 			resultado = new ChamadaService().listaPrecenca(objAluno, precenca);
 		} 
 		
-		
 		return resultado;
 
 	}
-	
-	
-	
+
 	
 	/**
 	 * Listar faltas por id de aluno
@@ -180,7 +175,6 @@ public class ChamadaResource {
 		}
 		
 		
-		
 		String texto = data.replaceAll("-", "/");
 		
 		DateFormat formatter = new SimpleDateFormat("yy/MM/dd");  
@@ -215,11 +209,8 @@ public class ChamadaResource {
 				retorno.add(aux);
 			}
 		}
-		
-		
-		
-		return retorno;
-				
+
+		return retorno;		
 	}
 	
 	
@@ -236,7 +227,6 @@ public class ChamadaResource {
 	public int getPrecencaTotal(@PathParam("idAluno") int idAluno , @PathParam("precenca") int precenca ) {
 		logger.info("Buscar precenca por id do Aluno " + idAluno);
 		
-		
 		List<Aluno> rsAluno;
 		rsAluno = new AlunoService().listarkey(idAluno);
 		Aluno objAluno = null;
@@ -250,7 +240,6 @@ public class ChamadaResource {
 			resultado = new ChamadaService().listaPrecenca(objAluno, precenca);
 			total = resultado.size();
 		} 
-		
 		
 		return total;
 
@@ -299,11 +288,9 @@ public class ChamadaResource {
 			
 			@FormParam("action") String action,
 			@FormParam("id") String strid,
-			
 			@FormParam("presenca") String presenca,
 			@FormParam("data") String data,
 			@FormParam("aluno") String aluno
-			
 			
 			
 			) {
@@ -311,15 +298,10 @@ public class ChamadaResource {
 		logger.info("eventoAction ...");
 		Chamada resultado;
 
-		
 		List<Aluno> rsAluno;
 		rsAluno = new AlunoService().listarkey(Integer.parseInt(aluno));
 		Aluno objAluno= rsAluno.get(0);
 		StringUtil stringUtil = new StringUtil();
-		
-		
-	
-		
 		
 		
 		if (action.equals("create")) {
@@ -341,9 +323,7 @@ public class ChamadaResource {
 			objChamada.setData(stringUtil.converteStringData(data));
 			objChamada.setPresenca(Short.parseShort(presenca));
 			
-			
-			
-			 resultado =  new ChamadaService().atualizarChamada(objChamada);
+			resultado =  new ChamadaService().atualizarChamada(objChamada);
 			
 		} else {
 			return "0";
@@ -351,6 +331,4 @@ public class ChamadaResource {
 	    return Integer.toString(resultado.getIdchamada());
 	
 		}
-	
-
 }

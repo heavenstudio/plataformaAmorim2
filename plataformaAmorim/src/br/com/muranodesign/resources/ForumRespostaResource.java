@@ -84,7 +84,7 @@ public class ForumRespostaResource {
 		
 		 new ForumQuestaoService().deletarForumQuestao(new ForumQuestaoService().listarkey(id).get(0));
 		
-		return "ok";//Integer.toString(retorno.getIdforumQuestao());
+		return "ok";
 	}
 	
 	
@@ -96,8 +96,6 @@ public class ForumRespostaResource {
 		
 		return "ok";
 	}
-	
-	
 	
 
 	/**

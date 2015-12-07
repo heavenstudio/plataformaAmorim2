@@ -125,11 +125,6 @@ public class CalendarioEventosResource {
 
 	}
 	
-	
-	
-	
-	
-	
 	/**
 	 * Serviço reponsavel por cadastra e atualizar dados
 	 *
@@ -159,24 +154,18 @@ public class CalendarioEventosResource {
 			@FormParam("calendario") String calendario,
 			@FormParam("anoLetivo") String anoLetivo,
 			@FormParam("tipoEvento") String tipoEvento
-			
-			
-			
-			
+
 			) {
 		CalendarioEventos objCalendarioEventos = new CalendarioEventos();
 		logger.info("eventoAction ...");
 		CalendarioEventos resultado;
 		StringUtil stringUtil = new StringUtil();
-		
-		
-		
+			
 		
 		List<TipoEvento> rsTipoEvento;
 		rsTipoEvento = new TipoEventoService().listarkey(Integer.parseInt(tipoEvento));
 		TipoEvento objTipoEvento= rsTipoEvento.get(0);
-		
-		
+
 		
 		Calendario objCalendario = null;
 		
@@ -185,13 +174,8 @@ public class CalendarioEventosResource {
 			rsCalendario = new CalendarioService().listarkey(Integer.parseInt(calendario));
 			objCalendario= rsCalendario.get(0);
 		}
-		
-	
-		
-		
-		
+
 		if (action.equals("create")) {
-			
 		
 			objCalendarioEventos.setDataInicio(stringUtil.converteStringData(dataInicio));
 			objCalendarioEventos.setDataFim(stringUtil.converteStringData(dataFim));
@@ -204,7 +188,6 @@ public class CalendarioEventosResource {
 			objCalendarioEventos.setCalendario(objCalendario);
 			}
 			
-	
 			resultado = new CalendarioEventosService().criarCalendarioEventos(objCalendarioEventos);
 			
 		}  else if (action.equals("update")) {
@@ -225,8 +208,6 @@ public class CalendarioEventosResource {
 			objCalendarioEventos.setCalendario(objCalendario);
 			}
 			
-			
-			
 			 resultado =  new CalendarioEventosService().atualizarCalendarioEventos(objCalendarioEventos);
 			
 		} else {
@@ -235,10 +216,6 @@ public class CalendarioEventosResource {
 	    return Integer.toString(resultado.getIdeventos());
 	
 		}
-	
-	
-	
-	
 	
 	/**
 	 * upload de  imagem
@@ -284,9 +261,6 @@ public class CalendarioEventosResource {
 
 		return resultado;
 
-
 	}
-
-	
 
 }

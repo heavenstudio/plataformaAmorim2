@@ -265,7 +265,6 @@ public class LoginResource {
 	 */
 	@Path("alterarSenha")
 	@POST
-	//@Produces("application/json")
 	@Produces("text/plain")
 	public String alterarSenha(@FormParam("login") String login,
 			@FormParam("senhaAnt") String senhaAnt,
@@ -323,15 +322,6 @@ public class LoginResource {
 		
 		Usuario user = new UsuarioService().listarkey(id).get(0);
 		List<MenuPerfil> menu = new MenuPerfilService().listarUser(user.getPerfil().getIdperfil());
-		
-		/*String HtmlContent = "";
-		
-		for(int i = 0; i < menu.size(); i++){
-			
-			HtmlContent += "<div class="+"Content_lateral_Menu_Opcao "+ menu.get(i).getMenu().getClasse()+">"+
-							"<a href="+menu.get(i).getMenu().getLink()+">"+menu.get(i).getMenu().getNome()+"</a>"+
-							"</div>";
-		}*/
 		
 		
 		return menu;

@@ -73,7 +73,6 @@ public class JornadaProfessorResource {
 			}
 			
 			jornada.setHorario(horario);
-			//jornada.setOcupado(ocupado);
 			
 			resultado = new JornadaProfessorService().atualizarJornadaProfessor(jornada);
 			
@@ -155,11 +154,11 @@ public class JornadaProfessorResource {
 		return new JornadaProfessorService().extra(con.get(0).getProfessor().getIdprofessorFuncionario());
 	}
 	
+	
 	@Path("CompletaRotina/{id}/{ciclo}")
 	@GET
 	@Produces("application/json")
-	public List<JornadaProfessor>/*Hashtable<String, String>*/ CompletaRotina(@PathParam("id") int id,@PathParam("ciclo") int ciclo){
-		//List<Hashtable<String, String>> list = new ArrayList<Hashtable<String,String>>();
+	public List<JornadaProfessor> CompletaRotina(@PathParam("id") int id,@PathParam("ciclo") int ciclo){
 		
 		List<OficinaProfessor> oficina = new OficinaProfessorService().listarProfessor(id);
 		List<OficinaProfessor> con = new ArrayList<OficinaProfessor>();

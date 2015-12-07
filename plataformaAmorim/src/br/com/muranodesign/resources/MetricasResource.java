@@ -40,7 +40,6 @@ public class MetricasResource {
 		Date data = Calendar.getInstance().getTime();
 		String ano = df.format(data);
 		
-		
 		for(int i = 1; i <= 12; i++){
 			
 			historicoEscola = historicoSer.listarQtdAcessoEscola("0"+i+ano);
@@ -89,7 +88,6 @@ public class MetricasResource {
 	@Produces("application/json")
 	public Hashtable<String, Integer> so(){
 		Hashtable<String, Integer> listaSos = new Hashtable<String,Integer>();
-		
 		
 		int Quantidade = 0;
 		

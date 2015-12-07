@@ -159,6 +159,11 @@ public class MensagensResource {
 
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Path("emailHashId/{id}")
 	@GET
 	@Produces("application/json")
@@ -214,7 +219,14 @@ public class MensagensResource {
 		return hash;
 	}
 	
-	
+	/**
+	 * 
+	 * @param proprietario
+	 * @param caixa
+	 * @param primeiro
+	 * @param ultimo
+	 * @return
+	 */
 	@Path("emailHash/{caixa}/{proprietario}/{primeiro}/{ultimo}")
 	@GET
 	@Produces("application/json")
@@ -275,7 +287,6 @@ public class MensagensResource {
 		return hash;
 
 	}
-	
 	
 	
 	/**
@@ -374,23 +385,12 @@ public class MensagensResource {
 			@FormParam("assunto") String assunto,
 			@FormParam("mensagem") String mensagem,
 			@FormParam("lida") String lida,
-			//@FormDataParam("cxEntrada") String cxEntrada,
-			//@FormDataParam("cxEnviada") String cxEnviada,
-			//@FormDataParam("proprietario") String proprietario,
 			@FormParam("remetente") String remetente,
-			//@FormDataParam("destinatario") String destinatario,
 			@FormParam("destinatarios")  List<String>  destinatarios
 			
-			//@FormDataParam("anexo") InputStream uploadedInputStream,
-			//@FormDataParam("anexo") FormDataContentDisposition fileDetail
-	
 
 			) {
 		
-	
-		
-		
- 		
 		
 		logger.info("eventoAction ...");
 		
@@ -400,14 +400,10 @@ public class MensagensResource {
 		rsUsuario = new UsuarioService().listarkey(Integer.parseInt(remetente));
 		Usuario objRementente = rsUsuario.get(0);
 		
-		
 
 		String strDestinatarios = "";
 	    Boolean firstDestinatario = true ;
 		
-	   
-			
-		// Gravando origen da msg
 		
 		for (String dest : destinatarios) {
 			
@@ -431,29 +427,11 @@ public class MensagensResource {
 			logger.info("Gravando origen da msg ...");
 			
 			String fileAnexo = null;
-			
-			/*if ( fileDetail != null ){
-				StringUtil stringUtil = new StringUtil();
-				String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),50);
-				String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
-			 
-				Upload upload = new Upload (); 
-				// save it
-				upload.writeToFile(uploadedInputStream, uploadedFileLocation);
-			
-				fileAnexo = "http://177.55.99.90/files/"+ arquivo;
-			}
-			
-*/
-			
-		    
-		    
+				    
 			for (String dest : destinatarios) {
 				rsUsuario = new UsuarioService().listarkey(Integer.parseInt(dest));
 				Mensagens objMensagens = new Mensagens();
-				//objDestinatario.add(rsUsuario.get(0));
-				
-				
+		
 				objMensagens.setDestinatarios(strDestinatarios);
 				objMensagens.setRemetente(objRementente);
 				objMensagens.setAssunto(assunto);
@@ -466,7 +444,6 @@ public class MensagensResource {
 				objMensagens.setAnexo(fileAnexo);
 			    resultado = new MensagensService().criarMensagens(objMensagens);
 			    
-				
 				
 			}
 		    
@@ -544,8 +521,5 @@ public class MensagensResource {
 	
 
 	}
-
-
-	
 
 }
