@@ -33,11 +33,11 @@ public class MuralCoordenacaoResource {
 		
 		MuralCoordenacao resultado = new MuralCoordenacao();
 		
-		if (action == "delete")
+		if (action.equals("delete"))
 		{
 			resultado = new MuralCoordenacaoService().deletarMuralCoordenacao(new MuralCoordenacaoService().listarkey(id).get(0));
 		}
-		else if (action == "create")
+		else if (action.equals("create"))
 		{
 			StringUtil stringUtil = new StringUtil();
 			
@@ -48,7 +48,7 @@ public class MuralCoordenacaoResource {
 			
 			resultado = new MuralCoordenacaoService().criarMuralCoordenacao(resultado);
 		}
-		else if (action == "update")
+		else if (action.equals("update"))
 		{
 			StringUtil stringUtil = new StringUtil();
 			
