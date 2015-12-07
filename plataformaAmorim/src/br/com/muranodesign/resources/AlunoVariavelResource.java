@@ -1058,9 +1058,7 @@ public class AlunoVariavelResource {
 							row.createCell((short) 0).setCellValue(valor);
 						}else{
 							retorno.add("não informado");
-						}
-						
-						
+						}		
 					
 					}
 					if(TelefoneResidencialMae != "" && TelefoneResidencialMae != null){

@@ -77,7 +77,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public Aluno getAluno(@PathParam("id") int id) {
-
+		logger.debug("Listar Aluno ...");
 		List<Aluno> resultado;
 		resultado = new AlunoService().listarkey(id);
 		Aluno aluno = null;
@@ -97,6 +97,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public List<Aluno> getAlunosNomeId(){
+		logger.debug("Listar Alunos ...");
 		return new AlunoService().ListarNomeId();
 	}
 	
@@ -105,7 +106,7 @@ public class AlunoResource {
 	@POST
 	@Produces("text/plain")
 	public String AlunoUpdate(@FormParam("id") int id, @FormParam("nome") String nome){
-		
+		logger.debug("Update Alunos ...");
 		Aluno result = new Aluno();
 		
 		Aluno aluno = new AlunoService().listarkey(id).get(0);
@@ -126,6 +127,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public String getHtmlAluno(@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
+		logger.debug("Listar Alunos ...");
 		List<Aluno> alunos;
 		
 		@SuppressWarnings("unused")
@@ -156,6 +158,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public String getHtmlAluno(){
+		logger.debug("Listar Alunos ...");
 		List<Aluno> alunos;
 		
 		@SuppressWarnings("unused")
@@ -188,6 +191,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public String gethtmlLikeAluno(@PathParam("letra") String letra){
+		logger.debug("Listar Alunos ...");
 		List<Aluno> alunos;
 		
 		@SuppressWarnings("unused")
@@ -221,7 +225,7 @@ public class AlunoResource {
 	@Produces("application/json")
 	public String getHtmlAlunoAno(@PathParam("ano") int ano){
 		
-		//alunos = new AlunoService().listarTodos();
+		logger.debug("Listar Alunos ...");
 		List<AlunoVariavel> variaveis;
 		variaveis  = new AlunoVariavelService().listaAnoEstudo(new AnoEstudoService().listarkey(ano).get(0));
 		int qtd = variaveis.size();
@@ -256,7 +260,7 @@ public class AlunoResource {
 	@GET
 	@Produces("application/json")
 	public String getHtmlAlunoAnoPeriodo(@PathParam("ano") int ano,@PathParam("periodo") int periodo){
-		
+		logger.debug("Listar Alunos ...");
 		List<AlunoVariavel> variaveis;
 		variaveis  = new AlunoVariavelService().listaAnoEstudoPeriodo(new AnoEstudoService().listarkey(ano).get(0), new PeriodoService().listarkey(periodo).get(0));
 		int qtd = variaveis.size();
@@ -534,9 +538,6 @@ public class AlunoResource {
 			@FormParam("ufMae") String ufMae,
 			@FormParam("ufPai") String ufPai,
 			@FormParam("ufResponsavel") String ufResponsavel,
-			// @FormParam("fotoAluno") String fotoAluno,
-			// @FormParam("fotoAluno") InputStream uploadedInputStream,
-			// @FormParam("fotoAluno") FormDataContentDisposition fileDetail,
 			@FormParam("sexo") String sexo,
 			@FormParam("ativo") String ativo,
 			@FormParam("numeroEol") String numeroEol,
@@ -723,7 +724,6 @@ public class AlunoResource {
 			if (!ufResponsavel.isEmpty()) {
 				objAluno.setUfResponsavel(ufResponsavel);
 			}
-			// objAluno.setFotoAluno(fotoAluno);
 			if (!sexo.isEmpty()) {
 				objAluno.setSexo(sexo);
 			}
