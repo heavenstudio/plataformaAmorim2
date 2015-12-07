@@ -287,6 +287,35 @@ public class TutoriaResource {
 
 	}
 	
+	@GET	
+	@Path("TutoriaGrupos/{idtutoria}")
+	@Produces("application/json")
+	public List<Hashtable<String, String>> listarGruposProfessor(@PathParam("idtutoria") int idtutoria)
+	{
+		logger.info("Tutoria Professor: " + idtutoria);
+		
+		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String, String>>();
+		
+		List<Grupo> grupos = new GrupoService().listarTutor(idtutoria);
+		for (Grupo grupo : grupos) {
+			Hashtable<String, String> objeto = new Hashtable<String, String>();
+			objeto.put("GrupoId", Integer.toString(grupo.getIdgrupo()));
+			objeto.put("NomeGrupo", grupo.getNomeGrupo());
+			List<AlunoVariavel> alunos = new AlunoVariavelService().listaGrupo(grupo.getIdgrupo());
+			String nomeAlunos = "";
+			for (int i = 0; i < alunos.size(); i++) {
+				nomeAlunos += alunos.get(i).getAluno().getNome();
+				if (i < alunos.size() - 1)
+					nomeAlunos += ", ";
+			}
+			objeto.put("alunos", nomeAlunos);
+			objeto.put("nomeTutor", grupo.getTutoria().getTutoria());	
+			list.add(objeto);
+		}
+		
+		return list;
+		
+	}
 	
 
 }
