@@ -35,7 +35,7 @@ public class PendenciasProducaoAlunoResource {
 		
 		if (action.equals("delete"))
 		{
-			resultado = new PendenciasProducaoAlunoService().deletarPendenciasProducaoAluno(new PendenciasProducaoAlunoService().listarkey(id).get(0));		
+			resultado = new PendenciasProducaoAlunoService().deletarPendenciasProducaoAluno(new PendenciasProducaoAlunoService().listarkey(id).get(0));
 		}
 		else if (action.equals("create"))
 		{
@@ -65,7 +65,7 @@ public class PendenciasProducaoAlunoResource {
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
-	public List<PendenciasProducaoAluno> getPendencias(int key){
+	public List<PendenciasProducaoAluno> getPendencias(@PathParam("id") int key){
 		logger.debug("Listando Pendencias Producao Aluno...");
 		List <PendenciasProducaoAluno> resultado = new PendenciasProducaoAlunoService().listarkey(key);
 		logger.debug("QTD Pendencias Producao Aluno: " + resultado.size());
