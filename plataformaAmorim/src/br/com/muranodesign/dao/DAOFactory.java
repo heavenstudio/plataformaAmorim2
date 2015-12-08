@@ -42,6 +42,7 @@ import br.com.muranodesign.dao.impl.MateriaDAOImpl;
 import br.com.muranodesign.dao.impl.MensagensDAOImpl;
 import br.com.muranodesign.dao.impl.MenuDAOImpl;
 import br.com.muranodesign.dao.impl.MenuPerfilDAOImpl;
+import br.com.muranodesign.dao.impl.MuralAlunoDAOImpl;
 import br.com.muranodesign.dao.impl.MuralCoordenacaoDAOImpl;
 import br.com.muranodesign.dao.impl.MuralDAOImpl;
 import br.com.muranodesign.dao.impl.NativeQueryDAOImpl;
@@ -813,6 +814,10 @@ public static MensagensDAO getMensagensDAO(
 
 	public static PendenciasProducaoAlunoDAO getPendenciasProducaoAlunoDAO(PersistenceContext persistenceContext) {
 		return new PendenciasProducaoAlunoDAOImpl((HibernatePersistenceContext) persistenceContext);
+	}
+
+	public static MuralAlunoDAO geMuralAlunoDAO(PersistenceContext pc) {
+		return new MuralAlunoDAOImpl((HibernatePersistenceContext) pc);
 	}
 	
 
