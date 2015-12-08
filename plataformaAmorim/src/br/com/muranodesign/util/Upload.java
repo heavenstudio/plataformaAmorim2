@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * Classe utilitaria para realização de upload atraves.
@@ -26,6 +28,7 @@ import java.io.OutputStream;
 
 public class Upload {
 
+	private Logger logger = Logger.getLogger(Upload.class.getName());
 	
 	// save uploaded file to new location
 	/**
@@ -51,7 +54,9 @@ public class Upload {
 				out.close();
 			} catch (IOException e) {
 	 
-				e.printStackTrace();
+				logger.warn("Erro de:  "+e);
+				//e.printStackTrace();
+				
 			}
 	 
 		}

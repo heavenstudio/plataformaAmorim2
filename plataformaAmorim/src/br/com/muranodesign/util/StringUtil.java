@@ -87,7 +87,8 @@ public class StringUtil {
 			
 		} catch (ParseException e) {
 			logger.error("Erro ao converter data");
-			e.printStackTrace();
+			logger.warn("Erro de:  "+e);
+			//e.printStackTrace();
 			
 		}
 		return dataConvertida;
