@@ -202,9 +202,6 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 
-		//criteria.createAlias("aluno", "aluno");
-		
-		//criteria.addOrder(Order.desc("aluno.idAluno"));
 		
 	    criteria.add(Restrictions.eq("idalunoVariavel", aluno));
 		List<AlunoVariavel> result = criteria.list();
@@ -229,7 +226,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 
 	public void update(int id,  int grupo){
 		Query query = getSession().getNamedQuery("AlunoVariavel.UPDATE");
-		//String update = query.getQueryString();
+
 		query.setParameter("id", grupo);
 		query.setParameter("idalunoVariavel", id);
 		
