@@ -284,10 +284,12 @@ public class UsuarioResource {
 		
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.warn("Erro de:  "+e);
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.warn("Erro de:  "+e);
 		}
 		
 
@@ -386,7 +388,8 @@ public class UsuarioResource {
 						
 					} catch (NoSuchAlgorithmException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						//e.printStackTrace();
+						logger.warn("Erro de:  "+e);
 					}
 				}
 				

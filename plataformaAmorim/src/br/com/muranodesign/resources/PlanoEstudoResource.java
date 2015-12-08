@@ -189,8 +189,8 @@ public class PlanoEstudoResource {
 			dataFimConvertido   = (Date) formatter.parse(dataFim);
 			
 		} catch (ParseException e) {
-			e.printStackTrace();
-			
+			//e.printStackTrace();
+			logger.warn("Erro de:  "+e);
 		}
 		
 		List<PlanoEstudo> ultimo;

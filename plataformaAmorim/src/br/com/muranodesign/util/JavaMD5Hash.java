@@ -12,6 +12,8 @@ package br.com.muranodesign.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.apache.log4j.Logger;
  
 
 /**
@@ -23,7 +25,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class JavaMD5Hash {
  
-
+	private static Logger logger = Logger.getLogger(JavaMD5Hash.class.getName());
      
     /**
      * Md5.
@@ -50,7 +52,8 @@ public class JavaMD5Hash {
  
         } catch (NoSuchAlgorithmException e) {
  
-            e.printStackTrace();
+        	logger.warn("Erro de:  "+e);
+            //e.printStackTrace();
         }
         return md5;
     }
