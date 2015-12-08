@@ -309,8 +309,11 @@ public class TutoriaResource {
 					nomeAlunos += ", ";
 			}
 			objeto.put("alunos", nomeAlunos);
-			objeto.put("nomeTutor", grupo.getTutoria().getTutoria());	
-			list.add(objeto);
+			objeto.put("nomeTutor", grupo.getTutoria().getTutoria());
+			if (nomeAlunos.length() > 0)
+				list.add(objeto);
+			else
+				new GrupoService().deletarGrupo(grupo);
 		}
 		
 		return list;
