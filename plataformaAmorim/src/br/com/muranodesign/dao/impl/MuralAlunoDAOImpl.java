@@ -32,7 +32,7 @@ public class MuralAlunoDAOImpl extends AbstractHibernateDAO implements MuralAlun
 		return resultado;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void deletar(MuralAluno muralAluno) {
 		synchronized (MuralAluno.class){
 			getSession().delete(muralAluno);
@@ -40,7 +40,7 @@ public class MuralAlunoDAOImpl extends AbstractHibernateDAO implements MuralAlun
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+
 	public void criar(MuralAluno muralAluno) {
 		synchronized (MuralAluno.class){
 			getSession().persist(muralAluno);

@@ -244,7 +244,6 @@ public class MuralResource {
 		return "erro";
 	}
 	
-	
 	/**
 	 * Listar all
 	 * @return
@@ -301,8 +300,4 @@ public class MuralResource {
 		return new MuralService().Range(data2,data,idAluno);
 	}
 	
-		
-		
-	
-
 }
