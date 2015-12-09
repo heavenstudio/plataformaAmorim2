@@ -47,6 +47,6 @@ public interface MuralDAO {
 	 * @param data
 	 * @return
 	 */
-	public List<Mural>Range(String data2, String data, int idAluno);
+	public List<Mural>Range(String data2, String data, int idProfessor);
 	
 	}

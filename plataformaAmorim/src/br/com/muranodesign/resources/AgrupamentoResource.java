@@ -1,5 +1,6 @@
 package br.com.muranodesign.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -14,7 +15,9 @@ import org.apache.log4j.Logger;
 import br.com.muranodesign.business.AgrupamentoService;
 import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CiclosService;
+import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.model.Agrupamento;
+import br.com.muranodesign.model.Rotina;
 
 
 @Path("Agrupamento")
@@ -125,6 +128,22 @@ public class AgrupamentoResource {
 		List<Agrupamento> resultado;
 		 resultado = new AgrupamentoService().listarTodos();
 		 logger.debug("QTD Agrupamento : " +  resultado.size());
+		return resultado;
+	}
+	
+	@Path("ListarPorOficina/{idOficina}")
+	@GET
+	@Produces("application/json")
+	public List<Agrupamento> getByOficina(@PathParam("idOficina") int idOficina)
+	{
+		logger.debug("Listar Agrupamento by Oficina...");
+		List<Agrupamento> resultado = new ArrayList<Agrupamento>();
+		List<Rotina> rotinas;
+		rotinas = new RotinaService().listarPorOficina(idOficina);
+		for (Rotina rotina : rotinas) {
+			resultado.add(rotina.getAgrupamento());
+		}
+		logger.debug("QTD Agrupamento : " +  resultado.size());
 		return resultado;
 	}
 }
