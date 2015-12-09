@@ -17,8 +17,8 @@ public class Usuario extends JerseyTest  {
 	
 	@Test
 	public void insert2() {
-		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AlunoVariavel/alunoGrupo");
-		webResource.post("alunos=201;202&grupo=850");
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Mural");
+		webResource.post("action=create&mensagem=goigshoi&idProfessor=106&idOficina=28&tutor=0");
 	}
 	
 }

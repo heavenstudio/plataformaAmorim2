@@ -203,10 +203,8 @@ public class AlunoVariavelResource {
 	@Produces("application/json")
 	public List<AlunoVariavel> getlistarCicloRangeObjeto(@PathParam("idCiclo") int idCiclo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
 		List<CicloAnoEstudo> ciclos = new CicloAnoEstudoService().listCiclo(idCiclo);
-		//int ano[] = new int[100];
-		List<Integer> anos = new ArrayList<Integer>();
 		
-	//	String html = "";
+		List<Integer> anos = new ArrayList<Integer>();
 		
 		for(int i = 0; i < ciclos.size(); i++) {
 			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
@@ -225,7 +223,7 @@ public class AlunoVariavelResource {
 	@GET
 	@Produces("application/json")
 	public String getlistarPeriodoRange(@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
-		//List<Periodo> periodo = new PeriodoService().listarkey(idPeriodo);
+		
 		String html1 = "";
 		
 		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarRangePeriodo(idPeriodo, primeiro, ultimo);
@@ -250,7 +248,6 @@ public class AlunoVariavelResource {
 	@GET
 	@Produces("application/json")
 	public List<AlunoVariavel> getlistarPeriodoRangeObjeto(@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
-		//List<Periodo> periodo = new PeriodoService().listarkey(idPeriodo);
 
 		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarRangePeriodo(idPeriodo, primeiro, ultimo);
 		
@@ -398,7 +395,7 @@ public class AlunoVariavelResource {
 	@Path("Relatorio")
 	@POST
 	@Produces("application/json")
-	public /*List<*/List<String>/*>*/ relatorio(
+	public List<String> relatorio(
 			@FormParam("Tutoria") int Tutoria,
 			@FormParam("Ano") int Ano,
 			@FormParam("Periodo") int Periodo,

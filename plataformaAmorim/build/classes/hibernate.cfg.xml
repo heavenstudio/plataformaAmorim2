@@ -8,6 +8,8 @@
 		<property name="hibernate.connection.url">jdbc:mysql://177.55.99.90:3306/amorim_prod_testeV2</property>
 		<property name="hibernate.connection.username">amorim_prod</property>
 		<property name="hibernate.connection.password">amorim_prod</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property> 
 		<!--<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/amorimvs2_testelocal</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password"></property>-->
@@ -129,7 +131,6 @@
 		<mapping class="br.com.muranodesign.model.PlanoAula" />
 		<mapping class="br.com.muranodesign.model.PlanejamentoAula" />
 		<mapping class="br.com.muranodesign.model.JornadaProfessor" />
-		
 		<mapping class="br.com.muranodesign.model.MuralCoordenacao" />
 		<mapping class="br.com.muranodesign.model.PendenciasProducaoAluno" />
 		

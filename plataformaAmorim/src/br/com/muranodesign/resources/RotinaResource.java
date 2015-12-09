@@ -39,7 +39,6 @@ public class RotinaResource {
 	 * @param idSala
 	 * @return id
 	 */
-	
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -53,9 +52,6 @@ public class RotinaResource {
 			@FormParam("idSala") int idSala){
 		
 		
-		//GregorianCalendar gc = new GregorianCalendar(); 
-		//long hora =  gc.get(Calendar.HOUR_OF_DAY);
-		
 		
 		Rotina resultado = new Rotina();
 		
@@ -64,7 +60,7 @@ public class RotinaResource {
 			resultado = new RotinaService().deletarRotina(new RotinaService().listarkey(id).get(0));
 		}else if(action.equals("create")){
 			
-			
+			 
 			
 			Rotina rotina = new Rotina();
 			

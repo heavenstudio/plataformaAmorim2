@@ -29,7 +29,6 @@ public class JavaMD5Hash {
      
     /**
      * Md5.
-     *
      * @param  String a ser criptografada
      * @return String criptografada
      */
@@ -37,7 +36,7 @@ public class JavaMD5Hash {
          
         String md5 = null;
          
-        if(null == input) return null;
+        if(null == input) return md5;//null;
          
         try {
              
