@@ -124,6 +124,16 @@ public class RoteiroResource {
 		return  new RoteiroService().listRoteiroRange(primeiro, ultimo);
 	}
 	
+	@Path("ListarNomeIdAnoEstudo/{idAnoEstudo}")
+	@GET
+	@Produces("application/json")
+	public List<Roteiro> listarLazyNome (@PathParam("idAnoEstudo") int anoEstudo){
+		logger.info("Listar Por Ano Estudo id " + anoEstudo);
+		List<Roteiro> resultado;
+		resultado = new RoteiroService().listarAnoEstudoLazy(anoEstudo);
+		return resultado;
+	}
+	
 
 	/**
 	 * Gets the evento.

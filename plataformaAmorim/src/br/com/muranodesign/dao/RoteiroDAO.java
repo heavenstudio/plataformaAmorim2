@@ -86,4 +86,6 @@ public interface RoteiroDAO {
 		 */
 		public List<Roteiro> listRoteiroRange(int primeiro, int ultimo);
 
+		public List<Roteiro> listarAnoEstudoLazy(int anoEstudo);
+
 }

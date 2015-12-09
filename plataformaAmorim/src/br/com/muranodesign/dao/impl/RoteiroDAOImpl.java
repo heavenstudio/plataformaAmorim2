@@ -166,4 +166,21 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 		return result;
 	}
 
+	@Override
+	public List<Roteiro> listarAnoEstudoLazy(int anoEstudo) {
+		Criteria criteria = getSession().createCriteria(Roteiro.class);
+		ProjectionList projList = Projections.projectionList();
+		
+		criteria.createAlias("anoEstudo", "anoEstudo");
+		criteria.add(Restrictions.eq("anoEstudo.idanoEstudo", anoEstudo));
+		projList.add(Projections.property("idroteiro"),"idroteiro");
+		projList.add(Projections.property("nome"),"nome");
+		criteria.setProjection(projList).setCacheable(true);
+	    criteria.setResultTransformer(Transformers.aliasToBean(Roteiro.class)); 
+	    List<Roteiro> result = criteria.list();
+		
+		return result;
+		
+	}
+
 }

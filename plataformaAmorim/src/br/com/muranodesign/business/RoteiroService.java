@@ -148,5 +148,13 @@ public class RoteiroService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<Roteiro> listarAnoEstudoLazy(int anoEstudo) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroDAO dao = DAOFactory.getRoteiroDAO(pc);
+		List<Roteiro> result = dao.listarAnoEstudoLazy(anoEstudo);
+		pc.commitAndClose();
+		return result;
+	}
 	
 }
