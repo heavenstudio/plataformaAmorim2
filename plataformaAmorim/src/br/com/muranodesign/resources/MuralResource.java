@@ -74,7 +74,7 @@ public class MuralResource {
 		if(action.equals("delete")){
 			
 			new MuralService().deletarMural(new MuralService().listarkey(id).get(0));
-			return "ok";
+			return Integer.toString(id);
 			
 		}else if(action.equals("create")){
 			
@@ -106,7 +106,7 @@ public class MuralResource {
 					  new MuralAlunoService().criarMuralAluno(muralAluno);
 				  }
 				
-				  return "ok";
+				  return Integer.toString(mural.getIdmural());
 				
 			}
 			else {
@@ -128,7 +128,7 @@ public class MuralResource {
 						new MuralAlunoService().criarMuralAluno(muralAluno);
 					}
 				
-					return "ok";
+					return Integer.toString(mural.getIdmural());
 				
 				}
 				else if(grupo != 0){
@@ -142,7 +142,7 @@ public class MuralResource {
 						new MuralAlunoService().criarMuralAluno(muralAluno);
 					}
 				
-					return "ok";
+					return Integer.toString(mural.getIdmural());
 				}
 				if (idOficina != 0){
 					List<AlunoVariavel> alunos = new ArrayList<AlunoVariavel>();
@@ -164,6 +164,7 @@ public class MuralResource {
 						muralAluno.setMural(mural);
 						new MuralAlunoService().criarMuralAluno(muralAluno);
 					}
+					return Integer.toString(mural.getIdmural());
 				}
 				else if(idAgrupamento != 0){
 					List<AlunoVariavel> alunos = new ArrayList<AlunoVariavel>();
@@ -178,6 +179,8 @@ public class MuralResource {
 						muralAluno.setMural(mural);
 						new MuralAlunoService().criarMuralAluno(muralAluno);
 					}
+					
+					return Integer.toString(mural.getIdmural());
 				}
 			}
 		}
