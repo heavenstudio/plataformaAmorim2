@@ -10,7 +10,7 @@ import br.com.muranodesign.model.SessaoForumGeral;
 public class SessaoForumGeralService {
 	
 	/**
-	 * 
+	 * Listar todos
 	 * @return
 	 */
 	public List<SessaoForumGeral> listarTodos() {
@@ -22,7 +22,7 @@ public class SessaoForumGeralService {
 	}
 	
 	/**
-	 * 
+	 * Listar por id
 	 * @param key
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public class SessaoForumGeralService {
 	}
 	
 	/**
-	 * 
+	 * Criar
 	 * @param p
 	 * @return
 	 */
@@ -48,7 +48,7 @@ public class SessaoForumGeralService {
 	}
 	
 	/**
-	 * 
+	 * Atualizar
 	 * @param p
 	 * @return
 	 */
@@ -61,7 +61,7 @@ public class SessaoForumGeralService {
 	}
 	
 	/**
-	 * 
+	 * Delete
 	 * @param p
 	 * @return
 	 */

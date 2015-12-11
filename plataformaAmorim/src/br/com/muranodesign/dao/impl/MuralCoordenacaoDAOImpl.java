@@ -17,6 +17,10 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MuralCoordenacaoDAO#listAll()
+	 */
 	@SuppressWarnings("unchecked")
 	public List<MuralCoordenacao> listAll() {
 		Criteria criteria = getSession().createCriteria(MuralCoordenacao.class);
@@ -24,6 +28,10 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MuralCoordenacaoDAO#listarKey(int)
+	 */
 	@SuppressWarnings("unchecked")
 	public List<MuralCoordenacao> listarKey(int key) {
 		Criteria criteria = getSession().createCriteria(MuralCoordenacao.class);
@@ -32,7 +40,10 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		return result;
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MuralCoordenacaoDAO#criar(br.com.muranodesign.model.MuralCoordenacao)
+	 */
 	public void criar(MuralCoordenacao p) {
 		synchronized (MuralCoordenacaoDAOImpl.class){
 			getSession().persist(p);
@@ -40,14 +51,20 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		}
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MuralCoordenacaoDAO#atualizar(br.com.muranodesign.model.MuralCoordenacao)
+	 */
 	public void atualizar(MuralCoordenacao p) {
 		getSession().merge(p);
 		getSession().flush();
 		
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.MuralCoordenacaoDAO#deletar(br.com.muranodesign.model.MuralCoordenacao)
+	 */
 	public void deletar(MuralCoordenacao p) {
 		getSession().delete(p);
 		getSession().flush();

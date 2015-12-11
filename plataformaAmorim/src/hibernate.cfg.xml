@@ -9,7 +9,7 @@
 		<property name="hibernate.connection.username">amorim_prod</property>
 		<property name="hibernate.connection.password">amorim_prod</property>
 		
-		<property name="hibernate.hbm2ddl.auto">update</property> 
+		 
 		<!--<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/amorimvs2_testelocal</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password"></property>-->
