@@ -79,12 +79,12 @@ public class MuralDAOImpl extends AbstractHibernateDAO implements MuralDAO{
 	 * @see br.com.muranodesign.dao.MuralDAO#Range(java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Mural>Range(String data2, String data, int idAluno){
+	public List<Mural>Range(String data2, String data, int idProfessor){
 		Criteria criteria = getSession().createCriteria(Mural.class);
 
 		StringUtil stringUtil = new StringUtil();
-		criteria.createAlias("aluno", "aluno");
-		criteria.add(Restrictions.eq("aluno.idalunoVariavel", idAluno));
+		criteria.createAlias("professor", "professor");
+		criteria.add(Restrictions.eq("professor.idprofessor_funcionario", idProfessor));
 		
 		criteria.add(Restrictions.ge("data", stringUtil.converteStringData(data2)));
 		criteria.add(Restrictions.lt("data", stringUtil.converteStringData(data)));

@@ -77,16 +77,15 @@ public class MuralService {
 	 * Range
 	 * @param data2
 	 * @param data
-	 * @param idAluno
+	 * @param idProfessor
 	 * @return
 	 */
-	public List<Mural>Range(String data2, String data, int idAluno){
+	public List<Mural>Range(String data2, String data, int idProfessor){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralDAO dao = DAOFactory.getMuralDAO(pc);
-		List<Mural> result = dao.Range(data2, data,idAluno);
+		List<Mural> result = dao.Range(data2, data,idProfessor);
 		pc.commitAndClose();
 		return result;
 		
 	}
-
 }

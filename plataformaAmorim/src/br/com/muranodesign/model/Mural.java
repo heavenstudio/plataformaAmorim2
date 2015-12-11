@@ -34,9 +34,9 @@ public class Mural implements Serializable{
 	 
 	 @OneToOne
 	 private ProfessorFuncionario professor;
-	 
-	 @OneToOne
-	 private AlunoVariavel aluno;
+
+	 /*@OneToOne
+	 private AlunoVariavel aluno;*/
 	 
 	 @Basic(optional = false)
 	 @Column(name = "data")
@@ -67,13 +67,13 @@ public class Mural implements Serializable{
 		this.professor = professor;
 	}
 
-	public AlunoVariavel getAluno() {
+	/*public AlunoVariavel getAluno() {
 		return aluno;
 	}
 
 	public void setAluno(AlunoVariavel aluno) {
 		this.aluno = aluno;
-	}
+	}*/
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

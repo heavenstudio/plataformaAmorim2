@@ -819,6 +819,10 @@ public static MensagensDAO getMensagensDAO(
 	public static MuralAlunoDAO geMuralAlunoDAO(PersistenceContext pc) {
 		return new MuralAlunoDAOImpl((HibernatePersistenceContext) pc);
 	}
+
+	public static RelatorioAlunoDAO getRelatorioAlunoDAO(PersistenceContext pc) {
+		return new RelatorioAlunoDAOImpl((HibernatePersistenceContext) pc);
+	}
 	
 
 }
