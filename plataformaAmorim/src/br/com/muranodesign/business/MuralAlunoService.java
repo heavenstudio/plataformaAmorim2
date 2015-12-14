@@ -10,6 +10,10 @@ import br.com.muranodesign.model.MuralAluno;
 
 public class MuralAlunoService {
 
+	/**
+	 * Listar todos
+	 * @return
+	 */
 	public List<MuralAluno> listarall() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralAlunoDAO dao = DAOFactory.geMuralAlunoDAO(pc);
@@ -18,6 +22,11 @@ public class MuralAlunoService {
 		return result;
 	}
 	
+	/**
+	 * Listar por id
+	 * @param id
+	 * @return
+	 */
 	public List<MuralAluno> listarkey(int id) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralAlunoDAO dao = DAOFactory.geMuralAlunoDAO(pc);
@@ -26,6 +35,11 @@ public class MuralAlunoService {
 		return result;
 	}
 	
+	/**
+	 * Deletar
+	 * @param muralAluno
+	 * @return
+	 */
 	public MuralAluno deletarMuralAluno(MuralAluno muralAluno) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralAlunoDAO dao = DAOFactory.geMuralAlunoDAO(pc);
@@ -34,6 +48,11 @@ public class MuralAlunoService {
 		return muralAluno;
 	}
 
+	/**
+	 * Criar
+	 * @param muralAluno
+	 * @return
+	 */
 	public MuralAluno criarMuralAluno(MuralAluno muralAluno) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralAlunoDAO dao = DAOFactory.geMuralAlunoDAO(pc);
@@ -41,9 +60,12 @@ public class MuralAlunoService {
 		pc.commitAndClose();
 		return muralAluno;
 	}
-
 	
-
+	/**
+	 * Lista Aluno
+	 * @param idaluno
+	 * @return
+	 */
 	public List<MuralAluno> listarAluno(int idaluno) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		MuralAlunoDAO dao = DAOFactory.geMuralAlunoDAO(pc);

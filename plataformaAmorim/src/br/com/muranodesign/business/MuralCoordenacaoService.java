@@ -10,7 +10,7 @@ import br.com.muranodesign.model.MuralCoordenacao;
 public class MuralCoordenacaoService {
 
 	/**
-	 * 
+	 * Listar todos
 	 * @return
 	 */
 	public List<MuralCoordenacao> listarTodos() {
@@ -22,7 +22,7 @@ public class MuralCoordenacaoService {
 	}
 	
 	/**
-	 * 
+	 * Listar por id
 	 * @param key
 	 * @return
 	 */

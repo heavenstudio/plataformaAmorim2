@@ -52,6 +52,11 @@ public class ForumQuestaoService {
 		return result;
 	}
 	
+	/**
+	 * Lista forum questao
+	 * @param idUser
+	 * @return
+	 */
 	public List<ForumQuestao> listaUser(int idUser){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ForumQuestaoDAO dao = DAOFactory.getForumQuestaoDAO(pc);

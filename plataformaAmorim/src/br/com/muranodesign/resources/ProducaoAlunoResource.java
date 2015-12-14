@@ -146,8 +146,6 @@ public class ProducaoAlunoResource {
 			retorno.put(0,0);
 		}
 		
-		
-		
 		return retorno;
 		
 	}
@@ -270,9 +268,7 @@ public class ProducaoAlunoResource {
 
 	}
 	
-	
-	
-	
+
 	/**
 	 * Listar producao de aluno por filtros 
 	 * @param id
@@ -287,6 +283,7 @@ public class ProducaoAlunoResource {
 			@PathParam("id") int id,
 			@PathParam("tipo") int tipo,
 			@PathParam("roteiro") int roteiro){
+		
 		
 		return new ProducaoAlunoService().listarFiltro(id, tipo, roteiro);
 		

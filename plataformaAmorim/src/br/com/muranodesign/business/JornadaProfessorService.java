@@ -11,7 +11,7 @@ import br.com.muranodesign.model.JornadaProfessor;
 public class JornadaProfessorService {
 
 	/**
-	 * 
+	 * Listar todos
 	 * @return
 	 */
 	public List<JornadaProfessor> listarTodos() {
@@ -23,7 +23,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Listar key
 	 * @param key
 	 * @return
 	 */
@@ -36,7 +36,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Criar
 	 * @param p
 	 * @return
 	 */
@@ -49,7 +49,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Atualizar Jornada Professor
 	 * @param p
 	 * @return
 	 */
@@ -62,7 +62,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Deletar Jornada Professor
 	 * @param p
 	 * @return
 	 */
@@ -75,7 +75,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Listar todos
 	 * @param professor
 	 * @return
 	 */
@@ -88,7 +88,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Total
 	 * @param professor
 	 * @return
 	 */
@@ -101,7 +101,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Disponivel
 	 * @param professor
 	 * @return
 	 */
@@ -114,7 +114,7 @@ public class JornadaProfessorService {
 	}
 	
 	/**
-	 * 
+	 * Extra
 	 * @param professor
 	 * @return
 	 */
