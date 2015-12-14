@@ -105,6 +105,4 @@ public class AvaliacaoProducaoAlunoDAOImpl extends AbstractHibernateDAO implemen
 		return result;
 	}
 
-
-
 }

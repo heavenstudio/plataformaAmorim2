@@ -151,6 +151,10 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		return result;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.ChamadaDAO#dataPresencaAtual(int, java.util.Date)
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Chamada> dataPresencaAtual(int id, Date data){
 		Criteria criteria = getSession().createCriteria(Chamada.class);
@@ -170,9 +174,5 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	    
 		return result; 
 	}
-
-
-
-	
 
 }

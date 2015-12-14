@@ -123,5 +123,4 @@ public class AtividadeDAOImpl extends AbstractHibernateDAO implements AtividadeD
 		return result;	
 	}
 	
-
 }
