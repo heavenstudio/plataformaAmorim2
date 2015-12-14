@@ -240,7 +240,11 @@ public class PlanejamentoRoteiroResource {
 
 	}
 	
-	
+	/**
+	 * Listar total 
+	 * @param id
+	 * @return
+	 */
 	@Path("ListarTotal/{id}")
 	@GET
 	@Produces("application/json")
@@ -260,6 +264,11 @@ public class PlanejamentoRoteiroResource {
 		return total;
 	}
 	
+	/**
+	 * Listar status 2
+	 * @param id
+	 * @return
+	 */
 	@Path("HashStatus2/{id}")
 	@GET
 	@Produces("application/json")
@@ -293,6 +302,11 @@ public class PlanejamentoRoteiroResource {
 		
 	}
 	
+	/**
+	 * Listar status 3
+	 * @param id
+	 * @return
+	 */
 	@Path("HashStatus3/{id}")
 	@GET
 	@Produces("application/json")
@@ -326,6 +340,11 @@ public class PlanejamentoRoteiroResource {
 		
 	}
 	
+	/**
+	 * Listar hash
+	 * @param id
+	 * @return
+	 */
 	@Path("HashAtribuicao/{id}")
 	@GET
 	@Produces("application/json")
@@ -483,7 +502,6 @@ public class PlanejamentoRoteiroResource {
 		String k = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
 	
 	
-		
 		if(status.equals("2")){
 			Date date = (Date)formatter.parse(k);
 			planejamento.setDataStatusEntregue(date);

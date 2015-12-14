@@ -119,9 +119,6 @@ public class GrupoResource {
 	
 	public List<Grupo> teste(@PathParam("ano") String ano,@PathParam("periodo") String periodo){
 		
-		//Grupo grupo = new Grupo();
-		//grupo = new GrupoService().listarUltimo(ano, periodo).get(0);
-		
 		
 		return new GrupoService().listarUltimo(ano, periodo);
 	}
@@ -374,40 +371,7 @@ public class GrupoResource {
 		return "true";
 	}
 	
-	/**
-	 * Listar alunos grupo
-	 * @param id
-	 * @return
-	 */
-	/*
-	@Path("AlunoGrupo/{id}")
-	@GET
-	@Produces("application/json")
-	public List<List<AlunoVariavel>> alunogrupo(@PathParam("id") int id){
-		List<AlunoVariavel> rsAluno;
-		List<AlunoVariavel> listaTotal = null;
-		List<List<AlunoVariavel>> full = new ArrayList<List<AlunoVariavel>>();
-		
-		int quantidade, quantidadeFull, quantidadeParcial;
-		rsAluno = new AlunoVariavelService().listaGrupo(id);
-		
-		quantidade = rsAluno.size();
-		
-		for(int i = 0; i < quantidade; i ++){
-			listaTotal = new AlunoVariavelService().listaAnoEstudo(rsAluno.get(i).getAnoEstudo());
-			full.add(listaTotal);
-		}
-		quantidadeFull = full.size();
-		
-		for(int i = 0; i < quantidadeFull; i ++){
-			quantidadeParcial = full.get(i).size();
-			for(int k = 0; k < quantidadeParcial; k++){
-				if(full.get(i).get(k).get)
-			}
-		}
-		return full;
-	}
-	*/
+
 
 	/**
 	 * Listar alunos por id de grupo
@@ -444,8 +408,7 @@ public class GrupoResource {
 	@GET
 	@Produces("application/json")
 	public List<Grupo> tutoriaGrupo(@PathParam("id") int id){
-	//	List<ProfessorFuncionario> professor = new ArrayList<ProfessorFuncionario>();
-		//professor = new ProfessorFuncionarioService().listarkey(id);
+
 		List<Tutoria> tutor = new TutoriaService().listarProfessorId(id);
 		List<Grupo> grupos = new ArrayList<Grupo>();
 		
@@ -454,6 +417,5 @@ public class GrupoResource {
 		return grupos;
 	}
 	
-	//!(tutor.get(0).getIdtutoria() == null) || .get(0).getIdtutoria()
-	
+
 }

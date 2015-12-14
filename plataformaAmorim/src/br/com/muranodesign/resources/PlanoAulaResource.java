@@ -26,6 +26,19 @@ public class PlanoAulaResource {
 	
 	private Logger logger = Logger.getLogger(PlanoAulaResource.class.getName());
 	
+	/**
+	 * Criar, deletar e atualizar
+	 * @param action
+	 * @param id
+	 * @param idBlog
+	 * @param idProfessor
+	 * @param data_ini
+	 * @param data_fim
+	 * @param objetivos
+	 * @param tarefa_casa
+	 * @param registro_atividade
+	 * @return
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -80,7 +93,10 @@ public class PlanoAulaResource {
 		return Integer.toString(resultado.getIdplano_aula());
 	}
 	
-	
+	/**
+	 * Plano Aula
+	 * @return
+	 */
 	@GET
 	@Produces("application/json")
 	public List<PlanoAula> getPlanoAula() {
@@ -91,7 +107,11 @@ public class PlanoAulaResource {
 		return resultado;
 	}
 	
-	
+	/**
+	 * Listar por id
+	 * @param id
+	 * @return
+	 */
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
@@ -100,7 +120,10 @@ public class PlanoAulaResource {
 		return new PlanoAulaService().listarkey(id);
 	}
 	
-	
+	/**
+	 * Range Data
+	 * @return
+	 */
 	@Path("RangeData/")
 	@GET
 	@Produces("application/json")
@@ -114,7 +137,11 @@ public class PlanoAulaResource {
 		return new PlanoAulaService().range(stringUtil.converteStringData(data));
 	}
 	
-	
+	/**
+	 * Listar ultimo por Professor
+	 * @param idProfessor
+	 * @return
+	 */
 	@Path("Ultimo/{idProfessor}")
 	@GET
 	@Produces("application/json")
@@ -122,6 +149,11 @@ public class PlanoAulaResource {
 		return new PlanoAulaService().listarUltimo(idProfessor);
 	}
 
+	/**
+	 * Listar professor Data
+	 * @param idProfessor
+	 * @return
+	 */
 	@Path("ProfessorData/{idProfessor}")
 	@GET
 	@Produces("application/json")

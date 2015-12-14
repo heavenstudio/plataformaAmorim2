@@ -97,6 +97,12 @@ public class ProducaoAlunoResource {
 
 	}
 	
+	/**
+	 * Aluno Portifolio
+	 * @param id
+	 * @return
+	 * @throws ParseException
+	 */
 	@Path("alunoPortifolio/{id}")
 	@GET
 	@Produces("application/json")
@@ -111,7 +117,13 @@ public class ProducaoAlunoResource {
 
 	}
 	
-	
+	/**
+	 * Aluno Tipo Producao
+	 * @param idAluno
+	 * @param idRoteiro
+	 * @param idTipo
+	 * @return
+	 */
 	@Path("alunoTipoProducao/{idAluno}/{idRoteiro}/{idTipo}")
 	@GET
 	@Produces("application/json")
@@ -140,6 +152,11 @@ public class ProducaoAlunoResource {
 		
 	}
 	
+	/**
+	 * Não capa
+	 * @param id
+	 * @return
+	 */
 	@Path("NCapa/{id}")
 	@GET
 	@Produces("application/json")
@@ -202,6 +219,13 @@ public class ProducaoAlunoResource {
 		
 	}
 	
+	/**
+	 * Upload de capa
+	 * @param strId
+	 * @param uploadedInputStream
+	 * @param fileDetail
+	 * @return
+	 */
 	@POST
 	@Path("upload/capa/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)

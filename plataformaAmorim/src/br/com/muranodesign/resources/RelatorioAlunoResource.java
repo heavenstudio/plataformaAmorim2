@@ -31,7 +31,6 @@ public class RelatorioAlunoResource {
 	 * @throws ParseException 
 	 * 
 	 */
-	
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -78,7 +77,10 @@ public class RelatorioAlunoResource {
 		return Integer.toString(resultado.getIdrelatorioAluno());
 	}
 	
-
+	/**
+	 * Lista Relatorio Aluno
+	 * @return
+	 */
 	@GET
 	@Produces("application/json")
 	public List<RelatorioAluno> getRelatorioAluno(){
@@ -90,6 +92,11 @@ public class RelatorioAlunoResource {
 		return resultado;
 	}
 	
+	/**
+	 * Listar por id
+	 * @param id
+	 * @return
+	 */
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
@@ -99,6 +106,11 @@ public class RelatorioAlunoResource {
 		return resultado;
 	}
 	
+	/**
+	 * Listar Aluno
+	 * @param aluno
+	 * @return
+	 */
 	@Path("ListarAluno/{idAluno}")
 	@GET
 	@Produces("application/json")
@@ -109,6 +121,11 @@ public class RelatorioAlunoResource {
 		return resultado;
 	}
 	
+	/**
+	 * Listar Por Professor
+	 * @param professor
+	 * @return
+	 */
 	@Path("ListarProfessor/{idProfessor}")
 	@GET
 	@Produces("application/json")

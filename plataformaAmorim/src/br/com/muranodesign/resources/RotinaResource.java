@@ -119,7 +119,6 @@ public class RotinaResource {
 				
 				for(int i = 0; i < agrupamentoAlunos.size();i++){
 					for(int j = 0; j < agrupamentoAlunosNovo.size();j++){
-						//if(agrupamentoAlunos.get(i).getAluno().getIdalunoVariavel() == agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()){
 						if(agrupamentoAlunos.get(i).getAluno().equals(agrupamentoAlunosNovo.get(j).getAluno())){
 							return "Erro: O aluno de id "+agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()+"já tem uma rotina para esse horario";
 						}
@@ -131,7 +130,6 @@ public class RotinaResource {
 				rotina.setHora(Hora);
 				rotina.setDia(new SemanaService().listarkey(idDia).get(0));
 				rotina.setOficina(new OficinaService().listarkey(idOficina).get(0));
-				//rotina.setSala(new SalasService().listarkey(idSala).get(0));
 				rotina.setAgrupamento(new AgrupamentoService().listarkey(idAgrupamento).get(0));
 				rotina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 				

@@ -63,7 +63,6 @@ public class ObjetivoResource {
 		logger.debug("Listar Objetivo ...");
 		List<Objetivo> resultado;
 		resultado = new ObjetivoService().listarTodos();
-		//resultado = new ObjetivoService().listAllTeste();
 		logger.debug("QTD Objetivo : " + resultado.size());
 		return resultado;
 	}
@@ -77,7 +76,6 @@ public class ObjetivoResource {
 	 */
 	@Path("{id}")
 	@GET
-	// @Produces("text/xml")
 	@Produces("application/json")
 	public Objetivo getObjetivo(@PathParam("id") int id) {
 
@@ -90,7 +88,11 @@ public class ObjetivoResource {
 
 	}
 	
-	
+	/**
+	 * Inativar Objetivo
+	 * @param id
+	 * @return
+	 */
 	@Path("InativarObjetivo/{id}")
 	@DELETE
 	@Produces("text/plain")
@@ -132,8 +134,7 @@ public class ObjetivoResource {
 
 		int quantidade = roteiros.size();
 		for (int i = 0; i < quantidade; i++) {
-			obj = new ObjetivoService().listarRoteiro(roteiros.get(i)
-					.getIdroteiro());
+			obj = new ObjetivoService().listarRoteiro(roteiros.get(i).getIdroteiro());
 			total.addAll(obj);
 		}
 		
@@ -183,22 +184,16 @@ public class ObjetivoResource {
 		logger.debug("Lista Evento  por id roteiro" + id);
 
 		List<AlunoVariavel> aluno = new AlunoVariavelService().listarkey(id);
-		List<Roteiro> roteiroAno = new RoteiroService().listarAno(aluno.get(0)
-				.getAnoEstudo().getIdanoEstudo());
-		List<AtribuicaoRoteiroExtra> atribuicao = new AtribuicaoRoteiroExtraService()
-				.listarAluno(aluno.get(0).getAluno());
-		
+		List<Roteiro> roteiroAno = new RoteiroService().listarAno(aluno.get(0).getAnoEstudo().getIdanoEstudo());
+		List<AtribuicaoRoteiroExtra> atribuicao = new AtribuicaoRoteiroExtraService().listarAluno(aluno.get(0).getAluno());
 
 		long totalObjetivos = 0;
 
 		for (int i = 0; i < roteiroAno.size(); i++) {
-			totalObjetivos += new ObjetivoService()
-					.listarRoteiroTotal(roteiroAno.get(i).getIdroteiro());
+			totalObjetivos += new ObjetivoService().listarRoteiroTotal(roteiroAno.get(i).getIdroteiro());
 		}
 		for (int i = 0; i < atribuicao.size(); i++) {
-			totalObjetivos += new ObjetivoService()
-					.listarRoteiroTotal(atribuicao.get(i).getRoteiro()
-							.getIdroteiro());
+			totalObjetivos += new ObjetivoService().listarRoteiroTotal(atribuicao.get(i).getRoteiro().getIdroteiro());
 		}
 
 		return totalObjetivos;
@@ -384,6 +379,13 @@ public class ObjetivoResource {
 
 	}
 
+	/**
+	 * Lista Objetivo Hash
+	 * @param idUsuario
+	 * @param idRoteiro
+	 * @param idPlanoEstudo
+	 * @return
+	 */
 	@Path("ListaObjetivoHash/{idUsuario}/{idRoteiro}/{idPlanoEstudo}")
 	@GET
 	@Produces("application/json")
@@ -461,7 +463,6 @@ public class ObjetivoResource {
 	@FormParam("action") String action, @FormParam("id") String strid,
 			@FormParam("nome") String nome,
 			@FormParam("descricao") String descricao,
-			//@FormParam("numero") String numero,
 			@FormParam("roteiro") String roteiro,
 			@FormParam("ativo") String ativo
 
@@ -476,16 +477,15 @@ public class ObjetivoResource {
 
 		if (action.equals("create")) {
 
-			// objUsuario.setLogin(login);
 			objObjetivo.setNome(nome);
 			objObjetivo.setDescricao(descricao);
-			//objObjetivo.setNumero(Integer.parseInt(numero));
 			objObjetivo.setRoteiro(objRoteiro);
 			objObjetivo.setAtivo(Integer.parseInt(ativo));
 
 			resultado = new ObjetivoService().criarObjetivo(objObjetivo);
 
 		} else if (action.equals("update")) {
+			
 			int id = Integer.parseInt(strid);
 			List<Objetivo> rsObjetivo;
 			rsObjetivo = new ObjetivoService().listarkey(id);
@@ -494,7 +494,6 @@ public class ObjetivoResource {
 			objObjetivo.setAtivo(Integer.parseInt(ativo));
 			objObjetivo.setNome(nome);
 			objObjetivo.setDescricao(descricao);
-			//objObjetivo.setNumero(Integer.parseInt(numero));
 			objObjetivo.setRoteiro(objRoteiro);
 
 			resultado = new ObjetivoService().atualizarObjetivo(objObjetivo);
