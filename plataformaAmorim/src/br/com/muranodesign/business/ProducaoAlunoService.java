@@ -166,4 +166,12 @@ public class ProducaoAlunoService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<ProducaoAluno> listarOficina(int idOficina, int idAluno) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ProducaoAlunoDAO dao = DAOFactory.getProducaoAlunoDAO(pc);
+		List<ProducaoAluno> result = dao.listaOficinaAluno(idOficina, idAluno);
+		pc.commitAndClose();
+		return result;
+	}
 }

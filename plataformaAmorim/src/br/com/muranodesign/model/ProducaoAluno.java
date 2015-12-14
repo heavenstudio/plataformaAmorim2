@@ -93,8 +93,20 @@ import javax.xml.bind.annotation.XmlRootElement;
     @JoinColumn(name = "tipo", referencedColumnName = "idtipo_producao_aluno")
     @ManyToOne(optional = false)
     private TipoProducaoAluno tipo;
+    
+    @JoinColumn(name = "oficina", referencedColumnName = "Idoficina")
+    @ManyToOne
+    private Oficina oficina;
 
-    public ProducaoAluno() {
+    public Oficina getOficina() {
+		return oficina;
+	}
+
+	public void setOficina(Oficina oficina) {
+		this.oficina = oficina;
+	}
+
+	public ProducaoAluno() {
     }
 
     public ProducaoAluno(Integer idproducaoAluno) {

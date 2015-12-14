@@ -94,4 +94,6 @@ public interface ProducaoAlunoDAO {
 		 * @return
 		 */
 		public List<ProducaoAluno> NCapa(int id);
+
+		public List<ProducaoAluno> listaOficinaAluno(int idOficina, int idAluno);
 }

@@ -32,12 +32,14 @@ import br.com.muranodesign.business.AlunoService;
 import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CategoriaProducaoAlunoService;
 import br.com.muranodesign.business.MensagensService;
+import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.ProducaoAlunoService;
 import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.business.TipoProducaoAlunoService;
 import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.AnoLetivo;
 import br.com.muranodesign.model.CategoriaProducaoAluno;
+import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.ProducaoAluno;
 import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.TipoProducaoAluno;
@@ -202,6 +204,16 @@ public class ProducaoAlunoResource {
 		
 	}
 	
+	@Path("OficinaAluno/{idOficina}/{idAluno}")
+	@GET
+	@Produces("application/json")
+	public List<ProducaoAluno> listarOficina(@PathParam("idOficina") int idOficina, @PathParam("idAluno") int idAluno){
+		
+		List<ProducaoAluno> resultado = new ProducaoAlunoService().listarOficina(idOficina, idAluno);
+		return resultado;
+		
+	}
+	
 	@POST
 	@Path("upload/capa/{id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -315,6 +327,7 @@ public class ProducaoAlunoResource {
 			@FormParam("aluno") String aluno,
 			@FormParam("tipo") String tipo,
 			@FormParam("roteiro") String roteiro,
+			@FormParam("oficina") String oficina,
 			@FormParam("categoria") String categoria
 			
 			) throws ParseException {
@@ -342,9 +355,15 @@ public class ProducaoAlunoResource {
 		
 
 		Roteiro objRoteiro = new Roteiro();
+		Oficina objOficina = new Oficina();
 		
 		if(roteiro != null){
 			objRoteiro = new RoteiroService().listarid(Integer.parseInt(roteiro));
+		}
+		
+		if(oficina != null){
+			objOficina = new OficinaService().listarkey(Integer.parseInt(oficina)).get(0);
+			
 		}
 		
 		List<CategoriaProducaoAluno> rsCategoriaProducaoAluno;
@@ -371,11 +390,13 @@ public class ProducaoAlunoResource {
 		    if(t == 5){
 		    	objProducaoAluno.setCapa(capa);
 		    }
-		    
+		    if (t == 7){
+		    	objProducaoAluno.setOficina(objOficina);
+		    }
 		    if(t == 6 ){
 		    	objProducaoAluno.setArquivo(arquivo);
 		    }
-		    if(t != 6 ){
+		    if(t < 5 ){
 		    	objProducaoAluno.setRoteiro(objRoteiro);
 		    }
 		    objProducaoAluno.setCategoria(objCategoriaProducaoAluno);
@@ -400,7 +421,10 @@ public class ProducaoAlunoResource {
 			    if(t == 5){
 			    	objProducaoAluno.setCapa(capa);
 			    }
-			    if(t != 6 ){
+			    if (t == 7){
+			    	objProducaoAluno.setOficina(objOficina);
+			    }
+			    if(t < 5 ){
 			    	objProducaoAluno.setRoteiro(objRoteiro);
 			    }
 			    objProducaoAluno.setCategoria(objCategoriaProducaoAluno);

@@ -106,8 +106,12 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		
 		criteria.createAlias("tipo", "tipo");
 		criteria.add(Restrictions.eq("tipo.idtipoProducaoAluno", tipo));
-		criteria.createAlias("roteiro", "roteiro");
-		criteria.add(Restrictions.eq("roteiro.idroteiro", roteiro));
+		
+		if (roteiro != 0)
+		{
+			criteria.createAlias("roteiro", "roteiro");
+			criteria.add(Restrictions.eq("roteiro.idroteiro", roteiro));
+		}
 		List<ProducaoAluno> result = criteria.list();
 		return result;
 	}
@@ -158,7 +162,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		return result;
 	}
 	
-	/*
+	/*	
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.ProducaoAlunoDAO#NCapa(int)
 	 */
@@ -167,6 +171,20 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		criteria.add(Restrictions.isNotNull("capa"));
 		List<ProducaoAluno> result = criteria.list();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ProducaoAluno> listaOficinaAluno(int idOficina, int idAluno) {
+		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", idAluno));
+		
+		List<ProducaoAluno> result = criteria.list();
+		
 		return result;
 	}
 
