@@ -105,7 +105,4 @@ public class RecursoAprendizagemDAOImpl extends AbstractHibernateDAO implements 
 		return result;
 	}
 
-
-	
-
 }

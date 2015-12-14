@@ -68,6 +68,4 @@ public class HistoricoEventosDAOImpl extends AbstractHibernateDAO implements His
 		return result;
 	}
 	
-	
-
 }
