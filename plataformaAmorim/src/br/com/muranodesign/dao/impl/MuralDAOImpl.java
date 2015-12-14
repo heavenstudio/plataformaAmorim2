@@ -84,7 +84,7 @@ public class MuralDAOImpl extends AbstractHibernateDAO implements MuralDAO{
 
 		StringUtil stringUtil = new StringUtil();
 		criteria.createAlias("professor", "professor");
-		criteria.add(Restrictions.eq("professor.idprofessor_funcionario", idProfessor));
+		criteria.add(Restrictions.eq("professor.idprofessorFuncionario", idProfessor));
 		
 		criteria.add(Restrictions.ge("data", stringUtil.converteStringData(data2)));
 		criteria.add(Restrictions.lt("data", stringUtil.converteStringData(data)));
