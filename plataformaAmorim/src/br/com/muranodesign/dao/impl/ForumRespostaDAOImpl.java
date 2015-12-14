@@ -138,6 +138,4 @@ public class ForumRespostaDAOImpl extends AbstractHibernateDAO implements ForumR
 		
 	}
 
-	
-
 }

@@ -10,7 +10,7 @@ import br.com.muranodesign.model.Rotina;
 public class RotinaService {
 	
 	/**
-	 * 
+	 * Listar todos
 	 * @return
 	 */
 	public List<Rotina> listarTodos() {
@@ -22,7 +22,7 @@ public class RotinaService {
 	}
 	
 	/**
-	 * 
+	 * Listar por id
 	 * @param key
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public class RotinaService {
 	}
 	
 	/**
-	 * 
+	 * Criar Rotina
 	 * @param p
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public class RotinaService {
 	}
 	
 	/**
-	 * 
+	 * Listar inconsistencia
 	 * @param hora
 	 * @param idSemana
 	 * @return
@@ -88,7 +88,7 @@ public class RotinaService {
 	}
 	
 	/**
-	 * 
+	 * Listar por oficina
 	 * @param idOficina
 	 * @return
 	 */
@@ -101,7 +101,7 @@ public class RotinaService {
 	}
 	
 	/**
-	 * 
+	 * Listar por agrupamento
 	 * @param idAgrupamento
 	 * @return
 	 */

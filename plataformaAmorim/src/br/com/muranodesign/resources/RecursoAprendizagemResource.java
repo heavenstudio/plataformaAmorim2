@@ -86,6 +86,11 @@ public class RecursoAprendizagemResource {
 
 	}
 	
+	/**
+	 * Listar por Roteiro
+	 * @param id
+	 * @return
+	 */
 	@Path("listarProRoteiro/{id}")
 	@GET
 	@Produces("application/json")
@@ -335,10 +340,5 @@ public class RecursoAprendizagemResource {
 		return new RecursoAprendizagemService().atualizarRecursoAprendizagem(objRecursoAprendizagem);
 
 	}
-
-	//RecursosAprendizagem
-	
-	
-	
 
 }

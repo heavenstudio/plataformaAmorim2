@@ -166,7 +166,12 @@ public class RoteiroDAOImpl extends AbstractHibernateDAO implements RoteiroDAO {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.RoteiroDAO#listarAnoEstudoLazy(int)
+	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Roteiro> listarAnoEstudoLazy(int anoEstudo) {
 		Criteria criteria = getSession().createCriteria(Roteiro.class);
 		ProjectionList projList = Projections.projectionList();

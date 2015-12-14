@@ -93,12 +93,4 @@ public class TipoRecursoAprendizagemDAOImpl extends AbstractHibernateDAO impleme
 		return result;
 	}
 
-	
-
-
-
-
-
-	
-
 }

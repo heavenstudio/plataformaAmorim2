@@ -25,6 +25,15 @@ public class RoteiroAulaResource {
 	
 	private Logger logger = Logger.getLogger(RoteiroAulaResource.class.getName());
 	
+	/**
+	 * Criar, deletar e atualizar
+	 * @param action
+	 * @param id
+	 * @param idOficinaProfessor
+	 * @param Descricao
+	 * @param roteiro
+	 * @return
+	 */
 	@POST
 	@Produces("text/plain")
 	public String eventoAction(
@@ -64,6 +73,10 @@ public class RoteiroAulaResource {
 	}
 	
 
+	/**
+	 * Roteiro Aula
+	 * @return
+	 */
 	@GET
 	@Produces("application/json")
 	public List<RoteiroAula> getRoteiroAula() {
@@ -74,6 +87,12 @@ public class RoteiroAulaResource {
 		return resultado;
 	}
 	
+	/**
+	 * Listar Por Oficina Professor
+	 * @param id
+	 * @param letra
+	 * @return
+	 */
 	@Path("ListarPorOficinaProfessor/{id}/{letra}")
 	@GET
 	@Produces("application/json")
@@ -85,10 +104,15 @@ public class RoteiroAulaResource {
 		}else{
 			retorno = new RoteiroAulaService().listarOficinaProfessorLike(id, letra);
 		}
-		return retorno;//new RoteiroAulaService().listarOficinaProfessor(id);
+		return retorno;
 	}
 	
-	
+	/**
+	 * Listar Não oficina Professor
+	 * @param id
+	 * @param letra
+	 * @return
+	 */
 	@Path("ListarNaoOficinaProfessor/{id}/{letra}")
 	@GET
 	@Produces("application/json")
@@ -101,10 +125,13 @@ public class RoteiroAulaResource {
 			retorno = new  RoteiroAulaService().listarNaoOficinaProfessorLike(id, letra);
 		}
 		
-		return retorno;//new RoteiroAulaService().listarNaoOficinaProfessor(id);
+		return retorno;
 	}
 	
-	
+	/**
+	 * Status
+	 * @param id
+	 */
 	@Path("status")
 	@POST
 	@Produces("text/plain")
@@ -121,7 +148,12 @@ public class RoteiroAulaResource {
 		new RoteiroAulaService().atualizarRoteiroAula(roteiro);
 	}
 	
-	
+	/**
+	 * Lista like Roteiro Aula
+	 * @param idOficinaProfessor
+	 * @param letras
+	 * @return
+	 */
 	@Path("ListaLikeRoteiroAula/{idOficinaProfessor}/{letras}") 
 	@GET
 	@Produces("application/json")
@@ -156,6 +188,11 @@ public class RoteiroAulaResource {
 
 	}
 	
+	/**
+	 * Listar Like Roteiro
+	 * @param letra
+	 * @return
+	 */
 	@Path("ListarLikeRoteiro/{letra}")
 	@GET
 	@Produces("application/json")
@@ -176,6 +213,13 @@ public class RoteiroAulaResource {
 		return roteiroHTML; 
 	}
 	
+	/**
+	 * Listar Oficina Ciclo
+	 * @param idOficina
+	 * @param idCiclo
+	 * @param idProfessor
+	 * @return
+	 */
 	@Path("ListarOficinaCiclo/{idOficina}/{idCiclo}/{idProfessor}")
 	@GET
 	@Produces("application/json")

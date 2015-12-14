@@ -70,8 +70,6 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.add(Restrictions.eq("ativo", status));
 		criteria.addOrder(Order.asc("aluno"));
 		
-		//criteria.addOrder(Order.desc("grupo.nomeGrupo"));
-		
 		List<AlunoVariavel> result = criteria.list();
 		
 		
@@ -196,6 +194,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#getAluno(int)
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public AlunoVariavel getAluno(int aluno) {
@@ -212,9 +214,12 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 			return result.get(0);
 		}
 		
-		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listarNamed()
+	 */
 	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listarNamed(){
 		
@@ -224,6 +229,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	}
 	
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#update(int, int)
+	 */
 	public void update(int id,  int grupo){
 		Query query = getSession().getNamedQuery("AlunoVariavel.UPDATE");
 
@@ -233,6 +242,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		query.executeUpdate();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#ListarCicloAno(java.util.List, int, int)
+	 */
 	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> ListarCicloAno(List<Integer> i, int primeiro, int ultimo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
@@ -245,6 +258,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#ListarCicloAnoPeriodo(java.util.List, int, int, int)
+	 */
 	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> ListarCicloAnoPeriodo(List<Integer> i,int periodo,int primeiro,int ultimo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
@@ -258,6 +275,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		return result;
 		
 	}
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#ListarRangePeriodo(int, int, int)
+	 */
 	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> ListarRangePeriodo(int id, int primeiro,int ultimo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);

@@ -73,7 +73,6 @@ public class RegistroDiarioResource {
 	 */
 	@Path("{id}")
 	@GET
-	//@Produces("text/xml")
 	@Produces("application/json")
 	public RegistroDiario getRegistroDiario(@PathParam("id") int id) {
 		

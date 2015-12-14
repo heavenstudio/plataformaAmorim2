@@ -107,10 +107,4 @@ public class AnoLetivoDAOImpl extends AbstractHibernateDAO implements AnoLetivoD
 		return result;
 	}
 
-
-
-
-
-	
-
 }

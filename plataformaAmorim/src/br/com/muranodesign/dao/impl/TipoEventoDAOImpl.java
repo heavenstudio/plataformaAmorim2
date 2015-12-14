@@ -115,11 +115,5 @@ public class TipoEventoDAOImpl extends AbstractHibernateDAO implements TipoEvent
 		
 		return result;
 	}
-
-
-
-
-
 	
-
 }

@@ -67,7 +67,5 @@ public class NativeQueryDAOImpl extends AbstractHibernateDAO implements NativeQu
 		return entities;
 	}
 	
-	
-	
 
 }

@@ -18,6 +18,10 @@ public class CicloDAOImpl extends AbstractHibernateDAO implements CicloDAO{
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CicloDAO#listAll()
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Ciclos> listAll() {
 		
@@ -28,6 +32,10 @@ public class CicloDAOImpl extends AbstractHibernateDAO implements CicloDAO{
 		return result;
 	} 
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CicloDAO#criar(br.com.muranodesign.model.Ciclos)
+	 */
 	public void criar(Ciclos c) {
 		synchronized (CicloDAOImpl.class) {
 			getSession().persist(c);
@@ -36,16 +44,28 @@ public class CicloDAOImpl extends AbstractHibernateDAO implements CicloDAO{
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CicloDAO#deletar(br.com.muranodesign.model.Ciclos)
+	 */
 	public void deletar(Ciclos c) {
 		getSession().delete(c);
 		getSession().flush();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CicloDAO#atualizar(br.com.muranodesign.model.Ciclos)
+	 */
 	public void atualizar(Ciclos p) {
 		getSession().merge(p);
 		getSession().flush();
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CicloDAO#listarKey(int)
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Ciclos> listarKey(int key){
 		Criteria criteria = getSession().createCriteria(Ciclos.class);

@@ -106,6 +106,4 @@ public class CalendarioEventosDAOImpl extends AbstractHibernateDAO implements Ca
 		return result;
 		
 	}
-
-
 }

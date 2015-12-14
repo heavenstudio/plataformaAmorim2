@@ -93,10 +93,4 @@ public class PerfilDAOImpl extends AbstractHibernateDAO implements PerfilDAO {
 		return result;
 	}
 
-
-
-
-
-	
-
 }

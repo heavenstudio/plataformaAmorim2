@@ -174,7 +174,4 @@ public class GrupoDAOImpl extends AbstractHibernateDAO implements GrupoDAO {
 		return result;
 		
 	}
-
-	
-
 }

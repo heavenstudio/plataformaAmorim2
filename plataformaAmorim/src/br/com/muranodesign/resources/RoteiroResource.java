@@ -79,13 +79,15 @@ public class RoteiroResource {
 	public List<Roteiro> getRoreiroAno(@PathParam("ano") int ano){
 		logger.info("Lista Roteiro  por ano " + ano);
 		List<Roteiro> resultado;
-		//AnoEstudoService id = new AnoEstudoService();
-		//int i = id.idAno(ano);
 		resultado = new RoteiroService().listarAno(ano);
 		return resultado;
 	}
 	
-	
+	/**
+	 * Lista Like Roteiro
+	 * @param letra
+	 * @return
+	 */
 	@Path("ListaLikeRoteiro/{letra}") 
 	@GET
 	@Produces("application/json")
@@ -96,7 +98,7 @@ public class RoteiroResource {
 		}else{
 			return new RoteiroService().listarTodos();
 		}
-		 //ForumQuestaoService().ListaLikeRoteiro(letra);
+	
 	}
 	
 	/**
@@ -117,6 +119,12 @@ public class RoteiroResource {
 		return resultado;
 	}
 	
+	/**
+	 * Roteiro range
+	 * @param primeiro
+	 * @param ultimo
+	 * @return
+	 */
 	@Path("RoteiroRange/{primeiro}/{ultimo}")
 	@GET
 	@Produces("application/json")
@@ -124,6 +132,11 @@ public class RoteiroResource {
 		return  new RoteiroService().listRoteiroRange(primeiro, ultimo);
 	}
 	
+	/**
+	 * Listar nome
+	 * @param anoEstudo
+	 * @return
+	 */
 	@Path("ListarNomeIdAnoEstudo/{idAnoEstudo}")
 	@GET
 	@Produces("application/json")
@@ -154,6 +167,11 @@ public class RoteiroResource {
 
 	}
 	
+	/**
+	 * Inativar Roteiro
+	 * @param id
+	 * @return
+	 */
 	@Path("InativarRoteiro/{id}")
 	@DELETE
 	@Produces("text/plain")
@@ -237,7 +255,6 @@ public class RoteiroResource {
 		
 		if (action.equals("create")) {
 			
-			//objUsuario.setLogin(login);
 			objRoteiro.setNome(nome);
 			objRoteiro.setDescricao(descricao);
 			objRoteiro.setAnoEstudo(objAnoEstudo);

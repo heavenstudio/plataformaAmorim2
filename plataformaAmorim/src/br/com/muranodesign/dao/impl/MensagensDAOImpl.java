@@ -176,9 +176,6 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 			
 		}
 		
-		//criteria.setFirstResult(primeiro);
-		//criteria.setMaxResults(ultimo);
-		
 		criteria.add(Restrictions.eq("proprietario", proprietario));
 		
 		

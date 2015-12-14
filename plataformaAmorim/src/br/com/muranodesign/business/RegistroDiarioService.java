@@ -137,7 +137,12 @@ public class RegistroDiarioService {
 		return p;
 	}
 
-	
+	/**
+	 * Listar por plano de estudo
+	 * @param id
+	 * @param data
+	 * @return
+	 */
 	public List<RegistroDiario> listaPlanoEstudoDara(int id, Date data){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RegistroDiarioDAO dao = DAOFactory.getRegistroDiarioDAO(pc);

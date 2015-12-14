@@ -16,6 +16,10 @@ public class CoresResource {
 	
 private Logger logger = Logger.getLogger(CoresResource.class.getName());	
 	
+	/**
+	 * Listar cores
+	 * @return
+	 */
 	@GET
 	@Produces("application/json")
 	public List<Cores> getOficina() {

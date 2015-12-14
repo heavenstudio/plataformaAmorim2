@@ -17,6 +17,10 @@ public class CoresDAOImpl extends AbstractHibernateDAO implements CoresDAO {
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.muranodesign.dao.CoresDAO#listAll()
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Cores> listAll() {
 		

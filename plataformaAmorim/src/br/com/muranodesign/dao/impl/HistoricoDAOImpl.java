@@ -108,5 +108,4 @@ public class HistoricoDAOImpl extends AbstractHibernateDAO implements HistoricoD
 		
 	}
 	
-
 }
