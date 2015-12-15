@@ -73,18 +73,25 @@ public class MuralResource {
 		
 		if(action.equals("delete")){
 			
-			new MuralService().deletarMural(new MuralService().listarkey(id).get(0));
 			List<MuralAluno> muralAlunoList = new MuralAlunoService().listarMural(id);
 			for (MuralAluno muralAluno : muralAlunoList) {
 				new MuralAlunoService().deletarMuralAluno(muralAluno);
 			}
+			new MuralService().deletarMural(new MuralService().listarkey(id).get(0));
 			return Integer.toString(id);
 			
-		}else if (action.equals("update")){
+		}
+		else if (action.equals("update")){
 			Mural mural = new Mural();
+			Mural muralOld = new MuralService().listarkey(id).get(0);
 			mural.setMensagem(mensagem);
 			mural.setIdmural(id);
+			mural.setData(muralOld.getData());
+			mural.setProfessor(muralOld.getProfessor());
 			new MuralService().atualizarMural(mural);
+			
+			return Integer.toString(mural.getIdmural());
+			
 		}
 		else if(action.equals("create")){
 			
