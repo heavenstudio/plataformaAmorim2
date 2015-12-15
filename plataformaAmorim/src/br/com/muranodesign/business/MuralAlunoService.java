@@ -74,4 +74,12 @@ public class MuralAlunoService {
 		return result;
 	}
 
+	public List<MuralAluno> listarMural(int id) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		MuralAlunoDAO dao = DAOFactory.geMuralAlunoDAO(pc);
+		List<MuralAluno> result = dao.listarMural(id);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

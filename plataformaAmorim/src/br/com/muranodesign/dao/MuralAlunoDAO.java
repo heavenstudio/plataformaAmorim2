@@ -16,4 +16,6 @@ public interface MuralAlunoDAO {
 
 	List<MuralAluno> listarAluno(int idaluno);
 
+	List<MuralAluno> listarMural(int id);
+
 }

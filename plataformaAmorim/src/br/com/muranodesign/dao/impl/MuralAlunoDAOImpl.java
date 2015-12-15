@@ -57,4 +57,13 @@ public class MuralAlunoDAOImpl extends AbstractHibernateDAO implements MuralAlun
 		return resultado;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<MuralAluno> listarMural(int id) {
+		Criteria criteria = getSession().createCriteria(MuralAluno.class);
+		criteria.createAlias("mural", "mural");
+		criteria.add(Restrictions.eq("mural.Idmural", id));
+		List<MuralAluno> resultado = criteria.list();
+		return resultado;
+	}
+
 }

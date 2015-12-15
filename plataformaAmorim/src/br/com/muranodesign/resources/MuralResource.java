@@ -74,9 +74,19 @@ public class MuralResource {
 		if(action.equals("delete")){
 			
 			new MuralService().deletarMural(new MuralService().listarkey(id).get(0));
+			List<MuralAluno> muralAlunoList = new MuralAlunoService().listarMural(id);
+			for (MuralAluno muralAluno : muralAlunoList) {
+				new MuralAlunoService().deletarMuralAluno(muralAluno);
+			}
 			return Integer.toString(id);
 			
-		}else if(action.equals("create")){
+		}else if (action.equals("update")){
+			Mural mural = new Mural();
+			mural.setMensagem(mensagem);
+			mural.setIdmural(id);
+			new MuralService().atualizarMural(mural);
+		}
+		else if(action.equals("create")){
 			
 			Date dataT = new Date();
 			
