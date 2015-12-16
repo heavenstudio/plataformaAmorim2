@@ -181,7 +181,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
 		
 		criteria.createAlias("oficina", "oficina");
-		criteria.add(Restrictions.eq("oficina.Idoficina", idAluno));
+		criteria.add(Restrictions.eq("oficina.Idoficina", idOficina));
 		
 		List<ProducaoAluno> result = criteria.list();
 		

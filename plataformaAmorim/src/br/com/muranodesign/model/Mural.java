@@ -35,6 +35,18 @@ public class Mural implements Serializable{
 	 @OneToOne
 	 private ProfessorFuncionario professor;
 
+	 @OneToOne
+	 private Oficina oficina;
+	 
+	 @OneToOne
+	 private Agrupamento agrupamento;
+	 
+	 @OneToOne
+	 private Grupo grupo;
+	 
+	 @Column(name = "tutoria")
+	 private int tutoria;
+
 	 /*@OneToOne
 	 private AlunoVariavel aluno;*/
 	 
@@ -85,6 +97,38 @@ public class Mural implements Serializable{
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	 public Oficina getOficina() {
+		return oficina;
+	}
+
+	public void setOficina(Oficina oficina) {
+		this.oficina = oficina;
+	}
+
+	public Agrupamento getAgrupamento() {
+		return agrupamento;
+	}
+
+	public void setAgrupamento(Agrupamento agrupamento) {
+		this.agrupamento = agrupamento;
+	}
+
+	public int getTutoria() {
+		return tutoria;
+	}
+
+	public void setTutoria(int tutoria) {
+		this.tutoria = tutoria;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 	 
 }

@@ -17,12 +17,14 @@ import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
 
+import br.com.muranodesign.business.AgrupamentoService;
 import br.com.muranodesign.business.AlunoAgrupamentoService;
 import br.com.muranodesign.business.AlunoVariavelService;
 import br.com.muranodesign.business.AnoEstudoService;
 import br.com.muranodesign.business.GrupoService;
 import br.com.muranodesign.business.MuralAlunoService;
 import br.com.muranodesign.business.MuralService;
+import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.business.TutoriaService;
@@ -82,12 +84,8 @@ public class MuralResource {
 			
 		}
 		else if (action.equals("update")){
-			Mural mural = new Mural();
-			Mural muralOld = new MuralService().listarkey(id).get(0);
+			Mural mural = new MuralService().listarkey(id).get(0);
 			mural.setMensagem(mensagem);
-			mural.setIdmural(id);
-			mural.setData(muralOld.getData());
-			mural.setProfessor(muralOld.getProfessor());
 			new MuralService().atualizarMural(mural);
 			
 			return Integer.toString(mural.getIdmural());
@@ -108,6 +106,14 @@ public class MuralResource {
 			mural.setMensagem(mensagem);
 			mural.setData(data);
 			mural.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
+			if (tutor != 0)
+				mural.setTutoria(1);
+			else if (grupo != 0)
+				mural.setGrupo(new GrupoService().listarkey(grupo).get(0));
+			if (idOficina != 0)
+				mural.setOficina(new OficinaService().listarkey(idOficina).get(0));
+			else if (idAgrupamento != 0)
+				mural.setAgrupamento(new AgrupamentoService().listarkey(idAgrupamento).get(0));
 			new MuralService().criarMural(mural);
 			
 			ProfessorFuncionario verificarCoordena = new ProfessorFuncionarioService().listarkey(idProfessor).get(0);
@@ -228,10 +234,15 @@ public class MuralResource {
 	@Produces("application/json")
 	public List<Mural> getRangeProfessor(@PathParam("idProfessor") int idProfessor){
 		Date dataHoje = new Date();
+		
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(dataHoje); 
+		c.add(Calendar.DATE, 1);
+		dataHoje = c.getTime();
+		
 		SimpleDateFormat formataData = new SimpleDateFormat("yy-MM-dd");
 		String data = formataData.format(dataHoje);
 		
-		Calendar c = Calendar.getInstance();
 		int mes = c.get(Calendar.MONTH);
 		String data2;
 		if(mes > 3){

@@ -2870,7 +2870,6 @@ public class AlunoVariavelResource {
 	public String eventoAction2( @FormParam("alunos") String alunos,
 			@FormParam("grupo") String grupo){
 		
-		
         logger.info("Buscando Grupo ...");
 		
         Grupo objGrupo = new Grupo();
@@ -2885,29 +2884,30 @@ public class AlunoVariavelResource {
         }
         
         String [] arrayAlunos = alunos.split(";");
+        List<AlunoVariavel> listAlunos = new ArrayList<AlunoVariavel>();
+        for (String string : arrayAlunos) {
+			listAlunos.add(new AlunoVariavelService().listarkey(Integer.parseInt(string)).get(0));
+		}
 		logger.info("QTD Alunos " +  arrayAlunos.length);
-		
-		
+			
 		List<AlunoVariavel> rsAluno;
 		rsAluno = new AlunoVariavelService().listaGrupo(Integer.parseInt(grupo));
-		
-		if(arrayAlunos.length < rsAluno.size()){
-			if(rsAluno.isEmpty()){
-				for(int t = 0; t < arrayAlunos.length; t++){
-					int id = Integer.parseInt(arrayAlunos[t]);
-					new AlunoVariavelService().update(id, objGrupo.getIdgrupo());
-				}
-			}else{
-				int diferenca =  arrayAlunos.length;
-				 for(int m = diferenca; m < rsAluno.size(); m++){
-					   rsAluno.get(m).setGrupo(null);
-					   new AlunoVariavelService().atualizarAlunoVariavel(rsAluno.get(m));
-				   }
-				 return "true";
+		for (AlunoVariavel alunoVariavel : rsAluno) {
+			if (listAlunos.contains(alunoVariavel))
+			{
+				listAlunos.remove(alunoVariavel);
+			}
+			else
+			{
+				alunoVariavel.setGrupo(null);
+				new AlunoVariavelService().atualizarAlunoVariavel(alunoVariavel);
 			}
 		}
+		for (AlunoVariavel alunoVariavel : listAlunos) {
+			new AlunoVariavelService().update(alunoVariavel.getIdalunoVariavel(), objGrupo.getIdgrupo());
+		}
 		
-		if(rsAluno.size() < arrayAlunos.length){
+		/*if(rsAluno.size() < arrayAlunos.length){
 			int diferenca =  rsAluno.size();
 			   for(int k = diferenca; k <  arrayAlunos.length; k++){
 				   int id = Integer.parseInt(arrayAlunos[k]);
@@ -2940,7 +2940,7 @@ public class AlunoVariavelResource {
 
 				}
 			}
-		}
+		}*/
 
 		return "true";
 	}
