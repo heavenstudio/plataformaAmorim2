@@ -74,7 +74,10 @@ public class BlogResource {
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
 			blog.setData(date);
-			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
+			if (oficina != 0)
+				blog.setOficina(new OficinaService().listarkey(oficina).get(0));
+			else
+				blog.setOficina(null);
 			
 			resultado = new BlogService().criarBlog(blog);
 			
@@ -83,9 +86,6 @@ public class BlogResource {
 			
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
-			blog.setData(date);
-			blog.setOficina(new OficinaService().listarkey(oficina).get(0));
-			
 			resultado = new BlogService().atualizarBloga(blog);
 		}
 		
@@ -124,6 +124,18 @@ public class BlogResource {
 		Blog result = new BlogService().atualizarBloga(blog);
 		
 		return result;
+	}
+	
+	@GET
+	@Path("DeletarImagem/{id}")
+	@Produces("text/plain")
+	public String deletarImagem(@PathParam("id") int id){
+		Blog blog = new BlogService().listarkey(id).get(0);
+		
+		blog.setImagem(null);
+		new BlogService().atualizarBloga(blog);
+		
+		return Integer.toString(id);
 	}
 	
 	
