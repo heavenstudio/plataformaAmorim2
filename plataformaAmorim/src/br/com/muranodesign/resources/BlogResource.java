@@ -138,6 +138,16 @@ public class BlogResource {
 		return Integer.toString(id);
 	}
 	
+	@GET
+	@Path("Imagem/{id}")
+	@Produces("text/plain")
+	public String getImagem(@PathParam("id") int id){
+		
+		Blog blog = new BlogService().listarkey(id).get(0);
+		
+		return blog.getImagem();
+	}
+	
 	
 	/**
 	 * 
