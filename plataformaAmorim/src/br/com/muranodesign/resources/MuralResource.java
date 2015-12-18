@@ -38,7 +38,11 @@ import br.com.muranodesign.model.ProfessorFuncionario;
 import br.com.muranodesign.model.Rotina;
 import br.com.muranodesign.model.Tutoria;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("Mural")
 public class MuralResource {
 	

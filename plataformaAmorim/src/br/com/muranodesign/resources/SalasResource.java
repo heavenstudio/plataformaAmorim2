@@ -13,7 +13,11 @@ import org.apache.log4j.Logger;
 import br.com.muranodesign.business.SalasService;
 import br.com.muranodesign.model.Salas;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("Salas")
 public class SalasResource {
 	

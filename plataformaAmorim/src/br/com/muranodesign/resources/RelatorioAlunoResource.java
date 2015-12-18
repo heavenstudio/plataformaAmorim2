@@ -21,6 +21,11 @@ import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.business.RelatorioAlunoService;
 import br.com.muranodesign.model.RelatorioAluno;
 
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("RelatorioAluno")
 public class RelatorioAlunoResource {
 	

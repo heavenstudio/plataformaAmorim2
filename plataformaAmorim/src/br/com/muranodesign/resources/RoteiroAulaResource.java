@@ -19,7 +19,11 @@ import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.model.RoteiroAula;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("RoteiroAula")
 public class RoteiroAulaResource {
 	

@@ -20,7 +20,11 @@ import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.PlanoAula;
 import br.com.muranodesign.util.StringUtil;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("PlanoAula")
 public class PlanoAulaResource {
 	

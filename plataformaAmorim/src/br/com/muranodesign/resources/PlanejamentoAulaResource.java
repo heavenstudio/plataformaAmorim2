@@ -23,6 +23,11 @@ import br.com.muranodesign.business.PlanoAulaService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.PlanejamentoAula;
 
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("PlanejamentoAula")
 public class PlanejamentoAulaResource {
 	private Logger logger = Logger.getLogger(PlanejamentoAulaResource.class.getName());

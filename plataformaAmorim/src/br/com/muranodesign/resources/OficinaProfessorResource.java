@@ -16,7 +16,11 @@ import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.OficinaProfessor;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("OficinaProfessor")
 public class OficinaProfessorResource {
 

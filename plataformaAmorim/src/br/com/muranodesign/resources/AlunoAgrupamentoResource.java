@@ -16,7 +16,11 @@ import br.com.muranodesign.business.AlunoAgrupamentoService;
 import br.com.muranodesign.business.AlunoVariavelService;
 import br.com.muranodesign.model.AlunoAgrupamento;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("AlunoAgrupamento")
 public class AlunoAgrupamentoResource {
 	

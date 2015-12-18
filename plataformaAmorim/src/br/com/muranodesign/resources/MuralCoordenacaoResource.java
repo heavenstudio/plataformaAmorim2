@@ -16,7 +16,11 @@ import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.MuralCoordenacao;
 import br.com.muranodesign.util.StringUtil;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("MuralCoordenacao")
 public class MuralCoordenacaoResource {
 	

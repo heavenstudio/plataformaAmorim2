@@ -26,7 +26,11 @@ import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.model.Rotina;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("Oficina")
 public class OficinaResource {
 	

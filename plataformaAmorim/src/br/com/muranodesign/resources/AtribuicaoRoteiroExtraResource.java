@@ -20,7 +20,11 @@ import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
 import br.com.muranodesign.model.Roteiro;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("AtribuicaoRoteiroExtra")
 public class AtribuicaoRoteiroExtraResource {
 	

@@ -22,6 +22,11 @@ import br.com.muranodesign.model.Agrupamento;
 import br.com.muranodesign.model.AlunoAgrupamento;
 import br.com.muranodesign.model.Rotina;
 
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("Rotina")
 public class RotinaResource {
 	

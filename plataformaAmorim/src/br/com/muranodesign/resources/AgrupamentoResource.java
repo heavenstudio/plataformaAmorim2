@@ -19,7 +19,11 @@ import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.model.Agrupamento;
 import br.com.muranodesign.model.Rotina;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("Agrupamento")
 public class AgrupamentoResource {
 	

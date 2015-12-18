@@ -17,7 +17,11 @@ import br.com.muranodesign.business.PendenciasProducaoAlunoService;
 import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.model.PendenciasProducaoAluno;
 
-
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("PendenciasProducaoAluno")
 public class PendenciasProducaoAlunoResource {
 	

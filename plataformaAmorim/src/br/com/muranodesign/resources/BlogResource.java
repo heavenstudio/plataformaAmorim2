@@ -31,6 +31,11 @@ import br.com.muranodesign.util.Upload;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 
+/**
+ * 
+ * @author Kevyn
+ *
+ */
 @Path("Blog")
 public class BlogResource {
 	
