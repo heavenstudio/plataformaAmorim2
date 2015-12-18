@@ -163,7 +163,6 @@ public class BlogResource {
 		List<Blog> resultado = new ArrayList<Blog>();
 		List<OficinaProfessor> oficinasProfessor;
 		List<Oficina> oficinas = new ArrayList<Oficina>();
-		//List<Cores> cores = new ArrayList<Cores>();
 		
 		oficinasProfessor = new OficinaProfessorService().listarProfessor(id);
 		
@@ -209,7 +208,7 @@ public class BlogResource {
 		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
 
 		Upload upload = new Upload();
-		// save it
+		
 		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
 
 		String anexo = "http://177.55.99.90/files/" + arquivo;
@@ -218,7 +217,7 @@ public class BlogResource {
 
 		blog.setImagem(anexo);
 		
-		Blog resultado = new BlogService().atualizarBloga(blog); //ProducaoAlunoService().atualizarProducaoAluno(prod);
+		Blog resultado = new BlogService().atualizarBloga(blog); 
 
 		return resultado;
 

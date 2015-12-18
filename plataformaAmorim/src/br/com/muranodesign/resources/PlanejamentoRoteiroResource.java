@@ -254,7 +254,6 @@ public class PlanejamentoRoteiroResource {
 		
 		int total = 0;
 		for (PlanejamentoRoteiro planejamentoRoteiro : resultado) {
-			//if(planejamentoRoteiro.getObjetivo().getRoteiro().getAtivo() == 1 && planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getIdanoEstudo() == aluno.get(0).getAnoEstudo().getIdanoEstudo()){
 			if(planejamentoRoteiro.getObjetivo().getRoteiro().getAtivo() == 1 && planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().equals(aluno.get(0).getAnoEstudo())){
 				
 				total++;	

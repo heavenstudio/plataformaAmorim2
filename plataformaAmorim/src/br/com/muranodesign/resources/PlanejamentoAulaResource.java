@@ -37,7 +37,6 @@ public class PlanejamentoAulaResource {
 			@FormParam("status") String status,
 			@FormParam("idProfessor") int idProfessor) throws ParseException{
 		
-		//Date data = null;
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
 		String k = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  

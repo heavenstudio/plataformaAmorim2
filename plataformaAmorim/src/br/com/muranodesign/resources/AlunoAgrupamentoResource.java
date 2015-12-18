@@ -35,7 +35,6 @@ public class AlunoAgrupamentoResource {
 	public String eventoAction(
 			@FormParam("action") String action,
 			@FormParam("id") int id,
-			//@FormParam("Alunos") String Alunos,
 			@FormParam("Aluno") int Aluno,
 			@FormParam("idAgrupamento") int idAgrupamento){
 		
