@@ -48,7 +48,9 @@ public class PlanejamentoAulaResource {
 			resultado = new PlanejamentoAulaService().deletarPlanejamentoAula(new PlanejamentoAulaService().listarkey(id).get(0));
 		}
 		else if(action.equals("create")){
+			
 			PlanejamentoAula planejamento = new PlanejamentoAula();
+			
 			planejamento.setPlanoAula(new PlanoAulaService().listarkey(idPlanoAula).get(0));
 			planejamento.setObjetivoAula(new ObjetivoAulaService().listarkey(idObjetivoAula).get(0));
 			planejamento.setStatus(status);
@@ -58,20 +60,20 @@ public class PlanejamentoAulaResource {
 			resultado = new PlanejamentoAulaService().criarPlanejamentoAula(planejamento);
 			
 		}else if(action.equals("update")){
+			
 			PlanejamentoAula planejamento = new  PlanejamentoAulaService().listarkey(id).get(0);
+			
 			planejamento.setPlanoAula(new PlanoAulaService().listarkey(idPlanoAula).get(0));
 			planejamento.setObjetivoAula(new ObjetivoAulaService().listarkey(idObjetivoAula).get(0));
 			planejamento.setStatus(status);
 			planejamento.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
 			planejamento.setData(date);
 			
-			
 			resultado = new PlanejamentoAulaService().atualizarPlanejamentoAula(planejamento);
 		}
 		
 		return Integer.toString(resultado.getIdplanejamento_aula());
 	}
-	
 	
 	@Path("listarProfessor/{idProfessor}")
 	@GET
@@ -88,7 +90,9 @@ public class PlanejamentoAulaResource {
 	@GET
 	@Produces("application/json")
 	public String getlistarProfessorObjetivoAula(@PathParam("idProfessor") int idProfessor,@PathParam("idObjetivoAula") int idObjetivoAula,@PathParam("idplanoAula") int idplanoAula){
+		
 		List<PlanejamentoAula> planejamnto = new PlanejamentoAulaService().listarProfessorObjetivoAula(idProfessor, idObjetivoAula, idplanoAula);
+		
 		String status;
 		if(!planejamnto.isEmpty()){
 			status = planejamnto.get(0).getStatus();
@@ -114,7 +118,6 @@ public class PlanejamentoAulaResource {
 		return status;
 	}
 	
-	
 	@Path("listarPlanoAula/{idPlanoAula}")
 	@GET
 	@Produces("application/json")
@@ -126,7 +129,6 @@ public class PlanejamentoAulaResource {
 		return resultado;
 	}
 	
-	
 	@GET
 	@Produces("application/json")
 	public List<PlanejamentoAula> getPlanejamentoAula() {
@@ -136,7 +138,6 @@ public class PlanejamentoAulaResource {
 		 logger.debug("QTD OficinaProfessor : " +  resultado.size());
 		return resultado;
 	}
-	
 	
 	@Path("listarStatus/{idPlanoAula}")
 	@GET
@@ -150,8 +151,7 @@ public class PlanejamentoAulaResource {
 		resultado = new PlanejamentoAulaService().listarPlanoAula(idPlanoAula);
 		
 		for (PlanejamentoAula planejamentoAula : resultado) {
-			
-			
+					
 			Hashtable<String, String> hash = new Hashtable<String, String>();
 			
 			hash.put("objetivo", planejamentoAula.getObjetivoAula().getObjetivo());
@@ -163,5 +163,4 @@ public class PlanejamentoAulaResource {
 		return list;
 	}
 	
-
 }

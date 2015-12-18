@@ -147,6 +147,12 @@ public class ChamadaResource {
 		return new ChamadaService().dataPresenca(id, date);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws ParseException
+	 */
 	@Path("dataChamadaAtual/{id}")
 	@GET
 	@Produces("application/json")
