@@ -2,11 +2,11 @@ package br.com.muranodesign.resources;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;

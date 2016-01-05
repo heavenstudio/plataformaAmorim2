@@ -285,6 +285,7 @@ public class GrupoResource {
 			objGrupo.setLider(objAluno);
 			objGrupo.setStatus("0");
 			objGrupo.setCiclo(ciclo);
+			objGrupo.setPeriodo(listaPeriodo.get(0));
 
 			resultado = new GrupoService().criarGrupo(objGrupo);
 			

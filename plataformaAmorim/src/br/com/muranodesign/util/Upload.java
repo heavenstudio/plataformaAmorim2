@@ -9,13 +9,18 @@
  */
 package br.com.muranodesign.util;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.imageio.ImageIO;
+
 import org.apache.log4j.Logger;
+//Teste
 
 
 /**
@@ -60,4 +65,45 @@ public class Upload {
 			}
 	 
 		}
+	
+	public void resizeAndWriteToFile (InputStream uploadedInputStream,
+			String uploadedFileLocation) throws Exception{
+		
+		int maxSize = 512;
+		
+		//InputStream is = new BufferedInputStream(new FileInputStream("teste.jpg"));
+		BufferedImage image = ImageIO.read(uploadedInputStream);
+		int width          = image.getWidth();
+		int height         = image.getHeight();
+		int format = (image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType());
+
+		
+		if (width > height)
+		{
+			if (width > maxSize)
+			{
+				image = resizeImage(image, format, maxSize, maxSize * height/width); 
+			}
+		}
+		else
+		{
+			if (height > maxSize)
+			{
+				image = resizeImage(image, format, maxSize * width/height, maxSize);
+			}
+		}
+		
+		ImageIO.write(image, "jpg", new File(uploadedFileLocation));
+		
+	}
+	
+	private static BufferedImage resizeImage(BufferedImage image, int format, int width, int height) {
+	    BufferedImage resizedImage = new BufferedImage(width, height, format);
+	    Graphics2D graphics = resizedImage.createGraphics();
+	    graphics.drawImage(image, 0, 0, width, height, null);
+	    graphics.dispose();
+
+	    return resizedImage;
+	}
 }
+
