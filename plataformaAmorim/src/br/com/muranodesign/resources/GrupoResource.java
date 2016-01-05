@@ -12,6 +12,7 @@ package br.com.muranodesign.resources;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -22,20 +23,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONException;
 
 import br.com.muranodesign.business.AlunoService;
 import br.com.muranodesign.business.AlunoVariavelService;
 import br.com.muranodesign.business.AnoLetivoService;
+import br.com.muranodesign.business.AtribuicaoRoteiroExtraService;
+import br.com.muranodesign.business.ChamadaService;
 import br.com.muranodesign.business.GrupoService;
+import br.com.muranodesign.business.ObjetivoService;
 import br.com.muranodesign.business.PeriodoService;
+import br.com.muranodesign.business.PlanejamentoRoteiroService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
+import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.business.TutoriaService;
 import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.AlunoVariavel;
 import br.com.muranodesign.model.AnoLetivo;
+import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
 import br.com.muranodesign.model.Grupo;
 import br.com.muranodesign.model.Periodo;
+import br.com.muranodesign.model.PlanejamentoRoteiro;
 import br.com.muranodesign.model.ProfessorFuncionario;
+import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.Tutoria;
 
 
@@ -112,15 +122,129 @@ public class GrupoResource {
 	 * @param ano
 	 * @param periodo
 	 * @return list
+	 * @throws JSONException 
 	 */
-	@Path("Teste/{ano}/{periodo}")
+	@Path("Teste")
 	@GET
 	@Produces("application/json")
+	public Hashtable<String, Object> teste(){
+		Hashtable<String, Object> list = new Hashtable<String, Object>();
+		list.put("YAY", "oi");
+		List<Object> nope = new ArrayList<Object>();
+		nope.add("Pretty Sure I shouldn't do this...");
+		nope.add("Yup... pretty sure...");
+		nope.add(33);
+		list.put("nopeList", nope);
+		return list;
+	}
 	
-	public List<Grupo> teste(@PathParam("ano") String ano,@PathParam("periodo") String periodo){
+	@Path("TutoriaDados/{idprofessor}")
+	@GET
+	@Produces("application/json")
+	public List<Object> tutoriaDados(@PathParam("idprofessor") int id)
+	{
+		List<Object> resultado = new ArrayList<Object>();
 		
+		int tutoriaId = new TutoriaService().listarProfessorId(id).get(0).getIdtutoria();
 		
-		return new GrupoService().listarUltimo(ano, periodo);
+		List<Grupo> grupos = new GrupoService().listarTutor(tutoriaId);
+		for (Grupo grupo : grupos) {
+			
+			Hashtable<String, Object> grupoDados = new Hashtable<String, Object>();
+			
+			grupoDados.put("grupoNome", grupo.getNomeGrupo());
+			
+			List<Object> alunos = new ArrayList<Object>();
+			List<AlunoVariavel> alunosGrupo = new AlunoVariavelService().listaGrupo(grupo.getIdgrupo());
+			for (AlunoVariavel alunoVariavel : alunosGrupo) {
+				
+				Hashtable<String, Object> alunoDados = new Hashtable<String, Object>();
+				
+				alunoDados.put("nome", alunoVariavel.getAluno().getNome());
+				alunoDados.put("idAluno", alunoVariavel.getAluno().getIdAluno());
+				alunoDados.put("foto", alunoVariavel.getAluno().getFotoAluno());
+				alunoDados.put("faltas", new ChamadaService().countFaltas(alunoVariavel.getAluno().getIdAluno()));
+				
+				int anoAluno = Integer.parseInt(alunoVariavel.getAnoEstudo().getAno());
+				
+				long totalObjetivosAno = 0;
+				long totalObjetivosPendentes = 0;
+				long totalObjetivosFuturos = 0;
+				
+				List<Roteiro> roteirosAno = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
+				for (Roteiro roteiro : roteirosAno) {
+					totalObjetivosAno += new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
+				}
+				List<AtribuicaoRoteiroExtra> roteirosPendentes = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(alunoVariavel.getAluno().getIdAluno()).get(0), new AnoLetivoService().listarkey(alunoVariavel.getAnoLetivo().getIdanoLetivo()).get(0));
+				for (AtribuicaoRoteiroExtra atribuicaoRoteiroExtra : roteirosPendentes) {
+					
+					int anoRoteiro = Integer.parseInt(atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo().getAno());
+					
+					if (anoRoteiro < anoAluno)
+						totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+					else
+						totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+				}
+				
+				long ObjetivosAnoCompletos = 0;
+				long ObjetivosPendentesCompletos = 0;
+				long ObjetivosFuturosCompletos = 0;
+				
+				List<PlanejamentoRoteiro> planejamentosCompletos = new PlanejamentoRoteiroService().listarAlunoCompletosLista(alunoVariavel.getAluno().getIdAluno());
+				for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCompletos) {
+					int planejamentoRoteiroAno = Integer.parseInt(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getAno());
+					if (planejamentoRoteiroAno < anoAluno)
+						ObjetivosPendentesCompletos++;
+					else if (planejamentoRoteiroAno > anoAluno)
+						ObjetivosFuturosCompletos++;
+					else
+						ObjetivosAnoCompletos++;
+				}
+				
+				long ObjetivosAnoCorrigidos = 0;
+				long ObjetivosPendentesCorrigidos = 0;
+				long ObjetivosFuturosCorrigidos = 0;
+				
+				List<PlanejamentoRoteiro> planejamentosCorrigidos = new PlanejamentoRoteiroService().listarAlunoCorrigidosLista(alunoVariavel.getAluno().getIdAluno());
+				for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCorrigidos) {
+					int planejamentoRoteiroAno = Integer.parseInt(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getAno());
+					if (planejamentoRoteiroAno < anoAluno)
+						ObjetivosPendentesCorrigidos++;
+					else if (planejamentoRoteiroAno > anoAluno)
+						ObjetivosFuturosCorrigidos++;
+					else
+						ObjetivosAnoCorrigidos++;
+				}
+				
+				
+				Hashtable<String, Long> objetivosAnoAtual = new Hashtable<String, Long>();
+				Hashtable<String, Long> objetivosPendentes = new Hashtable<String, Long>();
+				Hashtable<String, Long> objetivosFuturo = new Hashtable<String, Long>();
+				
+				
+				objetivosAnoAtual.put("total", totalObjetivosAno);
+				objetivosAnoAtual.put("completos", ObjetivosAnoCompletos + ObjetivosAnoCorrigidos);
+				objetivosAnoAtual.put("corrigidos", ObjetivosAnoCorrigidos);
+				
+				objetivosPendentes.put("total", totalObjetivosPendentes);
+				objetivosPendentes.put("completos", ObjetivosPendentesCompletos + ObjetivosPendentesCorrigidos);
+				objetivosPendentes.put("corrigidos", ObjetivosPendentesCorrigidos);
+				
+				objetivosFuturo.put("total", totalObjetivosFuturos);
+				objetivosFuturo.put("completos", ObjetivosFuturosCompletos + ObjetivosFuturosCorrigidos);
+				objetivosFuturo.put("corrigidos", ObjetivosFuturosCorrigidos);
+				
+				alunoDados.put("objetivosAnoAtual", objetivosAnoAtual);
+				alunoDados.put("objetivosPendentes", objetivosPendentes);
+				alunoDados.put("objetivosFuturo", objetivosFuturo);
+							
+				alunos.add(alunoDados);
+			}
+			
+			grupoDados.put("grupoAlunos", alunos);
+			resultado.add(grupoDados);
+		}		
+		return resultado;
 	}
 	
 	/**

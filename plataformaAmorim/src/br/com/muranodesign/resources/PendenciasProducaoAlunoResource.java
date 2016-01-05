@@ -125,4 +125,16 @@ public class PendenciasProducaoAlunoResource {
 		return resultado;
 	}
 	
+	@Path("ExistePendencia/{idaluno}/{idroteiro}")
+	@GET
+	@Produces("text/plain")
+	public String getPendenciasAlunoRoteiro(@PathParam("idaluno") int idaluno, @PathParam("idroteiro") int idroteiro)
+	{
+		logger.debug("Listando Pendencias Producao Aluno...");
+		logger.debug("Aluno: " + idaluno + " Roteiro: " + idroteiro);
+		List <PendenciasProducaoAluno> resultado = new PendenciasProducaoAlunoService().listarAlunoRoteiro(idaluno, idroteiro);
+		logger.debug("Existe Pendencias Producao Aluno: " + (resultado.size() > 0));
+		return Integer.toString(resultado.size());
+	}
+	
 }

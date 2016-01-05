@@ -251,6 +251,26 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<PlanejamentoRoteiro> listarAlunoCompletosLista(int idAluno) {
+		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
+		criteria.add(Restrictions.eq("idAluno", idAluno));
+		criteria.add(Restrictions.isNotNull("objetivo"));
+		criteria.add(Restrictions.eq("status", "2"));
+		List<PlanejamentoRoteiro> result = criteria.list();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PlanejamentoRoteiro> listarAlunoCorrigidosLista(int idAluno) {
+		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
+		criteria.add(Restrictions.eq("idAluno", idAluno));
+		criteria.add(Restrictions.isNotNull("objetivo"));
+		criteria.add(Restrictions.eq("status", "3"));
+		List<PlanejamentoRoteiro> result = criteria.list();
+		return result;
+	}
+
 
 
 }

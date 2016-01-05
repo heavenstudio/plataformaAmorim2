@@ -139,6 +139,10 @@ public interface PlanejamentoRoteiroDAO {
 		 * @return
 		 */
 		public List<PlanejamentoRoteiro> listarObjetivoTotal(int obj);
+
+		public List<PlanejamentoRoteiro> listarAlunoCompletosLista(int idAluno);
+
+		public List<PlanejamentoRoteiro> listarAlunoCorrigidosLista(int idAluno);
 	
 	
 }
