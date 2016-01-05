@@ -125,6 +125,28 @@ public class PendenciasProducaoAlunoResource {
 		return resultado;
 	}
 	
+	@Path("TotalPendencias/{idaluno}")
+	@GET
+	@Produces("text/plain")
+	public String getTotalPendencias(@PathParam("idaluno") int idaluno)
+	{
+		logger.debug("Contando Pendencias Producao Aluno...");
+		logger.debug("Aluno: " + idaluno);
+		List <PendenciasProducaoAluno> resultado = new PendenciasProducaoAlunoService().listarAluno(idaluno);
+		int cont = 0;
+		for (PendenciasProducaoAluno pendenciasProducaoAluno : resultado) {
+			if (pendenciasProducaoAluno.getRoteiroCompleto() != 1)
+			{
+				if (pendenciasProducaoAluno.getPortfolioCompleto() == 0)
+					cont++;
+				if (pendenciasProducaoAluno.getFichaFinalizacaoCompleta() == 0)
+					cont++;
+			}
+		}
+		
+		return Integer.toString(cont);
+	}
+	
 	@Path("ExistePendencia/{idaluno}/{idroteiro}")
 	@GET
 	@Produces("text/plain")

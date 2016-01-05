@@ -69,28 +69,17 @@ public class Upload {
 	public void resizeAndWriteToFile (InputStream uploadedInputStream,
 			String uploadedFileLocation) throws Exception{
 		
-		int maxSize = 512;
+		int maxSize = 210;
 		
-		//InputStream is = new BufferedInputStream(new FileInputStream("teste.jpg"));
 		BufferedImage image = ImageIO.read(uploadedInputStream);
 		int width          = image.getWidth();
 		int height         = image.getHeight();
 		int format = (image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType());
 
 		
-		if (width > height)
+		if (width > maxSize)
 		{
-			if (width > maxSize)
-			{
-				image = resizeImage(image, format, maxSize, maxSize * height/width); 
-			}
-		}
-		else
-		{
-			if (height > maxSize)
-			{
-				image = resizeImage(image, format, maxSize * width/height, maxSize);
-			}
+			image = resizeImage(image, format, maxSize, maxSize * height/width); 
 		}
 		
 		ImageIO.write(image, "jpg", new File(uploadedFileLocation));
