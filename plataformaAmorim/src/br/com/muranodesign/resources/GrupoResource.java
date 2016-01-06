@@ -154,6 +154,8 @@ public class GrupoResource {
 			
 			grupoDados.put("grupoNome", grupo.getNomeGrupo());
 			
+			grupoDados.put("lider", grupo.getLider());
+			
 			List<Object> alunos = new ArrayList<Object>();
 			List<AlunoVariavel> alunosGrupo = new AlunoVariavelService().listaGrupo(grupo.getIdgrupo());
 			for (AlunoVariavel alunoVariavel : alunosGrupo) {
@@ -164,6 +166,7 @@ public class GrupoResource {
 				alunoDados.put("idAluno", alunoVariavel.getAluno().getIdAluno());
 				alunoDados.put("foto", alunoVariavel.getAluno().getFotoAluno());
 				alunoDados.put("faltas", new ChamadaService().countFaltas(alunoVariavel.getAluno().getIdAluno()));
+				alunoDados.put("presenca", new ChamadaService().listaPrecenca(alunoVariavel.getAluno(), 1));
 				
 				int anoAluno = Integer.parseInt(alunoVariavel.getAnoEstudo().getAno());
 				
@@ -221,18 +224,40 @@ public class GrupoResource {
 				Hashtable<String, Long> objetivosPendentes = new Hashtable<String, Long>();
 				Hashtable<String, Long> objetivosFuturo = new Hashtable<String, Long>();
 				
+				if (totalObjetivosAno > 0)
+				{
+					objetivosAnoAtual.put("completos", (ObjetivosAnoCompletos + ObjetivosAnoCorrigidos) / totalObjetivosAno);
+					objetivosAnoAtual.put("corrigidos", ObjetivosAnoCorrigidos / totalObjetivosAno);
+				}
 				
-				objetivosAnoAtual.put("total", totalObjetivosAno);
-				objetivosAnoAtual.put("completos", ObjetivosAnoCompletos + ObjetivosAnoCorrigidos);
-				objetivosAnoAtual.put("corrigidos", ObjetivosAnoCorrigidos);
+				else
+				{
+					objetivosAnoAtual.put("completos", (long)0);
+					objetivosAnoAtual.put("corrigidos", (long)0);
+				}
 				
-				objetivosPendentes.put("total", totalObjetivosPendentes);
-				objetivosPendentes.put("completos", ObjetivosPendentesCompletos + ObjetivosPendentesCorrigidos);
-				objetivosPendentes.put("corrigidos", ObjetivosPendentesCorrigidos);
+				if (totalObjetivosPendentes > 0)
+				{
+					objetivosPendentes.put("completos", (ObjetivosPendentesCompletos + ObjetivosPendentesCorrigidos) / totalObjetivosPendentes );
+					objetivosPendentes.put("corrigidos", ObjetivosPendentesCorrigidos / totalObjetivosPendentes);
+				}
+				else
+				{
+					objetivosPendentes.put("completos", (long)0);
+					objetivosPendentes.put("corrigidos", (long)0);
+				}
 				
-				objetivosFuturo.put("total", totalObjetivosFuturos);
-				objetivosFuturo.put("completos", ObjetivosFuturosCompletos + ObjetivosFuturosCorrigidos);
-				objetivosFuturo.put("corrigidos", ObjetivosFuturosCorrigidos);
+				if (totalObjetivosFuturos > 0)
+				{
+					objetivosFuturo.put("completos", (ObjetivosFuturosCompletos + ObjetivosFuturosCorrigidos) / totalObjetivosFuturos);
+					objetivosFuturo.put("corrigidos", ObjetivosFuturosCorrigidos / totalObjetivosFuturos);
+				}
+				else
+				{
+					objetivosFuturo.put("completos", (long)0);
+					objetivosFuturo.put("corrigidos", (long)0);
+				}
+				
 				
 				alunoDados.put("objetivosAnoAtual", objetivosAnoAtual);
 				alunoDados.put("objetivosPendentes", objetivosPendentes);

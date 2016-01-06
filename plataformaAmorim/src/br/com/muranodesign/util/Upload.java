@@ -66,7 +66,7 @@ public class Upload {
 	 
 		}
 	
-	public void resizeAndWriteToFile (InputStream uploadedInputStream,
+	public void resizeAndWriteToFile (File uploadedInputStream,
 			String uploadedFileLocation) throws Exception{
 		
 		int maxSize = 210;

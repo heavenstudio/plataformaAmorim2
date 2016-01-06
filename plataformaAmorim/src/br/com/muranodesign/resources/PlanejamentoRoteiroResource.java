@@ -480,6 +480,22 @@ public class PlanejamentoRoteiroResource {
 
 	}
 	
+	@Path("Corrigir/")
+	@POST
+	@Produces("text/plain")
+	public String corrigir(@FormParam("planejamentos") String planejamentos){
+		
+		String [] arrayPlanejamentos = planejamentos.split(";");
+		for (String string : arrayPlanejamentos) {
+			PlanejamentoRoteiro r = new PlanejamentoRoteiroService().listarkey(Integer.parseInt(string)).get(0);
+			r.setStatus("3");
+			r.setDataStatusEntregue(new Date());
+			 new PlanejamentoRoteiroService().atualizarPlanejamentoRoteiro(r);
+		}
+		
+		return "1";
+	}
+	
 	/**
 	 * Alterar o status
 	 * @param strid
