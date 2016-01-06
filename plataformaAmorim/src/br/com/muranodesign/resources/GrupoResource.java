@@ -154,7 +154,10 @@ public class GrupoResource {
 			
 			grupoDados.put("grupoNome", grupo.getNomeGrupo());
 			
-			grupoDados.put("lider", grupo.getLider());
+			if (grupo.getLider() != null)
+				grupoDados.put("lider", grupo.getLider());
+			else
+				grupoDados.put("lider", "null");
 			
 			List<Object> alunos = new ArrayList<Object>();
 			List<AlunoVariavel> alunosGrupo = new AlunoVariavelService().listaGrupo(grupo.getIdgrupo());
@@ -166,13 +169,13 @@ public class GrupoResource {
 				alunoDados.put("idAluno", alunoVariavel.getAluno().getIdAluno());
 				alunoDados.put("foto", alunoVariavel.getAluno().getFotoAluno());
 				alunoDados.put("faltas", new ChamadaService().countFaltas(alunoVariavel.getAluno().getIdAluno()));
-				alunoDados.put("presenca", new ChamadaService().listaPrecenca(alunoVariavel.getAluno(), 1));
+				alunoDados.put("presencas", new ChamadaService().listaPrecenca(alunoVariavel.getAluno(), 1).size());
 				
 				int anoAluno = Integer.parseInt(alunoVariavel.getAnoEstudo().getAno());
 				
-				long totalObjetivosAno = 0;
-				long totalObjetivosPendentes = 0;
-				long totalObjetivosFuturos = 0;
+				float totalObjetivosAno = 0;
+				float totalObjetivosPendentes = 0;
+				float totalObjetivosFuturos = 0;
 				
 				List<Roteiro> roteirosAno = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
 				for (Roteiro roteiro : roteirosAno) {
@@ -189,9 +192,9 @@ public class GrupoResource {
 						totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
 				}
 				
-				long ObjetivosAnoCompletos = 0;
-				long ObjetivosPendentesCompletos = 0;
-				long ObjetivosFuturosCompletos = 0;
+				float ObjetivosAnoCompletos = 0;
+				float ObjetivosPendentesCompletos = 0;
+				float ObjetivosFuturosCompletos = 0;
 				
 				List<PlanejamentoRoteiro> planejamentosCompletos = new PlanejamentoRoteiroService().listarAlunoCompletosLista(alunoVariavel.getAluno().getIdAluno());
 				for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCompletos) {
@@ -204,9 +207,9 @@ public class GrupoResource {
 						ObjetivosAnoCompletos++;
 				}
 				
-				long ObjetivosAnoCorrigidos = 0;
-				long ObjetivosPendentesCorrigidos = 0;
-				long ObjetivosFuturosCorrigidos = 0;
+				float ObjetivosAnoCorrigidos = 0;
+				float ObjetivosPendentesCorrigidos = 0;
+				float ObjetivosFuturosCorrigidos = 0;
 				
 				List<PlanejamentoRoteiro> planejamentosCorrigidos = new PlanejamentoRoteiroService().listarAlunoCorrigidosLista(alunoVariavel.getAluno().getIdAluno());
 				for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCorrigidos) {
@@ -220,9 +223,9 @@ public class GrupoResource {
 				}
 				
 				
-				Hashtable<String, Long> objetivosAnoAtual = new Hashtable<String, Long>();
-				Hashtable<String, Long> objetivosPendentes = new Hashtable<String, Long>();
-				Hashtable<String, Long> objetivosFuturo = new Hashtable<String, Long>();
+				Hashtable<String, Float> objetivosAnoAtual = new Hashtable<String, Float>();
+				Hashtable<String, Float> objetivosPendentes = new Hashtable<String, Float>();
+				Hashtable<String, Float> objetivosFuturo = new Hashtable<String, Float>();
 				
 				if (totalObjetivosAno > 0)
 				{
@@ -232,8 +235,8 @@ public class GrupoResource {
 				
 				else
 				{
-					objetivosAnoAtual.put("completos", (long)0);
-					objetivosAnoAtual.put("corrigidos", (long)0);
+					objetivosAnoAtual.put("completos", 0.0f);
+					objetivosAnoAtual.put("corrigidos", 0.0f);
 				}
 				
 				if (totalObjetivosPendentes > 0)
@@ -243,8 +246,8 @@ public class GrupoResource {
 				}
 				else
 				{
-					objetivosPendentes.put("completos", (long)0);
-					objetivosPendentes.put("corrigidos", (long)0);
+					objetivosPendentes.put("completos", 0.0f);
+					objetivosPendentes.put("corrigidos", 0.0f);
 				}
 				
 				if (totalObjetivosFuturos > 0)
@@ -254,8 +257,8 @@ public class GrupoResource {
 				}
 				else
 				{
-					objetivosFuturo.put("completos", (long)0);
-					objetivosFuturo.put("corrigidos", (long)0);
+					objetivosFuturo.put("completos", 0.0f);
+					objetivosFuturo.put("corrigidos", 0.0f);
 				}
 				
 				

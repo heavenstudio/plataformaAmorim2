@@ -1,5 +1,6 @@
 package br.com.muranodesign.resources;
 
+import java.io.File;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -118,12 +119,21 @@ public class BlogResource {
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
 				50);
 		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+		String uploadedFileLocationMin = "/home/tomcat/webapps/files/Min/" + arquivo;
 
 		Upload upload = new Upload();
 		// save it
 		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
+		
+		File fileToMin = new File(uploadedFileLocation);
+		
+		try {
+			upload.resizeAndWriteToFile(fileToMin, uploadedFileLocationMin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		String anexo = "http://177.55.99.90/files/" + arquivo;
+		String anexo = arquivo;
 
 		blog.setImagem(anexo);
 		Blog result = new BlogService().atualizarBloga(blog);
@@ -150,9 +160,18 @@ public class BlogResource {
 		
 		Blog blog = new BlogService().listarkey(id).get(0);
 		
-		return blog.getImagem();
+		return "http://177.55.99.90/files/" + blog.getImagem();
 	}
 	
+	@GET
+	@Path("ImagemMin/{id}")
+	@Produces("text/plain")
+	public String getImagemMin(@PathParam("id") int id){
+		
+		Blog blog = new BlogService().listarkey(id).get(0);
+		
+		return "http://177.55.99.90/files/Min/" + blog.getImagem();
+	}
 	
 	/**
 	 * 

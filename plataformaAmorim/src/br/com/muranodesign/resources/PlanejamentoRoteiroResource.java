@@ -488,9 +488,12 @@ public class PlanejamentoRoteiroResource {
 		String [] arrayPlanejamentos = planejamentos.split(";");
 		for (String string : arrayPlanejamentos) {
 			PlanejamentoRoteiro r = new PlanejamentoRoteiroService().listarkey(Integer.parseInt(string)).get(0);
-			r.setStatus("3");
-			r.setDataStatusEntregue(new Date());
-			 new PlanejamentoRoteiroService().atualizarPlanejamentoRoteiro(r);
+			if (Integer.parseInt(r.getStatus()) == 2)
+			{
+				r.setStatus("3");
+				r.setDataStatusEntregue(new Date());
+				new PlanejamentoRoteiroService().atualizarPlanejamentoRoteiro(r);
+			}
 		}
 		
 		return "1";
