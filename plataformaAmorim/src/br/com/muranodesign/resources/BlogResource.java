@@ -166,6 +166,16 @@ public class BlogResource {
 	}
 	
 	@GET
+	@Path("ImagemMed/{id}")
+	@Produces("text/plain")
+	public String getImagemMed(@PathParam("id") int id){
+		
+		Blog blog = new BlogService().listarkey(id).get(0);
+		
+		return "http://177.55.99.90/files/Med/" + blog.getImagem();
+	}
+	
+	@GET
 	@Path("ImagemMin/{id}")
 	@Produces("text/plain")
 	public String getImagemMin(@PathParam("id") int id){

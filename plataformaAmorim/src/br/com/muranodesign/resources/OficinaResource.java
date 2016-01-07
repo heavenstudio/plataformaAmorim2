@@ -172,18 +172,26 @@ public class OficinaResource {
 	/*@Path("DadosOficina/{id}")
 	@GET
 	@Produces("application/json")
-	public List<Object> getDadosOficina (@PathParam("id") int id)
-	{
-		List<Object> resultado = new ArrayList<Object>();
-		
+	public Hashtable<String, Object> getDadosOficina (@PathParam("id") int id)
+	{		
 		Hashtable<String, Object> dadosOficina = new Hashtable<String, Object>();
 		
-		Oficina oficina = new OficinaService()
-
-			dadosOficina.put("nome", oficina.getNome());
-			dadosOficina.put("cor", oficina.getCor());
-			dadosOficina.put("idOficina", oficina.getIdoficina());
+		Oficina oficina = new OficinaService().listarkey(id).get(0);
 		
-		return resultado;
+		dadosOficina.put("nome", oficina.getNome());
+		dadosOficina.put("cor", oficina.getCor());
+		dadosOficina.put("idOficina", oficina.getIdoficina());
+		
+		List<Object> alunos = new ArrayList<Object>();
+		
+		List<Rotina> rotinasOficinas = new RotinaService().listarPorOficina(id);
+		for (Rotina rotina : rotinasOficinas) {
+			List<AlunoAgrupamento> alunoAgrupamentosOficina = new AlunoAgrupamentoService().listarAgrupamento(rotina.getAgrupamento().getIdagrupamento());
+			for (AlunoAgrupamento alunoAgrupamento : alunoAgrupamentosOficina) {
+				
+			}
+		}
+		
+		return dadosOficina;
 	}*/
 }
