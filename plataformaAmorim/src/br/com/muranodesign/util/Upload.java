@@ -67,9 +67,7 @@ public class Upload {
 		}
 	
 	public void resizeAndWriteToFile (File uploadedInputStream,
-			String uploadedFileLocation) throws Exception{
-		
-		int maxSize = 210;
+			String uploadedFileLocation, int maxSize) throws Exception{
 		
 		BufferedImage image = ImageIO.read(uploadedInputStream);
 		int width          = image.getWidth();

@@ -119,16 +119,18 @@ public class BlogResource {
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
 				50);
 		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+		String uploadedFileLocationMed = "/home/tomcat/webapps/files/Med/" + arquivo;
 		String uploadedFileLocationMin = "/home/tomcat/webapps/files/Min/" + arquivo;
 
 		Upload upload = new Upload();
 		// save it
 		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
 		
-		File fileToMin = new File(uploadedFileLocation);
+		File fileToResize = new File(uploadedFileLocation);
 		
 		try {
-			upload.resizeAndWriteToFile(fileToMin, uploadedFileLocationMin);
+			upload.resizeAndWriteToFile(fileToResize, uploadedFileLocationMed, 210);
+			upload.resizeAndWriteToFile(fileToResize, uploadedFileLocationMin, 64);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

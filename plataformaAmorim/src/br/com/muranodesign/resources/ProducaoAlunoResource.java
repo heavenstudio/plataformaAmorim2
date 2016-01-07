@@ -190,6 +190,18 @@ public class ProducaoAlunoResource {
 
 	}
 	
+	@Path("DeletarProducaoAluno/{idaluno}/{idroteiro}/{tipoproducao}")
+	@GET
+	@Produces("text/plain")
+	public String removerProducaoAluno(@PathParam("idaluno") int idaluno, @PathParam("idroteiro") int idroteiro, @PathParam("tipoproducao") int tipoproducao){
+		
+		ProducaoAluno producaoAluno = new ProducaoAlunoService().listaAlunoRoteiroTipo(idaluno, idroteiro, tipoproducao).get(0);
+		
+		new ProducaoAlunoService().deletarProducaoAluno(producaoAluno);
+		
+		return "deleteado";
+	}
+	
 	
 	/**
 	 * Verifica o status da produção do aluno
@@ -418,7 +430,7 @@ public class ProducaoAlunoResource {
 		    if(t == 6 ){
 		    	objProducaoAluno.setArquivo(arquivo);
 		    }
-		    if(t < 5 ){
+		    if(t == 4 || t == 5){
 		    	objProducaoAluno.setRoteiro(objRoteiro);
 		    }
 		    objProducaoAluno.setCategoria(objCategoriaProducaoAluno);
@@ -446,7 +458,7 @@ public class ProducaoAlunoResource {
 			    if (t == 7){
 			    	objProducaoAluno.setOficina(objOficina);
 			    }
-			    if(t < 5 ){
+			    if(t == 4 || t == 5){
 			    	objProducaoAluno.setRoteiro(objRoteiro);
 			    }
 			    objProducaoAluno.setCategoria(objCategoriaProducaoAluno);

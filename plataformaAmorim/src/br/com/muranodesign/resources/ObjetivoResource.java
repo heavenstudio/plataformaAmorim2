@@ -1,5 +1,4 @@
 /**
- *   Este codigo é software livre você e pode resdistribuir e/ou modificar ele seguindo os termos da
  *   Creative Commons Attribution 4.0 International Pare visualizar uma copia desta 
  *   licensa em ingles visite http://creativecommons.org/licenses/by/4.0/.
  *   
@@ -12,7 +11,6 @@ package br.com.muranodesign.resources;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -94,7 +92,7 @@ public class ObjetivoResource {
 	 * @return
 	 */
 	@Path("InativarObjetivo/{id}")
-	@DELETE
+	@GET
 	@Produces("text/plain")
 	public String deletarObjetivo(@PathParam("id") int id){
 		
@@ -363,7 +361,7 @@ public class ObjetivoResource {
 	 * @return the string
 	 */
 	@Path("{id}")
-	@DELETE
+	@GET
 	@Produces("text/plain")
 	public String removeObjetivo(@PathParam("id") int id) {
 

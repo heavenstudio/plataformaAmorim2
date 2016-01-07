@@ -148,7 +148,6 @@ public class OficinaResource {
 		return lista;
 	}
 
-	
 	@Path("ListaPorProfessor/{id}")
 	@GET
 	@Produces("application/json")
@@ -169,4 +168,22 @@ public class OficinaResource {
 		
 		return oficinas;
 	}
+	
+	/*@Path("DadosOficina/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Object> getDadosOficina (@PathParam("id") int id)
+	{
+		List<Object> resultado = new ArrayList<Object>();
+		
+		Hashtable<String, Object> dadosOficina = new Hashtable<String, Object>();
+		
+		Oficina oficina = new OficinaService()
+
+			dadosOficina.put("nome", oficina.getNome());
+			dadosOficina.put("cor", oficina.getCor());
+			dadosOficina.put("idOficina", oficina.getIdoficina());
+		
+		return resultado;
+	}*/
 }
