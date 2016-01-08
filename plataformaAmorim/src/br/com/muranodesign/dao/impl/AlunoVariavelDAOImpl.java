@@ -290,5 +290,46 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<AlunoVariavel> ListarCicloAnoPeriodoSemGrupo(
+			List<Integer> anos, int idPeriodo, int primeiro, int ultimo) {
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		criteria.createAlias("anoEstudo", "anoEstudo");
+		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos) );
+		criteria.createAlias("periodo", "periodo");
+		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
+		criteria.add(Restrictions.isNull("grupo"));
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<AlunoVariavel> ListarCicloAnoSemGrupo(List<Integer> anos,
+			int primeiro, int ultimo) {
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		criteria.createAlias("anoEstudo", "anoEstudo");
+		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos) );
+		criteria.add(Restrictions.isNull("grupo"));
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<AlunoVariavel> ListarRangePeriodoSemGrupo(int idPeriodo,
+			int primeiro, int ultimo) {
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		criteria.createAlias("periodo", "periodo");
+		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
+		criteria.add(Restrictions.isNull("grupo"));
+		criteria.setFirstResult(primeiro);
+		criteria.setMaxResults(ultimo);
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+	}
+	
 
 }

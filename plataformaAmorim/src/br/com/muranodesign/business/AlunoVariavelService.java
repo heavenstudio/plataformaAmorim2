@@ -246,6 +246,15 @@ public class AlunoVariavelService {
 		return result;
 	}
 	
+	public List<AlunoVariavel> ListarCicloAnoSemGrupo(List<Integer> anos,
+			int primeiro, int ultimo) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.ListarCicloAnoSemGrupo(anos, primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
+	
 	/**
 	 * Listar por ano e periodo
 	 * @param i
@@ -263,6 +272,15 @@ public class AlunoVariavelService {
 		
 	}
 	
+	public List<AlunoVariavel> ListarCicloAnoPeriodoSemGrupo(
+			List<Integer> anos, int idPeriodo, int primeiro, int ultimo) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.ListarCicloAnoPeriodoSemGrupo(anos, idPeriodo, primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
+	
 	/**
 	 * Listar range de periodo
 	 * @param id
@@ -274,6 +292,16 @@ public class AlunoVariavelService {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
 		List<AlunoVariavel> result = dao.ListarRangePeriodo(id, primeiro, ultimo);
+		pc.commitAndClose();
+		return result;
+	}
+
+
+	public List<AlunoVariavel> ListarRangePeriodoSemGrupo(int idPeriodo,
+			int primeiro, int ultimo) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.ListarRangePeriodoSemGrupo(idPeriodo, primeiro, ultimo);
 		pc.commitAndClose();
 		return result;
 	}

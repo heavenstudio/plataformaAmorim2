@@ -153,7 +153,7 @@ public class AlunoVariavelResource {
 			}
 		}
 		
-		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAnoPeriodo(anos, idPeriodo, primeiro, ultimo);
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAnoPeriodoSemGrupo(anos, idPeriodo, primeiro, ultimo);
 		
 		return retorno;		
 		
@@ -209,11 +209,10 @@ public class AlunoVariavelResource {
 		for(int i = 0; i < ciclos.size(); i++) {
 			if(!anos.contains(ciclos.get(i).getAno().getIdanoEstudo())){
 				anos.add(ciclos.get(i).getAno().getIdanoEstudo());
-				
 			}
 		}
 				
-		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAno(anos, primeiro, ultimo);
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarCicloAnoSemGrupo(anos, primeiro, ultimo);
 	
 		return retorno;		
 		
@@ -249,7 +248,7 @@ public class AlunoVariavelResource {
 	@Produces("application/json")
 	public List<AlunoVariavel> getlistarPeriodoRangeObjeto(@PathParam("idPeriodo") int idPeriodo,@PathParam("primeiro") int primeiro,@PathParam("ultimo") int ultimo){
 
-		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarRangePeriodo(idPeriodo, primeiro, ultimo);
+		List<AlunoVariavel> retorno = new AlunoVariavelService().ListarRangePeriodoSemGrupo(idPeriodo, primeiro, ultimo);
 		
 		return retorno;		
 		

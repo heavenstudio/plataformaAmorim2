@@ -16,9 +16,9 @@ import org.apache.log4j.Logger;
 import br.com.muranodesign.business.AlunoAgrupamentoService;
 import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CiclosService;
-import br.com.muranodesign.business.CoresService;
 import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
+import br.com.muranodesign.business.TipoOficinaService;
 import br.com.muranodesign.business.PeriodoService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.model.AlunoAgrupamento;
@@ -52,7 +52,7 @@ public class OficinaResource {
 			@FormParam("ciclo") int ciclo,
 			@FormParam("anoLetivo") int anoLetivo,
 			@FormParam("periodo") int periodo,
-			@FormParam("tipo") String tipo,
+			@FormParam("tipo") int tipo,
 			@FormParam("nome") String nome){
 		
 		Oficina resultado = new Oficina();
@@ -63,27 +63,16 @@ public class OficinaResource {
 		else if(action.equals("create")){
 			Oficina oficina = new Oficina();
 			
-			if(tipo.equals("outras")){
+			if(tipo == 1){
 				oficina.setNome(nome);
-				
-				// cor fake, mudar quando for subir pra produção
-				oficina.setCor(new CoresService().listarkey(4).get(0));
 			}else{
-				long tem = new OficinaService().listarNomeOficina(nome);
 				
-				Oficina ofi = new OficinaService().listarNomeOficinaid(nome).get(0);
+				int atual = new OficinaService().contTipo(tipo);
 				
-				oficina.setCor(ofi.getCor());
+				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + Integer.toString(tipo);
 				
-				if(tem == 0){
-					oficina.setNome(nome+" -1");
-				}else{
-					oficina.setNome(nome+" -"+tem);
-				}
 			}
 			
-
-			//oficina.setNome(nome);
 			//oficina.setCor(new CoresService().listarkey(cor).get(0));
 			oficina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 			oficina.setCiclo(new CiclosService().listarkey(ciclo).get(0));
@@ -138,9 +127,9 @@ public class OficinaResource {
 			
 			hash.put("idOficina", Integer.toString(rotinas.get(i).getOficina().getIdoficina()));
 			hash.put("Nome", rotinas.get(i).getOficina().getNome());
-			hash.put("CorForte", rotinas.get(i).getOficina().getCor().getForte());
-			hash.put("CorFraca", rotinas.get(i).getOficina().getCor().getFraco());
-			hash.put("CorMedia", rotinas.get(i).getOficina().getCor().getMedio());
+			//hash.put("CorForte", rotinas.get(i).getOficina().getCor().getForte());
+			//hash.put("CorFraca", rotinas.get(i).getOficina().getCor().getFraco());
+			//hash.put("CorMedia", rotinas.get(i).getOficina().getCor().getMedio());
 			
 			lista.add(hash);
 		}
@@ -180,7 +169,6 @@ public class OficinaResource {
 		
 		dadosOficina.put("nome", oficina.getNome());
 		dadosOficina.put("cor", oficina.getCor());
-		dadosOficina.put("idOficina", oficina.getIdoficina());
 		
 		List<Object> alunos = new ArrayList<Object>();
 		

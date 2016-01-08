@@ -33,6 +33,7 @@ import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CategoriaProducaoAlunoService;
 import br.com.muranodesign.business.MensagensService;
 import br.com.muranodesign.business.OficinaService;
+import br.com.muranodesign.business.PendenciasProducaoAlunoService;
 import br.com.muranodesign.business.ProducaoAlunoService;
 import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.business.TipoProducaoAlunoService;
@@ -40,6 +41,7 @@ import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.AnoLetivo;
 import br.com.muranodesign.model.CategoriaProducaoAluno;
 import br.com.muranodesign.model.Oficina;
+import br.com.muranodesign.model.PendenciasProducaoAluno;
 import br.com.muranodesign.model.ProducaoAluno;
 import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.TipoProducaoAluno;
@@ -111,10 +113,7 @@ public class ProducaoAlunoResource {
 	public List<ProducaoAluno> getalunoPortifolio(@PathParam("id") int id) throws ParseException {
 		logger.info("Lista ProducaoAluno  por id " + id);
 		List<ProducaoAluno> resultado;
-		resultado = new ProducaoAlunoService().listarPortifolio(id);
-		//PlanoEstudo evento = resultado.get(0);}
-        
-      
+		resultado = new ProducaoAlunoService().listarPortifolio(id);    
 		return resultado;
 
 	}
@@ -196,6 +195,15 @@ public class ProducaoAlunoResource {
 	public String removerProducaoAluno(@PathParam("idaluno") int idaluno, @PathParam("idroteiro") int idroteiro, @PathParam("tipoproducao") int tipoproducao){
 		
 		ProducaoAluno producaoAluno = new ProducaoAlunoService().listaAlunoRoteiroTipo(idaluno, idroteiro, tipoproducao).get(0);
+		
+		PendenciasProducaoAluno pendencias = new PendenciasProducaoAlunoService().listarAlunoRoteiro(idaluno, idroteiro).get(0);
+		
+		if (tipoproducao == 4)
+			pendencias.setFichaFinalizacaoCompleta(0);
+		else
+			pendencias.setPortfolioCompleto(0);
+		
+		new PendenciasProducaoAlunoService().atualizarPendenciasProducaoAluno(pendencias);
 		
 		new ProducaoAlunoService().deletarProducaoAluno(producaoAluno);
 		

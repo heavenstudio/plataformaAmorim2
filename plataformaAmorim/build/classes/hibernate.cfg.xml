@@ -133,6 +133,7 @@
 		<mapping class="br.com.muranodesign.model.JornadaProfessor" />
 		<mapping class="br.com.muranodesign.model.MuralCoordenacao" />
 		<mapping class="br.com.muranodesign.model.PendenciasProducaoAluno" />
+		<mapping class="br.com.muranodesign.model.TipoOficina" />
 		
 		
 	</session-factory>

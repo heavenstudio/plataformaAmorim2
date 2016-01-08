@@ -162,6 +162,9 @@ public class BlogResource {
 		
 		Blog blog = new BlogService().listarkey(id).get(0);
 		
+		if(blog.getImagem().isEmpty())
+			return "";
+		
 		return "http://177.55.99.90/files/" + blog.getImagem();
 	}
 	
@@ -172,6 +175,9 @@ public class BlogResource {
 		
 		Blog blog = new BlogService().listarkey(id).get(0);
 		
+		if(blog.getImagem().isEmpty())
+			return "";
+		
 		return "http://177.55.99.90/files/Med/" + blog.getImagem();
 	}
 	
@@ -181,6 +187,9 @@ public class BlogResource {
 	public String getImagemMin(@PathParam("id") int id){
 		
 		Blog blog = new BlogService().listarkey(id).get(0);
+		
+		if(blog.getImagem().isEmpty())
+			return "";
 		
 		return "http://177.55.99.90/files/Min/" + blog.getImagem();
 	}

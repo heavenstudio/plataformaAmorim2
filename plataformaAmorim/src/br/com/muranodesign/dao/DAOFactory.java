@@ -73,6 +73,7 @@ import br.com.muranodesign.dao.impl.SemanaDAOImpl;
 import br.com.muranodesign.dao.impl.SessaoForumGeralDAOImpl;
 import br.com.muranodesign.dao.impl.TemplateDAOImpl;
 import br.com.muranodesign.dao.impl.TipoEventoDAOImpl;
+import br.com.muranodesign.dao.impl.TipoOficinaDAOImpl;
 import br.com.muranodesign.dao.impl.TipoProducaoAlunoDAOImpl;
 import br.com.muranodesign.dao.impl.TipoRecursoAprendizagemDAOImpl;
 import br.com.muranodesign.dao.impl.TutoriaDAOImpl;
@@ -822,6 +823,10 @@ public static MensagensDAO getMensagensDAO(
 
 	public static RelatorioAlunoDAO getRelatorioAlunoDAO(PersistenceContext pc) {
 		return new RelatorioAlunoDAOImpl((HibernatePersistenceContext) pc);
+	}
+
+	public static TipoOficinaDAO getTipoOficinaDAO(PersistenceContext pc) {
+		return new TipoOficinaDAOImpl((HibernatePersistenceContext) pc);
 	}
 	
 

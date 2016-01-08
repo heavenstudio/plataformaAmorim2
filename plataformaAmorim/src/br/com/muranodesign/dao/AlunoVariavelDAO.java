@@ -160,6 +160,18 @@ public interface AlunoVariavelDAO {
 		 * @return
 		 */
 		public List<AlunoVariavel> ListarRangePeriodo(int id, int primeiro,int ultimo);
+
+
+		public List<AlunoVariavel> ListarCicloAnoPeriodoSemGrupo(
+				List<Integer> anos, int idPeriodo, int primeiro, int ultimo);
+
+
+		public List<AlunoVariavel> ListarCicloAnoSemGrupo(List<Integer> anos,
+				int primeiro, int ultimo);
+
+
+		public List<AlunoVariavel> ListarRangePeriodoSemGrupo(int idPeriodo,
+				int primeiro, int ultimo);
 		
 		
 }

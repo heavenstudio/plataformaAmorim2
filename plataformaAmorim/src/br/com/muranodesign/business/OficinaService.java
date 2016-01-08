@@ -138,4 +138,12 @@ public class OficinaService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public int contTipo(int tipo) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		OficinaDAO dao = DAOFactory.getOficinaDAO(pc);
+		int result = dao.contTipo(tipo);
+		pc.commitAndClose();
+		return result;
+	}
 }
