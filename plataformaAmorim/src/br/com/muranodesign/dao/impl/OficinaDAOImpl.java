@@ -144,11 +144,12 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 		 return result;
 	}
 
-	public int contTipo(int tipo) {
+	public long contTipo(int tipo) {
 		Criteria criteria = getSession().createCriteria(Oficina.class);
-		criteria.add(Restrictions.eq("tipoOficina", tipo));
+		criteria.createAlias("tipoOficina", "tipoOficina");
+		criteria.add(Restrictions.eq("tipoOficina.idTipoOficina", tipo));
 		criteria.setProjection(Projections.count("tipoOficina"));
-		int result = (Integer)criteria.list().get(0);
+		long result = (Long)criteria.list().get(0);
 		return result;
 	}
 }

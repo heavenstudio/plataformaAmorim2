@@ -31,7 +31,7 @@ public class TipoOficinaDAOImpl extends AbstractHibernateDAO implements TipoOfic
 	public TipoOficina listarKey(int key) {
 		
 		Criteria criteria = getSession().createCriteria(TipoOficina.class);
-		criteria.add(Restrictions.eq("idtipoOficina", key));
+		criteria.add(Restrictions.eq("idTipoOficina", key));
 		TipoOficina result = (TipoOficina)criteria.list().get(0);
 		return result;
 	}

@@ -18,9 +18,9 @@ import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.CiclosService;
 import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
-import br.com.muranodesign.business.TipoOficinaService;
 import br.com.muranodesign.business.PeriodoService;
 import br.com.muranodesign.business.RotinaService;
+import br.com.muranodesign.business.TipoOficinaService;
 import br.com.muranodesign.model.AlunoAgrupamento;
 import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.OficinaProfessor;
@@ -67,16 +67,18 @@ public class OficinaResource {
 				oficina.setNome(nome);
 			}else{
 				
-				int atual = new OficinaService().contTipo(tipo);
+				long atual = new OficinaService().contTipo(tipo);
 				
-				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + Integer.toString(tipo);
+				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + Long.toString(atual);
 				
 			}
 			
 			//oficina.setCor(new CoresService().listarkey(cor).get(0));
+			oficina.setNome(nome);
 			oficina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 			oficina.setCiclo(new CiclosService().listarkey(ciclo).get(0));
 			oficina.setPeriodo(new PeriodoService().listarkey(periodo).get(0));
+			oficina.setTipoOficina(new TipoOficinaService().listarkey(tipo));
 			resultado = new OficinaService().criarOficina(oficina);
 			
 		}else if(action.equals("update")){
@@ -91,6 +93,15 @@ public class OficinaResource {
 		}
 		
 		return Integer.toString(resultado.getIdoficina());
+	}
+	
+	@Path("Teste")
+	@GET
+	@Produces("text/plain")
+	public String teste()
+	{
+		long resultado = new OficinaService().contTipo(1);
+		return Long.toString(resultado);
 	}
 	
 	/**

@@ -79,5 +79,5 @@ public interface OficinaDAO {
 	 */
 	public List<Oficina> listarLazyNome(int id);
 
-	public int contTipo(int tipo);
+	public long contTipo(int tipo);
 }

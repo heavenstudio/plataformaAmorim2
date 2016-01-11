@@ -139,10 +139,10 @@ public class OficinaService {
 		return result;
 	}
 
-	public int contTipo(int tipo) {
+	public long contTipo(int tipo) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		OficinaDAO dao = DAOFactory.getOficinaDAO(pc);
-		int result = dao.contTipo(tipo);
+		long result = dao.contTipo(tipo);
 		pc.commitAndClose();
 		return result;
 	}

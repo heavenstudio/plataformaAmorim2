@@ -36,8 +36,8 @@ public class Oficina implements Serializable{
 	 @ManyToOne
 	 @JoinColumn (name = "tipoOficina", referencedColumnName = "idtipoOficina")
 	 private TipoOficina tipoOficina;
-	 
-	 @ManyToOne
+	
+	@ManyToOne
 	 @JoinColumn (name = "anoLetivo", referencedColumnName = "idano_letivo")
 	 private AnoLetivo anoLetivo;
 	 
@@ -102,5 +102,14 @@ public class Oficina implements Serializable{
 	public void setCiclo(Ciclos ciclo) {
 		this.ciclo = ciclo;
 	}
+	
+	public TipoOficina getTipoOficina() {
+		return tipoOficina;
+	}
+
+	public void setTipoOficina(TipoOficina tipoOficina) {
+		this.tipoOficina = tipoOficina;
+	}
+
 	 
 }
