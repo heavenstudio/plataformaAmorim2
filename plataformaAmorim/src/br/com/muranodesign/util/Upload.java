@@ -80,7 +80,10 @@ public class Upload {
 			image = resizeImage(image, format, maxSize, maxSize * height/width); 
 		}
 		
-		ImageIO.write(image, "jpg", new File(uploadedFileLocation));
+		int extensionStart = uploadedInputStream.toString().lastIndexOf('.');
+		String extension = uploadedInputStream.toString().substring(extensionStart + 1);
+		
+		ImageIO.write(image, extension, new File(uploadedFileLocation));
 		
 	}
 	

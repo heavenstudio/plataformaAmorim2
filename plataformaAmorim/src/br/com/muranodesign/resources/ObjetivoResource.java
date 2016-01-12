@@ -97,11 +97,12 @@ public class ObjetivoResource {
 	public String deletarObjetivo(@PathParam("id") int id){
 		
 		List<Atividade> atividades = new AtividadeService().listarObjetivo(id);
-		Objetivo  objetivo = new Objetivo();
+		List<PlanejamentoRoteiro> planejamentos = new PlanejamentoRoteiroService().listarObjetivoTotal(id);
+		Objetivo  objetivo = new ObjetivoService().listarkey(id).get(0);
 		
 		String retorno = "";
 		
-		if(!atividades.isEmpty()){
+		if(!atividades.isEmpty() || !planejamentos.isEmpty()){
 			objetivo.setAtivo(0);
 			new ObjetivoService().atualizarObjetivo(objetivo);
 			

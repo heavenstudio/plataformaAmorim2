@@ -118,7 +118,7 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 		return result;
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
 	public List<ProfessorFuncionario> listarOficinerios() {
 		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
 		

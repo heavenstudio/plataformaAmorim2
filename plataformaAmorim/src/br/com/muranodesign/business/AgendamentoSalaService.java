@@ -96,4 +96,12 @@ public class AgendamentoSalaService {
 		return result;
 	}
 
+	public List<AgendamentoSala> listarDiaHora(int idDiaSemana, long hora) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AgendamentoSalaDAO dao = DAOFactory.getAgendamentoSalaDAO(pc);
+		List<AgendamentoSala> result = dao.listarDiaHora(idDiaSemana, hora);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

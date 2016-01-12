@@ -218,8 +218,9 @@ public class RotinaResource {
 					rotinaObj.put("professor", new OficinaProfessorService().listarPorOficina(rotina.getOficina().getIdoficina()).get(0).getProfessor().getNome());
 					rotinaObj.put("sala", new AgendamentoSalaService().listarRotina(rotina.getIdrotina()));
 				}
+				
+				resultado.add(rotinaObj);
 			}
-			
 		}		
 		
 		return resultado;

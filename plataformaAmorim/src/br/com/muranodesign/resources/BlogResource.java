@@ -118,9 +118,12 @@ public class BlogResource {
 		StringUtil stringUtil = new StringUtil();
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
 				50);
-		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
-		String uploadedFileLocationMed = "/home/tomcat/webapps/files/Med/" + arquivo;
-		String uploadedFileLocationMin = "/home/tomcat/webapps/files/Min/" + arquivo;
+		String uploadedFileLocation = "C:/Users/murano/Desktop/" + arquivo;
+		String uploadedFileLocationMed = "C:/Users/murano/Desktop/Med/" + arquivo;
+		String uploadedFileLocationMin = "C:/Users/murano/Desktop/Min/" + arquivo;
+//		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+//		String uploadedFileLocationMed = "/home/tomcat/webapps/files/Med/" + arquivo;
+//		String uploadedFileLocationMin = "/home/tomcat/webapps/files/Min/" + arquivo;
 
 		Upload upload = new Upload();
 		// save it
