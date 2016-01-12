@@ -34,7 +34,7 @@ public class Oficina implements Serializable{
 	 private Cores cor;*/
 	 
 	 @ManyToOne
-	 @JoinColumn (name = "tipoOficina", referencedColumnName = "idtipoOficina")
+	 @JoinColumn (name = "tipoOficina", referencedColumnName = "idTipoOficina")
 	 private TipoOficina tipoOficina;
 	
 	@ManyToOne

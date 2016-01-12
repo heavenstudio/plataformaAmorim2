@@ -60,4 +60,6 @@ public interface RotinaDAO {
 	 * @return
 	 */
 	public List<Rotina> listarPorAgrupamento(int idAgrupamento);
+
+	public List<Rotina> listarRotinaAlunoDia(int idagrupamento, int iddiaSemana);
 }

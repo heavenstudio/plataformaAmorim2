@@ -113,4 +113,12 @@ public class RotinaService {
 		return result;
 	}
 
+	public List<Rotina> listarRotinaAlunoDia(int idagrupamento, int iddiaSemana) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RotinaDAO dao = DAOFactory.getRotinaDAO(pc);
+		List<Rotina> result = dao.listarRotinaAlunoDia(idagrupamento, iddiaSemana);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

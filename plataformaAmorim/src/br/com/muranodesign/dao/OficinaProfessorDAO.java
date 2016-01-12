@@ -3,6 +3,7 @@ package br.com.muranodesign.dao;
 import java.util.List;
 
 import br.com.muranodesign.model.OficinaProfessor;
+import br.com.muranodesign.resources.ProfessorFuncionario;
 
 public interface OficinaProfessorDAO {
 	
@@ -62,6 +63,8 @@ public interface OficinaProfessorDAO {
 	 * @return
 	 */
 	public List<OficinaProfessor> listarPorOficina(int idOficina);
+
+	public List<ProfessorFuncionario> listarOficinerios();
 	
 
 }

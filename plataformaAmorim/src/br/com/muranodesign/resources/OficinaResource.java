@@ -1,7 +1,6 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -69,7 +68,7 @@ public class OficinaResource {
 				
 				long atual = new OficinaService().contTipo(tipo);
 				
-				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + Long.toString(atual);
+				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + Long.toString(atual + 1);
 				
 			}
 			
@@ -122,10 +121,10 @@ public class OficinaResource {
 	@Path("ListarPorAluno/{id}")
 	@GET
 	@Produces("application/json")
-	public List<Hashtable<String, String>> getListarPorAluno(@PathParam("id") int id){
+	public List<Oficina> getListarPorAluno(@PathParam("id") int id){
 		logger.debug("Listar Oficina por aluno ..."+id);
 		
-		List<Hashtable<String, String>> lista = new ArrayList<Hashtable<String,String>>();
+		List<Oficina> lista = new ArrayList<Oficina>();
 		List<AlunoAgrupamento> aluAgrup = new AlunoAgrupamentoService().listarAluno(id);
 		List<Rotina> rotinas = new ArrayList<Rotina>();
 		
@@ -133,7 +132,12 @@ public class OficinaResource {
 			rotinas.addAll(new RotinaService().listarPorAgrupamento(alunoAgrupamento.getAgrupamento().getIdagrupamento()));
 		}
 		
-		for(int i = 0; i < rotinas.size(); i++){
+		for (Rotina rotina : rotinas) {
+			lista.add(rotina.getOficina());
+		}
+		
+		/*for(int i = 0; i < rotinas.size(); i++){
+			lista.add()
 			Hashtable<String, String> hash = new Hashtable<String, String>();
 			
 			hash.put("idOficina", Integer.toString(rotinas.get(i).getOficina().getIdoficina()));
@@ -143,7 +147,7 @@ public class OficinaResource {
 			//hash.put("CorMedia", rotinas.get(i).getOficina().getCor().getMedio());
 			
 			lista.add(hash);
-		}
+		}*/
 		
 		return lista;
 	}

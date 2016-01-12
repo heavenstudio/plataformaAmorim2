@@ -32,7 +32,7 @@ public class ObjetivoService {
 	public List<Objetivo> listarTodos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ObjetivoDAO dao = DAOFactory.getObjetivoDAO(pc);
-		List<Objetivo> result = dao.listAllTeste();
+		List<Objetivo> result = dao.listAll();
 				
 		pc.commitAndClose();
 		return result;

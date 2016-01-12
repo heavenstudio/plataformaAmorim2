@@ -90,4 +90,13 @@ public class AgendamentoSalaDAOImpl extends AbstractHibernateDAO implements Agen
 		List<AgendamentoSala> result = criteria.list();
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<AgendamentoSala> listarRotina(int idrotina) {
+		Criteria criteria = getSession().createCriteria(AgendamentoSala.class);
+		criteria.createAlias("rotina", "rotina");
+		criteria.add(Restrictions.eq("rotina.Idrotina", idrotina));
+		List<AgendamentoSala> result = criteria.list();
+		return result;
+	}
 }

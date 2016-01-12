@@ -118,4 +118,11 @@ public class OficinaProfessorResource {
 		return new OficinaProfessorService().listarPorOficina(id);
 	}
 	
+	@Path("ListarOficineiros")
+	@GET
+	@Produces("application/json")
+	public List<ProfessorFuncionario> getOficineiros(){
+		return new OficinaProfessorService().listarOficineiros();
+	}
+	
 }

@@ -1,6 +1,7 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -12,9 +13,11 @@ import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
 
+import br.com.muranodesign.business.AgendamentoSalaService;
 import br.com.muranodesign.business.AgrupamentoService;
 import br.com.muranodesign.business.AlunoAgrupamentoService;
 import br.com.muranodesign.business.AnoLetivoService;
+import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.business.SemanaService;
@@ -187,4 +190,39 @@ public class RotinaResource {
 	public List<Rotina> getListaPorId(@PathParam("idRotina") int idRotina){
 		return new RotinaService().listarkey(idRotina);
 	}
+	
+	@Path("RotinaDiariaAluno/{idaluno}/{iddiaSemana}")
+	@GET
+	@Produces("application/json")
+	public List<Object> getRotinaDiariaAluno(@PathParam("idaluno") int idaluno, @PathParam("iddiaSemana") int iddiaSemana){
+		List<Object> resultado = new ArrayList<Object>();
+		
+		List<AlunoAgrupamento> alunoAgrupamentos = new AlunoAgrupamentoService().listarAluno(idaluno);
+		for (AlunoAgrupamento alunoAgrupamento : alunoAgrupamentos) {
+			
+			List<Rotina> rotinaAluno = new RotinaService().listarRotinaAlunoDia(alunoAgrupamento.getAgrupamento().getIdagrupamento(), iddiaSemana);
+			for (Rotina rotina : rotinaAluno) {
+				
+				Hashtable<String, Object> rotinaObj = new Hashtable<String, Object>();
+				
+				rotinaObj.put("hora", rotina.getHora());
+				rotinaObj.put("oficina", rotina.getOficina());
+				if (rotina.getOficina() == null)
+				{
+					rotinaObj.put("tutoria", rotina.getTutoria());
+					rotinaObj.put("professor", rotina.getTutoria().getTutor().getNome());
+					rotinaObj.put("sala", new AgendamentoSalaService().listarRotina(rotina.getIdrotina()));
+				}
+				else
+				{
+					rotinaObj.put("professor", new OficinaProfessorService().listarPorOficina(rotina.getOficina().getIdoficina()).get(0).getProfessor().getNome());
+					rotinaObj.put("sala", new AgendamentoSalaService().listarRotina(rotina.getIdrotina()));
+				}
+			}
+			
+		}		
+		
+		return resultado;
+	}
+	
 }

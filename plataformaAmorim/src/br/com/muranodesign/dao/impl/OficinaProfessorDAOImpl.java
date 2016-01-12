@@ -3,12 +3,14 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.OficinaProfessorDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
 import br.com.muranodesign.hibernate.HibernatePersistenceContext;
 import br.com.muranodesign.model.OficinaProfessor;
+import br.com.muranodesign.resources.ProfessorFuncionario;
 
 public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements OficinaProfessorDAO{
 	
@@ -113,6 +115,17 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 		criteria.createAlias("oficina", "oficina");
 		criteria.add(Restrictions.eq("oficina.Idoficina", idOficina));
 		List<OficinaProfessor> result = criteria.list();
+		return result;
+	}
+
+	@Override
+	public List<ProfessorFuncionario> listarOficinerios() {
+		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
+		
+		criteria.setProjection(Projections.distinct(Projections.property("professor")));
+		
+		List<ProfessorFuncionario> result = criteria.list();
+		
 		return result;
 	}
 }
