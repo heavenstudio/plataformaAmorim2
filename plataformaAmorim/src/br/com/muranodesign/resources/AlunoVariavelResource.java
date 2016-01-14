@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -70,7 +71,8 @@ public class AlunoVariavelResource {
 	public /*List<AlunoVariavel>*/String getAlunoVariavelhtml(@PathParam("ano") int ano, @PathParam("periodo") int periodo) {
 		logger.info("Listar AlunoVariavel ...");
 		List<AlunoVariavel> resultado;
-		resultado = new AlunoVariavelService().listaAnoEstudoPeriodo(new AnoEstudoService().listarkey(ano).get(0), new PeriodoService().listarkey(periodo).get(0));
+		int anoLetivo = new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR))).get(0).getIdanoLetivo();
+		resultado = new AlunoVariavelService().listaAnoEstudoPeriodo(new AnoEstudoService().listarkey(ano).get(0), new PeriodoService().listarkey(periodo).get(0), anoLetivo);
 		logger.info("QTD AlunoVariavel : " + resultado.size());
 		int tamanho = resultado.size();
 		String HtmlContent = "";

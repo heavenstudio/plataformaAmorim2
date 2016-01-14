@@ -417,8 +417,8 @@ public class Aluno implements Serializable {
     private Collection<RelatorioAluno> relatorioAlunoCollection;
     
     /** The aluno variavel collection. */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
-    private Collection<AlunoVariavel> alunoVariavelCollection;
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
+    private Collection<AlunoVariavel> alunoVariavelCollection;*/
     
     /** The plano estudo collection. */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
@@ -1777,19 +1777,19 @@ public class Aluno implements Serializable {
      *
      * @return the aluno variavel collection
      */
-    @XmlTransient
+    /*@XmlTransient
     public Collection<AlunoVariavel> getAlunoVariavelCollection() {
         return alunoVariavelCollection;
-    }
+    }*/
 
     /**
      * Sets the aluno variavel collection.
      *
      * @param alunoVariavelCollection the new aluno variavel collection
      */
-    public void setAlunoVariavelCollection(Collection<AlunoVariavel> alunoVariavelCollection) {
+    /*public void setAlunoVariavelCollection(Collection<AlunoVariavel> alunoVariavelCollection) {
         this.alunoVariavelCollection = alunoVariavelCollection;
-    }
+    }*/
 
     /**
      * Gets the plano estudo collection.

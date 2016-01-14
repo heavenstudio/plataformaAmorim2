@@ -11,6 +11,7 @@ package br.com.muranodesign.resources;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -262,7 +263,8 @@ public class AlunoResource {
 	public String getHtmlAlunoAnoPeriodo(@PathParam("ano") int ano,@PathParam("periodo") int periodo){
 		logger.debug("Listar Alunos ...");
 		List<AlunoVariavel> variaveis;
-		variaveis  = new AlunoVariavelService().listaAnoEstudoPeriodo(new AnoEstudoService().listarkey(ano).get(0), new PeriodoService().listarkey(periodo).get(0));
+		int anoLetivo = Calendar.getInstance().get(Calendar.YEAR);
+		variaveis  = new AlunoVariavelService().listaAnoEstudoPeriodo(new AnoEstudoService().listarkey(ano).get(0), new PeriodoService().listarkey(periodo).get(0), anoLetivo);
 		int qtd = variaveis.size();
 		String html = "";
 		

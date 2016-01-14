@@ -111,12 +111,13 @@ public class AlunoVariavelService {
 	 * Listar por ano de estudo e periodo
 	 * @param ano
 	 * @param periodo
+	 * @param anoLetivo 
 	 * @return list
 	 */
-	public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo){
+	public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo, int anoLetivo){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
-		List<AlunoVariavel> result = dao.listaAnoEstudoPeriodo(ano, periodo);
+		List<AlunoVariavel> result = dao.listaAnoEstudoPeriodo(ano, periodo, anoLetivo);
 		pc.commitAndClose();
 		return result;
 	}

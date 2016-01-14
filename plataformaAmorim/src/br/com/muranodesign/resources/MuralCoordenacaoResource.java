@@ -85,5 +85,15 @@ public class MuralCoordenacaoResource {
 		List<MuralCoordenacao> resultado = new MuralCoordenacaoService().listarkey(id);
 		return resultado;
 	}
+	
+	@Path("ListarCoordenacao/{idProfessor}")
+	@GET
+	@Produces("application/json")
+	public List<MuralCoordenacao> getMuralCoordencaoProfessor(@PathParam("idProfessor") int idProfessor){
+		logger.debug("Listar Mural Coordenacao...");
+		List<MuralCoordenacao> resultado = new MuralCoordenacaoService().listarProfessor(idProfessor);
+		logger.debug("QTD MuralCoordencao: " + resultado.size());
+		return resultado;
+	}
 
 }

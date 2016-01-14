@@ -313,7 +313,10 @@ public class TutoriaResource {
 			if (nomeAlunos.length() > 0)
 				list.add(objeto);
 			else
-				new GrupoService().deletarGrupo(grupo);
+			{
+				grupo.setStatus("1");
+				new GrupoService().atualizarGrupo(grupo);
+			}
 		}
 		
 		return list;

@@ -70,4 +70,13 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		getSession().flush();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<MuralCoordenacao> listarProfessor(int idProfessor) {
+		Criteria criteria = getSession().createCriteria(MuralCoordenacao.class);
+		criteria.createAlias("professor", "professor");
+		criteria.add(Restrictions.eq("professor.idprofessorFuncionario", idProfessor));
+		List<MuralCoordenacao> result = criteria.list();
+		return result;
+	}
+
 }

@@ -162,10 +162,12 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaAnoEstudoPeriodo(br.com.muranodesign.model.AnoEstudo, br.com.muranodesign.model.Periodo)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo){
+	public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo, int anoLetivo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("anoEstudo", ano));
 		criteria.add(Restrictions.eq("periodo", periodo));
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", anoLetivo));
 		//criteria.add(Restrictions.isNull("grupo"));
 		List<AlunoVariavel> result = criteria.list();
 		return result;

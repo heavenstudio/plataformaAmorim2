@@ -101,9 +101,10 @@ public interface AlunoVariavelDAO {
 		 * Listar por ano e periodo
 		 * @param ano
 		 * @param periodo
+		 * @param anoLetivo 
 		 * @return
 		 */
-		public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo);
+		public List<AlunoVariavel> listaAnoEstudoPeriodo(AnoEstudo ano, Periodo periodo, int anoLetivo);
 		
 		/**
 		 * Listar por ano e periodo e que tenha grupo
