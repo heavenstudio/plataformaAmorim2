@@ -64,7 +64,6 @@ public class MuralResource {
 			@FormParam("id") int id,
 			@FormParam("mensagem") String mensagem,
 			@FormParam("idProfessor") int idProfessor,
-			@FormParam("todos") int todos,
 			@FormParam("periodo") int periodo,
 			@FormParam("agrupamento") int agrupamento,
 			@FormParam("tutoria") int tutor) throws ParseException{
@@ -102,7 +101,7 @@ public class MuralResource {
 			mural.setMensagem(mensagem);
 			mural.setData(data);
 			mural.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
-			if (todos != 0)
+			if (periodo == 1)
 				mural.setTodos(1);
 			else if (periodo != 0)
 				mural.setPeriodo(new PeriodoService().listarkey(periodo).get(0));
@@ -112,7 +111,7 @@ public class MuralResource {
 				mural.setAgrupamento(new AgrupamentoService().listarkey(agrupamento).get(0));
 			new MuralService().criarMural(mural);
 
-			if(todos != 0){
+			if(periodo == 1){
 				
 				  List<AlunoVariavel> listAluno = new ArrayList<AlunoVariavel>();
 				  listAluno.addAll(new AlunoVariavelService().listarTodos(1));			  

@@ -53,7 +53,8 @@ public class MuralCoordenacaoResource {
 			resultado.setHora(hora);
 			resultado.setMensagem(mensagem);
 			resultado.setPerfil(new PerfilService().listarkey(idPerfil).get(0));
-			resultado.setPeriodo(new PeriodoService().listarkey(idPeriodo).get(0));
+			if (idPeriodo != 0)
+				resultado.setPeriodo(new PeriodoService().listarkey(idPeriodo).get(0));
 			resultado.setProfessor(new ProfessorFuncionarioService().listarkey(professor).get(0));
 			
 			if (id == 0)			

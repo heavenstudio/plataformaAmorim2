@@ -162,7 +162,8 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarAnoid(int id){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
-		criteria.add(Restrictions.eq("anoLetivo", id)); 
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", id)); 
 		criteria.addOrder(Order.asc("tutoria"));
 		List<Tutoria> result = criteria.list();
 		
