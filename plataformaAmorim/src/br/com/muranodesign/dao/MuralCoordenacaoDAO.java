@@ -18,4 +18,6 @@ public interface MuralCoordenacaoDAO {
 
 	List<MuralCoordenacao> listarProfessor(int idProfessor);
 
+	List<MuralCoordenacao> listarPerfil(int perfil);
+
 }

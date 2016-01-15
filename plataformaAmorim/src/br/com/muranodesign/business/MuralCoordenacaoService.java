@@ -81,4 +81,12 @@ public class MuralCoordenacaoService {
 		return result;
 	}
 
+	public List<MuralCoordenacao> listarPerfil(int perfil) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		MuralCoordenacaoDAO dao = DAOFactory.getMuralCoordenacaoDAO(pc);
+		List<MuralCoordenacao> result =  dao.listarPerfil(perfil);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

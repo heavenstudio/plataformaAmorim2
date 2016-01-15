@@ -17,7 +17,7 @@ public class Usuario extends JerseyTest  {
 	@Test
 	public void insert2() {
 		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Grupo/liderGrupo");
-		webResource.post("lider=1058&grupo=175");
+		webResource.post("lider=1058&");
 	}
 	
 }

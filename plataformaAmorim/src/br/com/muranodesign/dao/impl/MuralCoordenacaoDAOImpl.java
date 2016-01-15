@@ -79,4 +79,13 @@ public class MuralCoordenacaoDAOImpl extends AbstractHibernateDAO implements Mur
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<MuralCoordenacao> listarPerfil(int perfil) {
+		Criteria criteria = getSession().createCriteria(MuralCoordenacao.class);
+		criteria.createAlias("perfil", "perfil");
+		criteria.add(Restrictions.eq("perfil.idperfil", perfil));
+		List<MuralCoordenacao> result = criteria.list();
+		return result;
+	}
+
 }

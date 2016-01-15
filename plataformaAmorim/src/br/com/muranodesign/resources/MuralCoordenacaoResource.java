@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.MuralCoordenacaoService;
+import br.com.muranodesign.business.PerfilService;
+import br.com.muranodesign.business.PeriodoService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.MuralCoordenacao;
 import br.com.muranodesign.util.StringUtil;
@@ -32,6 +34,8 @@ public class MuralCoordenacaoResource {
 			@FormParam("id") int id,
 			@FormParam("professor") int professor,
 			@FormParam("data") String data,
+			@FormParam("perfil") int idPerfil,
+			@FormParam("periodo") int idPeriodo,
 			@FormParam("mensagem") String mensagem,
 			@FormParam("hora") String hora) {
 		
@@ -48,21 +52,17 @@ public class MuralCoordenacaoResource {
 			resultado.setData(stringUtil.converteStringData(data));
 			resultado.setHora(hora);
 			resultado.setMensagem(mensagem);
+			resultado.setPerfil(new PerfilService().listarkey(idPerfil).get(0));
+			resultado.setPeriodo(new PeriodoService().listarkey(idPeriodo).get(0));
 			resultado.setProfessor(new ProfessorFuncionarioService().listarkey(professor).get(0));
 			
-			resultado = new MuralCoordenacaoService().criarMuralCoordenacao(resultado);
-		}
-		else if (action.equals("update"))
-		{
-			StringUtil stringUtil = new StringUtil();
-			
-			resultado = new MuralCoordenacaoService().listarkey(id).get(0);
-			resultado.setData(stringUtil.converteStringData(data));
-			resultado.setHora(hora);
-			resultado.setMensagem(mensagem);
-			resultado.setProfessor(new ProfessorFuncionarioService().listarkey(professor).get(0));
-			
-			resultado = new MuralCoordenacaoService().atualizarMuralCoordenacao(resultado);
+			if (id == 0)			
+				resultado = new MuralCoordenacaoService().criarMuralCoordenacao(resultado);
+			else
+			{
+				resultado.setIdMuralCoordenacao(id);
+				resultado = new MuralCoordenacaoService().atualizarMuralCoordenacao(resultado);
+			}
 		}
 		
 		return Integer.toString(resultado.getIdMuralCoordenacao());
@@ -92,6 +92,16 @@ public class MuralCoordenacaoResource {
 	public List<MuralCoordenacao> getMuralCoordencaoProfessor(@PathParam("idProfessor") int idProfessor){
 		logger.debug("Listar Mural Coordenacao...");
 		List<MuralCoordenacao> resultado = new MuralCoordenacaoService().listarProfessor(idProfessor);
+		logger.debug("QTD MuralCoordencao: " + resultado.size());
+		return resultado;
+	}
+	
+	@Path("ListarPerfil/{idPerfil}")
+	@GET
+	@Produces("application/json")
+	public List<MuralCoordenacao> getMuralCordenacaoPerfil (@PathParam("idPerfil") int perfil){
+		logger.debug("Listar Mural Coordenacao...");
+		List<MuralCoordenacao> resultado = new MuralCoordenacaoService().listarPerfil(perfil);
 		logger.debug("QTD MuralCoordencao: " + resultado.size());
 		return resultado;
 	}
