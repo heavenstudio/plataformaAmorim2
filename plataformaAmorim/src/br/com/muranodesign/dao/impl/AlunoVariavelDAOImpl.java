@@ -9,6 +9,7 @@
  */
 
 package br.com.muranodesign.dao.impl;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -16,11 +17,13 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.dao.AlunoVariavelDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
 import br.com.muranodesign.hibernate.HibernatePersistenceContext;
 import br.com.muranodesign.model.AlunoVariavel;
 import br.com.muranodesign.model.AnoEstudo;
+import br.com.muranodesign.model.AnoLetivo;
 import br.com.muranodesign.model.Periodo;
 
 
@@ -123,6 +126,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaAluno(int idAluno){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		criteria.add(Restrictions.eq("ativo", 1));
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
 		List<AlunoVariavel> result = criteria.list();
@@ -138,6 +145,9 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("grupo", "grupo");
 		criteria.add(Restrictions.eq("grupo.idgrupo", idGrupo));
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.addOrder(Order.asc("aluno"));
 		List<AlunoVariavel> result = criteria.list();
@@ -151,6 +161,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	@SuppressWarnings("unchecked")
 	public List<AlunoVariavel> listaAnoEstudo(AnoEstudo ano){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		String anoLetivo = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivoObj = new AnoLetivoService().listarAnoLetivo(anoLetivo).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivoObj));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.add(Restrictions.eq("anoEstudo", ano));
 		criteria.addOrder(Order.asc("aluno"));
 		List<AlunoVariavel> result = criteria.list();
@@ -166,6 +180,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("anoEstudo", ano));
 		criteria.add(Restrictions.eq("periodo", periodo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("anoLetivo", "anoLetivo");
 		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", anoLetivo));
 		//criteria.add(Restrictions.isNull("grupo"));
@@ -181,6 +196,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("anoEstudo", ano));
 		criteria.add(Restrictions.eq("periodo", periodo));
+		String anoLetivo = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivoObj = new AnoLetivoService().listarAnoLetivo(anoLetivo).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivoObj));
+		criteria.add(Restrictions.eq("ativo", 1));
 		List<AlunoVariavel> result = criteria.list();
 		return result;
 	}
@@ -192,6 +211,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	public List<AlunoVariavel> listaPeriodo(Periodo periodo){
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.add(Restrictions.eq("periodo", periodo));
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		List<AlunoVariavel> result = criteria.list();
 		return result;
 	}
@@ -253,6 +276,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", i) );
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();
@@ -269,6 +296,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", i) );
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", periodo) );
 		criteria.setFirstResult(primeiro);
@@ -286,6 +317,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", id) );
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();
@@ -296,6 +331,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	public List<AlunoVariavel> ListarCicloAnoPeriodoSemGrupo(
 			List<Integer> anos, int idPeriodo, int primeiro, int ultimo) {
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos) );
 		criteria.createAlias("periodo", "periodo");
@@ -311,6 +350,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	public List<AlunoVariavel> ListarCicloAnoSemGrupo(List<Integer> anos,
 			int primeiro, int ultimo) {
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos) );
 		criteria.add(Restrictions.isNull("grupo"));
@@ -324,6 +367,10 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	public List<AlunoVariavel> ListarRangePeriodoSemGrupo(int idPeriodo,
 			int primeiro, int ultimo) {
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
 		criteria.add(Restrictions.isNull("grupo"));

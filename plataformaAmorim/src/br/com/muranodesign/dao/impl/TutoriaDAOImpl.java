@@ -9,6 +9,7 @@
  */
 
 package br.com.muranodesign.dao.impl;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -18,9 +19,11 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 
+import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.dao.TutoriaDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
 import br.com.muranodesign.hibernate.HibernatePersistenceContext;
+import br.com.muranodesign.model.AnoLetivo;
 import br.com.muranodesign.model.Tutoria;
 
 
@@ -132,6 +135,9 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarProfessorId(int tutor){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.createAlias("tutor", "tutor");
 		criteria.add(Restrictions.eq("tutor.idprofessorFuncionario", tutor));
 		List<Tutoria> result = criteria.list();

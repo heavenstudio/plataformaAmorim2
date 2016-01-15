@@ -79,13 +79,6 @@ public class MuralResource {
 			return Integer.toString(id);
 			
 		}
-		else if (action.equals("update")){
-			Mural mural = new MuralService().listarkey(id).get(0);
-			mural.setMensagem(mensagem);
-			new MuralService().atualizarMural(mural);
-			return Integer.toString(mural.getIdmural());
-			
-		}
 		else if(action.equals("create")){
 			
 			Date dataT = new Date();
@@ -109,7 +102,16 @@ public class MuralResource {
 				mural.setTutoria(1);
 			else if (agrupamento != 0)
 				mural.setAgrupamento(new AgrupamentoService().listarkey(agrupamento).get(0));
-			new MuralService().criarMural(mural);
+			
+			if (id != 0)
+			{
+				mural.setIdmural(id);
+				new MuralService().atualizarMural(mural);
+			}
+			else
+			{
+				new MuralService().criarMural(mural);
+			}
 
 			if(periodo == 1){
 				
