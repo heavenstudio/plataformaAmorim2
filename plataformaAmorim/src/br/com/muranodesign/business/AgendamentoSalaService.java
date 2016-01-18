@@ -88,7 +88,7 @@ public class AgendamentoSalaService {
 		return result;
 	}
 
-	public Object listarRotina(int idrotina) {
+	public List<AgendamentoSala> listarRotina(int idrotina) {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		AgendamentoSalaDAO dao = DAOFactory.getAgendamentoSalaDAO(pc);
 		List<AgendamentoSala> result = dao.listarRotina(idrotina);

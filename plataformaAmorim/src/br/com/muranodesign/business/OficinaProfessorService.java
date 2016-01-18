@@ -121,4 +121,12 @@ public class OficinaProfessorService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<ProfessorFuncionario> listarProfessoresPorOficina(int idOficina) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		OficinaProfessorDAO dao = DAOFactory.getOficinaProfessorDAO(pc);
+		List<ProfessorFuncionario> result = dao.listarProfessoresPorOficina(idOficina);
+		pc.commitAndClose();
+		return result;
+	}
 }

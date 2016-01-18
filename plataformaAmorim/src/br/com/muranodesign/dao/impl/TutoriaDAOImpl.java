@@ -107,6 +107,9 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	@SuppressWarnings("unchecked")
 	public List<Tutoria> listarProfessor(String tutoria){
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.add(Restrictions.eq("tutoria", tutoria));
 		List<Tutoria> result = criteria.list();
 		return result;

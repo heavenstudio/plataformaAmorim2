@@ -128,4 +128,15 @@ public class OficinaProfessorDAOImpl extends AbstractHibernateDAO implements Ofi
 		
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<ProfessorFuncionario> listarProfessoresPorOficina(int idOficina) {
+		Criteria criteria = getSession().createCriteria(OficinaProfessor.class);
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", idOficina));
+		criteria.setProjection(Projections.property("professor"));
+		List<ProfessorFuncionario> result = criteria.list();
+		
+		return result;
+	}
 }

@@ -280,6 +280,9 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
 		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.add(Restrictions.eq("ativo", 1));
+		criteria.addOrder(Order.asc("anoEstudo.ano"));
+		criteria.createAlias("aluno", "aluno");
+		criteria.addOrder(Order.asc("aluno.nome"));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();
@@ -302,6 +305,9 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", periodo) );
+		criteria.addOrder(Order.asc("anoEstudo.ano"));
+		criteria.createAlias("aluno", "aluno");
+		criteria.addOrder(Order.asc("aluno.nome"));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();
@@ -321,6 +327,9 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
 		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.add(Restrictions.eq("ativo", 1));
+		criteria.addOrder(Order.asc("anoEstudo.ano"));
+		criteria.createAlias("aluno", "aluno");
+		criteria.addOrder(Order.asc("aluno.nome"));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();
@@ -340,6 +349,9 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
 		criteria.add(Restrictions.isNull("grupo"));
+		criteria.addOrder(Order.asc("anoEstudo.ano"));
+		criteria.createAlias("aluno", "aluno");
+		criteria.addOrder(Order.asc("aluno.nome"));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();
@@ -357,6 +369,9 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos) );
 		criteria.add(Restrictions.isNull("grupo"));
+		criteria.addOrder(Order.asc("anoEstudo.ano"));
+		criteria.createAlias("aluno", "aluno");
+		criteria.addOrder(Order.asc("aluno.nome"));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();
@@ -374,6 +389,9 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
 		criteria.add(Restrictions.isNull("grupo"));
+		criteria.addOrder(Order.asc("anoEstudo.ano"));
+		criteria.createAlias("aluno", "aluno");
+		criteria.addOrder(Order.asc("aluno.nome"));
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		List<AlunoVariavel> result = criteria.list();

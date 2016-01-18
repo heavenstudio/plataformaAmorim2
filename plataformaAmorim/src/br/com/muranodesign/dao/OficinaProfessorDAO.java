@@ -65,6 +65,8 @@ public interface OficinaProfessorDAO {
 	public List<OficinaProfessor> listarPorOficina(int idOficina);
 
 	public List<ProfessorFuncionario> listarOficinerios();
+
+	public List<ProfessorFuncionario> listarProfessoresPorOficina(int idOficina);
 	
 
 }
