@@ -37,6 +37,7 @@ import br.com.muranodesign.dao.impl.GrupoDAOImpl;
 import br.com.muranodesign.dao.impl.HistoricoDAOImpl;
 import br.com.muranodesign.dao.impl.HistoricoEventosDAOImpl;
 import br.com.muranodesign.dao.impl.ImagensDAOImpl;
+import br.com.muranodesign.dao.impl.JeiffPeaDAOImpl;
 import br.com.muranodesign.dao.impl.JornadaProfessorDAOImpl;
 import br.com.muranodesign.dao.impl.MateriaDAOImpl;
 import br.com.muranodesign.dao.impl.MensagensDAOImpl;
@@ -827,6 +828,10 @@ public static MensagensDAO getMensagensDAO(
 
 	public static TipoOficinaDAO getTipoOficinaDAO(PersistenceContext pc) {
 		return new TipoOficinaDAOImpl((HibernatePersistenceContext) pc);
+	}
+
+	public static JeiffPeaDAO getJeiffPeaDAO(PersistenceContext pc) {
+		return new JeiffPeaDAOImpl((HibernatePersistenceContext) pc);
 	}
 	
 

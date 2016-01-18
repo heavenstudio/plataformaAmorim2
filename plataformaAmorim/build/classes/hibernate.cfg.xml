@@ -23,8 +23,8 @@
 		<property name="hibernate.c3p0.idle_test_period">30000</property>
 	
 		
-		<!--<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!--<property name="hibernate.hbm2ddl.auto">update</property>
 		<propertsy name="hibernate.connection.url">jdbc:mysql://177.55.99.90:3306/amorim_prod_testeV2</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
@@ -134,6 +134,7 @@
 		<mapping class="br.com.muranodesign.model.MuralCoordenacao" />
 		<mapping class="br.com.muranodesign.model.PendenciasProducaoAluno" />
 		<mapping class="br.com.muranodesign.model.TipoOficina" />
+		<mapping class="br.com.muranodesign.model.JeiffPea" />
 		
 		
 	</session-factory>
