@@ -109,21 +109,19 @@ public class BlogResource {
 			@FormDataParam("fotoAluno") FormDataContentDisposition fileDetail
 			){
 		
-		Blog blog = new Blog();
 		int id = Integer.parseInt(strId);
-		List<Blog> Lblog = new BlogService().listarkey(id);
-		blog = Lblog.get(0);
+		Blog blog = new BlogService().listarkey(id).get(0);
 		
 		// TODO: Criar uma configiracao para o caminho
 		StringUtil stringUtil = new StringUtil();
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(),
 				50);
-		String uploadedFileLocation = "C:/Users/murano/Desktop/" + arquivo;
-		String uploadedFileLocationMed = "C:/Users/murano/Desktop/Med/" + arquivo;
-		String uploadedFileLocationMin = "C:/Users/murano/Desktop/Min/" + arquivo;
-//		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
-//		String uploadedFileLocationMed = "/home/tomcat/webapps/files/Med/" + arquivo;
-//		String uploadedFileLocationMin = "/home/tomcat/webapps/files/Min/" + arquivo;
+		//String uploadedFileLocation = "C:/Users/murano/Desktop/" + arquivo;
+		//String uploadedFileLocationMed = "C:/Users/murano/Desktop/Med/" + arquivo;
+		//String uploadedFileLocationMin = "C:/Users/murano/Desktop/Min/" + arquivo;
+		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
+		String uploadedFileLocationMed = "/home/tomcat/webapps/files/Med/" + arquivo;
+		String uploadedFileLocationMin = "/home/tomcat/webapps/files/Min/" + arquivo;
 
 		Upload upload = new Upload();
 		// save it
