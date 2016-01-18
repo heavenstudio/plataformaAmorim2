@@ -150,9 +150,7 @@ public class OficinaProfessorResource {
 					
 					Hashtable <String, Object> rotinaObj = new Hashtable<String, Object>();
 					
-					rotinaObj.put("nome", oficinaProfessor.getOficina().getNome());
-					rotinaObj.put("ciclo", oficinaProfessor.getOficina().getCiclo());
-					rotinaObj.put("periodo", oficinaProfessor.getOficina().getPeriodo());
+					rotinaObj.put("oficina", oficinaProfessor.getOficina());
 					rotinaObj.put("dia", rotinaOficinaProfessor.getDia().getDia());
 					rotinaObj.put("hora", rotinaOficinaProfessor.getHora());
 					if (!agendamento.isEmpty())

@@ -11,6 +11,8 @@ package br.com.muranodesign.resources;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -24,11 +26,22 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
+import br.com.muranodesign.business.AlunoService;
+import br.com.muranodesign.business.AlunoVariavelService;
+import br.com.muranodesign.business.AnoLetivoService;
+import br.com.muranodesign.business.AtribuicaoRoteiroExtraService;
 import br.com.muranodesign.business.GrupoService;
+import br.com.muranodesign.business.ObjetivoService;
+import br.com.muranodesign.business.PlanejamentoRoteiroService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
+import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.business.TutoriaService;
+import br.com.muranodesign.model.AlunoVariavel;
+import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
 import br.com.muranodesign.model.Grupo;
+import br.com.muranodesign.model.PlanejamentoRoteiro;
 import br.com.muranodesign.model.ProfessorFuncionario;
+import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.Tutoria;
 import br.com.muranodesign.util.StringUtil;
 import br.com.muranodesign.util.Upload;
@@ -127,6 +140,64 @@ public class ProfessorFuncionarioResource {
 		
 		return totalGrupo;
 		
+	}
+	
+	@Path("DadosTutoriaProfessores/")
+	@GET
+	@Produces("application/json")
+	public List<Object> tutoriaDados()
+	{
+		List<Object> resultado = new ArrayList<Object>();
+		
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+
+		List<Tutoria> tutorias = new TutoriaService().listarAno(ano);
+		for (Tutoria tutoria : tutorias) {
+			Hashtable<String, Object> professorDados = new Hashtable<String, Object>();
+			professorDados.put("nome", tutoria.getTutor().getNome());
+			professorDados.put("idProfessor", tutoria.getTutor().getIdprofessorFuncionario());
+			professorDados.put("foto", tutoria.getTutor().getFotoProfessorFuncionario());
+			float objetivosTotais = 0;
+			float objetivosCompletos = 0;
+			float objetivosCorrigidos = 0;
+			List<Grupo> grupos = new GrupoService().listarTutor(tutoria.getIdtutoria());
+			for (Grupo grupo : grupos) {
+				List<AlunoVariavel> alunosGrupo = new AlunoVariavelService().listaGrupo(grupo.getIdgrupo());
+				for (AlunoVariavel alunoVariavel : alunosGrupo) {
+					List<Roteiro> roteirosAno = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
+					for (Roteiro roteiro : roteirosAno) {
+						objetivosTotais += new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
+					}
+					List<AtribuicaoRoteiroExtra> roteirosExtra = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(alunoVariavel.getAluno().getIdAluno()).get(0), new AnoLetivoService().listarkey(alunoVariavel.getAnoLetivo().getIdanoLetivo()).get(0));
+					for (AtribuicaoRoteiroExtra atribuicaoRoteiroExtra : roteirosExtra) {
+						objetivosTotais += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+					}
+					List<PlanejamentoRoteiro> planejamentosCompletos = new PlanejamentoRoteiroService().listarAlunoCompletosLista(alunoVariavel.getAluno().getIdAluno());
+					List<PlanejamentoRoteiro> planejamentosCorrigidos = new PlanejamentoRoteiroService().listarAlunoCorrigidosLista(alunoVariavel.getAluno().getIdAluno());
+					
+					objetivosCompletos += planejamentosCompletos.size();
+					objetivosCorrigidos += planejamentosCorrigidos.size();							
+				}
+			}
+			Hashtable<String, Float> objetivos = new Hashtable<String, Float>();
+			if (objetivosTotais > 0)
+			{
+				objetivos.put("completos", (objetivosCompletos + objetivosCorrigidos) / objetivosTotais);
+				objetivos.put("corrigidos", objetivosCorrigidos / objetivosTotais);
+			}
+			else
+			{
+				objetivos.put("completos", 0.0f);
+				objetivos.put("corrigidos", 0.0f);
+			}
+			
+			professorDados.put("objetivos", objetivos);
+			if (grupos.size() > 0)
+			{
+				resultado.add(professorDados);
+			}
+		}
+		return resultado;
 	}
 	
 	

@@ -576,5 +576,20 @@ public class GrupoResource {
 		return grupos;
 	}
 	
+	@Path("GrupoAluno/{nomeAluno}")
+	@GET
+	@Produces("application/json")
+	public List<Grupo> getAlunoGrupo(@PathParam("nomeAluno") String nomeAluno){
+		
+		List<Aluno> alunos = new AlunoService().listAllLike(nomeAluno);
+		List<Grupo> grupos = new ArrayList<Grupo>();
+		for (Aluno aluno : alunos) {
+			grupos.add(new AlunoVariavelService().listaAluno(aluno.getIdAluno()).get(0).getGrupo());
+		}
+		
+		return grupos;	
+		
+	}
+	
 
 }
