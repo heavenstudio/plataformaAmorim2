@@ -1,6 +1,7 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -20,6 +21,7 @@ import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.PeriodoService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.business.TipoOficinaService;
+import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.AlunoAgrupamento;
 import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.OficinaProfessor;
@@ -71,8 +73,6 @@ public class OficinaResource {
 				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + Long.toString(atual + 1);
 				
 			}
-			
-			//oficina.setCor(new CoresService().listarkey(cor).get(0));
 			oficina.setNome(nome);
 			oficina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 			oficina.setCiclo(new CiclosService().listarkey(ciclo).get(0));
@@ -82,10 +82,6 @@ public class OficinaResource {
 			
 		}else if(action.equals("update")){
 			Oficina oficina = new OficinaService().listarkey(id).get(0);
-			
-			//oficina.setNome(nome);
-			//oficina.setCor(new CoresService().listarkey(cor).get(0));
-			oficina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 			oficina.setCiclo(new CiclosService().listarkey(ciclo).get(0));
 			oficina.setPeriodo(new PeriodoService().listarkey(periodo).get(0));
 			resultado = new OficinaService().atualizarOficina(oficina);
@@ -172,6 +168,34 @@ public class OficinaResource {
 		
 		return oficinas;
 	}
+	
+	@Path("AlunosAgrupamento/{idOficina}")
+	@GET
+	@Produces("application/json")
+	public Hashtable<String, Object> getAlunosAgrupamento(@PathParam("idOficina") int idOficina){
+		
+		Hashtable<String, Object> resultado = new Hashtable<String, Object>();
+				
+		Oficina oficina = new OficinaService().listarkey(idOficina).get(0);
+		Rotina rotina = new RotinaService().listarPorOficina(oficina.getIdoficina()).get(0);
+		
+		resultado.put("nome", rotina.getAgrupamento().getNome());
+		resultado.put("id", rotina.getAgrupamento().getIdagrupamento());
+		List<Object> alunos = new ArrayList<Object>();
+		List<AlunoAgrupamento> alunoAgrupamentos = new AlunoAgrupamentoService().listarAgrupamento(rotina.getAgrupamento().getIdagrupamento());
+		for (AlunoAgrupamento alunoAgrupamento : alunoAgrupamentos) {
+			Hashtable<String, Object> alunoObj = new Hashtable<String, Object>();
+			Aluno aluno = alunoAgrupamento.getAluno().getAluno();
+			alunoObj.put("nome", aluno.getNome());
+			alunoObj.put("foto", aluno.getFotoAluno());
+			alunoObj.put("id", aluno.getIdAluno());
+			alunos.add(alunoObj);
+		}
+		resultado.put("alunos", alunos);
+		
+		return resultado;
+	}
+	
 	
 	/*@Path("DadosOficina/{id}")
 	@GET
