@@ -197,4 +197,24 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Calendario> listarGeralMes(int mes, int ano) {
+		Criteria criteria = getSession().createCriteria(Calendario.class);
+		Calendar primeiroDia = Calendar.getInstance();
+		primeiroDia.set(Calendar.YEAR, ano);
+		primeiroDia.set(Calendar.MONTH, mes - 1);
+		primeiroDia.set(Calendar.DAY_OF_MONTH, 1);
+		Calendar ultimoDia =  Calendar.getInstance();
+		ultimoDia.set(Calendar.YEAR, ano);
+		ultimoDia.set(Calendar.MONTH, mes - 1);
+		ultimoDia.set(Calendar.DAY_OF_MONTH, ultimoDia.getActualMaximum(Calendar.DAY_OF_MONTH));
+		criteria.createAlias("tipoEvento", "tipoEvento");
+		criteria.add(Restrictions.eq("tipoEvento.idtipoEvento", 46));
+		criteria.add(Restrictions.ge("dataInicio", primeiroDia.getTime()));
+		criteria.add(Restrictions.le("dataInicio", ultimoDia.getTime()));
+		criteria.addOrder(Order.asc("dataInicio"));
+		List<Calendario> result = criteria.list();
+		return result;
+	}
+
 }

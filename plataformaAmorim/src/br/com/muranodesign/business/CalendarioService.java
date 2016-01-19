@@ -169,5 +169,14 @@ public class CalendarioService {
 		pc.commitAndClose();
 		return result;
 	}
+
+
+	public List<Calendario> listarGeralMes(int mes, int ano) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		CalendarioDAO dao = DAOFactory.getCalendarioDAO(pc);
+		List<Calendario> result = dao.listarGeralMes(mes, ano);
+		pc.commitAndClose();
+		return result;
+	}
 	
 }

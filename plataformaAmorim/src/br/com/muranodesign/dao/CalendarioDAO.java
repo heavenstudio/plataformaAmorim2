@@ -93,4 +93,6 @@ public interface CalendarioDAO {
 		 */
 		public List<Calendario> listarRange();
 
+		public List<Calendario> listarGeralMes(int mes, int ano);
+
 }

@@ -141,6 +141,26 @@ public class CalendarioResource {
 		return resultado;
 
 	}
+	
+	/**
+	 * Listar calendarios por id de evento
+	 * @param id
+	 * @return list
+	 * @throws ParseException
+	 */
+	@Path("Mes/{mes}/{ano}")
+	@GET
+	@Produces("application/json")
+	public List<Calendario> getByEvento(@PathParam("mes") int mes, @PathParam("ano") int ano) throws ParseException {
+
+		logger.info("Lista Calendario  por ano e mês " + mes + "/" + ano);
+		List<Calendario> resultado;
+		resultado = new CalendarioService().listarGeralMes(mes, ano);
+		
+		return resultado;
+
+	}
+	
 	/**
 	 * Gets the evento.
 	 *
