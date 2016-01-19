@@ -123,7 +123,7 @@ public class JeiffPeaResource {
 		Upload upload = new Upload();
 		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
 		
-		jeiff.setArquivo(arquivo);
+		jeiff.setArquivo("http://177.55.99.90/files/" + arquivo);
 		new JeiffPeaService().atualizarJeiffPea(jeiff);
 		
 		return Integer.toString(id);
