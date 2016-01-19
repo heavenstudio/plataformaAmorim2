@@ -61,9 +61,8 @@ public class JeiffPeaResource {
 		}
 		else if(action.equals("create"))
 		{
-			DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-			String dataS = formatter.format(data);
-			Date dataT = (Date) formatter.parse(dataS);
+			StringUtil stringUtil = new StringUtil();
+			Date dataT = stringUtil.converteStringData(data);
 			
 			resultado.setProfessorFuncionario(new ProfessorFuncionarioService().listarkey(idprofessorFuncionario).get(0));
 			resultado.setAta(ata);

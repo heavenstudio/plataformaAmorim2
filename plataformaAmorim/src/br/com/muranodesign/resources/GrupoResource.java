@@ -581,11 +581,20 @@ public class GrupoResource {
 	@Produces("application/json")
 	public List<Grupo> getAlunoGrupo(@PathParam("nomeAluno") String nomeAluno){
 		
+		logger.debug("Buscando Grupo por nome Aluno: " + nomeAluno);
+		
 		List<Aluno> alunos = new AlunoService().listAllLike(nomeAluno);
 		List<Grupo> grupos = new ArrayList<Grupo>();
-		for (Aluno aluno : alunos) {
-			grupos.add(new AlunoVariavelService().listaAluno(aluno.getIdAluno()).get(0).getGrupo());
+		if (!alunos.isEmpty())
+		{
+			for (Aluno aluno : alunos) {
+				List<AlunoVariavel> alunoVariavel = new AlunoVariavelService().listaAluno(aluno.getIdAluno());
+				if (!alunoVariavel.isEmpty() && alunoVariavel.get(0).getGrupo() != null)
+					grupos.add(alunoVariavel.get(0).getGrupo());
+			}
 		}
+		
+		logger.debug("QTD Grupos: " + grupos.size());
 		
 		return grupos;	
 		

@@ -64,7 +64,7 @@ public class BlogResource {
 		
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String k = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();  
+		String k = formatter.format(new Date()).toString();  
 		Date date = (Date)formatter.parse(k);
 		
 		
