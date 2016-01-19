@@ -1,5 +1,6 @@
 package br.com.muranodesign.dao.impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -58,6 +59,11 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 	@SuppressWarnings("unchecked")
 	public List<PendenciasProducaoAluno> listarAluno(int id) {
 		Criteria criteria = getSession().createCriteria(PendenciasProducaoAluno.class);
+
+		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", ano));
+		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
 		List<PendenciasProducaoAluno> resultado = criteria.list();
@@ -67,6 +73,11 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 	@SuppressWarnings("unchecked")
 	public List<PendenciasProducaoAluno> listarAlunoRoteiro(int idaluno, int idroteiro) {
 		Criteria criteria = getSession().createCriteria(PendenciasProducaoAluno.class);
+		
+		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", ano));
+		
 		criteria.createAlias("aluno", "aluno");
 		criteria.createAlias("roteiro", "roteiro");
 		criteria.add(Restrictions.eq("aluno.idAluno", idaluno));

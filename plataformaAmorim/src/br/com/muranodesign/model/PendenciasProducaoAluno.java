@@ -34,6 +34,10 @@ public class PendenciasProducaoAluno implements Serializable{
 	@JoinColumn(name = "roteiro", referencedColumnName = "idroteiro")
 	private Roteiro roteiro;
 	
+	@ManyToOne
+	@JoinColumn(name = "ano_letivo", referencedColumnName = "idano_letivo")
+	private AnoLetivo anoLetivo;
+
 	@Basic(optional = false)
 	@Column(name = "portfolio_completo")
 	private int portfolioCompleto;
@@ -68,6 +72,14 @@ public class PendenciasProducaoAluno implements Serializable{
 
 	public void setRoteiro(Roteiro roteiro) {
 		this.roteiro = roteiro;
+	}
+	
+	public AnoLetivo getAnoLetivo() {
+		return anoLetivo;
+	}
+
+	public void setAnoLetivo(AnoLetivo anoLetivo) {
+		this.anoLetivo = anoLetivo;
 	}
 
 	public int getPortfolioCompleto() {

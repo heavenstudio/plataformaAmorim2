@@ -1,5 +1,6 @@
 package br.com.muranodesign.resources;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -12,6 +13,7 @@ import javax.ws.rs.Produces;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AlunoService;
+import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.FichaInscricaoService;
 import br.com.muranodesign.business.PendenciasProducaoAlunoService;
 import br.com.muranodesign.business.RoteiroService;
@@ -45,6 +47,8 @@ public class PendenciasProducaoAlunoResource {
 		{
 			resultado.setAluno(new AlunoService().listarkey(idaluno).get(0));
 			resultado.setRoteiro(new RoteiroService().listarkey(idroteiro).get(0));
+			String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+			resultado.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(ano).get(0));
 			resultado.setPortfolioCompleto(0);
 			//Verifica se o roteiro tem ficha de finalização ou não
 			//Se tiver o valor fica 0 (size = 1 logo size - 1 = 0), indicando que ela não foi entregue
