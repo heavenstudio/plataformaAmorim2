@@ -9,6 +9,7 @@
  */
 
 package br.com.muranodesign.dao.impl;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +67,10 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	public List<Chamada> listaPrecenca(Aluno aluno , int precenca) {
 		
 		Criteria criteria = getSession().createCriteria(Chamada.class);
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DAY_OF_YEAR, 1);
+		criteria.add(Restrictions.ge("data", cal.getTime()));
+		
 		short shortPrecenca;
 		shortPrecenca = (short) precenca;
 		
@@ -127,6 +132,9 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 	public long countFaltas(int id){
 		short t = 0;
 		Criteria criteria = getSession().createCriteria(Chamada.class);
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DAY_OF_YEAR, 1);
+		criteria.add(Restrictions.ge("data", cal.getTime()));
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
 		criteria.add(Restrictions.eq("presenca",t ));
