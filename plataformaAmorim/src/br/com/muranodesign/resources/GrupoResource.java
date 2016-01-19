@@ -589,8 +589,10 @@ public class GrupoResource {
 		{
 			for (Aluno aluno : alunos) {
 				List<AlunoVariavel> alunoVariavel = new AlunoVariavelService().listaAluno(aluno.getIdAluno());
-				if (!alunoVariavel.isEmpty() && alunoVariavel.get(0).getGrupo() != null)
-					grupos.add(alunoVariavel.get(0).getGrupo());
+				if (!alunoVariavel.isEmpty() &&
+					alunoVariavel.get(0).getGrupo() != null &&
+					!grupos.contains(alunoVariavel.get(0).getGrupo()))
+						grupos.add(alunoVariavel.get(0).getGrupo());
 			}
 		}
 		
