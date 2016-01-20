@@ -104,7 +104,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		
 		int ano = Calendar.getInstance().get(Calendar.YEAR);
 		criteria.createAlias("anoLetivo", "anoLetivo");
-		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", ano));
+		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
@@ -132,7 +132,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		
 		int ano = Calendar.getInstance().get(Calendar.YEAR);
 		criteria.createAlias("anoLetivo", "anoLetivo");
-		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", ano));
+		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
@@ -149,7 +149,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		
 		int ano = Calendar.getInstance().get(Calendar.YEAR);
 		criteria.createAlias("anoLetivo", "anoLetivo");
-		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", ano));
+		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
@@ -169,7 +169,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		
 		int ano = Calendar.getInstance().get(Calendar.YEAR);
 		criteria.createAlias("anoLetivo", "anoLetivo");
-		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", ano));
+		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
@@ -201,7 +201,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 		
 		int ano = Calendar.getInstance().get(Calendar.YEAR);
 		criteria.createAlias("anoLetivo", "anoLetivo");
-		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", ano));
+		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
