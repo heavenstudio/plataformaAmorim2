@@ -102,7 +102,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	public List<ProducaoAluno> listarFiltro(int id, int tipo, int roteiro){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		
-		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 		criteria.createAlias("anoLetivo", "anoLetivo");
 		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
@@ -130,7 +130,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	public List<ProducaoAluno> listarAluno(int id){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		
-		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 		criteria.createAlias("anoLetivo", "anoLetivo");
 		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
@@ -147,7 +147,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	public List<ProducaoAluno> listarPortifolio(int id){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		
-		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 		criteria.createAlias("anoLetivo", "anoLetivo");
 		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
@@ -167,7 +167,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	public List<ProducaoAluno> listaAlunoRoteiroTipo(int idAluno, int idRoteiro, int idTipo){
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		
-		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 		criteria.createAlias("anoLetivo", "anoLetivo");
 		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
@@ -199,7 +199,7 @@ public class ProducaoAlunoDAOImpl extends AbstractHibernateDAO implements Produc
 	public List<ProducaoAluno> listaOficinaAluno(int idOficina, int idAluno) {
 		Criteria criteria = getSession().createCriteria(ProducaoAluno.class);
 		
-		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 		criteria.createAlias("anoLetivo", "anoLetivo");
 		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
