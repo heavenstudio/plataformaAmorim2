@@ -47,6 +47,7 @@ import br.com.muranodesign.model.PlanejamentoRoteiro;
 import br.com.muranodesign.model.ProfessorFuncionario;
 import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.Tutoria;
+import br.com.muranodesign.util.Upload;
 
 
 /**
@@ -127,15 +128,10 @@ public class GrupoResource {
 	@Path("Teste")
 	@GET
 	@Produces("application/json")
-	public Hashtable<String, Object> teste(){
-		Hashtable<String, Object> list = new Hashtable<String, Object>();
-		list.put("YAY", "oi");
-		List<Object> nope = new ArrayList<Object>();
-		nope.add("Pretty Sure I shouldn't do this...");
-		nope.add("Yup... pretty sure...");
-		nope.add(33);
-		list.put("nopeList", nope);
-		return list;
+	public String teste(){
+		Upload upload = new Upload();
+		upload.deleteFile("C://Users/murano/Desktop/teste.png");
+		return "ok";
 	}
 	
 	@Path("TutoriaDados/{idprofessor}")

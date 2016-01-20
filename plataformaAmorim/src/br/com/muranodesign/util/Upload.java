@@ -95,5 +95,9 @@ public class Upload {
 
 	    return resizedImage;
 	}
+	
+	public void deleteFile(String filePath){
+		new File(filePath).delete();
+	}
 }
 

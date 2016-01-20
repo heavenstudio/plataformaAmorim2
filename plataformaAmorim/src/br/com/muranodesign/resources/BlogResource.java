@@ -137,7 +137,12 @@ public class BlogResource {
 		}
 
 		String anexo = arquivo;
-
+		if (blog.getImagem() != null)
+		{
+			upload.deleteFile("/home/tomcat/webapps/files/" + blog.getImagem());
+			upload.deleteFile("/home/tomcat/webapps/files/Med" + blog.getImagem());
+			upload.deleteFile("/home/tomcat/webapps/files/Min" + blog.getImagem());
+		}
 		blog.setImagem(anexo);
 		Blog result = new BlogService().atualizarBloga(blog);
 		
@@ -150,8 +155,15 @@ public class BlogResource {
 	public String deletarImagem(@PathParam("id") int id){
 		Blog blog = new BlogService().listarkey(id).get(0);
 		
-		blog.setImagem(null);
-		new BlogService().atualizarBloga(blog);
+		if (blog.getImagem() != null)
+		{
+			Upload upload = new Upload();
+			upload.deleteFile("/home/tomcat/webapps/files/" + blog.getImagem());
+			upload.deleteFile("/home/tomcat/webapps/files/Med" + blog.getImagem());
+			upload.deleteFile("/home/tomcat/webapps/files/Min" + blog.getImagem());
+			blog.setImagem(null);
+			new BlogService().atualizarBloga(blog);
+		}
 		
 		return Integer.toString(id);
 	}

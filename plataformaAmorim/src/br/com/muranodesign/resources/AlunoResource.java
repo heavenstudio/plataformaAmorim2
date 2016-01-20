@@ -330,6 +330,8 @@ public class AlunoResource {
 
 		logger.info("anexo" + anexo);
 
+		if (objAluno.getFotoAluno() != null)
+			upload.deleteFile(objAluno.getFotoAluno());
 		objAluno.setFotoAluno(anexo);
 		Aluno resultado = new AlunoService().atualizarAluno(objAluno);
 

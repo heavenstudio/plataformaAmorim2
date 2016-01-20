@@ -292,6 +292,8 @@ public class ProducaoAlunoResource {
 		String anexo = "http://177.55.99.90/files/" + arquivo;
 
 		logger.info("anexo" + anexo);
+		if(prod.getCapa() != null)
+			upload.deleteFile(prod.getCapa());
 
 		prod.setCapa(anexo);
 		
@@ -517,7 +519,7 @@ public class ProducaoAlunoResource {
 		Upload upload = new Upload (); 
 		upload.writeToFile(uploadedInputStream, uploadedFileLocation);
 		
-		logger.info("anexo" + anexo);     
+		logger.info("anexo" + anexo);  
 		
 		objProducaoAluno.setImagem(anexo);
 		
@@ -566,6 +568,8 @@ public class ProducaoAlunoResource {
 		
 		logger.info("anexo" + anexo);     
 		
+		if(objProducaoAluno.getArquivo() != null)
+			upload.deleteFile(objProducaoAluno.getArquivo());
 		objProducaoAluno.setArquivo(anexo);
 		
 		resultado =  new ProducaoAlunoService().atualizarProducaoAluno(objProducaoAluno);

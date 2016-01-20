@@ -459,6 +459,8 @@ public class ProfessorFuncionarioResource {
 
 		logger.info("anexo" + anexo);
 
+		if (objProfessorFuncionario.getFotoProfessorFuncionario() != null)
+			upload.deleteFile(objProfessorFuncionario.getFotoProfessorFuncionario());
 		objProfessorFuncionario.setFotoProfessorFuncionario(anexo);
 
 		resultado = new ProfessorFuncionarioService().atualizarProfessorFuncionario(objProfessorFuncionario);
