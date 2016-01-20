@@ -124,4 +124,26 @@ public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Rotina> listarRotinaOficinaDia(int idoficina, int idDiaSemana) {
+		Criteria criteria = getSession().createCriteria(Rotina.class);
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", idoficina));
+		criteria.createAlias("dia", "dia");
+		criteria.add(Restrictions.eq("dia.Idsemana", idDiaSemana));
+		List<Rotina> result = criteria.list();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Rotina> listarRotinaTutoriaDia(Integer idtutoria, int idDiaSemana) {
+		Criteria criteria = getSession().createCriteria(Rotina.class);
+		criteria.createAlias("tutoria", "tutoria");
+		criteria.add(Restrictions.eq("tutoria.idtutoria", idtutoria));
+		criteria.createAlias("dia", "dia");
+		criteria.add(Restrictions.eq("dia.Idsemana", idDiaSemana));
+		List<Rotina> result = criteria.list();
+		return result;
+	}
+
 }

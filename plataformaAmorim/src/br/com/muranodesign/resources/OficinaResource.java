@@ -177,21 +177,25 @@ public class OficinaResource {
 		Hashtable<String, Object> resultado = new Hashtable<String, Object>();
 				
 		Oficina oficina = new OficinaService().listarkey(idOficina).get(0);
-		Rotina rotina = new RotinaService().listarPorOficina(oficina.getIdoficina()).get(0);
-		
-		resultado.put("nome", rotina.getAgrupamento().getNome());
-		resultado.put("id", rotina.getAgrupamento().getIdagrupamento());
-		List<Object> alunos = new ArrayList<Object>();
-		List<AlunoAgrupamento> alunoAgrupamentos = new AlunoAgrupamentoService().listarAgrupamento(rotina.getAgrupamento().getIdagrupamento());
-		for (AlunoAgrupamento alunoAgrupamento : alunoAgrupamentos) {
-			Hashtable<String, Object> alunoObj = new Hashtable<String, Object>();
-			Aluno aluno = alunoAgrupamento.getAluno().getAluno();
-			alunoObj.put("nome", aluno.getNome());
-			alunoObj.put("foto", aluno.getFotoAluno());
-			alunoObj.put("id", aluno.getIdAluno());
-			alunos.add(alunoObj);
+		List<Rotina> listRotina = new RotinaService().listarPorOficina(oficina.getIdoficina());
+		if(!(listRotina.isEmpty()))
+		{
+			Rotina rotina = listRotina.get(0);
+			
+			resultado.put("nome", rotina.getAgrupamento().getNome());
+			resultado.put("id", rotina.getAgrupamento().getIdagrupamento());
+			List<Object> alunos = new ArrayList<Object>();
+			List<AlunoAgrupamento> alunoAgrupamentos = new AlunoAgrupamentoService().listarAgrupamento(rotina.getAgrupamento().getIdagrupamento());
+			for (AlunoAgrupamento alunoAgrupamento : alunoAgrupamentos) {
+				Hashtable<String, Object> alunoObj = new Hashtable<String, Object>();
+				Aluno aluno = alunoAgrupamento.getAluno().getAluno();
+				alunoObj.put("nome", aluno.getNome());
+				alunoObj.put("foto", aluno.getFotoAluno());
+				alunoObj.put("id", aluno.getIdAluno());
+				alunos.add(alunoObj);
+			}
+			resultado.put("alunos", alunos);
 		}
-		resultado.put("alunos", alunos);
 		
 		return resultado;
 	}

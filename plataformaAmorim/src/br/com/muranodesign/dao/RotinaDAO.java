@@ -62,4 +62,9 @@ public interface RotinaDAO {
 	public List<Rotina> listarPorAgrupamento(int idAgrupamento);
 
 	public List<Rotina> listarRotinaAlunoDia(int idagrupamento, int iddiaSemana);
+
+	public List<Rotina> listarRotinaOficinaDia(int idoficina, int idDiaSemana);
+
+	public List<Rotina> listarRotinaTutoriaDia(Integer idtutoria,
+			int idDiaSemana);
 }

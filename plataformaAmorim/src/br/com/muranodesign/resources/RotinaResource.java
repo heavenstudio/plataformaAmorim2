@@ -21,9 +21,12 @@ import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.business.SemanaService;
+import br.com.muranodesign.business.TutoriaService;
 import br.com.muranodesign.model.Agrupamento;
 import br.com.muranodesign.model.AlunoAgrupamento;
+import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.model.Rotina;
+import br.com.muranodesign.model.Tutoria;
 
 /**
  * 
@@ -222,6 +225,49 @@ public class RotinaResource {
 				resultado.add(rotinaObj);
 			}
 		}		
+		
+		return resultado;
+	}
+	
+	@Path("RotinaDiariaProfessor/{idProfessor}/{idDiaSemana}")
+	@GET
+	@Produces("application/json")
+	public List<Object> getRotinaDiariaProfessor(@PathParam("idProfessor") int idProfessor, @PathParam("idDiaSemana") int idDiaSemana){
+		List<Object> resultado = new ArrayList<Object>();
+		
+		List<OficinaProfessor> oficinasProfessor = new OficinaProfessorService().listarProfessor(idProfessor);
+		for (OficinaProfessor oficinaProfessor : oficinasProfessor) {
+			List<Rotina> rotinaProfessor = new RotinaService().ListarRotinaOficinaDia(oficinaProfessor.getOficina().getIdoficina(), idDiaSemana);
+			for (Rotina rotina : rotinaProfessor) {
+				
+				Hashtable<String, Object> rotinaObj = new Hashtable<String, Object>();
+				
+				rotinaObj.put("hora", rotina.getHora());
+				rotinaObj.put("oficina", rotina.getOficina());
+				rotinaObj.put("tutoria", "");
+				rotinaObj.put("agrupamento", rotina.getAgrupamento().getNome());
+				rotinaObj.put("sala", new AgendamentoSalaService().listarRotina(rotina.getIdrotina()));
+				
+				resultado.add(rotinaObj);
+			}
+		}
+		
+		List<Tutoria> tutoriaProfessor = new TutoriaService().listarProfessorId(idProfessor);
+		for (Tutoria tutoria : tutoriaProfessor) {
+			List<Rotina> rotinaProfessor = new RotinaService().ListarRotinaTutoriaDia(tutoria.getIdtutoria(), idDiaSemana);
+			for (Rotina rotina : rotinaProfessor) {
+				
+				Hashtable<String, Object> rotinaObj = new Hashtable<String, Object>();
+				
+				rotinaObj.put("hora", rotina.getHora());
+				rotinaObj.put("oficina", "");
+				rotinaObj.put("tutoria", tutoria.getIdtutoria());
+				rotinaObj.put("agrupamento", "tutoria");
+				rotinaObj.put("sala", new AgendamentoSalaService().listarRotina(rotina.getIdrotina()));
+				
+				resultado.add(rotinaObj);
+			}
+		}
 		
 		return resultado;
 	}
