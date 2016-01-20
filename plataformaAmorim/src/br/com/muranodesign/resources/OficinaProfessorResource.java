@@ -149,16 +149,18 @@ public class OficinaProfessorResource {
 					List<AgendamentoSala> agendamento = new AgendamentoSalaService().listarRotina(rotinaOficinaProfessor.getIdrotina());
 					
 					Hashtable <String, Object> rotinaObj = new Hashtable<String, Object>();
-					
-					rotinaObj.put("oficina", oficinaProfessor.getOficina());
-					rotinaObj.put("dia", rotinaOficinaProfessor.getDia().getDia());
-					rotinaObj.put("hora", rotinaOficinaProfessor.getHora());
+
 					if (!agendamento.isEmpty())
-						rotinaObj.put("sala", agendamento.get(0).getSala().getSala());
+					{
+						rotinaObj.put("sala", agendamento.get(0));
+						rotinaObj.put("rotina", rotinaOficinaProfessor);
+					}
 					else
+					{
 						rotinaObj.put("sala", "");
+						rotinaObj.put("rotina", rotinaOficinaProfessor);
+					}
 					rotinaObj.put("professores", professores);
-					rotinaObj.put("agrupamento", rotinaOficinaProfessor.getAgrupamento().getNome());
 					
 					resultado.add(rotinaObj);
 				}
