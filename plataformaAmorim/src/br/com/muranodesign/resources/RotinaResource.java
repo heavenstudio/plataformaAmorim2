@@ -72,30 +72,30 @@ public class RotinaResource {
 			
 			Rotina rotina = new Rotina();
 			
-			List<Rotina> validação = new RotinaService().listarInconsistencia(Hora, idDia/*, idSala*/);
-			
-			List<AlunoAgrupamento> agrupamentoAlunos = new ArrayList<AlunoAgrupamento>();
-			Agrupamento agrupamentoNovo = new AgrupamentoService().listarkey(idAgrupamento).get(0);
-			
-			
-			if(!validação.isEmpty()){
-				for(Rotina rotina2 : validação) {
-					agrupamentoAlunos.addAll(new AlunoAgrupamentoService().listarAgrupamento(rotina2.getAgrupamento().getIdagrupamento()));
-				}
-				
-				List<AlunoAgrupamento> agrupamentoAlunosNovo = new ArrayList<AlunoAgrupamento>();
-				agrupamentoAlunosNovo.addAll(new AlunoAgrupamentoService().listarAgrupamento(agrupamentoNovo.getIdagrupamento()));
-				
-				for(int i = 0; i < agrupamentoAlunos.size();i++){
-					for(int j = 0; j < agrupamentoAlunosNovo.size();j++){
-						//if(agrupamentoAlunos.get(i).getAluno().getIdalunoVariavel() == agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()){
-						if(agrupamentoAlunos.get(i).getAluno().equals(agrupamentoAlunosNovo.get(j).getAluno())){
-							return "Erro: O aluno de id "+agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()+"já tem uma rotina para esse horario";
-						}
-					}
-				}	
-				//return "Erro: Já existe uma rotina para essa data, hora e sala. Favor escolher outra";
-			}else{
+//			List<Rotina> validação = new RotinaService().listarInconsistencia(Hora, idDia/*, idSala*/);
+//			
+//			List<AlunoAgrupamento> agrupamentoAlunos = new ArrayList<AlunoAgrupamento>();
+//			Agrupamento agrupamentoNovo = new AgrupamentoService().listarkey(idAgrupamento).get(0);
+//			
+//			
+//			if(!validação.isEmpty()){
+//				for(Rotina rotina2 : validação) {
+//					agrupamentoAlunos.addAll(new AlunoAgrupamentoService().listarAgrupamento(rotina2.getAgrupamento().getIdagrupamento()));
+//				}
+//				
+//				List<AlunoAgrupamento> agrupamentoAlunosNovo = new ArrayList<AlunoAgrupamento>();
+//				agrupamentoAlunosNovo.addAll(new AlunoAgrupamentoService().listarAgrupamento(agrupamentoNovo.getIdagrupamento()));
+//				
+//				for(int i = 0; i < agrupamentoAlunos.size();i++){
+//					for(int j = 0; j < agrupamentoAlunosNovo.size();j++){
+//						//if(agrupamentoAlunos.get(i).getAluno().getIdalunoVariavel() == agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()){
+//						if(agrupamentoAlunos.get(i).getAluno().equals(agrupamentoAlunosNovo.get(j).getAluno())){
+//							return "Erro: O aluno de id "+agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()+"já tem uma rotina para esse horario";
+//						}
+//					}
+//				}	
+//				//return "Erro: Já existe uma rotina para essa data, hora e sala. Favor escolher outra";
+//			}else{
 			
 				rotina.setHora(Hora);
 				rotina.setDia(new SemanaService().listarkey(idDia).get(0));
@@ -105,7 +105,7 @@ public class RotinaResource {
 				rotina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 				
 				resultado = new RotinaService().criarRotina(rotina);
-			}
+//			}
 			
 		}else if(action.equals("update")){
 			
