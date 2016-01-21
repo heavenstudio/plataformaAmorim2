@@ -22,7 +22,6 @@ import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.business.SemanaService;
 import br.com.muranodesign.business.TutoriaService;
-import br.com.muranodesign.model.Agrupamento;
 import br.com.muranodesign.model.AlunoAgrupamento;
 import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.model.Rotina;
@@ -114,29 +113,29 @@ public class RotinaResource {
 			
 			Rotina rotina = new RotinaService().listarkey(id).get(0);
 			
-			List<Rotina> validação = new RotinaService().listarInconsistencia(Hora, idDia/*, idSala*/);
+//			List<Rotina> validação = new RotinaService().listarInconsistencia(Hora, idDia/*, idSala*/);
+//			
+//			List<AlunoAgrupamento> agrupamentoAlunos = new ArrayList<AlunoAgrupamento>();
+//			Agrupamento agrupamentoNovo = new AgrupamentoService().listarkey(idAgrupamento).get(0);
 			
-			List<AlunoAgrupamento> agrupamentoAlunos = new ArrayList<AlunoAgrupamento>();
-			Agrupamento agrupamentoNovo = new AgrupamentoService().listarkey(idAgrupamento).get(0);
 			
-			
-			if(!validação.isEmpty()){
-				for(Rotina rotina2 : validação) {
-					agrupamentoAlunos.addAll(new AlunoAgrupamentoService().listarAgrupamento(rotina2.getAgrupamento().getIdagrupamento()));
-				}
-				
-				List<AlunoAgrupamento> agrupamentoAlunosNovo = new ArrayList<AlunoAgrupamento>();
-				agrupamentoAlunosNovo.addAll(new AlunoAgrupamentoService().listarAgrupamento(agrupamentoNovo.getIdagrupamento()));
-				
-				for(int i = 0; i < agrupamentoAlunos.size();i++){
-					for(int j = 0; j < agrupamentoAlunosNovo.size();j++){
-						if(agrupamentoAlunos.get(i).getAluno().equals(agrupamentoAlunosNovo.get(j).getAluno())){
-							return "Erro: O aluno de id "+agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()+"já tem uma rotina para esse horario";
-						}
-					}
-				}
-						
-			}else{
+//			if(!validação.isEmpty()){
+//				for(Rotina rotina2 : validação) {
+//					agrupamentoAlunos.addAll(new AlunoAgrupamentoService().listarAgrupamento(rotina2.getAgrupamento().getIdagrupamento()));
+//				}
+//				
+//				List<AlunoAgrupamento> agrupamentoAlunosNovo = new ArrayList<AlunoAgrupamento>();
+//				agrupamentoAlunosNovo.addAll(new AlunoAgrupamentoService().listarAgrupamento(agrupamentoNovo.getIdagrupamento()));
+//				
+//				for(int i = 0; i < agrupamentoAlunos.size();i++){
+//					for(int j = 0; j < agrupamentoAlunosNovo.size();j++){
+//						if(agrupamentoAlunos.get(i).getAluno().equals(agrupamentoAlunosNovo.get(j).getAluno())){
+//							return "Erro: O aluno de id "+agrupamentoAlunosNovo.get(j).getAluno().getIdalunoVariavel()+"já tem uma rotina para esse horario";
+//						}
+//					}
+//				}
+//						
+//			}else{
 			
 				rotina.setHora(Hora);
 				rotina.setDia(new SemanaService().listarkey(idDia).get(0));
@@ -145,7 +144,7 @@ public class RotinaResource {
 				rotina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 				
 				resultado = new RotinaService().atualizarRotina(rotina);
-			}
+//			}
 		}
 		
 		return Integer.toString(resultado.getIdrotina());

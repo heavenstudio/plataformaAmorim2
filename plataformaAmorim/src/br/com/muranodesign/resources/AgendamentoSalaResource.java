@@ -65,39 +65,11 @@ public class AgendamentoSalaResource {
 		}
 		else if(action.equals("create")){
 			AgendamentoSala agendamento = new AgendamentoSala();
-			
-			if(idrotina != 0){
-				
-				Rotina rotina = new RotinaService().listarkey(idrotina).get(0);
-				
-				List<AgendamentoSala> validacao = new AgendamentoSalaService().listarValidacao(rotina.getDia().getIdsemana(), idsala, rotina.getHora());
-				
-				if(!validacao.isEmpty()){
-					return "ERRO: Horario indisponivel";
-				}
-				
-				
-				agendamento.setRotina(new RotinaService().listarkey(idrotina).get(0));
-				agendamento.setSala(new SalasService().listarkey(idsala).get(0));
-				
-				resultado = new AgendamentoSalaService().criarAgendamentoSala(agendamento);
-			}else{
-			
-				List<AgendamentoSala> validacao = new AgendamentoSalaService().listarValidacao(iddia, idsala, hora);
-				
-				if(!validacao.isEmpty()){
-					return "ERRO: Horario indisponivel";
-				}
-				
-				agendamento.setDia(new SemanaService().listarkey(iddia).get(0));
-				agendamento.setHora(hora);
-				agendamento.setOutra(outra);
-				
-				agendamento.setSala(new SalasService().listarkey(idsala).get(0));
-				
-				resultado = new AgendamentoSalaService().criarAgendamentoSala(agendamento);
-			}
-			
+			agendamento.setHora(Hora);
+			agendamento.setDia(new SemanaService().listarkey(iddia).get(0));
+			agendamento.setRotina(new RotinaService().listarkey(idrotina).get(0));
+			agendamento.setSala(new SalasService().listarkey(idsala).get(0));
+			new AgendamentoSalaService().criarAgendamentoSala(agendamento);
 		}else if(action.equals("update")){
 			AgendamentoSala agendamento = new AgendamentoSalaService().listarkey(id).get(0);
 			

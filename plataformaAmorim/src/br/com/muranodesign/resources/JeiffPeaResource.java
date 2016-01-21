@@ -105,12 +105,12 @@ public class JeiffPeaResource {
 	/**
 	 * upload arquivo Jeiff/Pea
 	 */
-	@Path("upload/")
+	@Path("/upload/{id}")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces("text/plain")
 	public String uploadJeiffPea(
-			@FormParam("id") int id,
+			@PathParam("id") int id,
 			@FormDataParam("anexo") InputStream uploadedInputStream,
 			@FormDataParam("anexo") FormDataContentDisposition fileDetail){
 		

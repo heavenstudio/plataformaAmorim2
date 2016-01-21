@@ -339,6 +339,13 @@ public class ProducaoAlunoResource {
 		
 	}
 	
+	@Path("AlunoUltimasPostagens/{idAluno}")
+	@GET
+	@Produces("application/json")
+	public List<ProducaoAluno> getUltimasProducoes(@PathParam("idAluno") int idAluno){
+		return new ProducaoAlunoService().listarUltimasAluno(idAluno);
+	}
+	
 	/**
 	 * Criar e alterar producao do aluno
 	 * @param action
