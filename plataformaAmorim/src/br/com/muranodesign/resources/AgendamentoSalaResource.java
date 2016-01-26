@@ -69,8 +69,15 @@ public class AgendamentoSalaResource {
 			agendamento.setDia(new SemanaService().listarkey(iddia).get(0));
 			agendamento.setRotina(new RotinaService().listarkey(idrotina).get(0));
 			agendamento.setSala(new SalasService().listarkey(idsala).get(0));
-			new AgendamentoSalaService().criarAgendamentoSala(agendamento);
-		}else if(action.equals("update")){
+			if (id != 0)
+			{
+				agendamento.setIdagendamento_sala(id);
+				new AgendamentoSalaService().atualizarAgendamentoSala(agendamento);
+			}
+			else
+				new AgendamentoSalaService().criarAgendamentoSala(agendamento);
+		}
+		else if(action.equals("update")){
 			AgendamentoSala agendamento = new AgendamentoSalaService().listarkey(id).get(0);
 			
 			if(idrotina != 0){
