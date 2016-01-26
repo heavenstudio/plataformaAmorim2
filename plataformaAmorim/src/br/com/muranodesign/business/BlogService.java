@@ -85,4 +85,12 @@ public class BlogService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<Blog> listarAgrupamento(int idAgrupamento) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		BlogDAO dao = DAOFactory.getBlogDAO(pc);
+		List<Blog> result = dao.listarAgrupamento(idAgrupamento);
+		pc.commitAndClose();
+		return result;
+	}
 }

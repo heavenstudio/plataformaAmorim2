@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
+import br.com.muranodesign.business.AgrupamentoService;
 import br.com.muranodesign.business.BlogService;
 import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
@@ -57,6 +58,7 @@ public class BlogResource {
 			@FormParam("action") String action,
 			@FormParam("id") int id,
 			@FormParam("oficina") int oficina,
+			@FormParam("agrupamento") int agrupamento,
 			@FormParam("titulo") String titulo,
 			@FormParam("Descricao") String Descricao) throws ParseException{
 		
@@ -80,6 +82,7 @@ public class BlogResource {
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
 			blog.setData(date);
+			blog.setAgrupamento(new AgrupamentoService().listarkey(agrupamento).get(0));
 			if (oficina != 0)
 				blog.setOficina(new OficinaService().listarkey(oficina).get(0));
 			else
@@ -255,6 +258,15 @@ public class BlogResource {
 		}
 		
 		return resultado;
+	}
+	
+	@Path("BlogAgrupamento/{idAgrupamento}")
+	@GET
+	@Produces("application/json")
+	public List<Blog> getBlogAgrupamento(@PathParam("idAgrupamento") int idAgrupamento){
+		logger.debug("Lista Blog por Agrupamento " + idAgrupamento);
+		
+		return new BlogService().listarAgrupamento(idAgrupamento);
 	}
 
 	/**
