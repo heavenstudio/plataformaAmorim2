@@ -33,7 +33,9 @@ import br.com.muranodesign.business.AtribuicaoRoteiroExtraService;
 import br.com.muranodesign.business.GrupoService;
 import br.com.muranodesign.business.ObjetivoService;
 import br.com.muranodesign.business.PlanejamentoRoteiroService;
+import br.com.muranodesign.business.PresencaProfessorService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
+import br.com.muranodesign.business.ProfessorFuncionarioVariavelService;
 import br.com.muranodesign.business.RoteiroService;
 import br.com.muranodesign.business.TutoriaService;
 import br.com.muranodesign.model.AlunoVariavel;
@@ -41,6 +43,7 @@ import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
 import br.com.muranodesign.model.Grupo;
 import br.com.muranodesign.model.PlanejamentoRoteiro;
 import br.com.muranodesign.model.ProfessorFuncionario;
+import br.com.muranodesign.model.ProfessorFuncionarioVariavel;
 import br.com.muranodesign.model.Roteiro;
 import br.com.muranodesign.model.Tutoria;
 import br.com.muranodesign.util.StringUtil;
@@ -154,6 +157,9 @@ public class ProfessorFuncionarioResource {
 		List<Tutoria> tutorias = new TutoriaService().listarAno(ano);
 		for (Tutoria tutoria : tutorias) {
 			Hashtable<String, Object> professorDados = new Hashtable<String, Object>();
+			ProfessorFuncionarioVariavel professorVariavel = new ProfessorFuncionarioVariavelService().listarProfessor(tutoria.getTutor().getIdprofessorFuncionario()).get(0);
+			professorDados.put("faltas", new PresencaProfessorService().listarFaltas(professorVariavel.getIdprofessorFuncionarioVariavel()).size());
+			professorDados.put("presencas", new PresencaProfessorService().listarPresencas(professorVariavel.getIdprofessorFuncionarioVariavel()).size());
 			professorDados.put("nome", tutoria.getTutor().getNome());
 			professorDados.put("idProfessor", tutoria.getTutor().getIdprofessorFuncionario());
 			professorDados.put("foto", tutoria.getTutor().getFotoProfessorFuncionario());
