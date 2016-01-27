@@ -67,11 +67,7 @@ public class OficinaResource {
 			if(tipo == 1){
 				oficina.setNome(nome);
 			}else{
-				
-				long atual = new OficinaService().contTipo(tipo);
-				
-				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + Long.toString(atual + 1);
-				
+				nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + new CiclosService().listarkey(ciclo).get(0).getSigla() + new PeriodoService().listarkey(periodo).get(0).getPeriodo().substring(0, 1);			
 			}
 			oficina.setNome(nome);
 			oficina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
@@ -90,13 +86,13 @@ public class OficinaResource {
 		return Integer.toString(resultado.getIdoficina());
 	}
 	
-	@Path("Teste")
+	@Path("Teste/{tipo}/{ciclo}/{periodo}")
 	@GET
 	@Produces("text/plain")
-	public String teste()
+	public String teste(@PathParam("tipo") int tipo, @PathParam("ciclo") int ciclo, @PathParam("periodo") int periodo)
 	{
-		long resultado = new OficinaService().contTipo(1);
-		return Long.toString(resultado);
+		String nome = new TipoOficinaService().listarkey(tipo).getNome() + " - " + new CiclosService().listarkey(ciclo).get(0).getSigla() + new PeriodoService().listarkey(periodo).get(0).getPeriodo().substring(0, 1);	
+		return nome;
 	}
 	
 	/**
@@ -172,15 +168,16 @@ public class OficinaResource {
 	@Path("AlunosAgrupamento/{idOficina}")
 	@GET
 	@Produces("application/json")
-	public Hashtable<String, Object> getAlunosAgrupamento(@PathParam("idOficina") int idOficina){
+	public List<Object> getAlunosAgrupamento(@PathParam("idOficina") int idOficina){
 		
-		Hashtable<String, Object> resultado = new Hashtable<String, Object>();
+		List<Object> listaResultado = new ArrayList<Object>();
 				
 		Oficina oficina = new OficinaService().listarkey(idOficina).get(0);
 		List<Rotina> listRotina = new RotinaService().listarPorOficina(oficina.getIdoficina());
 		if(!(listRotina.isEmpty()))
 		{
 			for (Rotina rotina : listRotina) {
+				Hashtable<String, Object> resultado = new Hashtable<String, Object>();
 				resultado.put("nome", rotina.getAgrupamento().getNome());
 				resultado.put("id", rotina.getAgrupamento().getIdagrupamento());
 				List<Object> alunos = new ArrayList<Object>();
@@ -194,10 +191,11 @@ public class OficinaResource {
 					alunos.add(alunoObj);
 				}
 				resultado.put("alunos", alunos);
+				listaResultado.add(resultado);
 			}
 		}
 		
-		return resultado;
+		return listaResultado;
 	}
 	
 	
