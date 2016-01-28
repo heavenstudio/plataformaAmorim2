@@ -3,6 +3,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.BlogDAO;
@@ -24,6 +25,7 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 	public List<Blog> listAll() {
 			
 			Criteria criteria = getSession().createCriteria(Blog.class);
+			criteria.addOrder(Order.desc("data"));
 			List<Blog> result = criteria.list();
 			
 			
@@ -79,6 +81,7 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 	@SuppressWarnings("unchecked")
 	public List<Blog> listarOficina(int id){
 		Criteria criteria = getSession().createCriteria(Blog.class);
+		criteria.addOrder(Order.desc("data"));
 		criteria.createAlias("oficina", "oficina");
 		criteria.add(Restrictions.eq("oficina.Idoficina", id));
 		List<Blog> result = criteria.list();
@@ -88,6 +91,7 @@ public class BlogDAOImpl extends AbstractHibernateDAO implements BlogDAO{
 	@SuppressWarnings("unchecked")
 	public List<Blog> listarAgrupamento(int idAgrupamento) {
 		Criteria criteria = getSession().createCriteria(Blog.class);
+		criteria.addOrder(Order.desc("data"));
 		criteria.createAlias("agrupamento", "agrupamento");
 		criteria.add(Restrictions.eq("agrupamento.Idagrupamento", idAgrupamento));
 		List<Blog> result = criteria.list();

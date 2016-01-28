@@ -133,7 +133,7 @@ public class BlogResource {
 		File fileToResize = new File(uploadedFileLocation);
 		
 		try {
-			upload.resizeAndWriteToFile(fileToResize, uploadedFileLocationMed, 210);
+			upload.resizeAndWriteToFile(fileToResize, uploadedFileLocationMed, 350);
 			upload.resizeAndWriteToFile(fileToResize, uploadedFileLocationMin, 64);
 		} catch (Exception e) {
 			e.printStackTrace();

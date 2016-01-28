@@ -17,7 +17,7 @@ public class Usuario extends JerseyTest  {
 	@Test
 	public void insert2() {
 		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/AgendamentoSala/");
-		webResource.post("action=create&Hora=10&dia=2&idsala=1&idrotina=17&id=58");
+		webResource.post("action=create&Hora=20&dia=1&idsala=3&idrotina=17&id=64");
 	}
 	
 }
