@@ -57,10 +57,10 @@ public class JeiffPeaService {
 		return result;
 	}
 
-	public List<String> listarAnexos() {
+	public List<Object> listarAnexos() {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		JeiffPeaDAO dao = DAOFactory.getJeiffPeaDAO(pc);
-		List<String> result = dao.listarAnexos();
+		List<Object> result = dao.listarAnexos();
 		pc.commitAndClose();
 		return result;
 	}

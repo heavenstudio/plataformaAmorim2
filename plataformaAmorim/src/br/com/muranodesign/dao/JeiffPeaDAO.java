@@ -18,6 +18,6 @@ public interface JeiffPeaDAO {
 
 	List<JeiffPea> listarPeriodo(int idperiodo);
 
-	List<String> listarAnexos();
+	List<Object> listarAnexos();
 
 }

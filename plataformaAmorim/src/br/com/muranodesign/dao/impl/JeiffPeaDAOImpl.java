@@ -69,11 +69,12 @@ public class JeiffPeaDAOImpl extends AbstractHibernateDAO implements JeiffPeaDAO
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<String> listarAnexos() {
+	public List<Object> listarAnexos() {
 		Criteria criteria = getSession().createCriteria(JeiffPea.class);
 		criteria.addOrder(Order.desc("data"));
-		criteria.setProjection(Projections.property("anexo"));
-		List<String> resultado = criteria.list();
+		criteria.setProjection(Projections.projectionList().add(Projections.property("arquivo")).add(Projections.property("descricao")));
+		//criteria.setProjection(Projections.property("arquivo"));
+		List<Object> resultado = criteria.list();
 		return resultado;
 	}
 

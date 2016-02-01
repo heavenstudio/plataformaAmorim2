@@ -111,6 +111,7 @@ public class JeiffPeaResource {
 	@Produces("text/plain")
 	public String uploadJeiffPea(
 			@PathParam("id") int id,
+			@FormDataParam("descricao") String descricao,
 			@FormDataParam("anexo") InputStream uploadedInputStream,
 			@FormDataParam("anexo") FormDataContentDisposition fileDetail){
 		
@@ -126,6 +127,7 @@ public class JeiffPeaResource {
 		if(jeiff.getArquivo() != null)
 			upload.deleteFile(jeiff.getArquivo());
 		jeiff.setArquivo("http://177.55.99.90/files/" + arquivo);
+		jeiff.setDescricao(descricao);
 		new JeiffPeaService().atualizarJeiffPea(jeiff);
 		
 		return Integer.toString(id);
@@ -182,9 +184,9 @@ public class JeiffPeaResource {
 	@Path("ListarAnexos")
 	@GET
 	@Produces("application/json")
-	public List<String> getAnexos(){
+	public List<Object> getAnexos(){
 		logger.debug("Listar Anexos Jeiff/Pea");
-		List<String> resultado = new JeiffPeaService().listarAnexos();
+		List<Object> resultado = new JeiffPeaService().listarAnexos();
 		logger.debug("QTD Anexos Jeiff/Pea: " + resultado.size());
 		return resultado;
 	}

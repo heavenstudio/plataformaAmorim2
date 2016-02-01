@@ -47,6 +47,25 @@ public class JeiffPea implements Serializable {
 	 
 	@Column(name = "arquivo")
 	private String arquivo;
+	
+	@Column(name = "descricao")
+	private String descricao;
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
 	public int getIdJeiffPea() {
 		return idJeiffPea;
