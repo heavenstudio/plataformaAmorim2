@@ -50,9 +50,6 @@ public class Mural implements Serializable{
 	 @ManyToOne
 	 @JoinColumn(name = "periodo", referencedColumnName = "idperiodo")
 	 private Periodo periodo;
-
-	 /*@OneToOne
-	 private AlunoVariavel aluno;*/
 	 
 	 @Basic(optional = false)
 	 @Column(name = "data")
@@ -82,14 +79,6 @@ public class Mural implements Serializable{
 	public void setProfessor(ProfessorFuncionario professor) {
 		this.professor = professor;
 	}
-
-	/*public AlunoVariavel getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(AlunoVariavel aluno) {
-		this.aluno = aluno;
-	}*/
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
