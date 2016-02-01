@@ -46,7 +46,10 @@ public class AlunoAgrupamentoResource {
 		
 		
 		if(action.equals("delete")){
-			resultado = new AlunoAgrupamentoService().deletarAlunoAgrupamento(new AlunoAgrupamentoService().listarkey(id).get(0));
+			if (id != 0)
+				resultado = new AlunoAgrupamentoService().deletarAlunoAgrupamento(new AlunoAgrupamentoService().listarkey(id).get(0));
+			else
+				resultado = new AlunoAgrupamentoService().deletarAlunoAgrupamento(new AlunoAgrupamentoService().listarAlunoAgrupamento(Aluno, idAgrupamento).get(0));
 		}
 		else if(action.equals("create")){
 			AlunoAgrupamento agrupamento = new AlunoAgrupamento();
