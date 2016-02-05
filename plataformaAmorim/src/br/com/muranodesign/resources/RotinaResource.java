@@ -112,7 +112,7 @@ public class RotinaResource {
 				rotina.setAgrupamento(new AgrupamentoService().listarkey(idAgrupamento).get(0));
 				rotina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 				
-				if (id == 0)
+				if (id != 0)
 				{
 					rotina.setIdrotina(id);
 					resultado = new RotinaService().atualizarRotina(rotina);
@@ -283,6 +283,13 @@ public class RotinaResource {
 		}
 		
 		return resultado;
+	}
+	
+	@Path("ListarOficina/{idOficina}")
+	@GET
+	@Produces("application/json")
+	public List<Rotina> listarOficina(@PathParam("idOficina") int idOficina){
+		return new RotinaService().listarPorOficina(idOficina);
 	}
 	
 }
