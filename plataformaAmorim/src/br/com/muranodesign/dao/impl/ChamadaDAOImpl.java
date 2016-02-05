@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -181,6 +182,29 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		
 	    
 		return result; 
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Chamada> getFaltasSemana(int idAluno, int dia, int mes) {
+		Criteria criteria = getSession().createCriteria(Chamada.class);
+		
+		Calendar primeiroDia = Calendar.getInstance();
+		primeiroDia.set(Calendar.MONTH, mes - 1);
+		primeiroDia.set(Calendar.DAY_OF_WEEK, 1);
+		Calendar ultimoDia =  Calendar.getInstance();
+		ultimoDia.set(Calendar.MONTH, mes - 1);
+		ultimoDia.set(Calendar.DAY_OF_WEEK, ultimoDia.getActualMaximum(Calendar.DAY_OF_WEEK));
+		
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		
+		criteria.add(Restrictions.ge("data", primeiroDia.getTime()));
+		criteria.add(Restrictions.le("data", ultimoDia.getTime()));
+		criteria.addOrder(Order.asc("data"));
+		
+		List<Chamada> result = criteria.list();
+		return result;
+		
 	}
 
 }

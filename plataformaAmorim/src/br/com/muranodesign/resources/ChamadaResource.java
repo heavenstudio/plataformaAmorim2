@@ -84,6 +84,25 @@ public class ChamadaResource {
 
 	}
 	
+	@Path("ListarGrupo/{idGrupo}/{dia}/{mes}")
+	@GET
+	@Produces("application/json")
+	public List<Object> getGrupo(@PathParam("idGrupo") int idGrupo, @PathParam("dia") int dia, @PathParam("mes") int mes){
+		List<Object> resultado = new ArrayList<Object>();
+		
+		List<AlunoVariavel> listAlunoVariavel = new AlunoVariavelService().listaGrupo(idGrupo);
+		List<Alunos> alunos = new ArrayList<Alunos>();
+		for (AlunoVariavel alunoVariavel : listAlunoVariavel) {
+			Hashtable<String, Object> faltasAluno = new Hashtable<String, Object>();
+			faltasAluno.put("alunoNome", alunoVariavel.getAluno().getNome());
+			faltasAluno.put("alunoId", alunoVariavel.getAluno().getIdAluno());
+			faltasAluno.put("faltas", new ChamadaService().listarFaltasSemana(alunoVariavel.getAluno().getIdAluno(), dia, mes));
+		}
+		
+		
+		return resultado;
+	}
+	
 	
 	/**
 	 * Gets Chamada.

@@ -156,5 +156,14 @@ public class ChamadaService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<Chamada> listarFaltasSemana(int idAluno, int dia, int mes) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ChamadaDAO dao = DAOFactory.getChamadaDAO(pc);
+		List<Chamada> result = dao.getFaltasSemana(idAluno, dia, mes);
+				
+		pc.commitAndClose();
+		return result;
+	}
 	
 }

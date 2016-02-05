@@ -89,6 +89,8 @@ public interface ChamadaDAO {
 		 * @return
 		 */
 		public List<Chamada> dataPresencaAtual(int id, Date data);
+
+		public List<Chamada> getFaltasSemana(int idAluno, int dia, int mes);
 	
 
 }
