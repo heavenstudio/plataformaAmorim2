@@ -38,6 +38,12 @@ public class RotinaResource {
 	private Logger logger = Logger.getLogger(RotinaResource.class.getName());
 	
 	
+	@Path("Teste")
+	@POST
+	public String teste(@FormParam("json") String ob){
+		return "oi";
+	}
+	
 	/**
 	 * 
 	 * @param action
@@ -106,7 +112,15 @@ public class RotinaResource {
 				rotina.setAgrupamento(new AgrupamentoService().listarkey(idAgrupamento).get(0));
 				rotina.setAnoLetivo(new AnoLetivoService().listarkey(anoLetivo).get(0));
 				
-				resultado = new RotinaService().criarRotina(rotina);
+				if (id == 0)
+				{
+					rotina.setIdrotina(id);
+					resultado = new RotinaService().atualizarRotina(rotina);
+				}
+				else
+				{
+					resultado = new RotinaService().criarRotina(rotina);
+				}
 //			}
 			
 		}else if(action.equals("update")){
