@@ -147,5 +147,18 @@ public class AgendamentoSalaResource {
 		 logger.debug("QTD AgendamentoSala : " +  resultado.size());
 		return resultado;
 	}
+	
+	@GET
+	@Path("ListarRotina/{idRotina}")
+	@Produces("application/json")
+	public AgendamentoSala listarRotina(@PathParam("idRotina") int idRotina){
+		
+		try{
+			return new AgendamentoSalaService().listarRotina(idRotina).get(0);
+		}
+		catch (Exception e){
+			return new AgendamentoSala();
+		}
+	}
 
 }
