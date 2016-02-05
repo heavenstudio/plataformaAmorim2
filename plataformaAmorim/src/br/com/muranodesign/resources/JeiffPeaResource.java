@@ -119,6 +119,7 @@ public class JeiffPeaResource {
 		
 		StringUtil stringUtil = new StringUtil();
 		String arquivo = stringUtil.geraNomeAleatorio(fileDetail.getFileName(), 50);
+		//String uploadedFileLocation = "C:/Users/murano/Desktop/" + arquivo;
 		String uploadedFileLocation = "/home/tomcat/webapps/files/" + arquivo;
 		
 		Upload upload = new Upload();

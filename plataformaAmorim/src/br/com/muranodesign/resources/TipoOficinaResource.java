@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
@@ -29,6 +30,13 @@ public class TipoOficinaResource {
 		 resultado = new TipoOficinaService().listarTodos();
 		 logger.debug("QTD TipoOficina : " +  resultado.size());
 		return resultado;
+	}
+	
+	@Path("{id}")
+	@GET
+	@Produces("application/json")
+	public TipoOficina getOficina(@PathParam("id") int id){
+		return new TipoOficinaService().listarkey(id);
 	}
 	
 }
