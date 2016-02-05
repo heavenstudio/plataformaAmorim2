@@ -160,6 +160,15 @@ public class UsuarioDAOImpl extends AbstractHibernateDAO implements UsuarioDAO {
 		return result;
 	}
 
+	@Override
+	public List<Usuario> listarPerfil(int idPerfil) {
+		Criteria criteria = getSession().createCriteria(Usuario.class);
+		criteria.createAlias("perfil", "perfil");
+		criteria.add(Restrictions.eq("perfil.idperfil", idPerfil));
+		List<Usuario> result = criteria.list();
+		return result;
+	}
+
 	
 	
 }

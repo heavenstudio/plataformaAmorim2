@@ -208,6 +208,13 @@ public class UsuarioResource {
 		return evento;
 	}
 	
+	@Path("ListarPerfil/{idPerfil}")
+	@GET
+	@Produces("application/json")
+	public List<Usuario> getPerfil(@PathParam("idPerfil") int idPerfil){
+		return new UsuarioService().listarPerfil(idPerfil);
+	}
+	
 	/**
 	 * Seta o valor 1 para o campo banner
 	 * @param id
