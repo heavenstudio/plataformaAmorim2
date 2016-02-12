@@ -9,6 +9,7 @@
  */
 package br.com.muranodesign.business;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -161,6 +162,15 @@ public class ChamadaService {
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		ChamadaDAO dao = DAOFactory.getChamadaDAO(pc);
 		List<Chamada> result = dao.getFaltasSemana(idAluno, dia, mes);
+				
+		pc.commitAndClose();
+		return result;
+	}
+
+	public List<Chamada> dataPresenca(int id, Calendar cal) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ChamadaDAO dao = DAOFactory.getChamadaDAO(pc);
+		List<Chamada> result = dao.dataPresenca(id, cal);
 				
 		pc.commitAndClose();
 		return result;

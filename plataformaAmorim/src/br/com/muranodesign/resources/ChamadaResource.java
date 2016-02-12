@@ -26,6 +26,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import br.com.muranodesign.business.AlunoService;
 import br.com.muranodesign.business.AlunoVariavelService;
@@ -49,7 +52,55 @@ public class ChamadaResource {
 
 	/** The logger. */
 	private Logger logger = Logger.getLogger(ChamadaResource.class.getName());
+	@Path("ChamadaGrupo/")
+	@POST
+	@Produces("text/plain")
+	public String postGrupo(@FormParam("stringfiedJson") String stringfiedJson){
+		try {
+			JSONObject json  = new JSONObject(stringfiedJson);
+			
+			JSONArray faltas = json.optJSONArray("listaFaltas");
+			for(int i = 0; i < faltas.length(); i++)
+			{
+				Calendar cal = Calendar.getInstance();
+				cal.set(Calendar.MONTH, json.getInt("dataMes"));
+				cal.set(Calendar.DATE, json.getInt("dataDia"));
 
+				JSONObject alunoFaltas = new JSONObject(faltas.get(i).toString());
+				for(int j = 0; j < 7; j++)
+				{
+					if (j > 0 && j < 6)
+					{
+						StringUtil stringUtil = new StringUtil();
+						Date data = stringUtil.converteStringData(cal.get(Calendar.YEAR) + "-" + String.format("%02d", cal.get(Calendar.MONTH) + 1) + "-" + String.format("%02d", cal.get(Calendar.DATE)));
+						List<Chamada> chamadaDia = new ChamadaService().dataPresenca(alunoFaltas.getInt("alunoId"), data);
+						if (!chamadaDia.isEmpty())
+						{
+							chamadaDia.get(0).setPresenca((short)alunoFaltas.optJSONArray("faltas").getInt(j));
+							new ChamadaService().atualizarChamada(chamadaDia.get(0));
+						}
+						else
+						{
+							Chamada chamada = new Chamada();
+							chamada.setAluno(new AlunoService().listarkey(alunoFaltas.getInt("alunoId")).get(0));
+							chamada.setData(data);
+							chamada.setPresenca((short)alunoFaltas.optJSONArray("faltas").getInt(j));
+							new ChamadaService().criarChamada(chamada);
+						}
+					}
+					cal.set(Calendar.DATE, cal.get(Calendar.DATE) + 1);
+				}				
+			}
+			
+		} catch (JSONException e) {
+			// 	
+			System.out.println(stringfiedJson);
+			e.printStackTrace();
+		}
+		
+		return "Post Completo";
+	}
+	
 	/**
 	 * Gets the chamada.
 	 *
@@ -91,12 +142,19 @@ public class ChamadaResource {
 		List<Object> resultado = new ArrayList<Object>();
 		
 		List<AlunoVariavel> listAlunoVariavel = new AlunoVariavelService().listaGrupo(idGrupo);
-		List<Alunos> alunos = new ArrayList<Alunos>();
+//		List<Alunos> alunos = new ArrayList<Alunos>();
 		for (AlunoVariavel alunoVariavel : listAlunoVariavel) {
 			Hashtable<String, Object> faltasAluno = new Hashtable<String, Object>();
 			faltasAluno.put("alunoNome", alunoVariavel.getAluno().getNome());
 			faltasAluno.put("alunoId", alunoVariavel.getAluno().getIdAluno());
-			faltasAluno.put("faltas", new ChamadaService().listarFaltasSemana(alunoVariavel.getAluno().getIdAluno(), dia, mes));
+			faltasAluno.put("foto", alunoVariavel.getAluno().getFotoAluno());
+			List<Chamada> chamadas = new ChamadaService().listarFaltasSemana(alunoVariavel.getAluno().getIdAluno(), dia, mes);
+			List<String> faltas = new ArrayList<String>();
+			for (Chamada chamada : chamadas) {
+				faltas.add(chamada.getData().toString());
+			}
+			faltasAluno.put("faltas", faltas);
+			resultado.add(faltasAluno);
 		}
 		
 		

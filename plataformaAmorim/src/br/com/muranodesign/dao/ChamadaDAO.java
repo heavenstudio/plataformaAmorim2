@@ -9,6 +9,7 @@
  */
 package br.com.muranodesign.dao;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -91,6 +92,8 @@ public interface ChamadaDAO {
 		public List<Chamada> dataPresencaAtual(int id, Date data);
 
 		public List<Chamada> getFaltasSemana(int idAluno, int dia, int mes);
+
+		public List<Chamada> dataPresenca(int id, Calendar cal);
 	
 
 }
