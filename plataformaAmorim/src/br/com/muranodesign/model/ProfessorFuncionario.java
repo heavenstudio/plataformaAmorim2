@@ -74,8 +74,8 @@ public class ProfessorFuncionario implements Serializable {
     @Column(name = "complemento")
     private String complemento;
     
-//    @Column(name = "perfil")
-//    private int perfil;
+    @Column(name = "perfil")
+    private int perfil;
     
     @Basic(optional = false)
     @Column(name = "cep")
@@ -362,13 +362,13 @@ public class ProfessorFuncionario implements Serializable {
         return "br.com.muranodesign.model.ProfessorFuncionario[ idprofessorFuncionario=" + idprofessorFuncionario + " ]";
     }
 
-//	public int getPerfil() {
-//		return perfil;
-//	}
-//
-//	public void setPerfil(int perfil) {
-//		this.perfil = perfil;
-//	}
+	public int getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(int perfil) {
+		this.perfil = perfil;
+	}
 
 
 
