@@ -53,6 +53,9 @@ public class TutoriaDAOImpl extends AbstractHibernateDAO implements TutoriaDAO {
 	public List<Tutoria> listAll() {
 		
 		Criteria criteria = getSession().createCriteria(Tutoria.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.addOrder(Order.asc("tutoria"));
 		List<Tutoria> result = criteria.list();
 		
