@@ -10,6 +10,7 @@
 package br.com.muranodesign.business;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -177,6 +178,38 @@ public class CalendarioService {
 		List<Calendario> result = dao.listarGeralMes(mes, ano);
 		pc.commitAndClose();
 		return result;
+	}
+	
+	public List<Calendario> listaFeriado(Calendar dataInicio, Calendar dataFim){
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		CalendarioDAO dao = DAOFactory.getCalendarioDAO(pc);
+		List<Calendario> result = dao.listFeriados(dataInicio, dataFim);
+		pc.commitAndClose();
+		return result;
+	}
+	
+	public int diasLetivosCount(Calendar dataInicio, Calendar dataFim){
+		int finsDeSemana = 0;
+		Calendar d = Calendar.getInstance();
+		d.set(Calendar.MONTH, dataInicio.get(Calendar.MONTH));
+		d.set(Calendar.DATE, dataInicio.get(Calendar.DATE));
+		for (; d.get(Calendar.DAY_OF_YEAR) <= dataFim.get(Calendar.DAY_OF_YEAR); d.set(Calendar.DATE, d.get(Calendar.DATE) + 1)){
+			if(d.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || d.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
+				finsDeSemana++;
+		}
+		int diasFeriado = 0;
+		List<Calendario> feriados = new CalendarioService().listaFeriado(dataInicio, dataFim);
+		for (Calendario calendario : feriados) {
+			Calendar inicioFeriado = Calendar.getInstance();
+			inicioFeriado.setTime(calendario.getDataInicio());
+			Calendar fimFeriado = Calendar.getInstance();
+			fimFeriado.setTime(calendario.getDataFim());
+			diasFeriado += fimFeriado.get(Calendar.DAY_OF_YEAR) - inicioFeriado.get(Calendar.DAY_OF_YEAR) + 1;
+		}
+		int diasTotais = dataFim.get(Calendar.DAY_OF_YEAR) - dataInicio.get(Calendar.DAY_OF_YEAR) + 1;
+		
+		int diasLetivosTotais = diasTotais - finsDeSemana - diasFeriado;
+		return diasLetivosTotais;
 	}
 	
 }

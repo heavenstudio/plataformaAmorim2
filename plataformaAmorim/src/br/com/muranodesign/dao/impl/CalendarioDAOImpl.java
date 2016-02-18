@@ -217,4 +217,16 @@ public class CalendarioDAOImpl extends AbstractHibernateDAO implements Calendari
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Calendario> listFeriados(Calendar dataInicio, Calendar dataFim) {
+		Criteria criteria = getSession().createCriteria(Calendario.class);
+		criteria.add(Restrictions.or(Restrictions.ge("feriado",1),Restrictions.eq("aula",0)));
+		criteria.add(Restrictions.eq("ano", dataInicio.get(Calendar.YEAR)));
+		criteria.add(Restrictions.ge("dataInicio", dataInicio.getTime()));
+		criteria.add(Restrictions.le("dataInicio", dataFim.getTime()));
+		criteria.addOrder(Order.asc("dataInicio"));		
+		List<Calendario> result = criteria.list();		
+		return result;
+	}
+
 }

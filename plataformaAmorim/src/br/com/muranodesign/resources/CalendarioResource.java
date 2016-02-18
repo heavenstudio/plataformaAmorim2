@@ -11,6 +11,7 @@ package br.com.muranodesign.resources;
 
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -62,6 +63,19 @@ public class CalendarioResource {
 		resultado = new CalendarioService().listarTodos();
 		logger.info("QTD Calendario : " + resultado.size());
 		return resultado;
+	}
+	
+	@Path("Teste")
+	@GET
+	@Produces("text/plain")
+	public String teste(){
+		Calendar dataInicio = Calendar.getInstance();
+		dataInicio.set(Calendar.MONTH, Calendar.JANUARY);
+		dataInicio.set(Calendar.DATE, 3);
+		Calendar dataFim = Calendar.getInstance();
+		dataFim.set(Calendar.MONTH, Calendar.JANUARY);
+		dataFim.set(Calendar.DATE, 30);
+		return Integer.toString(new CalendarioService().diasLetivosCount(dataInicio, dataFim));
 	}
 	
 	@Path("Range")

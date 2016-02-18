@@ -10,6 +10,7 @@
 package br.com.muranodesign.dao;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -94,5 +95,7 @@ public interface CalendarioDAO {
 		public List<Calendario> listarRange();
 
 		public List<Calendario> listarGeralMes(int mes, int ano);
+
+		public List<Calendario> listFeriados(Calendar dataInicio, Calendar dataFim);
 
 }
