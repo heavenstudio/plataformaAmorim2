@@ -24,6 +24,7 @@ import br.com.muranodesign.business.AgrupamentoService;
 import br.com.muranodesign.business.BlogService;
 import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
+import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.Blog;
 import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.OficinaProfessor;
@@ -57,6 +58,7 @@ public class BlogResource {
 	public String eventoAction(
 			@FormParam("action") String action,
 			@FormParam("id") int id,
+			@FormParam("autor") int autor,
 			@FormParam("oficina") int oficina,
 			@FormParam("agrupamento") int agrupamento,
 			@FormParam("titulo") String titulo,
@@ -83,6 +85,7 @@ public class BlogResource {
 			blog.setTitulo(titulo);
 			blog.setData(date);
 			blog.setAgrupamento(new AgrupamentoService().listarkey(agrupamento).get(0));
+			blog.setAutor(new ProfessorFuncionarioService().listarkey(autor).get(0));
 			if (oficina != 0)
 				blog.setOficina(new OficinaService().listarkey(oficina).get(0));
 			else
@@ -258,6 +261,13 @@ public class BlogResource {
 		}
 		
 		return resultado;
+	}
+	
+	@Path("BlogTutoria/{idProfessor}")
+	@GET
+	@Produces("application/json")
+	public List<Blog> listarTutoria (@PathParam("idProfessor") int idProfessor){
+		return new BlogService().listarTutoria(idProfessor);
 	}
 	
 	@Path("BlogAgrupamento/{idAgrupamento}")

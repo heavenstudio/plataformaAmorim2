@@ -93,4 +93,12 @@ public class BlogService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<Blog> listarTutoria(int idProfessor) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		BlogDAO dao = DAOFactory.getBlogDAO(pc);
+		List<Blog> result = dao.listarTutoria(idProfessor);
+		pc.commitAndClose();
+		return result;
+	}
 }

@@ -53,6 +53,18 @@ public class Blog implements Serializable{
 	 @ManyToOne
 	 @JoinColumn(name = "agrupamento", referencedColumnName = "Idagrupamento")
 	 private Agrupamento agrupamento;
+	 
+	 @ManyToOne
+	 @JoinColumn(name = "autor", referencedColumnName = "idprofessor_funcionario")
+	 private ProfessorFuncionario autor;
+
+	public ProfessorFuncionario getAutor() {
+		return autor;
+	}
+
+	public void setAutor(ProfessorFuncionario autor) {
+		this.autor = autor;
+	}
 
 	public int getIdblog() {
 		return Idblog;
