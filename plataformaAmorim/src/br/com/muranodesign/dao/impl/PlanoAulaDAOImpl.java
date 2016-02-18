@@ -139,7 +139,11 @@ public class PlanoAulaDAOImpl extends AbstractHibernateDAO implements PlanoAulaD
 		criteria.add(Restrictions.eq("professor.idprofessorFuncionario", idProfessor));
 		criteria.add(Restrictions.le("data_ini", data));
 		criteria.addOrder(Order.desc("data_ini"));
-		PlanoAula result = (PlanoAula)criteria.list().get(0);
+		PlanoAula result;
+		if (criteria.list().size() > 0)
+			result = (PlanoAula)criteria.list().get(0);
+		else
+			result = new PlanoAula();
 		return result;
 	}
 }
