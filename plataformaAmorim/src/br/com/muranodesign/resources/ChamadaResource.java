@@ -64,29 +64,26 @@ public class ChamadaResource {
 			{
 				Calendar cal = Calendar.getInstance();
 				cal.set(Calendar.MONTH, json.getInt("dataMes"));
-				cal.set(Calendar.DATE, json.getInt("dataDia"));
+				cal.set(Calendar.DATE, json.getInt("dataDia")  + 1);
 
 				JSONObject alunoFaltas = new JSONObject(faltas.get(i).toString());
-				for(int j = 0; j < 7; j++)
+				for(int j = 0; j < 5; j++)
 				{
-					if (j > 0 && j < 6)
+					StringUtil stringUtil = new StringUtil();
+					Date data = stringUtil.converteStringData(cal.get(Calendar.YEAR) + "-" + String.format("%02d", cal.get(Calendar.MONTH) + 1) + "-" + String.format("%02d", cal.get(Calendar.DATE)));
+					List<Chamada> chamadaDia = new ChamadaService().dataPresenca(alunoFaltas.getInt("alunoId"), data);
+					if (!chamadaDia.isEmpty())
 					{
-						StringUtil stringUtil = new StringUtil();
-						Date data = stringUtil.converteStringData(cal.get(Calendar.YEAR) + "-" + String.format("%02d", cal.get(Calendar.MONTH) + 1) + "-" + String.format("%02d", cal.get(Calendar.DATE)));
-						List<Chamada> chamadaDia = new ChamadaService().dataPresenca(alunoFaltas.getInt("alunoId"), data);
-						if (!chamadaDia.isEmpty())
-						{
-							chamadaDia.get(0).setPresenca((short)alunoFaltas.optJSONArray("faltas").getInt(j));
-							new ChamadaService().atualizarChamada(chamadaDia.get(0));
-						}
-						else
-						{
-							Chamada chamada = new Chamada();
-							chamada.setAluno(new AlunoService().listarkey(alunoFaltas.getInt("alunoId")).get(0));
-							chamada.setData(data);
-							chamada.setPresenca((short)alunoFaltas.optJSONArray("faltas").getInt(j));
-							new ChamadaService().criarChamada(chamada);
-						}
+						chamadaDia.get(0).setPresenca((short)alunoFaltas.optJSONArray("faltas").getInt(j));
+						new ChamadaService().atualizarChamada(chamadaDia.get(0));
+					}
+					else
+					{
+						Chamada chamada = new Chamada();
+						chamada.setAluno(new AlunoService().listarkey(alunoFaltas.getInt("alunoId")).get(0));
+						chamada.setData(data);
+						chamada.setPresenca((short)alunoFaltas.optJSONArray("faltas").getInt(j));
+						new ChamadaService().criarChamada(chamada);
 					}
 					cal.set(Calendar.DATE, cal.get(Calendar.DATE) + 1);
 				}				
@@ -153,6 +150,7 @@ public class ChamadaResource {
 			for (Chamada chamada : chamadas) {
 				faltas.add(chamada.getData().toString());
 			}
+			
 			faltasAluno.put("faltas", faltas);
 			resultado.add(faltasAluno);
 		}

@@ -195,9 +195,7 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		primeiroDia.set(Calendar.DAY_OF_WEEK, primeiroDia.getFirstDayOfWeek());
 		Calendar ultimoDia =  Calendar.getInstance();
 		ultimoDia.set(Calendar.MONTH, mes);
-		ultimoDia.set(Calendar.DATE, dia);
-		ultimoDia.set(Calendar.WEEK_OF_MONTH, primeiroDia.get(Calendar.WEEK_OF_MONTH));
-		ultimoDia.set(Calendar.DAY_OF_WEEK, ultimoDia.getActualMaximum(Calendar.DAY_OF_WEEK));
+		ultimoDia.set(Calendar.DATE, primeiroDia.get(Calendar.DATE) + 6);
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
 		
