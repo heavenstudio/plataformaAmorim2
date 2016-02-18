@@ -101,4 +101,12 @@ public class BlogService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<Blog> listarOficinaProfessor(int idOficina, int idProfessor) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		BlogDAO dao = DAOFactory.getBlogDAO(pc);
+		List<Blog> result = dao.listarOficinaProfessor(idOficina, idProfessor);
+		pc.commitAndClose();
+		return result;
+	}
 }

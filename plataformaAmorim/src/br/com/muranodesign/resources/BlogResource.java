@@ -324,4 +324,12 @@ public class BlogResource {
 		return resultado;
 
 	}
+	
+	@Path("ListarOficinaProfessor/{idOficina}/{idProfessor}")
+	@GET
+	@Produces("application/json")
+	public List<Blog> listarOficinaProfessor(@PathParam("idOficina") int idOficina, @PathParam("idProfessor") int idProfessor){
+		return new BlogService().listarOficinaProfessor(idOficina, idProfessor);
+	}
+	
 }
