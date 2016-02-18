@@ -1,6 +1,7 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -14,10 +15,15 @@ import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
+import br.com.muranodesign.business.PlanejamentoAulaService;
+import br.com.muranodesign.business.PlanoAulaService;
 import br.com.muranodesign.business.RoteiroAulaService;
 import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.OficinaProfessor;
+import br.com.muranodesign.model.PlanejamentoAula;
+import br.com.muranodesign.model.PlanoAula;
 import br.com.muranodesign.model.RoteiroAula;
+import br.com.muranodesign.util.StringUtil;
 
 /**
  * 
@@ -251,6 +257,39 @@ public class RoteiroAulaResource {
 		}
 		
 		return roteiros;
+		
+	}
+	
+	/**
+	 * Listar Roteiro Aula por oficina e data
+	 * @param idOficina
+	 * @param dataString
+	 * @return
+	 */
+	@Path("ListarOficinaData/{idOficina}/{data}")
+	@GET
+	@Produces("application/json")
+	public List<RoteiroAula> listarOficinaData(@PathParam("idOficina") int idOficina, @PathParam("data") String dataString){
+		
+		List<RoteiroAula> resultado = new ArrayList<RoteiroAula>();
+		
+		StringUtil stringUtil = new StringUtil();
+		
+		Date data = stringUtil.converteStringData(dataString);
+		
+		List<PlanoAula> planosAula = new PlanoAulaService().listarOficinaData(idOficina, data);
+		for (PlanoAula planoAula : planosAula) {
+			List<PlanejamentoAula> planejamentosAula = new PlanejamentoAulaService().listarPlanoAula(planoAula.getIdplano_aula());
+			for (PlanejamentoAula planejamentoAula : planejamentosAula) {
+				RoteiroAula roteiroAula = planejamentoAula.getObjetivoAula().getRoteiro();
+				if (!resultado.contains(roteiroAula))
+				{
+					resultado.add(roteiroAula);
+				}
+			}
+		}
+		
+		return resultado;
 		
 	}
 	

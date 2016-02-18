@@ -1,6 +1,7 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -15,10 +16,15 @@ import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.ObjetivoAulaService;
 import br.com.muranodesign.business.OficinaProfessorService;
+import br.com.muranodesign.business.PlanejamentoAulaService;
+import br.com.muranodesign.business.PlanoAulaService;
 import br.com.muranodesign.business.RoteiroAulaService;
 import br.com.muranodesign.model.ObjetivoAula;
 import br.com.muranodesign.model.OficinaProfessor;
+import br.com.muranodesign.model.PlanejamentoAula;
+import br.com.muranodesign.model.PlanoAula;
 import br.com.muranodesign.model.RoteiroAula;
+import br.com.muranodesign.util.StringUtil;
 
 /**
  * 
@@ -244,6 +250,43 @@ public class ObjetivoAulaResource {
 		}
 
 		return "ok";
+	}
+	
+	/**
+	 * Listar Roteiro Aula por oficina e data
+	 * @param idOficina
+	 * @param dataString
+	 * @return
+	 */
+	@Path("ListarOficinaRoteiroData/{idOficina}/{idRoteiro}/{data}")
+	@GET
+	@Produces("application/json")
+	public List<ObjetivoAula> listarOficinaRoteiroData(
+			@PathParam("idOficina") int idOficina,
+			@PathParam("idRoteiro") int idRoteiro,
+			@PathParam("data") String dataString){
+		
+		List<ObjetivoAula> resultado = new ArrayList<ObjetivoAula>();
+		
+		StringUtil stringUtil = new StringUtil();
+		
+		Date data = stringUtil.converteStringData(dataString);
+		
+		List<PlanoAula> planosAula = new PlanoAulaService().listarOficinaData(idOficina, data);
+		for (PlanoAula planoAula : planosAula) {
+			List<PlanejamentoAula> planejamentosAula = new PlanejamentoAulaService().listarPlanoAula(planoAula.getIdplano_aula());
+			for (PlanejamentoAula planejamentoAula : planejamentosAula) {
+				RoteiroAula roteiroAula = planejamentoAula.getObjetivoAula().getRoteiro();
+				ObjetivoAula objetivoAula = planejamentoAula.getObjetivoAula();
+				if (roteiroAula.getIdroteiro_aula() == idRoteiro && !(resultado.contains(objetivoAula)))
+				{
+					resultado.add(objetivoAula);
+				}
+			}
+		}
+		
+		return resultado;
+		
 	}
 
 }
