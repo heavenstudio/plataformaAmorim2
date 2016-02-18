@@ -16,8 +16,8 @@ public class Usuario extends JerseyTest  {
 	
 	@Test
 	public void insert2() {
-		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/Chamada/ChamadaGrupo/");
-			webResource.post("stringfiedJson=%7B%22dataDia%22%3A%2228%22%2C%22dataMes%22%3A1%2C%22listaFaltas%22%3A%5B%7B%22alunoId%22%3A%221058%22%2C%22faltas%22%3A%5B%221%22%2C%220%22%2C%221%22%2C%221%22%2C%221%22%2C%220%22%2C%221%22%5D%7D%2C%7B%22alunoId%22%3A%221001%22%2C%22faltas%22%3A%5B%221%22%2C%221%22%2C%221%22%2C%221%22%2C%220%22%2C%221%22%2C%221%22%5D%7D%5D%7D");
+		WebResource webResource = client().resource("http://localhost:8888/plataformaAmorim/ProfessorFuncionario");
+			webResource.post("id=0&action=create&foto_professor_funcionario=1&ativo=S&dataEntradaEscola=2010-10-10&dataEntradaPrefeitura=2010-10-10&nome=Ewerton+Donizet&naturalidadePais=Brasil&naturalidadeEstado=AC&rua=Rua+Capit%C3%A3o+Rezende+da+Costa%2C+15&bairro=Centro&numero=1&complemento=ccc&cep=23232-323&estado=AC&cidade=Acrel%C3%A2ndia&observacao=Pega+a+metralhadora+e+tra+rarARAW+DSR+EDGFJSRCGFHVJ+BSD");
 			}
 	
 }

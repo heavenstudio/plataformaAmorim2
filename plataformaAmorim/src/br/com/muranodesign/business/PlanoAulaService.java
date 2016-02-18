@@ -114,4 +114,27 @@ public class PlanoAulaService {
 		return result;
 	}
 
+	/**
+	 * Listar Plano de Aula por data e oficina
+	 * @param idOficina
+	 * @param data
+	 * @return
+	 */
+	public List<PlanoAula> listarOficinaData(int idOficina, Date data) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
+		List<PlanoAula> result = dao.listarOficinaData(idOficina, data);
+		pc.commitAndClose();
+		return result;
+	}
+
+	public PlanoAula listarProfessorOficinaRecente(int idProfessor,
+			int idOficina) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
+		PlanoAula result = dao.listarProfessorOficinaRecente(idProfessor, idOficina);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

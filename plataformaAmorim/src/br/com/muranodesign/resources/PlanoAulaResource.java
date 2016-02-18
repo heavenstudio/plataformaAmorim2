@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.BlogService;
+import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.PlanoAulaService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.PlanoAula;
@@ -48,6 +49,7 @@ public class PlanoAulaResource {
 	public String eventoAction(
 			@FormParam("action") String action,
 			@FormParam("id") int id,
+			@FormParam("idOficina") int idOficina,
 			@FormParam("idBlog") int idBlog,
 			@FormParam("idProfessor") int idProfessor,
 			@FormParam("data_ini") String data_ini,
@@ -72,7 +74,8 @@ public class PlanoAulaResource {
 			plano.setRegistro_atividade(registro_atividade);
 			if(idBlog != 0){
 				plano.setBlog(new BlogService().listarkey(idBlog).get(0));
-			}
+			}			
+			plano.setOficina(new OficinaService().listarkey(idOficina).get(0));
 			
 			plano.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
 			
@@ -171,6 +174,13 @@ public class PlanoAulaResource {
 		StringUtil  t = new StringUtil();
 		
 		return new PlanoAulaService().listarProfessor(idProfessor, t.converteStringData(anoString+"-01-01")); 
+	}
+	
+	@Path("MaisRecenteProfessorOficina/{idProfessor}/{idOficina}")
+	@GET
+	@Produces("application/json")
+	public PlanoAula getProfessorOficinaRecente(@PathParam("idProfessor") int idProfessor, @PathParam("idOficina") int idOficina){
+		return new PlanoAulaService().listarProfessorOficinaRecente(idProfessor, idOficina);
 	}
 	
 	

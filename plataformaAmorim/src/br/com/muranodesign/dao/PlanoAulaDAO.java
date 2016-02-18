@@ -62,4 +62,21 @@ public interface PlanoAulaDAO {
 	 * @return
 	 */
 	public List<PlanoAula> listarProfessor(int idProfessor, Date data);
+
+	/**
+	 * Listar por data e oficina
+	 * @param idOficina
+	 * @param data
+	 * @return
+	 */
+	public List<PlanoAula> listarOficinaData(int idOficina, Date data);
+
+	/**
+	 * Listar plano de aula mais recente do professor
+	 * @param idProfessor
+	 * @param idOficina
+	 * @return
+	 */
+	public PlanoAula listarProfessorOficinaRecente(int idProfessor,
+			int idOficina);
 }

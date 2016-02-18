@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -50,6 +52,18 @@ public class PlanoAula implements Serializable{
 	 
 	 @OneToOne
 	 private ProfessorFuncionario professor;
+	 
+	 @ManyToOne
+	 @JoinColumn(name = "oficina", referencedColumnName = "idoficina")
+	 private Oficina oficina;
+
+	 public Oficina getOficina() {
+		 return oficina;
+	 }
+
+	 public void setOficina(Oficina oficina) {
+		 this.oficina = oficina;
+	 }
 
 	public int getIdplano_aula() {
 		return Idplano_aula;

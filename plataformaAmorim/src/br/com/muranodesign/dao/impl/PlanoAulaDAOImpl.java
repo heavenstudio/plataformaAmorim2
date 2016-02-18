@@ -116,4 +116,30 @@ public class PlanoAulaDAOImpl extends AbstractHibernateDAO implements PlanoAulaD
 		List<PlanoAula> result = criteria.list();
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<PlanoAula> listarOficinaData(int idOficina, Date data) {
+		Criteria criteria = getSession().createCriteria(PlanoAula.class);
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", idOficina));
+		criteria.add(Restrictions.le("data_ini", data));
+		criteria.add(Restrictions.ge("data_fim", data));
+		List<PlanoAula> result = criteria.list();
+		return result;
+	}
+
+	@Override
+	public PlanoAula listarProfessorOficinaRecente(int idProfessor,
+			int idOficina) {
+		Criteria criteria = getSession().createCriteria(PlanoAula.class);
+		Date data = new Date();
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", idOficina));
+		criteria.createAlias("professor", "professor");
+		criteria.add(Restrictions.eq("professor.idprofessorFuncionario", idProfessor));
+		criteria.add(Restrictions.le("data_ini", data));
+		criteria.addOrder(Order.desc("data_ini"));
+		PlanoAula result = (PlanoAula)criteria.list().get(0);
+		return result;
+	}
 }
