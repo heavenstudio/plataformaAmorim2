@@ -240,6 +240,13 @@ public class PlanejamentoRoteiroResource {
 
 	}
 	
+	@Path("AlunoAno/{idAluno}/{ano}")
+	@GET
+	@Produces("application/json")
+	public List<PlanejamentoRoteiro> getAlunoAno(@PathParam("idAluno") int idAluno, @PathParam("ano") int ano){
+		return new PlanejamentoRoteiroService().listarAlunoAno(idAluno, ano);
+	}
+	
 	/**
 	 * Listar total 
 	 * @param id

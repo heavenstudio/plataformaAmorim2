@@ -143,6 +143,8 @@ public interface PlanejamentoRoteiroDAO {
 		public List<PlanejamentoRoteiro> listarAlunoCompletosLista(int idAluno);
 
 		public List<PlanejamentoRoteiro> listarAlunoCorrigidosLista(int idAluno);
+
+		public List<PlanejamentoRoteiro> listarAlunoAno(int idAluno, int ano);
 	
 	
 }

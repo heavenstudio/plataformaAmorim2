@@ -93,6 +93,13 @@ public class RelatorioTutoriaResource {
 		return resultado;
 	}
 	
+	@Path("TutoriaAlunoAno/{tutoria}/{aluno}/{ano}")
+	@GET
+	@Produces("application/json")
+	public List<RelatorioTutoria> listarTutoriaAlunoAno(@PathParam("tutoria") int tutoria, @PathParam("aluno") int aluno, @PathParam("ano") int ano){
+		return new RelatorioTutoriaService().listarTutoriaAlunoAno(tutoria, aluno, ano);
+	}
+	
 	/**
 	 * Removes the relatorio tutoria.
 	 *

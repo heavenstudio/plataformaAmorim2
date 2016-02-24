@@ -314,12 +314,11 @@ public class GrupoResource {
 			List<Grupo> resultado;
 			resultado = new GrupoService().listarkey(id);
 			Grupo res = resultado.get(0);
-			List<AlunoVariavel> aluno = new AlunoVariavelService().listaGrupo(id);
-			for(int i = 0; i < aluno.size(); i++){
-				Grupo g = new Grupo();
-				aluno.get(i).setGrupo(g);
+			List<AlunoVariavel> alunos = new AlunoVariavelService().listaGrupo(id);
+			for (AlunoVariavel alunoVariavel : alunos) {
+				alunoVariavel.setGrupo(null);
+				new AlunoVariavelService().atualizarAlunoVariavel(alunoVariavel);
 			}
-			
 			new GrupoService().deletarGrupo(res);
 			return "true";
 		} else {
@@ -362,12 +361,12 @@ public class GrupoResource {
 		Grupo resultado = null;
 		Tutoria resultadoTutor;
 		
-		if(action.equals("delete")){
-			 resultado = new GrupoService().listarkey(idGrupo).get(0);
-			 resultado.setStatus("1");
-			 new GrupoService().atualizarGrupo(resultado);
-			 return Integer.toString(idGrupo);
-		}
+//		if(action.equals("delete")){
+//			 resultado = new GrupoService().listarkey(idGrupo).get(0);
+//			 resultado.setStatus("1");
+//			 new GrupoService().atualizarGrupo(resultado);
+//			 return Integer.toString(idGrupo);
+//		}
 		
 		Tutoria tutor = new Tutoria();
 		TutoriaService tutorSer = new TutoriaService();

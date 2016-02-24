@@ -258,5 +258,13 @@ public class PlanejamentoRoteiroService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<PlanejamentoRoteiro> listarAlunoAno(int idAluno, int ano) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		PlanejamentoRoteiroDAO dao = DAOFactory.getPlanejamentoRoteiroDAO(pc);
+		List<PlanejamentoRoteiro> result = dao.listarAlunoAno(idAluno, ano);
+		pc.commitAndClose();
+		return result;
+	}
 	
 }

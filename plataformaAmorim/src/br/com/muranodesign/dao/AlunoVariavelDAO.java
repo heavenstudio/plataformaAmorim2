@@ -173,6 +173,12 @@ public interface AlunoVariavelDAO {
 
 		public List<AlunoVariavel> ListarRangePeriodoSemGrupo(int idPeriodo,
 				int primeiro, int ultimo);
+
+
+		public List<AlunoVariavel> ListarNomeSemGrupo(String nome, int idPeriodo, List<Integer> anos);
+
+
+		public List<AlunoVariavel> listarAlunoAno(int idAluno, int ano);
 		
 		
 }

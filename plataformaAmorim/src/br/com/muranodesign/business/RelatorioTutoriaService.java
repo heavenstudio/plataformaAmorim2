@@ -111,5 +111,14 @@ public class RelatorioTutoriaService {
 		return result;
 	}
 
+	public List<RelatorioTutoria> listarTutoriaAlunoAno(int tutoria, int aluno,
+			int ano) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RelatorioTutoriaDAO dao = DAOFactory.getRelatorioTutoriaDAO(pc);
+		List<RelatorioTutoria> result = dao.listarTutoriaAlunoAno(tutoria, aluno, ano);
+		pc.commitAndClose();
+		return result;
+	}
+
 	
 }

@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -389,6 +390,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
 		criteria.add(Restrictions.isNull("grupo"));
+		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.addOrder(Order.asc("anoEstudo.ano"));
 		criteria.createAlias("aluno", "aluno");
 		criteria.addOrder(Order.asc("aluno.nome"));
@@ -398,5 +400,44 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<AlunoVariavel> ListarNomeSemGrupo(String nome, int idPeriodo, List<Integer> anos){
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
+		
+		criteria.createAlias("aluno", "aluno");
+		if (idPeriodo != 0)
+		{
+			criteria.createAlias("periodo", "periodo");
+			criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo));
+		}
+		if (!anos.isEmpty())
+		{
+			criteria.createAlias("anoEstudo", "anoEstudo");
+			criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos));
+		}
+		criteria.add(Restrictions.like("aluno.nome", nome, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.isNull("grupo"));
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<AlunoVariavel> listarAlunoAno(int idAluno, int ano) {
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.eq("anoLetivo.ano", Integer.toString(ano)));
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		
+		List<AlunoVariavel> result = criteria.list();
+		
+		return result;
+	}
 
 }

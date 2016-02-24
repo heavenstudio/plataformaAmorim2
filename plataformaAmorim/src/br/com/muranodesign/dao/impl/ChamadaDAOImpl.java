@@ -221,4 +221,24 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public long countFaltasAno(int idAluno, int ano) {
+		short t = 0;
+		Criteria criteria = getSession().createCriteria(Chamada.class);
+		Calendar calInicio = Calendar.getInstance();
+		calInicio.set(Calendar.YEAR, ano);
+		calInicio.set(Calendar.DAY_OF_YEAR, 1);
+		Calendar calFim = Calendar.getInstance();
+		calFim.set(Calendar.YEAR, ano);
+		calFim.set(Calendar.DAY_OF_YEAR, calFim.getActualMaximum(Calendar.DAY_OF_YEAR));
+		criteria.add(Restrictions.ge("data", calInicio.getTime()));
+		criteria.add(Restrictions.le("data", calFim.getTime()));
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		criteria.add(Restrictions.eq("presenca",t ));
+		List<Chamada> result = criteria.list();
+		long r =  result.size();
+		return r;
+	}
+
 }

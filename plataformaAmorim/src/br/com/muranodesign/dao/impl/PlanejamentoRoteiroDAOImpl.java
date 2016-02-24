@@ -163,6 +163,22 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 		List<PlanejamentoRoteiro> result = criteria.list();
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PlanejamentoRoteiro> listarAlunoAno(int idAluno, int ano){
+		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
+		Calendar calInicio = Calendar.getInstance();
+		calInicio.set(Calendar.YEAR, ano);
+		calInicio.set(Calendar.DAY_OF_YEAR, 1);
+		Calendar calFim = Calendar.getInstance();
+		calFim.set(Calendar.YEAR, ano);
+		calFim.set(Calendar.DAY_OF_YEAR, calFim.getActualMaximum(Calendar.DAY_OF_YEAR));
+		criteria.add(Restrictions.eq("idAluno", idAluno));
+		criteria.add(Restrictions.ge("dataStatusPlanejado", calInicio.getTime()));
+		criteria.add(Restrictions.le("dataStatusPlanejado", calFim.getTime()));
+		List<PlanejamentoRoteiro> result = criteria.list();
+		return result;
+	}
 
 	/*
 	 * (non-Javadoc)

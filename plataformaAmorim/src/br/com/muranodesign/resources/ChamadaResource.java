@@ -32,6 +32,7 @@ import org.codehaus.jettison.json.JSONObject;
 
 import br.com.muranodesign.business.AlunoService;
 import br.com.muranodesign.business.AlunoVariavelService;
+import br.com.muranodesign.business.CalendarioService;
 import br.com.muranodesign.business.ChamadaService;
 import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.AlunoVariavel;
@@ -144,7 +145,8 @@ public class ChamadaResource {
 			Hashtable<String, Object> faltasAluno = new Hashtable<String, Object>();
 			faltasAluno.put("alunoNome", alunoVariavel.getAluno().getNome());
 			faltasAluno.put("alunoId", alunoVariavel.getAluno().getIdAluno());
-			faltasAluno.put("foto", alunoVariavel.getAluno().getFotoAluno());
+			if(alunoVariavel.getAluno().getFotoAluno() != null)
+				faltasAluno.put("foto", alunoVariavel.getAluno().getFotoAluno());
 			List<Chamada> chamadas = new ChamadaService().listarFaltasSemana(alunoVariavel.getAluno().getIdAluno(), dia, mes);
 			List<String> faltas = new ArrayList<String>();
 			for (Chamada chamada : chamadas) {
@@ -159,6 +161,33 @@ public class ChamadaResource {
 		return resultado;
 	}
 	
+	@Path("FaltasTotaisGrupo/{idGrupo}")
+	@GET
+	@Produces("application/json")
+	public List<Object> getFaltarTotaisGrupo(@PathParam("idGrupo") int idGrupo){
+		List<Object> resultado = new ArrayList<Object>();
+		List<AlunoVariavel> listAlunoVariavel = new AlunoVariavelService().listaGrupo(idGrupo);
+		for (AlunoVariavel alunoVariavel : listAlunoVariavel) {
+			Hashtable<String, Object> faltasAluno = new Hashtable<String, Object>();
+			faltasAluno.put("alunoNome", alunoVariavel.getAluno().getNome());
+			faltasAluno.put("alunoId", alunoVariavel.getAluno().getIdAluno());
+			if(alunoVariavel.getAluno().getFotoAluno() != null)
+				faltasAluno.put("foto", alunoVariavel.getAluno().getFotoAluno());
+			long faltasTotais = new ChamadaService().countFaltas(alunoVariavel.getAluno().getIdAluno());
+			long faltasCompensadas = 0; //Código Provisório
+			long faltasCalculadas = faltasTotais - faltasCompensadas;
+			
+			faltasAluno.put("faltasTotais", faltasTotais);
+			faltasAluno.put("faltasCompensadas", faltasCompensadas);
+			faltasAluno.put("faltasCalculadas", faltasCalculadas);
+			Calendar inicio = Calendar.getInstance();
+			inicio.set(Calendar.DAY_OF_YEAR, 1);
+			Calendar hoje = Calendar.getInstance();
+			faltasAluno.put("percentualFaltas", (100*faltasCalculadas)/new CalendarioService().diasLetivosCount(inicio, hoje));
+			resultado.add(faltasAluno);
+		}
+		return resultado;
+	}
 	
 	/**
 	 * Gets Chamada.
@@ -201,6 +230,13 @@ public class ChamadaResource {
 	public long countFaltas(@PathParam("id") int id){
 		
 		return new ChamadaService().countFaltas(id);
+	}
+	
+	@Path("FaltasAno/{idAluno}/{ano}")
+	@GET
+	@Produces("application/json")
+	public long countFaltasAno(@PathParam("idAluno") int idAluno, @PathParam("ano") int ano){
+		return new ChamadaService().countFaltasAno(idAluno, ano);
 	}
 	
 	/**

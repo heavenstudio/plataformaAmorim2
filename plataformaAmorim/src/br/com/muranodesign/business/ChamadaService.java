@@ -175,5 +175,13 @@ public class ChamadaService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public long countFaltasAno(int idAluno, int ano) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ChamadaDAO dao = DAOFactory.getChamadaDAO(pc);
+		long result = dao.countFaltasAno(idAluno, ano);
+		pc.commitAndClose();
+		return result;
+	}
 	
 }

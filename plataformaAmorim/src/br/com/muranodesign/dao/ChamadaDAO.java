@@ -94,6 +94,8 @@ public interface ChamadaDAO {
 		public List<Chamada> getFaltasSemana(int idAluno, int dia, int mes);
 
 		public List<Chamada> dataPresenca(int id, Calendar cal);
+
+		public long countFaltasAno(int idAluno, int ano);
 	
 
 }

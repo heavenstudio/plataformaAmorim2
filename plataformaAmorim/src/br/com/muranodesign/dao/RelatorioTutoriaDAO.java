@@ -63,6 +63,9 @@ public interface RelatorioTutoriaDAO {
 		 * @return
 		 */
 		public List<RelatorioTutoria> listarTutoriaAluno(int tutoria, int aluno);
+
+		public List<RelatorioTutoria> listarTutoriaAlunoAno(int tutoria,
+				int aluno, int ano);
 	
 
 }

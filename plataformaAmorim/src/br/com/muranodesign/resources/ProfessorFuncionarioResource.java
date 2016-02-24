@@ -145,6 +145,21 @@ public class ProfessorFuncionarioResource {
 		
 	}
 	
+	@Path("Teste")
+	@GET
+	@Produces("application/json")
+	public List<Tutoria> teste(){
+		List<Tutoria> result = new ArrayList<Tutoria>();
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		List<Tutoria> tutorias = new TutoriaService().listarAno(ano);
+		for (Tutoria tutoria : tutorias) {
+			List<Grupo> grupos = new GrupoService().listarTutor(tutoria.getIdtutoria());
+			if (grupos.isEmpty())
+				result.add(tutoria);
+		}
+		return result;
+	}
+	
 	@Path("DadosTutoriaProfessores/")
 	@GET
 	@Produces("application/json")
@@ -184,6 +199,8 @@ public class ProfessorFuncionarioResource {
 					objetivosCompletos += planejamentosCompletos.size();
 					objetivosCorrigidos += planejamentosCorrigidos.size();							
 				}
+				if (alunosGrupo.isEmpty())
+					grupos.clear();
 			}
 			Hashtable<String, Float> objetivos = new Hashtable<String, Float>();
 			if (objetivosTotais > 0)
@@ -198,7 +215,7 @@ public class ProfessorFuncionarioResource {
 			}
 			
 			professorDados.put("objetivos", objetivos);
-			if (grupos.size() > 0)
+			if (!grupos.isEmpty())
 			{
 				resultado.add(professorDados);
 			}

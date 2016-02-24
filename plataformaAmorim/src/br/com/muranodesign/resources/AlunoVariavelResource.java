@@ -256,6 +256,20 @@ public class AlunoVariavelResource {
 		
 	}
 	
+	@Path("ListarNomeSemGrupo/{nome}/{idPeriodo}/{idCiclo}")
+	@GET
+	@Produces("application/json")
+	public List<AlunoVariavel> getNome(@PathParam("nome") String nome, @PathParam("idPeriodo") int idPeriodo, @PathParam("idCiclo") int idCiclo){
+		List<CicloAnoEstudo> anosCiclo = new CicloAnoEstudoService().listCiclo(idCiclo);
+		List<Integer> anos = new ArrayList<Integer>();
+		
+		for (CicloAnoEstudo cicloAnoEstudo : anosCiclo) {
+			anos.add(cicloAnoEstudo.getAno().getIdanoEstudo());
+		}
+		
+		return new AlunoVariavelService().listarNomeSemGrupo(nome, idPeriodo, anos);
+	}
+	
 	/**
 	 * Serviço reponsavel por Lista todos os alunos variaveis por status.
 	 * 
@@ -365,6 +379,13 @@ public class AlunoVariavelResource {
 		}
 		
 		return resultado;
+	}
+	
+	@Path("AlunoAno/{idAluno}/{ano}")
+	@GET
+	@Produces("application/json")
+	public AlunoVariavel getAlunoAno(@PathParam("idAluno") int idAluno, @PathParam("ano") int ano){
+		return new AlunoVariavelService().listarAlunoAno(idAluno, ano).get(0);
 	}
 	
 	/**

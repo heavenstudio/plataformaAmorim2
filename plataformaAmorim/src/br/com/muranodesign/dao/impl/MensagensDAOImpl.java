@@ -150,23 +150,22 @@ public class MensagensDAOImpl extends AbstractHibernateDAO implements MensagensD
 		Criteria criteria = getSession().createCriteria(Mensagens.class);
 		
 
+		criteria.addOrder(Order.asc("lida"));
+		criteria.addOrder(Order.desc("data"));
+		criteria.addOrder(Order.desc("idmensagens"));
+		
 		if (caixa.equals("entrada")){ 
 			criteria.add(Restrictions.eq("cxEntrada", "S"));
 			
 		} else if  (caixa.equals("enviado")){
 			criteria.add(Restrictions.eq("cxEnviada", "S"));
-			
+	
 		}
 		
 		criteria.setFirstResult(primeiro);
 		criteria.setMaxResults(ultimo);
 		
 		criteria.add(Restrictions.eq("proprietario", proprietario));
-		
-		
-		criteria.addOrder(Order.asc("lida"));
-		criteria.addOrder(Order.desc("data"));
-		criteria.addOrder(Order.desc("idmensagens"));
 		
 		List<Mensagens> result = criteria.list();
 		return result;

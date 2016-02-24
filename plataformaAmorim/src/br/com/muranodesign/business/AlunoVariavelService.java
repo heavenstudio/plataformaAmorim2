@@ -307,4 +307,22 @@ public class AlunoVariavelService {
 		return result;
 	}
 
+
+	public List<AlunoVariavel> listarNomeSemGrupo(String nome, int idPeriodo, List<Integer> anos) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.ListarNomeSemGrupo(nome, idPeriodo, anos);
+		pc.commitAndClose();
+		return result;
+	}
+
+
+	public List<AlunoVariavel> listarAlunoAno(int idAluno, int ano) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.listarAlunoAno(idAluno, ano);
+		pc.commitAndClose();
+		return result;
+	}
+
 }
