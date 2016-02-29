@@ -297,6 +297,7 @@ public class MensagensResource {
 	 * @return the string
 	 */
 	@Path("{action}/{id}")
+	@GET
 	@Produces("text/plain")
 	public String removeMensagens(@PathParam("action") String action,
 			@PathParam("id") int id) {
