@@ -199,9 +199,9 @@ public class ProfessorFuncionarioResource {
 					objetivosCompletos += planejamentosCompletos.size();
 					objetivosCorrigidos += planejamentosCorrigidos.size();							
 				}
-				if (alunosGrupo.isEmpty())
-					grupos.clear();
 			}
+			if (objetivosTotais == 0)
+				grupos.clear();
 			Hashtable<String, Float> objetivos = new Hashtable<String, Float>();
 			if (objetivosTotais > 0)
 			{
