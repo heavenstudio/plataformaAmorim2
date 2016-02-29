@@ -49,5 +49,7 @@ public interface BlogDAO {
 	public List<Blog> listarTutoria(int idProfessor);
 
 	public List<Blog> listarOficinaProfessor(int idOficina, int idProfessor);
+
+	public List<Blog> listarAutor(int id);
 	
 }

@@ -2,10 +2,10 @@ package br.com.muranodesign.resources;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,15 +19,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+import org.jose4j.jwk.RsaJsonWebKey;
+import org.jose4j.jws.AlgorithmIdentifiers;
+import org.jose4j.jws.JsonWebSignature;
+import org.jose4j.jwt.JwtClaims;
+import org.jose4j.jwt.consumer.InvalidJwtException;
+import org.jose4j.jwt.consumer.JwtConsumer;
+import org.jose4j.jwt.consumer.JwtConsumerBuilder;
+import org.jose4j.keys.HmacKey;
+import org.jose4j.lang.JoseException;
 
 import br.com.muranodesign.business.AgrupamentoService;
 import br.com.muranodesign.business.BlogService;
-import br.com.muranodesign.business.OficinaProfessorService;
 import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.ProfessorFuncionarioService;
 import br.com.muranodesign.model.Blog;
-import br.com.muranodesign.model.Oficina;
-import br.com.muranodesign.model.OficinaProfessor;
 import br.com.muranodesign.util.StringUtil;
 import br.com.muranodesign.util.Upload;
 
@@ -43,6 +49,60 @@ import com.sun.jersey.multipart.FormDataParam;
 public class BlogResource {
 	
 	private Logger logger = Logger.getLogger(BlogResource.class.getName());
+	
+	
+	@Path("Teste")
+	@GET
+	@Produces("text/plain")
+	public String teste() throws UnsupportedEncodingException{
+		RsaJsonWebKey rsaJsonWebKey;
+		try {
+			String secret = "O8zBTpnHhl\ngJuTimlEhN\niq7ZWhitG0";
+			HmacKey key = new HmacKey(secret.getBytes("UTF-8"));
+			JwtClaims claims = new JwtClaims();
+			claims.setIssuer("Issuer");  // who creates the token and signs it
+		    claims.setAudience("Audience"); // to whom the token is intended to be sent
+		    claims.setExpirationTimeMinutesInTheFuture(10); // time when the token will expire (10 minutes from now)
+		    claims.setGeneratedJwtId(); // a unique identifier for the token
+		    claims.setIssuedAtToNow();  // when the token was issued/created (now)
+		    claims.setNotBeforeMinutesInThePast(2); // time before which the token is not yet valid (2 minutes ago)
+		    claims.setSubject("subject"); // the subject/principal is whom the token is about
+		    claims.setClaim("email","mail@example.com");
+			JsonWebSignature jws = new JsonWebSignature();
+			jws.setPayload(claims.toJson());
+			jws.setKey(key);
+			jws.setAlgorithmHeaderValue(AlgorithmIdentifiers.HMAC_SHA256);
+			String jwt = jws.getCompactSerialization();
+			System.out.println("JWT: " + jwt);
+			
+			JwtConsumer jwtConsumer = new JwtConsumerBuilder()
+            .setRequireExpirationTime() // the JWT must have an expiration time
+            .setAllowedClockSkewInSeconds(30) // allow some leeway in validating time based claims to account for clock skew
+            .setRequireSubject() // the JWT must have a subject claim
+            .setExpectedIssuer("Issuer") // whom the JWT needs to have been issued by
+            .setExpectedAudience("Audience") // to whom the JWT is intended for
+            .setVerificationKey(key) // verify the signature with the public key
+            .build(); // create the JwtConsumer instance
+
+			try
+			{
+				//  Validate the JWT and process it to the Claims
+				JwtClaims jwtClaims = jwtConsumer.processToClaims(jwt);
+				System.out.println("JWT validation succeeded! " + jwtClaims);
+			}
+			catch (InvalidJwtException e)
+			{
+				// InvalidJwtException will be thrown, if the JWT failed processing or validation in anyway.
+				// Hopefully with meaningful explanations(s) about what went wrong.
+				System.out.println("Invalid JWT! " + e);
+			}
+			
+		} catch (JoseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
 	
 	/**
 	 * Criar, deltera e alterar blog
@@ -84,7 +144,8 @@ public class BlogResource {
 			blog.setDescricao(Descricao);
 			blog.setTitulo(titulo);
 			blog.setData(date);
-			blog.setAgrupamento(new AgrupamentoService().listarkey(agrupamento).get(0));
+			if (agrupamento != 0)
+				blog.setAgrupamento(new AgrupamentoService().listarkey(agrupamento).get(0));
 			blog.setAutor(new ProfessorFuncionarioService().listarkey(autor).get(0));
 			if (oficina != 0)
 				blog.setOficina(new OficinaService().listarkey(oficina).get(0));
@@ -246,21 +307,7 @@ public class BlogResource {
 	@Produces("application/json")
 	public List<Blog> getBlogProfessor(@PathParam("id") int id){
 		logger.debug("Lista Blog por Professor " + id);
-		List<Blog> resultado = new ArrayList<Blog>();
-		List<OficinaProfessor> oficinasProfessor;
-		List<Oficina> oficinas = new ArrayList<Oficina>();
-		
-		oficinasProfessor = new OficinaProfessorService().listarProfessor(id);
-		
-		for (OficinaProfessor oficinaProfessor : oficinasProfessor) {
-			oficinas.add(new OficinaService().listarkey(oficinaProfessor.getOficina().getIdoficina()).get(0));
-		}
-		
-		for (Oficina oficina : oficinas){
-			resultado.addAll(new BlogService().listarOficina(oficina.getIdoficina()));
-		}
-		
-		return resultado;
+		return new BlogService().listarAutor(id);
 	}
 	
 	@Path("BlogTutoria/{idProfessor}")
