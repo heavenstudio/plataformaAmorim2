@@ -293,4 +293,12 @@ public class RoteiroAulaResource {
 		
 	}
 	
+	@Path("ProfessorOficina/{idProfessor}/{idOficina}")
+	@GET
+	@Produces("application/json")
+	public List<RoteiroAula> getProfessorOficina(@PathParam("idProfessor") int idProfessor, @PathParam("idOficina") int idOficina){
+		List<OficinaProfessor> oficinaProfessor = new OficinaProfessorService().listarOficinaProfessor(idOficina, idProfessor);
+		return new RoteiroAulaService().listarOficinaProfessor(oficinaProfessor.get(0).getIdoficina_professor());
+	}
+	
 }
