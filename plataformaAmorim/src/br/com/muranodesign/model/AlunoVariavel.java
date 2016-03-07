@@ -75,8 +75,19 @@ public class AlunoVariavel implements Serializable {
     @JoinColumn(name = "grupo", referencedColumnName = "idgrupo")
     @ManyToOne
     private Grupo grupo;
+    
+    @Column(name = "verificarRoteiros")
+    private int verificarRoteiros;
 
-    public AlunoVariavel() {
+    public int getVerificarRoteiros() {
+		return verificarRoteiros;
+	}
+
+	public void setVerificarRoteiros(int verificarRoteiros) {
+		this.verificarRoteiros = verificarRoteiros;
+	}
+
+	public AlunoVariavel() {
     }
 
     public AlunoVariavel(Integer idalunoVariavel) {

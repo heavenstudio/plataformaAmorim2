@@ -1,6 +1,7 @@
 package br.com.muranodesign.resources;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -14,10 +15,15 @@ import javax.ws.rs.Produces;
 import org.apache.log4j.Logger;
 
 import br.com.muranodesign.business.AlunoService;
+import br.com.muranodesign.business.AlunoVariavelService;
 import br.com.muranodesign.business.AnoLetivoService;
 import br.com.muranodesign.business.AtribuicaoRoteiroExtraService;
+import br.com.muranodesign.business.ObjetivoService;
+import br.com.muranodesign.business.PlanejamentoRoteiroService;
 import br.com.muranodesign.business.RoteiroService;
+import br.com.muranodesign.model.AlunoVariavel;
 import br.com.muranodesign.model.AtribuicaoRoteiroExtra;
+import br.com.muranodesign.model.PlanejamentoRoteiro;
 import br.com.muranodesign.model.Roteiro;
 
 /**
@@ -164,6 +170,69 @@ public class AtribuicaoRoteiroExtraResource {
 		
 		
 		return roteiro;
+	}
+	
+	@Path("AtribuirRoteirosIncompletosAnoAnterior/{idAluno}")
+	@GET
+	@Produces("application/json")
+	public List<AtribuicaoRoteiroExtra> atribuirExtras(@PathParam("idAluno") int idAluno){
+		List<AtribuicaoRoteiroExtra> result = new ArrayList<AtribuicaoRoteiroExtra>();
+		AlunoVariavel alunoVariavel = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1).get(0);
+		List<Roteiro> roteirosAnoAnterior = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
+		for (Roteiro roteiro : roteirosAnoAnterior) {
+			long objetivosTotais = new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
+			List<PlanejamentoRoteiro> objetivosCompletos = new PlanejamentoRoteiroService().countRoteiroCompletos(roteiro.getIdroteiro(), idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1);
+			if(objetivosCompletos.size() < objetivosTotais)
+			{
+				AtribuicaoRoteiroExtra atribuicao = new AtribuicaoRoteiroExtra();
+				atribuicao.setAluno(new AlunoService().listarkey(idAluno).get(0));
+				atribuicao.setRoteiro(roteiro);
+				atribuicao.setMotivo("Roteiro não foi completado no ano anterior");
+				atribuicao.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR))).get(0));
+				new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
+				result.add(atribuicao);
+				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
+					planejamentoRoteiro.setIdplanejamentoRoteiro(0);
+					planejamentoRoteiro.setPlanoEstudo(null);
+					planejamentoRoteiro.setDataStatusEntregue(Calendar.getInstance().getTime());
+					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(planejamentoRoteiro);
+				}
+			}
+		}
+		List <AtribuicaoRoteiroExtra> roteirosExtrasAnoAnterior = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(idAluno).get(0), new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR) - 1)).get(0));
+		for (AtribuicaoRoteiroExtra atribuicaoRoteiroExtra : roteirosExtrasAnoAnterior) {
+			long objetivosTotais = new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+			List<PlanejamentoRoteiro> objetivosCompletos = new PlanejamentoRoteiroService().countRoteiroCompletos(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro(), idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1);
+			if(	objetivosCompletos.size() < objetivosTotais && 
+				atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() != alunoVariavel.getAnoEstudo()){
+					
+				AtribuicaoRoteiroExtra atribuicao = new AtribuicaoRoteiroExtra();
+				atribuicao.setAluno(new AlunoService().listarkey(idAluno).get(0));
+				atribuicao.setRoteiro(atribuicaoRoteiroExtra.getRoteiro());
+				atribuicao.setMotivo("Roteiro não foi completado no ano anterior");
+				atribuicao.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR))).get(0));
+				new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
+				result.add(atribuicao);
+				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
+					planejamentoRoteiro.setIdplanejamentoRoteiro(0);
+					planejamentoRoteiro.setPlanoEstudo(null);
+					planejamentoRoteiro.setDataStatusEntregue(Calendar.getInstance().getTime());
+					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(planejamentoRoteiro);
+				}
+			}
+			if (atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() == alunoVariavel.getAnoEstudo()){
+				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
+					planejamentoRoteiro.setIdplanejamentoRoteiro(0);
+					planejamentoRoteiro.setPlanoEstudo(null);
+					planejamentoRoteiro.setDataStatusEntregue(Calendar.getInstance().getTime());
+					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(planejamentoRoteiro);
+				}
+			}
+		}
+		AlunoVariavel alunoAno = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR)).get(0);
+		alunoAno.setVerificarRoteiros(0);
+		new AlunoVariavelService().atualizarAlunoVariavel(alunoAno);
+		return result;
 	}
 
 }

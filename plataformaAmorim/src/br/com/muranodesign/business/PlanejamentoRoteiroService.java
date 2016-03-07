@@ -266,5 +266,13 @@ public class PlanejamentoRoteiroService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public List<PlanejamentoRoteiro> countRoteiroCompletos(Integer idroteiro, int idAluno, int ano) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		PlanejamentoRoteiroDAO dao = DAOFactory.getPlanejamentoRoteiroDAO(pc);
+		List<PlanejamentoRoteiro> result = dao.countRoteiroCompletos(idroteiro, idAluno, ano);
+		pc.commitAndClose();
+		return result;
+	}
 	
 }
