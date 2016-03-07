@@ -141,139 +141,145 @@ public class GrupoResource {
 	{
 		List<Object> resultado = new ArrayList<Object>();
 		
-		int tutoriaId = new TutoriaService().listarProfessorId(id).get(0).getIdtutoria();
-		
-		List<Grupo> grupos = new GrupoService().listarTutor(tutoriaId);
-		for (Grupo grupo : grupos) {
-			
-			List<AlunoVariavel> alunosGrupo = new AlunoVariavelService().listaGrupo(grupo.getIdgrupo());
-			
-			if (alunosGrupo.size() > 0)
-			{
-				Hashtable<String, Object> grupoDados = new Hashtable<String, Object>();
+		List<Tutoria> tutorias = new TutoriaService().listarProfessorId(id);
+		for (Tutoria tutoria : tutorias) {
+			int tutoriaId = tutoria.getIdtutoria();
+			List<Grupo> grupos = new GrupoService().listarTutor(tutoriaId);
+			for (Grupo grupo : grupos) {
 				
-				grupoDados.put("grupoNome", grupo.getNomeGrupo());
-				grupoDados.put("grupoId", grupo.getIdgrupo());
+				List<AlunoVariavel> alunosGrupo = new AlunoVariavelService().listaGrupo(grupo.getIdgrupo());
 				
-				if (grupo.getLider() != null)
-					grupoDados.put("lider", grupo.getLider());
-				else
-					grupoDados.put("lider", "null");
-				
-				List<Object> alunos = new ArrayList<Object>();
-				
-				for (AlunoVariavel alunoVariavel : alunosGrupo) {
+				if (alunosGrupo.size() > 0)
+				{
+					Hashtable<String, Object> grupoDados = new Hashtable<String, Object>();
 					
-					Hashtable<String, Object> alunoDados = new Hashtable<String, Object>();
+					grupoDados.put("grupoNome", grupo.getNomeGrupo());
+					grupoDados.put("grupoId", grupo.getIdgrupo());
 					
-					alunoDados.put("nome", alunoVariavel.getAluno().getNome());
-					alunoDados.put("idAluno", alunoVariavel.getAluno().getIdAluno());
-					alunoDados.put("foto", alunoVariavel.getAluno().getFotoAluno());
-					alunoDados.put("faltas", new ChamadaService().countFaltas(alunoVariavel.getAluno().getIdAluno()));
-					alunoDados.put("presencas", new ChamadaService().listaPrecenca(alunoVariavel.getAluno(), 1).size());
+					if (grupo.getLider() != null)
+						grupoDados.put("lider", grupo.getLider());
+					else
+						grupoDados.put("lider", "null");
 					
-					int anoAluno = Integer.parseInt(alunoVariavel.getAnoEstudo().getAno());
+					List<Object> alunos = new ArrayList<Object>();
 					
-					float totalObjetivosAno = 0;
-					float totalObjetivosPendentes = 0;
-					float totalObjetivosFuturos = 0;
-					
-					List<Roteiro> roteirosAno = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
-					for (Roteiro roteiro : roteirosAno) {
-						totalObjetivosAno += new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
-					}
-					List<AtribuicaoRoteiroExtra> roteirosPendentes = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(alunoVariavel.getAluno().getIdAluno()).get(0), new AnoLetivoService().listarkey(alunoVariavel.getAnoLetivo().getIdanoLetivo()).get(0));
-					for (AtribuicaoRoteiroExtra atribuicaoRoteiroExtra : roteirosPendentes) {
+					for (AlunoVariavel alunoVariavel : alunosGrupo) {
 						
-						int anoRoteiro = Integer.parseInt(atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo().getAno());
+						Hashtable<String, Object> alunoDados = new Hashtable<String, Object>();
 						
-						if (anoRoteiro < anoAluno)
-							totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+						alunoDados.put("nome", alunoVariavel.getAluno().getNome());
+						alunoDados.put("idAluno", alunoVariavel.getAluno().getIdAluno());
+						if (alunoVariavel.getAluno().getFotoAluno() != null)
+							alunoDados.put("foto", alunoVariavel.getAluno().getFotoAluno());
 						else
-							totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
-					}
-					
-					float ObjetivosAnoCompletos = 0;
-					float ObjetivosPendentesCompletos = 0;
-					float ObjetivosFuturosCompletos = 0;
-					
-					List<PlanejamentoRoteiro> planejamentosCompletos = new PlanejamentoRoteiroService().listarAlunoCompletosLista(alunoVariavel.getAluno().getIdAluno());
-					for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCompletos) {
-						int planejamentoRoteiroAno = Integer.parseInt(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getAno());
-						if (planejamentoRoteiroAno < anoAluno)
-							ObjetivosPendentesCompletos++;
-						else if (planejamentoRoteiroAno > anoAluno)
-							ObjetivosFuturosCompletos++;
+							alunoDados.put("foto", "null");
+						alunoDados.put("faltas", new ChamadaService().countFaltas(alunoVariavel.getAluno().getIdAluno()));
+						alunoDados.put("presencas", new ChamadaService().listaPrecenca(alunoVariavel.getAluno(), 1).size());
+						
+						int anoAluno = Integer.parseInt(alunoVariavel.getAnoEstudo().getAno());
+						
+						float totalObjetivosAno = 0;
+						float totalObjetivosPendentes = 0;
+						float totalObjetivosFuturos = 0;
+						
+						List<Roteiro> roteirosAno = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
+						for (Roteiro roteiro : roteirosAno) {
+							totalObjetivosAno += new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
+						}
+						List<AtribuicaoRoteiroExtra> roteirosPendentes = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(alunoVariavel.getAluno().getIdAluno()).get(0), new AnoLetivoService().listarkey(alunoVariavel.getAnoLetivo().getIdanoLetivo()).get(0));
+						for (AtribuicaoRoteiroExtra atribuicaoRoteiroExtra : roteirosPendentes) {
+							
+							int anoRoteiro = Integer.parseInt(atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo().getAno());
+							
+							if (anoRoteiro < anoAluno)
+								totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+							else
+								totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+						}
+						
+						float ObjetivosAnoCompletos = 0;
+						float ObjetivosPendentesCompletos = 0;
+						float ObjetivosFuturosCompletos = 0;
+						
+						List<PlanejamentoRoteiro> planejamentosCompletos = new PlanejamentoRoteiroService().listarAlunoCompletosLista(alunoVariavel.getAluno().getIdAluno());
+						for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCompletos) {
+							int planejamentoRoteiroAno = Integer.parseInt(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getAno());
+							if (planejamentoRoteiroAno < anoAluno)
+								ObjetivosPendentesCompletos++;
+							else if (planejamentoRoteiroAno > anoAluno)
+								ObjetivosFuturosCompletos++;
+							else
+								ObjetivosAnoCompletos++;
+						}
+						
+						float ObjetivosAnoCorrigidos = 0;
+						float ObjetivosPendentesCorrigidos = 0;
+						float ObjetivosFuturosCorrigidos = 0;
+						
+						List<PlanejamentoRoteiro> planejamentosCorrigidos = new PlanejamentoRoteiroService().listarAlunoCorrigidosLista(alunoVariavel.getAluno().getIdAluno());
+						for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCorrigidos) {
+							int planejamentoRoteiroAno = Integer.parseInt(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getAno());
+							if (planejamentoRoteiroAno < anoAluno)
+								ObjetivosPendentesCorrigidos++;
+							else if (planejamentoRoteiroAno > anoAluno)
+								ObjetivosFuturosCorrigidos++;
+							else
+								ObjetivosAnoCorrigidos++;
+						}
+						
+						
+						Hashtable<String, Float> objetivosAnoAtual = new Hashtable<String, Float>();
+						Hashtable<String, Float> objetivosPendentes = new Hashtable<String, Float>();
+						Hashtable<String, Float> objetivosFuturo = new Hashtable<String, Float>();
+						
+						if (totalObjetivosAno > 0)
+						{
+							objetivosAnoAtual.put("completos", (ObjetivosAnoCompletos + ObjetivosAnoCorrigidos) / totalObjetivosAno);
+							objetivosAnoAtual.put("corrigidos", ObjetivosAnoCorrigidos / totalObjetivosAno);
+						}
+						
 						else
-							ObjetivosAnoCompletos++;
-					}
-					
-					float ObjetivosAnoCorrigidos = 0;
-					float ObjetivosPendentesCorrigidos = 0;
-					float ObjetivosFuturosCorrigidos = 0;
-					
-					List<PlanejamentoRoteiro> planejamentosCorrigidos = new PlanejamentoRoteiroService().listarAlunoCorrigidosLista(alunoVariavel.getAluno().getIdAluno());
-					for (PlanejamentoRoteiro planejamentoRoteiro : planejamentosCorrigidos) {
-						int planejamentoRoteiroAno = Integer.parseInt(planejamentoRoteiro.getObjetivo().getRoteiro().getAnoEstudo().getAno());
-						if (planejamentoRoteiroAno < anoAluno)
-							ObjetivosPendentesCorrigidos++;
-						else if (planejamentoRoteiroAno > anoAluno)
-							ObjetivosFuturosCorrigidos++;
+						{
+							objetivosAnoAtual.put("completos", 0.0f);
+							objetivosAnoAtual.put("corrigidos", 0.0f);
+						}
+						
+						if (totalObjetivosPendentes > 0)
+						{
+							objetivosPendentes.put("completos", (ObjetivosPendentesCompletos + ObjetivosPendentesCorrigidos) / totalObjetivosPendentes );
+							objetivosPendentes.put("corrigidos", ObjetivosPendentesCorrigidos / totalObjetivosPendentes);
+						}
 						else
-							ObjetivosAnoCorrigidos++;
+						{
+							objetivosPendentes.put("completos", 0.0f);
+							objetivosPendentes.put("corrigidos", 0.0f);
+						}
+						
+						if (totalObjetivosFuturos > 0)
+						{
+							objetivosFuturo.put("completos", (ObjetivosFuturosCompletos + ObjetivosFuturosCorrigidos) / totalObjetivosFuturos);
+							objetivosFuturo.put("corrigidos", ObjetivosFuturosCorrigidos / totalObjetivosFuturos);
+						}
+						else
+						{
+							objetivosFuturo.put("completos", 0.0f);
+							objetivosFuturo.put("corrigidos", 0.0f);
+						}
+						
+						
+						alunoDados.put("objetivosAnoAtual", objetivosAnoAtual);
+						alunoDados.put("objetivosPendentes", objetivosPendentes);
+						alunoDados.put("objetivosFuturo", objetivosFuturo);
+									
+						alunos.add(alunoDados);
 					}
 					
-					
-					Hashtable<String, Float> objetivosAnoAtual = new Hashtable<String, Float>();
-					Hashtable<String, Float> objetivosPendentes = new Hashtable<String, Float>();
-					Hashtable<String, Float> objetivosFuturo = new Hashtable<String, Float>();
-					
-					if (totalObjetivosAno > 0)
-					{
-						objetivosAnoAtual.put("completos", (ObjetivosAnoCompletos + ObjetivosAnoCorrigidos) / totalObjetivosAno);
-						objetivosAnoAtual.put("corrigidos", ObjetivosAnoCorrigidos / totalObjetivosAno);
-					}
-					
-					else
-					{
-						objetivosAnoAtual.put("completos", 0.0f);
-						objetivosAnoAtual.put("corrigidos", 0.0f);
-					}
-					
-					if (totalObjetivosPendentes > 0)
-					{
-						objetivosPendentes.put("completos", (ObjetivosPendentesCompletos + ObjetivosPendentesCorrigidos) / totalObjetivosPendentes );
-						objetivosPendentes.put("corrigidos", ObjetivosPendentesCorrigidos / totalObjetivosPendentes);
-					}
-					else
-					{
-						objetivosPendentes.put("completos", 0.0f);
-						objetivosPendentes.put("corrigidos", 0.0f);
-					}
-					
-					if (totalObjetivosFuturos > 0)
-					{
-						objetivosFuturo.put("completos", (ObjetivosFuturosCompletos + ObjetivosFuturosCorrigidos) / totalObjetivosFuturos);
-						objetivosFuturo.put("corrigidos", ObjetivosFuturosCorrigidos / totalObjetivosFuturos);
-					}
-					else
-					{
-						objetivosFuturo.put("completos", 0.0f);
-						objetivosFuturo.put("corrigidos", 0.0f);
-					}
-					
-					
-					alunoDados.put("objetivosAnoAtual", objetivosAnoAtual);
-					alunoDados.put("objetivosPendentes", objetivosPendentes);
-					alunoDados.put("objetivosFuturo", objetivosFuturo);
-								
-					alunos.add(alunoDados);
+					grupoDados.put("grupoAlunos", alunos);
+					resultado.add(grupoDados);
 				}
-				
-				grupoDados.put("grupoAlunos", alunos);
-				resultado.add(grupoDados);
 			}
-		}		
+		}
+				
 		return resultado;
 	}
 	
