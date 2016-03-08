@@ -127,8 +127,7 @@ public class RoteiroAulaResource {
 	@GET
 	@Produces("application/json")
 	public List<RoteiroAula> getListarNaoOficinaProfessor(@PathParam("id") int id,@PathParam("letra") String letra) {
-		List<RoteiroAula> retorno = new ArrayList<RoteiroAula>();
-		
+		List<RoteiroAula> retorno;
 		if(letra.equals("-")){
 			retorno = new RoteiroAulaService().listarNaoOficinaProfessor(id);
 		}else{

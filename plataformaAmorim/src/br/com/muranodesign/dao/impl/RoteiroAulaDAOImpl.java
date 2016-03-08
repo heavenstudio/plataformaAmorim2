@@ -3,6 +3,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
@@ -110,13 +111,10 @@ public class RoteiroAulaDAOImpl extends AbstractHibernateDAO implements  Roteiro
 	 * @see br.com.muranodesign.dao.RoteiroAulaDAO#listarNaoOficinaProfessor(int)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<RoteiroAula> listarNaoOficinaProfessor(int id){
-		Criteria criteria = getSession().createCriteria(RoteiroAula.class);
-		criteria.createAlias("Oficinaprofessor", "Oficinaprofessor");
-		criteria.add(Restrictions.ne("Oficinaprofessor.Idoficina_professor", id));
-		criteria.add(Restrictions.eq("status", 0));
-		List<RoteiroAula> result = criteria.list();
-		return result;
+	public List<RoteiroAula> listarNaoOficinaProfessor(int idOficinaProfessor){
+		Query query = getSession().getNamedQuery("findClonaveis");
+		query.setString("oficinaProfessor", Integer.toString(idOficinaProfessor));
+		return query.list();
 	}
 	
 	/*
@@ -155,12 +153,20 @@ public class RoteiroAulaDAOImpl extends AbstractHibernateDAO implements  Roteiro
 	 * @see br.com.muranodesign.dao.RoteiroAulaDAO#listarNaoOficinaProfessorLike(int, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<RoteiroAula> listarNaoOficinaProfessorLike(int id, String letra){
+	public List<RoteiroAula> listarNaoOficinaProfessorLike(int idOficinaProfessor, String letras){
+		Query query = getSession().getNamedQuery("findClonaveis");
+		query.setString("oficinaProfessor", Integer.toString(idOficinaProfessor));
+		query.setString("letras", letras);
+		return query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<RoteiroAula> listarClonados(int id) {
 		Criteria criteria = getSession().createCriteria(RoteiroAula.class);
 		criteria.createAlias("Oficinaprofessor", "Oficinaprofessor");
-		criteria.add(Restrictions.ne("Oficinaprofessor.Idoficina_professor", id));
-		criteria.add(Restrictions.like("roteiro", letra, MatchMode.START));
+		criteria.add(Restrictions.eq("Oficinaprofessor.Idoficina_professor", id));
 		criteria.add(Restrictions.eq("status", 0));
+		criteria.add(Restrictions.isNotNull("original"));
 		List<RoteiroAula> result = criteria.list();
 		return result;
 	}

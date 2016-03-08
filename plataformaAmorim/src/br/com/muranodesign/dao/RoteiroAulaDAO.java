@@ -67,16 +67,18 @@ public interface RoteiroAulaDAO {
 	/**
 	 * Listar quando o id for diferente
 	 * @param id
+	 * @param roteirosClonadosId 
 	 * @return
 	 */
-	public List<RoteiroAula> listarNaoOficinaProfessor(int id);
+	public List<RoteiroAula> listarNaoOficinaProfessor(int idOficinaProfessor);
 	
 	/**
 	 * istar quando o id for diferente e like roteiro aula
 	 * @param id
+	 * @param roteirosClonadosId 
 	 * @return
 	 */
-	public List<RoteiroAula> listarNaoOficinaProfessorLike(int id, String letra);
+	public List<RoteiroAula> listarNaoOficinaProfessorLike(int idOficinaProfessor, String letra);
 	
 	/**
 	 * Listar roteiros like
@@ -85,5 +87,7 @@ public interface RoteiroAulaDAO {
 	 * @return
 	 */
 	public List<RoteiroAula> listarLike(int idOficinaProfessor, String letras);
+
+	public List<RoteiroAula> listarClonados(int id);
 	
 }

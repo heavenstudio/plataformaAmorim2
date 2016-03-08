@@ -236,6 +236,7 @@ public class ObjetivoAulaResource {
 		roteiroAula.setRoteiro(roteiro.getRoteiro());
 		roteiroAula.setOficinaprofessor(new OficinaProfessorService()
 				.listarkey(idOficinaProfessor).get(0));
+		roteiroAula.setOriginal(roteiro);
 
 		resultado = new RoteiroAulaService().criarRoteiroAula(roteiroAula);
 

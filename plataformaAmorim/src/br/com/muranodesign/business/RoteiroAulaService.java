@@ -102,6 +102,7 @@ public class RoteiroAulaService {
 	/**
 	 * 
 	 * @param id
+	 * @param roteirosClonadosId 
 	 * @return
 	 */
 	public List<RoteiroAula> listarNaoOficinaProfessor(int id){
@@ -144,12 +145,21 @@ public class RoteiroAulaService {
 	 * 
 	 * @param id
 	 * @param letra
+	 * @param roteirosClonadosId 
 	 * @return
 	 */
 	public List<RoteiroAula> listarNaoOficinaProfessorLike(int id, String letra){
 		PersistenceContext pc = DAOFactory.createPersistenceContext();
 		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
 		List<RoteiroAula> result = dao.listarNaoOficinaProfessorLike(id, letra);
+		pc.commitAndClose();
+		return result;
+	}
+
+	public List<RoteiroAula> listarClonados(int id) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		RoteiroAulaDAO dao = DAOFactory.getRoteiroAulaDAO(pc);
+		List<RoteiroAula> result = dao.listarClonados(id);
 		pc.commitAndClose();
 		return result;
 	}
