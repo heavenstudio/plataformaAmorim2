@@ -3,6 +3,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -85,6 +86,7 @@ public class ObjetivoAulaDAOImpl extends AbstractHibernateDAO implements Objetiv
 		Criteria criteria = getSession().createCriteria(ObjetivoAula.class);
 		criteria.createAlias("roteiro", "roteiro");
 		criteria.add(Restrictions.eq("roteiro.Idroteiro_aula", idroteiro));
+		criteria.addOrder(Order.desc("Idobjetivo_aula"));
 		List<ObjetivoAula> result = criteria.list();
 		return result;
 	}
@@ -102,7 +104,7 @@ public class ObjetivoAulaDAOImpl extends AbstractHibernateDAO implements Objetiv
 	    ProjectionList projList = Projections.projectionList();  
 	    projList.add(Projections.property("objetivo"),"objetivo"); 
 	    criteria.setProjection(projList);
-	    
+	    criteria.addOrder(Order.desc("Idobjetivo_aula"));
 	    criteria.setResultTransformer(Transformers.aliasToBean(ObjetivoAula.class));  
 	    List<ObjetivoAula> results = criteria.list();
 	    
