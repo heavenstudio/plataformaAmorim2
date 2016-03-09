@@ -192,10 +192,15 @@ public class AtribuicaoRoteiroExtraResource {
 				new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
 				result.add(atribuicao);
 				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
-					planejamentoRoteiro.setIdplanejamentoRoteiro(0);
-					planejamentoRoteiro.setPlanoEstudo(null);
-					planejamentoRoteiro.setDataStatusEntregue(Calendar.getInstance().getTime());
-					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(planejamentoRoteiro);
+					PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
+					clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
+					clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
+					clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
+					clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
+					clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
+					clonePlanejamento.setPlanoEstudo(null);
+					clonePlanejamento.setIdAluno(idAluno);
+					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
 				}
 			}
 		}
@@ -214,18 +219,28 @@ public class AtribuicaoRoteiroExtraResource {
 				new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
 				result.add(atribuicao);
 				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
-					planejamentoRoteiro.setIdplanejamentoRoteiro(0);
-					planejamentoRoteiro.setPlanoEstudo(null);
-					planejamentoRoteiro.setDataStatusEntregue(Calendar.getInstance().getTime());
-					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(planejamentoRoteiro);
+					PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
+					clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
+					clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
+					clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
+					clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
+					clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
+					clonePlanejamento.setPlanoEstudo(null);
+					clonePlanejamento.setIdAluno(idAluno);
+					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
 				}
 			}
 			if (atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() == alunoVariavel.getAnoEstudo()){
 				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
-					planejamentoRoteiro.setIdplanejamentoRoteiro(0);
-					planejamentoRoteiro.setPlanoEstudo(null);
-					planejamentoRoteiro.setDataStatusEntregue(Calendar.getInstance().getTime());
-					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(planejamentoRoteiro);
+					PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
+					clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
+					clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
+					clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
+					clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
+					clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
+					clonePlanejamento.setPlanoEstudo(null);
+					clonePlanejamento.setIdAluno(idAluno);
+					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
 				}
 			}
 		}
