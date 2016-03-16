@@ -440,4 +440,13 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		return result;
 	}
 
+	@Override
+	public List<AlunoVariavel> listaAlunoTodos(int idAluno) {
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+	}
+
 }

@@ -325,4 +325,13 @@ public class AlunoVariavelService {
 		return result;
 	}
 
+
+	public List<AlunoVariavel> listaAlunoTodos(int idAluno) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.listaAlunoTodos(idAluno);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

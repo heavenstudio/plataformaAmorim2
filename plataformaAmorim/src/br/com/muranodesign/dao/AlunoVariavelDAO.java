@@ -179,6 +179,9 @@ public interface AlunoVariavelDAO {
 
 
 		public List<AlunoVariavel> listarAlunoAno(int idAluno, int ano);
+
+
+		public List<AlunoVariavel> listaAlunoTodos(int idAluno);
 		
 		
 }

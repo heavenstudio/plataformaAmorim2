@@ -2668,6 +2668,22 @@ public class AlunoVariavelResource {
 	}
 	
 	/**
+	 * Lista todos Aluno variavel de um Aluno
+	 * @param id
+	 * @return Obj AlunoVariavel
+	 */
+	@Path("alunoTodos/{id}")
+	@GET
+	@Produces("application/json")
+	public List<AlunoVariavel> getAlunoTodos(@PathParam("id") int id) {
+		logger.info("Lista AlunoVariavel  por id " + id);
+		List<AlunoVariavel> resultado;
+		resultado = new AlunoVariavelService().listaAlunoTodos(id);
+
+		return resultado;
+	}
+	
+	/**
 	 * Lista grupo
 	 * @param id
 	 * @return list
@@ -2825,6 +2841,7 @@ public class AlunoVariavelResource {
 			objAlunoVariavel.setGrupo(objGrupo);
 			objAlunoVariavel.setProgramaSocial(programaSocial);
 			objAlunoVariavel.setAtivo(ativo);
+			objAlunoVariavel.setVerificarRoteiros(1);
 			
 			
 			
