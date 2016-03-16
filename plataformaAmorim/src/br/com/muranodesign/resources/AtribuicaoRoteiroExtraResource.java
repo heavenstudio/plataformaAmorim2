@@ -177,76 +177,79 @@ public class AtribuicaoRoteiroExtraResource {
 	@Produces("application/json")
 	public List<AtribuicaoRoteiroExtra> atribuirExtras(@PathParam("idAluno") int idAluno){
 		List<AtribuicaoRoteiroExtra> result = new ArrayList<AtribuicaoRoteiroExtra>();
-		AlunoVariavel alunoVariavel = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1).get(0);
-		List<Roteiro> roteirosAnoAnterior = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
-		for (Roteiro roteiro : roteirosAnoAnterior) {
-			long objetivosTotais = new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
-			List<PlanejamentoRoteiro> objetivosCompletos = new PlanejamentoRoteiroService().countRoteiroCompletos(roteiro.getIdroteiro(), idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1);
-			if(objetivosCompletos.size() < objetivosTotais)
-			{
-				AtribuicaoRoteiroExtra atribuicao = new AtribuicaoRoteiroExtra();
-				atribuicao.setAluno(new AlunoService().listarkey(idAluno).get(0));
-				atribuicao.setRoteiro(roteiro);
-				atribuicao.setMotivo("Roteiro não foi completado no ano anterior");
-				atribuicao.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR))).get(0));
-				new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
-				result.add(atribuicao);
-				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
-					PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
-					clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
-					clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
-					clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
-					clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
-					clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
-					clonePlanejamento.setPlanoEstudo(null);
-					clonePlanejamento.setIdAluno(idAluno);
-					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
+		if(new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1).size() > 0)
+		{
+			AlunoVariavel alunoVariavel = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1).get(0);
+			AlunoVariavel alunoAno = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR)).get(0);
+			List<Roteiro> roteirosAnoAnterior = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
+			for (Roteiro roteiro : roteirosAnoAnterior) {
+				long objetivosTotais = new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
+				List<PlanejamentoRoteiro> objetivosCompletos = new PlanejamentoRoteiroService().countRoteiroCompletos(roteiro.getIdroteiro(), idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1);
+				if(objetivosCompletos.size() < objetivosTotais)
+				{
+					AtribuicaoRoteiroExtra atribuicao = new AtribuicaoRoteiroExtra();
+					atribuicao.setAluno(new AlunoService().listarkey(idAluno).get(0));
+					atribuicao.setRoteiro(roteiro);
+					atribuicao.setMotivo("Roteiro não foi completado no ano anterior");
+					atribuicao.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR))).get(0));
+					new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
+					result.add(atribuicao);
+					for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
+						PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
+						clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
+						clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
+						clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
+						clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
+						clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
+						clonePlanejamento.setPlanoEstudo(null);
+						clonePlanejamento.setIdAluno(idAluno);
+						new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
+					}
 				}
 			}
+			List <AtribuicaoRoteiroExtra> roteirosExtrasAnoAnterior = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(idAluno).get(0), new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR) - 1)).get(0));
+			for (AtribuicaoRoteiroExtra atribuicaoRoteiroExtra : roteirosExtrasAnoAnterior) {
+				long objetivosTotais = new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+				List<PlanejamentoRoteiro> objetivosCompletos = new PlanejamentoRoteiroService().countRoteiroCompletos(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro(), idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1);
+				if(	objetivosCompletos.size() < objetivosTotais && 
+					atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() != alunoAno.getAnoEstudo()){
+						
+					AtribuicaoRoteiroExtra atribuicao = new AtribuicaoRoteiroExtra();
+					atribuicao.setAluno(new AlunoService().listarkey(idAluno).get(0));
+					atribuicao.setRoteiro(atribuicaoRoteiroExtra.getRoteiro());
+					atribuicao.setMotivo("Roteiro não foi completado no ano anterior");
+					atribuicao.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR))).get(0));
+					new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
+					result.add(atribuicao);
+					for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
+						PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
+						clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
+						clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
+						clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
+						clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
+						clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
+						clonePlanejamento.setPlanoEstudo(null);
+						clonePlanejamento.setIdAluno(idAluno);
+						new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
+					}
+				}
+				if (atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() == alunoAno.getAnoEstudo()){
+					for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
+						PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
+						clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
+						clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
+						clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
+						clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
+						clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
+						clonePlanejamento.setPlanoEstudo(null);
+						clonePlanejamento.setIdAluno(idAluno);
+						new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
+					}
+				}
+			}
+			alunoAno.setVerificarRoteiros(0);
+			new AlunoVariavelService().atualizarAlunoVariavel(alunoAno);
 		}
-		List <AtribuicaoRoteiroExtra> roteirosExtrasAnoAnterior = new AtribuicaoRoteiroExtraService().listarAluno(new AlunoService().listarkey(idAluno).get(0), new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR) - 1)).get(0));
-		for (AtribuicaoRoteiroExtra atribuicaoRoteiroExtra : roteirosExtrasAnoAnterior) {
-			long objetivosTotais = new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
-			List<PlanejamentoRoteiro> objetivosCompletos = new PlanejamentoRoteiroService().countRoteiroCompletos(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro(), idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1);
-			if(	objetivosCompletos.size() < objetivosTotais && 
-				atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() != alunoVariavel.getAnoEstudo()){
-					
-				AtribuicaoRoteiroExtra atribuicao = new AtribuicaoRoteiroExtra();
-				atribuicao.setAluno(new AlunoService().listarkey(idAluno).get(0));
-				atribuicao.setRoteiro(atribuicaoRoteiroExtra.getRoteiro());
-				atribuicao.setMotivo("Roteiro não foi completado no ano anterior");
-				atribuicao.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(Integer.toString(Calendar.getInstance().get(Calendar.YEAR))).get(0));
-				new AtribuicaoRoteiroExtraService().criarRoteiroExtra(atribuicao);
-				result.add(atribuicao);
-				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
-					PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
-					clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
-					clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
-					clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
-					clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
-					clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
-					clonePlanejamento.setPlanoEstudo(null);
-					clonePlanejamento.setIdAluno(idAluno);
-					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
-				}
-			}
-			if (atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() == alunoVariavel.getAnoEstudo()){
-				for (PlanejamentoRoteiro planejamentoRoteiro : objetivosCompletos) {
-					PlanejamentoRoteiro clonePlanejamento = new PlanejamentoRoteiro();
-					clonePlanejamento.setDataStatusPlanejado(Calendar.getInstance().getTime());
-					clonePlanejamento.setDataStatusEntregue(planejamentoRoteiro.getDataStatusEntregue());
-					clonePlanejamento.setDataStatusVisto(planejamentoRoteiro.getDataStatusVisto());
-					clonePlanejamento.setObjetivo(planejamentoRoteiro.getObjetivo());
-					clonePlanejamento.setStatus(planejamentoRoteiro.getStatus());
-					clonePlanejamento.setPlanoEstudo(null);
-					clonePlanejamento.setIdAluno(idAluno);
-					new PlanejamentoRoteiroService().criarPlanejamentoRoteiro(clonePlanejamento);
-				}
-			}
-		}
-		AlunoVariavel alunoAno = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR)).get(0);
-		alunoAno.setVerificarRoteiros(0);
-		new AlunoVariavelService().atualizarAlunoVariavel(alunoAno);
 		return result;
 	}
 
