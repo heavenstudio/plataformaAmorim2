@@ -177,7 +177,10 @@ public class ProfessorFuncionarioResource {
 			professorDados.put("presencas", new PresencaProfessorService().listarPresencas(professorVariavel.getIdprofessorFuncionarioVariavel()).size());
 			professorDados.put("nome", tutoria.getTutor().getNome());
 			professorDados.put("idProfessor", tutoria.getTutor().getIdprofessorFuncionario());
-			professorDados.put("foto", tutoria.getTutor().getFotoProfessorFuncionario());
+			if (tutoria.getTutor().getFotoProfessorFuncionario() != null)
+				professorDados.put("foto", tutoria.getTutor().getFotoProfessorFuncionario());
+			else
+				professorDados.put("foto", "null");
 			float objetivosTotais = 0;
 			float objetivosCompletos = 0;
 			float objetivosCorrigidos = 0;
