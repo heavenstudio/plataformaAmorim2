@@ -203,7 +203,10 @@ public class CalendarioService {
 			Calendar inicioFeriado = Calendar.getInstance();
 			inicioFeriado.setTime(calendario.getDataInicio());
 			Calendar fimFeriado = Calendar.getInstance();
-			fimFeriado.setTime(calendario.getDataFim());
+			if (calendario.getDataFim() != null)
+				fimFeriado.setTime(calendario.getDataFim());
+			else
+				fimFeriado.setTime(calendario.getDataInicio());
 			diasFeriado += fimFeriado.get(Calendar.DAY_OF_YEAR) - inicioFeriado.get(Calendar.DAY_OF_YEAR) + 1;
 		}
 		int diasTotais = dataFim.get(Calendar.DAY_OF_YEAR) - dataInicio.get(Calendar.DAY_OF_YEAR) + 1;
