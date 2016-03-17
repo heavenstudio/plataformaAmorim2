@@ -194,7 +194,7 @@ public class GrupoResource {
 							if (anoRoteiro < anoAluno)
 								totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
 							else
-								totalObjetivosPendentes += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
+								totalObjetivosFuturos += new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
 						}
 						
 						float ObjetivosAnoCompletos = 0;
