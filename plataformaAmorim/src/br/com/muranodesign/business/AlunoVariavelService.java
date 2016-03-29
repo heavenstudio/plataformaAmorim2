@@ -334,4 +334,13 @@ public class AlunoVariavelService {
 		return result;
 	}
 
+
+	public List<AlunoVariavel> listarNomeAluno(String like) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		AlunoVariavelDAO dao = DAOFactory.getAlunoVariavelDAO(pc);
+		List<AlunoVariavel> result = dao.listarNomeAluno(like);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

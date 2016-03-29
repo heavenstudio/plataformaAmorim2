@@ -182,6 +182,9 @@ public interface AlunoVariavelDAO {
 
 
 		public List<AlunoVariavel> listaAlunoTodos(int idAluno);
+
+
+		public List<AlunoVariavel> listarNomeAluno(String like);
 		
 		
 }

@@ -256,6 +256,32 @@ public class AlunoVariavelResource {
 		
 	}
 	
+	@Path("buscarAgrupamentoHtml/{like}")
+	@GET
+	@Produces("application/json")
+	public String buscarAgrupamento(@PathParam("like") String like){
+		
+		String html1 = "";
+		
+		List<AlunoVariavel> retorno = new AlunoVariavelService().listarNomeAluno(like);
+		
+		for (AlunoVariavel alunoVariavel : retorno) {
+		html1 += 	"<div class="+"'Grupo_Aluno_Linha'"+">" +
+			 		"<span class="+"'Nome_Aluno'"+">"+alunoVariavel.getAluno().getNome()+"</span>"+
+			        "<input type="+"'checkbox'"+" id="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"' class="+"'Aluno_Ano_Check'" +"/>"+
+			        "<label for="+"'Aluno_Check_"+alunoVariavel.getIdalunoVariavel()+"'>"+
+			        "<span></span>" + 
+					"</label>" +
+					"<span class="+"Ano_Aluno"+">"+alunoVariavel.getAnoEstudo().getAno()+"º ano</span>"+
+          "</div>";
+		}
+		
+				
+		
+		return html1;		
+		
+	}
+	
 	@Path("ListarNomeSemGrupo/{nome}/{idPeriodo}/{idCiclo}")
 	@GET
 	@Produces("application/json")
