@@ -154,9 +154,9 @@ public class RoteiroAulaDAOImpl extends AbstractHibernateDAO implements  Roteiro
 	 */
 	@SuppressWarnings("unchecked")
 	public List<RoteiroAula> listarNaoOficinaProfessorLike(int idOficinaProfessor, String letras){
-		Query query = getSession().getNamedQuery("findClonaveis");
+		Query query = getSession().getNamedQuery("findClonaveisLike");
 		query.setString("oficinaProfessor", Integer.toString(idOficinaProfessor));
-		query.setString("letras", letras);
+		query.setString("letras", "%"+letras+"%");
 		return query.list();
 	}
 

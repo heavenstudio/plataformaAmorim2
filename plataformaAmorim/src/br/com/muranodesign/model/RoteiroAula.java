@@ -38,17 +38,18 @@ import org.hibernate.annotations.NamedNativeQuery;
 	),
 	@NamedNativeQuery(
 			name = "findClonaveisLike",
-			query = "SELECT * FROM `roteiro_aula` WHERE "
-					+ "	(`status` = 0 AND `Idroteiro_aula` NOT IN "
-					+ "		(SELECT `original` FROM `roteiro_aula` WHERE "
-					+ "			`Oficinaprofessor_Idoficina_professor` = :oficinaProfessor AND "
-					+ "			`original` IS NOT NULL) OR "
-					+ "	`Idroteiro_aula` IN "
-					+ "		(SELECT `original` From `roteiro_aula` WHERE "
-					+ "			`Oficinaprofessor_Idoficina_professor` != :oficinaProfesor AND "
-					+ "			`status` = 0)) "
-					+ "AND `Oficinaprofessor_Idoficina_professor` != :oficinaProfessor"
-					+ "	AND `roteiro` LIKE `%:letras%`",
+			query = "SELECT * FROM roteiro_aula WHERE "
+					+	"roteiro LIKE :letras AND "
+					+ 	"Oficinaprofessor_Idoficina_professor != :oficinaProfessor AND "
+					+ 	"Idroteiro_aula NOT IN (SELECT original FROM roteiro_aula WHERE	"
+					+ 		"Oficinaprofessor_Idoficina_professor = :oficinaProfessor AND "
+					+ 		"original IS NOT NULL) AND "
+					+ 	"(original IS NULL AND "
+					+ 		"(status = 0) OR "
+					+ 		"(Idroteiro_aula IN (SELECT original FROM roteiro_aula WHERE "
+					+ 			"Oficinaprofessor_Idoficina_professor != :oficinaProfessor AND "
+					+ 			"status = 0 AND "
+					+ 			"original IS NOT NULL)))",
 		        resultClass = RoteiroAula.class
 			)
 })

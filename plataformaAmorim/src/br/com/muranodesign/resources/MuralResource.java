@@ -183,6 +183,19 @@ public class MuralResource {
 				return Integer.toString(mural.getIdmural());
 			}
 		}
+		else if (action.equals("update")){
+			Date dataT = new Date();
+			DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			String dataS = formatter.format(dataT);
+			Date data = (Date) formatter.parse(dataS);
+			
+			Mural mural = new Mural();
+			mural.setMensagem(mensagem);
+			mural.setData(data);
+			mural.setIdmural(id);
+			new MuralService().atualizarMural(mural);
+			return Integer.toString(mural.getIdmural());
+		}
 		return "erro";
 	}
 	

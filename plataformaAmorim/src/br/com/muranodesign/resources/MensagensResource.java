@@ -259,7 +259,7 @@ public class MensagensResource {
 				aux.put("remetente_perfil", "Aluno");
 				aux.put("remetente_nome", mensagens.getRemetente().getAluno().getNome());	
 				
-			}else if (mensagens.getRemetente().getPerfil().getIdperfil() == 24){
+			}else{
 				aux.put("remetente_perfil", "Professor");
 				aux.put("remetente_nome", mensagens.getRemetente().getProfessor().getNome());		
 			}
