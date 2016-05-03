@@ -21,6 +21,7 @@ import br.com.muranodesign.business.OficinaService;
 import br.com.muranodesign.business.PeriodoService;
 import br.com.muranodesign.business.RotinaService;
 import br.com.muranodesign.business.TipoOficinaService;
+import br.com.muranodesign.model.Agrupamento;
 import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.AlunoAgrupamento;
 import br.com.muranodesign.model.Oficina;
@@ -121,12 +122,12 @@ public class OficinaResource {
 		List<Rotina> rotinas = new ArrayList<Rotina>();
 		
 		for (AlunoAgrupamento alunoAgrupamento : aluAgrup) {
-			rotinas.addAll(new RotinaService().listarPorAgrupamento(alunoAgrupamento.getAgrupamento().getIdagrupamento()));
+			lista.addAll(new RotinaService().listarPorAgrupamento(alunoAgrupamento.getAgrupamento().getIdagrupamento()));
 		}
 		
-		for (Rotina rotina : rotinas) {
-			lista.add(rotina.getOficina());
-		}
+//		for (Rotina rotina : rotinas) {
+//			lista.add(rotina.getOficina());
+//		}
 		
 		/*for(int i = 0; i < rotinas.size(); i++){
 			lista.add()
@@ -173,20 +174,23 @@ public class OficinaResource {
 		List<Object> listaResultado = new ArrayList<Object>();
 				
 		Oficina oficina = new OficinaService().listarkey(idOficina).get(0);
-		List<Rotina> listRotina = new RotinaService().listarPorOficina(oficina.getIdoficina());
-		if(!(listRotina.isEmpty()))
+		List<Agrupamento> listAgrupamentos = new RotinaService().listarAgrupamentoPorOficina(oficina.getIdoficina());
+		if(!(listAgrupamentos.isEmpty()))
 		{
-			for (Rotina rotina : listRotina) {
+			for (Agrupamento agrupamento : listAgrupamentos) {
 				Hashtable<String, Object> resultado = new Hashtable<String, Object>();
-				resultado.put("nome", rotina.getAgrupamento().getNome());
-				resultado.put("id", rotina.getAgrupamento().getIdagrupamento());
+				resultado.put("nome", agrupamento.getNome());
+				resultado.put("id", agrupamento.getIdagrupamento());
 				List<Object> alunos = new ArrayList<Object>();
-				List<AlunoAgrupamento> alunoAgrupamentos = new AlunoAgrupamentoService().listarAgrupamento(rotina.getAgrupamento().getIdagrupamento());
+				List<AlunoAgrupamento> alunoAgrupamentos = new AlunoAgrupamentoService().listarAgrupamento(agrupamento.getIdagrupamento());
 				for (AlunoAgrupamento alunoAgrupamento : alunoAgrupamentos) {
 					Hashtable<String, Object> alunoObj = new Hashtable<String, Object>();
 					Aluno aluno = alunoAgrupamento.getAluno().getAluno();
 					alunoObj.put("nome", aluno.getNome());
-					alunoObj.put("foto", aluno.getFotoAluno());
+					if(aluno.getFotoAluno() != null)
+						alunoObj.put("foto", aluno.getFotoAluno());
+					else
+						alunoObj.put("foto", "null");
 					alunoObj.put("id", aluno.getIdAluno());
 					alunos.add(alunoObj);
 				}

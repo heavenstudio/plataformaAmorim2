@@ -3,11 +3,14 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.muranodesign.dao.RotinaDAO;
 import br.com.muranodesign.hibernate.AbstractHibernateDAO;
 import br.com.muranodesign.hibernate.HibernatePersistenceContext;
+import br.com.muranodesign.model.Agrupamento;
+import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.Rotina;
 
 public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
@@ -105,11 +108,12 @@ public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
 	 * @see br.com.muranodesign.dao.RotinaDAO#listarPorAgrupamento(int)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Rotina> listarPorAgrupamento(int idAgrupamento){
+	public List<Oficina> listarPorAgrupamento(int idAgrupamento){
 		Criteria criteria = getSession().createCriteria(Rotina.class);
 		criteria.createAlias("agrupamento", "agrupamento");
 		criteria.add(Restrictions.eq("agrupamento.Idagrupamento", idAgrupamento));
-		List<Rotina> result = criteria.list();
+		criteria.setProjection(Projections.distinct(Projections.property("oficina")));
+		List<Oficina> result = criteria.list();
 		return result;
 	}
 
@@ -143,6 +147,16 @@ public class RotinaDAOImpl extends AbstractHibernateDAO implements RotinaDAO{
 		criteria.createAlias("dia", "dia");
 		criteria.add(Restrictions.eq("dia.Idsemana", idDiaSemana));
 		List<Rotina> result = criteria.list();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Agrupamento> listarAgrupamentoPorOficina(int idOficina) {
+		Criteria criteria = getSession().createCriteria(Rotina.class);
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", idOficina));
+		criteria.setProjection(Projections.distinct(Projections.property("agrupamento")));
+		List<Agrupamento> result = criteria.list();
 		return result;
 	}
 

@@ -2,6 +2,8 @@ package br.com.muranodesign.dao;
 
 import java.util.List;
 
+import br.com.muranodesign.model.Agrupamento;
+import br.com.muranodesign.model.Oficina;
 import br.com.muranodesign.model.Rotina;
 
 public interface RotinaDAO {
@@ -59,7 +61,7 @@ public interface RotinaDAO {
 	 * @param idAgrupamento
 	 * @return
 	 */
-	public List<Rotina> listarPorAgrupamento(int idAgrupamento);
+	public List<Oficina> listarPorAgrupamento(int idAgrupamento);
 
 	public List<Rotina> listarRotinaAlunoDia(int idagrupamento, int iddiaSemana);
 
@@ -67,4 +69,6 @@ public interface RotinaDAO {
 
 	public List<Rotina> listarRotinaTutoriaDia(Integer idtutoria,
 			int idDiaSemana);
+
+	public List<Agrupamento> listarAgrupamentoPorOficina(int idOficina);
 }
