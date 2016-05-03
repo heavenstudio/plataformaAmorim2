@@ -202,6 +202,8 @@ public class ProfessorFuncionarioResource {
 					objetivosCompletos += planejamentosCompletos.size();
 					objetivosCorrigidos += planejamentosCorrigidos.size();							
 				}
+				if (alunosGrupo.size() == 0)
+					new GrupoService().deletarGrupo(grupo);
 			}
 			if (objetivosTotais == 0)
 				grupos.clear();
