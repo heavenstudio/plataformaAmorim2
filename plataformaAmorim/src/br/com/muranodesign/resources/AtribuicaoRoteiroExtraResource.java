@@ -172,15 +172,22 @@ public class AtribuicaoRoteiroExtraResource {
 		return roteiro;
 	}
 	
+	@Path("Teste/{roteiro}/{idAluno}/{ano}")
+	@GET
+	@Produces("application/json")
+	public List<PlanejamentoRoteiro> teste(@PathParam("roteiro") int roteiro, @PathParam("idAluno") int aluno, @PathParam("ano") int ano){
+		return new PlanejamentoRoteiroService().countRoteiroCompletos(roteiro, aluno, ano);
+	}
+	
 	@Path("AtribuirRoteirosIncompletosAnoAnterior/{idAluno}")
 	@GET
 	@Produces("application/json")
 	public List<AtribuicaoRoteiroExtra> atribuirExtras(@PathParam("idAluno") int idAluno){
 		List<AtribuicaoRoteiroExtra> result = new ArrayList<AtribuicaoRoteiroExtra>();
+		AlunoVariavel alunoAno = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR)).get(0);
 		if(new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1).size() > 0)
 		{
 			AlunoVariavel alunoVariavel = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1).get(0);
-			AlunoVariavel alunoAno = new AlunoVariavelService().listarAlunoAno(idAluno, Calendar.getInstance().get(Calendar.YEAR)).get(0);
 			List<Roteiro> roteirosAnoAnterior = new RoteiroService().listarAno(alunoVariavel.getAnoEstudo().getIdanoEstudo());
 			for (Roteiro roteiro : roteirosAnoAnterior) {
 				long objetivosTotais = new ObjetivoService().listarRoteiroTotal(roteiro.getIdroteiro());
@@ -212,7 +219,7 @@ public class AtribuicaoRoteiroExtraResource {
 				long objetivosTotais = new ObjetivoService().listarRoteiroTotal(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro());
 				List<PlanejamentoRoteiro> objetivosCompletos = new PlanejamentoRoteiroService().countRoteiroCompletos(atribuicaoRoteiroExtra.getRoteiro().getIdroteiro(), idAluno, Calendar.getInstance().get(Calendar.YEAR) - 1);
 				if(	objetivosCompletos.size() < objetivosTotais && 
-					atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo() != alunoAno.getAnoEstudo()){
+					atribuicaoRoteiroExtra.getRoteiro().getAnoEstudo().getIdanoEstudo() != alunoAno.getAnoEstudo().getIdanoEstudo()){
 						
 					AtribuicaoRoteiroExtra atribuicao = new AtribuicaoRoteiroExtra();
 					atribuicao.setAluno(new AlunoService().listarkey(idAluno).get(0));
@@ -247,9 +254,9 @@ public class AtribuicaoRoteiroExtraResource {
 					}
 				}
 			}
-			alunoAno.setVerificarRoteiros(0);
-			new AlunoVariavelService().atualizarAlunoVariavel(alunoAno);
 		}
+		alunoAno.setVerificarRoteiros(0);
+		new AlunoVariavelService().atualizarAlunoVariavel(alunoAno);
 		return result;
 	}
 
