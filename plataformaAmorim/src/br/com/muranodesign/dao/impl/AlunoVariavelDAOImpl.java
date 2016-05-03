@@ -137,6 +137,18 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<AlunoVariavel> listaAlunoInativo(int idAluno){
+		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		List<AlunoVariavel> result = criteria.list();
+		return result;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see br.com.muranodesign.dao.AlunoVariavelDAO#listaGrupo(int)
@@ -349,7 +361,8 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos) );
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
-		criteria.add(Restrictions.isNull("grupo"));
+		criteria.createAlias("grupo", "grupo", Criteria.LEFT_JOIN);
+		criteria.add(Restrictions.or(Restrictions.isNull("grupo"), Restrictions.eq("grupo.status", "1")));
 		criteria.addOrder(Order.asc("anoEstudo.ano"));
 		criteria.createAlias("aluno", "aluno");
 		criteria.addOrder(Order.asc("aluno.nome"));
@@ -369,7 +382,8 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos) );
-		criteria.add(Restrictions.isNull("grupo"));
+		criteria.createAlias("grupo", "grupo", Criteria.LEFT_JOIN);
+		criteria.add(Restrictions.or(Restrictions.isNull("grupo"), Restrictions.eq("grupo.status", "1")));
 		criteria.addOrder(Order.asc("anoEstudo.ano"));
 		criteria.createAlias("aluno", "aluno");
 		criteria.addOrder(Order.asc("aluno.nome"));
@@ -389,7 +403,8 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("periodo", "periodo");
 		criteria.add(Restrictions.eq("periodo.idperiodo", idPeriodo) );
-		criteria.add(Restrictions.isNull("grupo"));
+		criteria.createAlias("grupo", "grupo", Criteria.LEFT_JOIN);
+		criteria.add(Restrictions.or(Restrictions.isNull("grupo"), Restrictions.eq("grupo.status", "1")));
 		criteria.createAlias("anoEstudo", "anoEstudo");
 		criteria.addOrder(Order.asc("anoEstudo.ano"));
 		criteria.createAlias("aluno", "aluno");
@@ -421,7 +436,8 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 			criteria.add(Restrictions.in("anoEstudo.idanoEstudo", anos));
 		}
 		criteria.add(Restrictions.like("aluno.nome", nome, MatchMode.ANYWHERE));
-		criteria.add(Restrictions.isNull("grupo"));
+		criteria.createAlias("grupo", "grupo", Criteria.LEFT_JOIN);
+		criteria.add(Restrictions.or(Restrictions.isNull("grupo"), Restrictions.eq("grupo.status", "1")));
 		List<AlunoVariavel> result = criteria.list();
 		return result;
 	}
@@ -452,10 +468,26 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 	@Override
 	public List<AlunoVariavel> listarNomeAluno(String like) {
 		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
+		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.like("aluno.nome", like, MatchMode.ANYWHERE));
 		List<AlunoVariavel> result = criteria.list();
 		return result;
+	}
+
+	@Override
+	public AlunoVariavel listarAtivosAno(int ano, int i) {
+		Query query = getSession().getNamedQuery("listarAnoNovo");
+		return (AlunoVariavel)query.list().get(i);
+//		Criteria criteria = getSession().createCriteria(AlunoVariavel.class);
+//		criteria.createAlias("anoLetivo", "anoLetivo");
+//		criteria.add(Restrictions.eq("anoLetivo.idanoLetivo", 61));
+//		criteria.add(Restrictions.eq("ativo", 1));
+//		criteria.addOrder(Order.asc("aluno"));
+//		AlunoVariavel result = (AlunoVariavel)criteria.list().get(i);
+//		return result;
 	}
 
 }

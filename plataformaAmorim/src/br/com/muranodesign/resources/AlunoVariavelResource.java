@@ -2693,6 +2693,18 @@ public class AlunoVariavelResource {
 		return evento;
 	}
 	
+	@Path("alunoInativo/{id}")
+	@GET
+	@Produces("application/json")
+	public AlunoVariavel getAlunoInativo(@PathParam("id") int id) {
+		logger.info("Lista AlunoVariavel  por id " + id);
+		List<AlunoVariavel> resultado;
+		resultado = new AlunoVariavelService().listaAlunoInativo(id);
+		AlunoVariavel evento = resultado.get(0);
+
+		return evento;
+	}
+	
 	/**
 	 * Lista todos Aluno variavel de um Aluno
 	 * @param id
@@ -3009,4 +3021,14 @@ public class AlunoVariavelResource {
 
 		return "true";
 	}
+	
+	@Path("listarAtivosAno/{i}")
+	@GET
+	@Produces("application/json")
+	public AlunoVariavel ativosAno(@PathParam("i") int i){
+		AlunoVariavel resultado = new AlunoVariavelService().listarAtivosAno(Calendar.getInstance().get(Calendar.YEAR), i);
+		return resultado;
+	}
+	
+	
 }

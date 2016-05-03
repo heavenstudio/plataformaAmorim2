@@ -185,6 +185,12 @@ public interface AlunoVariavelDAO {
 
 
 		public List<AlunoVariavel> listarNomeAluno(String like);
+
+
+		public AlunoVariavel listarAtivosAno(int ano, int i);
+
+
+		public List<AlunoVariavel> listaAlunoInativo(int idAluno);
 		
 		
 }
