@@ -270,12 +270,10 @@ public class Aluno implements Serializable {
     private String nome;
     
     /** The nome mae. */
-    @Basic(optional = false)
     @Column(name = "NOME_MAE")
     private String nomeMae;
     
     /** The nome pai. */
-    @Basic(optional = false)
     @Column(name = "NOME_PAI")
     private String nomePai;
     

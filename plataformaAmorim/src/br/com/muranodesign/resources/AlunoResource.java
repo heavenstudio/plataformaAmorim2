@@ -933,10 +933,10 @@ public class AlunoResource {
 			if (!uf.isEmpty()) {
 				objAluno.setUf(uf);
 			}
-			if (!ufMae.isEmpty()) {
+			if (!ufMae.isEmpty() && !(ufMae.equals("null"))) {
 				objAluno.setUfMae(ufMae);
 			}
-			if (!ufPai.isEmpty()) {
+			if (!ufPai.isEmpty() && !(ufPai.equals("null"))) {
 				objAluno.setUfPai(ufPai);
 			}
 			if (!ufResponsavel.isEmpty()) {
