@@ -275,4 +275,12 @@ public class PlanejamentoRoteiroService {
 		return result;
 	}
 	
+	public List<PlanejamentoRoteiro> countRoteiroCorrigidos(Integer idroteiro, int idAluno, int ano) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		PlanejamentoRoteiroDAO dao = DAOFactory.getPlanejamentoRoteiroDAO(pc);
+		List<PlanejamentoRoteiro> result = dao.countRoteiroCorrigidos(idroteiro, idAluno, ano);
+		pc.commitAndClose();
+		return result;
+	}
+	
 }

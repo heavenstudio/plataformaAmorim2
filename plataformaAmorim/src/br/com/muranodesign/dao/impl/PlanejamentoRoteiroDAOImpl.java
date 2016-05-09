@@ -342,6 +342,27 @@ public class PlanejamentoRoteiroDAOImpl extends AbstractHibernateDAO implements 
 		return result;
 	}
 
+	
+	@SuppressWarnings("unchecked")
+	public List<PlanejamentoRoteiro> countRoteiroCorrigidos(Integer idroteiro, int idAluno, int ano) {
+		Criteria criteria = getSession().createCriteria(PlanejamentoRoteiro.class);
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, ano);
+		cal.set(Calendar.DAY_OF_YEAR, 1);
+		Calendar calFim = Calendar.getInstance();
+		calFim.set(Calendar.YEAR, ano + 1);
+		calFim.set(Calendar.DAY_OF_YEAR, 1);
+		criteria.add(Restrictions.ge("dataStatusPlanejado", cal.getTime()));
+		criteria.add(Restrictions.lt("dataStatusPlanejado", calFim.getTime()));
+		criteria.add(Restrictions.eq("idAluno", idAluno));
+		criteria.createAlias("objetivo", "objetivo");
+		criteria.createAlias("objetivo.roteiro", "roteiro");
+		criteria.add(Restrictions.isNotNull("objetivo"));
+		criteria.add(Restrictions.eq("roteiro.idroteiro", idroteiro));
+		criteria.add(Restrictions.eq("status", "3"));
+		List<PlanejamentoRoteiro> result = criteria.list();
+		return result;
+	}
 
 
 }

@@ -147,6 +147,9 @@ public interface PlanejamentoRoteiroDAO {
 		public List<PlanejamentoRoteiro> listarAlunoAno(int idAluno, int ano);
 
 		public List<PlanejamentoRoteiro> countRoteiroCompletos(Integer idroteiro, int idAluno, int ano);
+
+		public List<PlanejamentoRoteiro> countRoteiroCorrigidos(
+				Integer idroteiro, int idAluno, int ano);
 	
 	
 }
