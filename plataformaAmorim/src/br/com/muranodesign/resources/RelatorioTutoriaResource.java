@@ -144,6 +144,7 @@ public class RelatorioTutoriaResource {
 			
 			@FormParam("relatorio") String relatorio,
 			@FormParam("data") String data,
+			@FormParam("ano") String ano,
 			
 			@FormParam("tutoria") String tutoria,
 			@FormParam("aluno") String aluno
@@ -183,6 +184,7 @@ public class RelatorioTutoriaResource {
 			objRelatorioTutoria.setTutoria(objTutoria);
 			objRelatorioTutoria.setRelatorio(relatorio);
 			
+			
 			resultado = new RelatorioTutoriaService().criarRelatorioTutoria(objRelatorioTutoria);
 			
 		}  else if (action.equals("update")) {
@@ -193,7 +195,6 @@ public class RelatorioTutoriaResource {
 			objRelatorioTutoria= rsRelatorioTutoria.get(0);
 		
 			objRelatorioTutoria.setAluno(objAluno);
-			objRelatorioTutoria.setData(stringUtil.converteStringData(data));
 			objRelatorioTutoria.setTutoria(objTutoria);
 			objRelatorioTutoria.setRelatorio(relatorio);
 			
