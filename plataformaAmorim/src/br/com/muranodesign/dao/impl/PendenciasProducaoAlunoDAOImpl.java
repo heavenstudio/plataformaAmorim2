@@ -69,6 +69,20 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 		List<PendenciasProducaoAluno> resultado = criteria.list();
 		return resultado;
 	}
+	
+	public List<PendenciasProducaoAluno> listarAlunoAnoAnterior(int id) {
+		Criteria criteria = getSession().createCriteria(PendenciasProducaoAluno.class);
+
+		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.ne("anoLetivo.ano", ano));
+		
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", id));
+		criteria.add(Restrictions.eq("roteiroCompleto", 0));
+		List<PendenciasProducaoAluno> resultado = criteria.list();
+		return resultado;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<PendenciasProducaoAluno> listarAlunoRoteiro(int idaluno, int idroteiro) {
@@ -82,6 +96,21 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 		criteria.createAlias("roteiro", "roteiro");
 		criteria.add(Restrictions.eq("aluno.idAluno", idaluno));
 		criteria.add(Restrictions.eq("roteiro.idroteiro", idroteiro));
+		List<PendenciasProducaoAluno> resultado = criteria.list();
+		return resultado;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PendenciasProducaoAluno> listarAlunoRoteiroAno(int idAluno, int idRoteiro, String ano){
+		Criteria criteria = getSession().createCriteria(PendenciasProducaoAluno.class);
+		
+		criteria.createAlias("anoLetivo", "anoLetivo");
+		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
+		
+		criteria.createAlias("aluno", "aluno");
+		criteria.createAlias("roteiro", "roteiro");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		criteria.add(Restrictions.eq("roteiro.idroteiro", idRoteiro));
 		List<PendenciasProducaoAluno> resultado = criteria.list();
 		return resultado;
 	}
