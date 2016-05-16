@@ -59,11 +59,11 @@ public class PendenciasProducaoAlunoResource {
 			resultado.setRoteiro(new RoteiroService().listarkey(idroteiro).get(0));
 			String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 			resultado.setAnoLetivo(new AnoLetivoService().listarAnoLetivo(ano).get(0));
-			resultado.setPortfolioCompleto(0);
+			resultado.setPortfolioCompleto(new ProducaoAlunoService().listarFiltro(idaluno, 5, idroteiro).size());
 			//Verifica se o roteiro tem ficha de finalização ou não
 			//Se tiver o valor fica 0 (size = 1 logo size - 1 = 0), indicando que ela não foi entregue
 			//Caso contrário o valor fica -1, indicando que ela não existe.
-			resultado.setFichaFinalizacaoCompleta(new FichaInscricaoService().listarkey(idroteiro).size()- 1);
+			resultado.setFichaFinalizacaoCompleta(new FichaInscricaoService().listarkey(idroteiro).size() + new ProducaoAlunoService().listarFiltro(idaluno, 4, idroteiro).size()  - 1);
 			resultado.setRoteiroCompleto(0);
 			resultado = new PendenciasProducaoAlunoService().criarPendenciasProducaoAluno(resultado);
 		}	 

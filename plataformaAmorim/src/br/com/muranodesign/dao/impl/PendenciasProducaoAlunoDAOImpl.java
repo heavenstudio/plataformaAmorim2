@@ -59,10 +59,6 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 	@SuppressWarnings("unchecked")
 	public List<PendenciasProducaoAluno> listarAluno(int id) {
 		Criteria criteria = getSession().createCriteria(PendenciasProducaoAluno.class);
-
-		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-		criteria.createAlias("anoLetivo", "anoLetivo");
-		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
@@ -79,7 +75,6 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.eq("aluno.idAluno", id));
-		criteria.add(Restrictions.eq("roteiroCompleto", 0));
 		List<PendenciasProducaoAluno> resultado = criteria.list();
 		return resultado;
 	}
@@ -87,10 +82,6 @@ public class PendenciasProducaoAlunoDAOImpl extends AbstractHibernateDAO impleme
 	@SuppressWarnings("unchecked")
 	public List<PendenciasProducaoAluno> listarAlunoRoteiro(int idaluno, int idroteiro) {
 		Criteria criteria = getSession().createCriteria(PendenciasProducaoAluno.class);
-		
-		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-		criteria.createAlias("anoLetivo", "anoLetivo");
-		criteria.add(Restrictions.eq("anoLetivo.ano", ano));
 		
 		criteria.createAlias("aluno", "aluno");
 		criteria.createAlias("roteiro", "roteiro");
