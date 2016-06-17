@@ -463,7 +463,8 @@ public class ObjetivoResource {
 			@FormParam("nome") String nome,
 			@FormParam("descricao") String descricao,
 			@FormParam("roteiro") String roteiro,
-			@FormParam("ativo") String ativo
+			@FormParam("ativo") String ativo,
+			@FormParam("numero") int numero
 
 	) {
 		Objetivo objObjetivo = new Objetivo();
@@ -479,6 +480,7 @@ public class ObjetivoResource {
 			objObjetivo.setNome(nome);
 			objObjetivo.setDescricao(descricao);
 			objObjetivo.setRoteiro(objRoteiro);
+			objObjetivo.setNumero(numero);
 			objObjetivo.setAtivo(Integer.parseInt(ativo));
 
 			resultado = new ObjetivoService().criarObjetivo(objObjetivo);
