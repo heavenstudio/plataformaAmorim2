@@ -471,6 +471,7 @@ public class AlunoVariavelDAOImpl extends AbstractHibernateDAO implements AlunoV
 		String ano = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 		AnoLetivo anoLetivo = new AnoLetivoService().listarAnoLetivo(ano).get(0);
 		criteria.add(Restrictions.eq("anoLetivo", anoLetivo));
+		criteria.add(Restrictions.eq("ativo", 1));
 		criteria.createAlias("aluno", "aluno");
 		criteria.add(Restrictions.like("aluno.nome", like, MatchMode.ANYWHERE));
 		List<AlunoVariavel> result = criteria.list();
