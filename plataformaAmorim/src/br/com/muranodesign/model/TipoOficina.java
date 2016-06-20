@@ -33,6 +33,18 @@ public class TipoOficina implements Serializable{
 	 @ManyToOne
 	 @JoinColumn (name = "cor", referencedColumnName = "Idcor")
 	 private Cores cor;
+	 
+	 @Basic
+	 @Column (name = "visibilidade")
+	 private int visilbilidade;
+
+	public int getVisilbilidade() {
+		return visilbilidade;
+	}
+
+	public void setVisilbilidade(int visilbilidade) {
+		this.visilbilidade = visilbilidade;
+	}
 
 	public int getIdTipoOficina() {
 		return idTipoOficina;
