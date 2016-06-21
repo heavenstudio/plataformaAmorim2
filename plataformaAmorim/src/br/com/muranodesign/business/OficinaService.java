@@ -146,4 +146,12 @@ public class OficinaService {
 		pc.commitAndClose();
 		return result;
 	}
+
+	public int deletarOficinaSemProfessor() {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		OficinaDAO dao = DAOFactory.getOficinaDAO(pc);
+		int result = dao.deletarOficinaSemProfessor();
+		pc.commitAndClose();
+		return result;
+	}
 }

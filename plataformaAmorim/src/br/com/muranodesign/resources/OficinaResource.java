@@ -60,6 +60,10 @@ public class OficinaResource {
 		Oficina resultado = new Oficina();
 		
 		if(action.equals("delete")){
+			List<OficinaProfessor> professores = new OficinaProfessorService().listarPorOficina(id);
+			for (OficinaProfessor oficinaProfessor : professores) {
+				new OficinaProfessorService().deletarOficinaProfessor(oficinaProfessor);
+			}
 			resultado = new OficinaService().deletarOficina(new OficinaService().listarkey(id).get(0));
 		}
 		else if(action.equals("create")){
@@ -85,6 +89,14 @@ public class OficinaResource {
 		}
 		
 		return Integer.toString(resultado.getIdoficina());
+	}
+	
+	@Path("DeletarOficinasSemProfessor")
+	@GET
+	@Produces("application/json")
+	public String deletarOficinaProfessor(){
+		new OficinaService().deletarOficinaSemProfessor();
+		return "deletado com sucesso";
 	}
 	
 	@Path("Teste/{tipo}/{ciclo}/{periodo}")

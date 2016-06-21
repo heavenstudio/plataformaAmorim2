@@ -146,4 +146,16 @@ public class PlanoAulaDAOImpl extends AbstractHibernateDAO implements PlanoAulaD
 			result = new PlanoAula();
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PlanoAula> verificarData(Date inicio, Date fim, int idOficina) {
+		Criteria criteria = getSession().createCriteria(PlanoAula.class);
+		criteria.add(Restrictions.or(
+				Restrictions.between("data_ini", inicio, fim), 
+				Restrictions.between("data_fim", inicio, fim)));
+		criteria.createAlias("oficina", "oficina");
+		criteria.add(Restrictions.eq("oficina.Idoficina", idOficina));
+		return criteria.list();
+	}
 }

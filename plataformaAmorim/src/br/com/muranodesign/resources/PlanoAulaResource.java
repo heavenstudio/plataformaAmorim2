@@ -63,24 +63,6 @@ public class PlanoAulaResource {
 		
 		if(action.equals("delete")){
 			resultado = new PlanoAulaService().deletarPlanoAula(new PlanoAulaService().listarkey(id).get(0));
-		}
-		else if(action.equals("create")){
-			PlanoAula plano = new PlanoAula();
-
-			plano.setData_ini(stringUtil.converteStringData(data_ini));
-			plano.setData_fim(stringUtil.converteStringData(data_fim));
-			plano.setObjetivos(objetivos);
-			plano.setTarefa_casa(tarefa_casa);
-			plano.setRegistro_atividade(registro_atividade);
-			if(idBlog != 0){
-				plano.setBlog(new BlogService().listarkey(idBlog).get(0));
-			}			
-			plano.setOficina(new OficinaService().listarkey(idOficina).get(0));
-			
-			plano.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
-			
-			resultado = new PlanoAulaService().criarPlanoAula(plano);
-			
 		}else if(action.equals("update")){
 			PlanoAula plano = new PlanoAulaService().listarkey(id).get(0);
 			
@@ -98,6 +80,55 @@ public class PlanoAulaResource {
 		}
 		
 		return Integer.toString(resultado.getIdplano_aula());
+	}
+	
+	@Path("CriarPlanoAula")
+	@POST
+	@Produces("application/json")
+	public PlanoAula criarPlanoAula(
+			@FormParam("action") String action,
+			@FormParam("id") int id,
+			@FormParam("idOficina") int idOficina,
+			@FormParam("idBlog") int idBlog,
+			@FormParam("idProfessor") int idProfessor,
+			@FormParam("data_ini") String data_ini,
+			@FormParam("data_fim") String data_fim,
+			@FormParam("objetivos") String objetivos,
+			@FormParam("tarefa_casa") String tarefa_casa,
+			@FormParam("registro_atividade") String registro_atividade){
+		StringUtil stringUtil = new StringUtil();
+		Date inicio = stringUtil.converteStringData(data_ini);
+		Date fim = stringUtil.converteStringData(data_fim);
+		if (new PlanoAulaService().verificarData(inicio, fim, idOficina).size() > 0)
+			return new PlanoAula();
+		else{
+			PlanoAula plano = new PlanoAula();
+
+			plano.setData_ini(stringUtil.converteStringData(data_ini));
+			plano.setData_fim(stringUtil.converteStringData(data_fim));
+			plano.setObjetivos(objetivos);
+			plano.setTarefa_casa(tarefa_casa);
+			plano.setRegistro_atividade(registro_atividade);
+			if(idBlog != 0){
+				plano.setBlog(new BlogService().listarkey(idBlog).get(0));
+			}			
+			plano.setOficina(new OficinaService().listarkey(idOficina).get(0));
+			
+			plano.setProfessor(new ProfessorFuncionarioService().listarkey(idProfessor).get(0));
+			
+			return new PlanoAulaService().criarPlanoAula(plano);
+		}
+			
+	}
+	
+	@Path("Teste/{data_ini}/{data_fim}/{idProfessor}")
+	@GET
+	@Produces("application/json")
+	public List<PlanoAula> teste(@PathParam("data_ini") String data_ini, @PathParam("data_fim") String data_fim, @PathParam("idProfessor") int idProfessor){
+		StringUtil stringUtil = new StringUtil();
+		Date inicio = stringUtil.converteStringData(data_ini);
+		Date fim = stringUtil.converteStringData(data_fim);
+		return new PlanoAulaService().verificarData(inicio, fim, idProfessor);
 	}
 	
 	/**

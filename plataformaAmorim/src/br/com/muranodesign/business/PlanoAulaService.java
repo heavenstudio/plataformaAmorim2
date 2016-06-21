@@ -137,4 +137,12 @@ public class PlanoAulaService {
 		return result;
 	}
 
+	public List<PlanoAula> verificarData(Date inicio, Date fim, int idOficina) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		PlanoAulaDAO dao = DAOFactory.getPlanoAulaDAO(pc);
+		List<PlanoAula> result = dao.verificarData(inicio, fim, idOficina);
+		pc.commitAndClose();
+		return result;
+	}
+
 }

@@ -3,6 +3,7 @@ package br.com.muranodesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -151,5 +152,12 @@ public class OficinaDAOImpl extends AbstractHibernateDAO implements OficinaDAO{
 		criteria.setProjection(Projections.count("tipoOficina"));
 		long result = (Long)criteria.list().get(0);
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int deletarOficinaSemProfessor() {
+		Query q =  getSession().getNamedQuery("oficina.deletarOficinaSemProfessores");
+	    return q.executeUpdate();
 	}
 }

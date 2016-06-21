@@ -80,4 +80,6 @@ public interface OficinaDAO {
 	public List<Oficina> listarLazyNome(int id);
 
 	public long contTipo(int tipo);
+
+	public int deletarOficinaSemProfessor();
 }

@@ -79,4 +79,6 @@ public interface PlanoAulaDAO {
 	 */
 	public PlanoAula listarProfessorOficinaRecente(int idProfessor,
 			int idOficina);
+
+	public List<PlanoAula> verificarData(Date inicio, Date fim, int idOficina);
 }
