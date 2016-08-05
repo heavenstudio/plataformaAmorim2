@@ -3030,5 +3030,21 @@ public class AlunoVariavelResource {
 		return resultado;
 	}
 	
-	
+	/** Serviço que atualiza o grupo de determinado aluno variável
+	 * @author Pedro Henrique dos Santos
+	 * @param id Identificador do aluno variável que será atualizado
+	 * @param idGrupo Identificador do novo grupo que o usuário irá informar para aluno variável
+	 * @return id do aluno variável recém manipulado
+	 */
+	@Path("UpdateGrupo")
+	@POST
+	@Produces("text/plain")
+	public String eventoAction(@FormParam("id") int id, @FormParam("idGrupo") int idGrupo){
+		logger.info("Buscando Aluno Variável...");
+		AlunoVariavel alunoVariavel = new AlunoVariavelService().listarkey(id).get(0);
+		Grupo grupo = new GrupoService().listarkey(idGrupo).get(0);
+		alunoVariavel.setGrupo(grupo);
+		alunoVariavel = new AlunoVariavelService().atualizarAlunoVariavel(alunoVariavel);
+		return Integer.toString(alunoVariavel.getIdalunoVariavel());		
+	}
 }
