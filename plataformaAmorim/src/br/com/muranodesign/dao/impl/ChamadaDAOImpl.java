@@ -9,10 +9,11 @@
  */
 
 package br.com.muranodesign.dao.impl;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
+import br.com.muranodesign.dao.ChamadaDAO;
+import br.com.muranodesign.hibernate.AbstractHibernateDAO;
+import br.com.muranodesign.hibernate.HibernatePersistenceContext;
+import br.com.muranodesign.model.Aluno;
+import br.com.muranodesign.model.Chamada;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
@@ -20,11 +21,9 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 
-import br.com.muranodesign.dao.ChamadaDAO;
-import br.com.muranodesign.hibernate.AbstractHibernateDAO;
-import br.com.muranodesign.hibernate.HibernatePersistenceContext;
-import br.com.muranodesign.model.Aluno;
-import br.com.muranodesign.model.Chamada;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 
@@ -219,6 +218,16 @@ public class ChamadaDAOImpl extends AbstractHibernateDAO implements ChamadaDAO {
 		List<Chamada> result = criteria.list();
 		
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Chamada> listBetween(int idAluno, Date startDate, Date endDate) {
+		short t = 0;
+		Criteria criteria = getSession().createCriteria(Chamada.class);
+		criteria.add(Restrictions.between("data", startDate, endDate));
+		criteria.createAlias("aluno", "aluno");
+		criteria.add(Restrictions.eq("aluno.idAluno", idAluno));
+		return criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")

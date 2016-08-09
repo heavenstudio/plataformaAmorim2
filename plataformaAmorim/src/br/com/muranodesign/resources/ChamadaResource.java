@@ -18,12 +18,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
@@ -128,11 +123,29 @@ public class ChamadaResource {
 		List<Chamada> resultado;
 		resultado = new ChamadaService().listarkey(id);
 		Chamada evento = resultado.get(0);
-
 		return evento;
 
 	}
-	
+
+	/**
+	 * Gets Chamada.
+	 *
+	 * @param id do aluno
+	 * @return the Chamada
+	 */
+	@Path("list/{id}")
+	@GET
+	@Produces("application/json")
+	public List<Chamada> getChamada(@PathParam("id") int id, @QueryParam("startDate") Long startDate, @QueryParam("endDate") Long endDate) {
+		logger.info("Lista Chamada por id " + id + " e data entre startDate = " + startDate + " e endDate = " + endDate);
+		List<Chamada> chamadas, resultado = new ArrayList<Chamada>();
+		chamadas = new ChamadaService().listarEntre(id, new Date(startDate), new Date(endDate));
+		for (Chamada chamada: chamadas) {
+			resultado.add(new Chamada(chamada.getIdchamada(), chamada.getData(), chamada.getPresenca()));
+		}
+		return resultado;
+	}
+
 	@Path("ListarGrupo/{idGrupo}/{dia}/{mes}")
 	@GET
 	@Produces("application/json")

@@ -9,15 +9,15 @@
  */
 package br.com.muranodesign.business;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import br.com.muranodesign.dao.ChamadaDAO;
 import br.com.muranodesign.dao.DAOFactory;
 import br.com.muranodesign.hibernate.impl.PersistenceContext;
 import br.com.muranodesign.model.Aluno;
 import br.com.muranodesign.model.Chamada;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 
@@ -57,7 +57,14 @@ public class ChamadaService {
 		pc.commitAndClose();
 		return result;
 	}
-	
+
+	public List<Chamada> listarEntre(int id, Date startDate, Date endDate) {
+		PersistenceContext pc = DAOFactory.createPersistenceContext();
+		ChamadaDAO dao = DAOFactory.getChamadaDAO(pc);
+		List<Chamada> result = dao.listBetween(id,startDate,endDate);
+		pc.commitAndClose();
+		return result;
+	}
 	
 	/**
 	 * Criar chamada.
@@ -117,7 +124,7 @@ public class ChamadaService {
 		return result;
 	}
 	/**
-	 * Conta nº faltas
+	 * Conta num faltas
 	 * @param id
 	 * @return
 	 */
@@ -183,5 +190,5 @@ public class ChamadaService {
 		pc.commitAndClose();
 		return result;
 	}
-	
+
 }
